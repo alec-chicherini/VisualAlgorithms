@@ -1,9 +1,9 @@
 //Real-World Algorithms - > Beginners guide - Panos Louridas book examples and tasks.
 
 #include <iostream>
-#include <timedelay.h>
+#include <timedelay.h> //https://github.com/ikvasir/timedelay
 #include <timedelay.cpp>
-#define PART1
+#define PART2
 
 #ifdef PART1
 
@@ -298,9 +298,239 @@ public:
 
 #endif
 
+#ifdef PART2
+//2.1
+template <class T>
+class ouMyList
+{
+    struct Node {
+        T data;
+        Node* next;
+    };
+
+    Node* first = nullptr;
+
+public:
+    ouMyList() {};
+    Node* insert(T&& after, T&& data) {
+
+        Node* n = new Node();
+        n->data = data;
+
+        if (first == nullptr)
+        {
+            first = n;
+            n->next = nullptr;
+        }
+        else
+        {
+            Node* current = find(std::move(after));
+            n->next = current->next;
+            current->next = n;
+        }
+
+        return n;
+    };
+    Node* insert(T&& data) {
+
+        Node* n = new Node();
+        n->data = data;
+        n->next = first;
+        first = n;
+
+        return n;
+    };
+   
+    Node* find(T&& data)
+    {
+        Node* current = first;
+        while (current != nullptr)
+        {
+            if (current->data == data) return current;
+            else current = current->next;
+        };
+        return nullptr;
+    };
+
+    Node* find_prev(T&& data)
+    {
+        if (first!=nullptr && first->data == data) return nullptr;
+
+        Node* current = first;
+        while (current != nullptr)
+        {
+               if (current->next->data == data)  return current;
+                    else current = current->next;
+        };
+        return nullptr;
+    };
+
+    void remove(T&& data) {
+     
+        auto current = find(std::move(data));
+        if(current == first)
+            if(first->next==nullptr) { delete first; first = nullptr; }
+            else                     { first = first->next; delete current;}
+        else {
+            current = find_prev(std::move(data));
+            auto next = current->next->next;
+            delete current->next;
+            current->next = next;
+        }
+    }
+
+    void print() {
+
+        Node* current = first;
+
+        while (current != nullptr) {
+            std::cout << current->data << "->";
+            current = current->next;
+        }
+        std::cout << "nullptr" << std::endl;
+    };
+    void cleanup() {
+
+        while (first != nullptr) {
+            auto next = first->next;
+            delete first;
+            first = next;
+        }
+        std::cout << "list deleted" << std::endl;
+    };
+
+};
+//2.2
+#include <array>
+template <class T, size_t SIZE=10>
+class ouMyQueue
+{
+    std::array<T, SIZE>* queue_;
+public:
+    ouMyQueue() { queue_ = new std::array<T, SIZE>; };
+
+public:
+    struct possition {
+        size_t pos;
+        possition(size_t pos_) { pos = pos_; };
+        possition() { pos = 0; };
+
+        possition& operator++() 
+        {
+            if ((pos + 1) < SIZE)++pos;
+            else pos = 0;
+            return *this;
+        };
+        possition operator++(int) 
+        {
+            possition temp = *this;
+            ++* this;
+            return temp;
+        };
+
+        possition& operator--()
+        {
+            if (pos!=0)--pos;
+            else pos = SIZE-1;
+            return *this;
+        };
+
+        possition operator--(int)
+         {
+            possition temp = *this;
+            --* this;
+            return temp;
+        };
+
+        //auto operator<=>(const possition&)const = default;
+
+    };
+private:
+    possition Head_;
+    possition Tail_;
+
+    bool b_is_full = false;
+    bool b_is_empty = true;
+    bool b_is_one_element = false;
+
+public:
+    bool is_full() { return b_is_full; }
+    bool is_empty() { return b_is_empty; }
+    void push(T&& data)
+    {
+     if (is_full()) std::cout << "push failed. queue is full" << std::endl;
+        else if (is_empty()) 
+            {
+             queue_->operator[](Tail_.pos) = data;
+             b_is_empty = false;
+             b_is_one_element = true;
+            }
+            else 
+             {
+             b_is_one_element = false;
+             Tail_++;
+             queue_->operator[](Tail_.pos) = data;
+             Tail_++;
+             if (Tail_.pos == Head_.pos) b_is_full = true;
+             Tail_--;
+             }
+    };
+
+    T pop()
+    {
+    if (is_empty())std::cout << "pop failed. queue is empty" << std::endl;
+        else {
+            b_is_full = false;
+            auto current = Head_.pos;
+
+            if((Tail_.pos == Head_.pos) && b_is_one_element) { b_is_empty = true; b_is_one_element = false; }
+            else Head_++;
+
+            if (Tail_.pos == Head_.pos&& !b_is_one_element) { b_is_one_element = true; }
+            return queue_->operator[](current);
+        }
+    };
+
+    void print()
+    {
+        possition current(Head_.pos);
+        std::array <std::string, SIZE>* print_array = new std::array <std::string, SIZE>;
+        for (auto& s : *print_array)s = " ";
+
+        if (!is_empty())
+           while (true)
+            {
+               
+               print_array->operator[](current.pos) = std::to_string(queue_->operator[](current.pos));
+               if (b_is_one_element)break;
+
+               current++;
+
+               if (current.pos == Tail_.pos) {
+                   print_array->operator[](current.pos) = std::to_string(queue_->operator[](current.pos));
+                   break;
+               };
+            };
+            for (size_t i = 0; i < SIZE; i++) std::cout << i << " ";
+            std::cout << std::endl;
+            
+            for (size_t i = 0; i < SIZE; i++) std::cout << print_array->operator[](i) << " " ;
+            std::cout << std::endl;
+
+            for (size_t i = 0; i < SIZE; i++) if (Head_.pos == i)std::cout << "H"; else std::cout << "  ";
+            std::cout << std::endl;
+
+            for (size_t i = 0; i < SIZE; i++) if (Tail_.pos == i)std::cout << "T"; else std::cout << "  ";
+            std::cout << std::endl;
+        
+    };
+};
+
+#endif
     int main()
     {
         timedelay T;
+
 #ifdef PART1
 
 
@@ -366,6 +596,68 @@ public:
         std::cout << br4.checkBracers() << std::endl;
         br5.getExpression("[](){}");
         std::cout << br5.checkBracers() << std::endl;
+
+#endif
+
+#ifdef PART2
+        //2.1
+        ouMyList<int> lst;
+        lst.print();
+        lst.insert(1);
+        lst.insert(3);
+        lst.print();
+        lst.insert(3, 2);
+        lst.insert(1, 0);
+        lst.print();
+        lst.remove(1);
+        lst.print();
+        lst.cleanup();
+        lst.print();
+
+        //2.2
+        std::cout << std::endl;
+        ouMyQueue<int> que;
+        //std::cout<<que.Head_.pos<<std::endl;
+        //que.Head_++;        que.Head_++;        que.Head_++;        que.Head_++;        que.Head_++;        que.Head_++;        que.Head_++;        que.Head_++;    
+        //std::cout << que.Head_.pos << std::endl;
+        //++que.Head_;        ++que.Head_;
+        //std::cout << que.Head_.pos << std::endl;
+        //que.Head_--;
+        //std::cout << que.Head_.pos << std::endl;
+        //--que.Head_;
+        //std::cout << que.Head_.pos << std::endl;
+        //--que.Head_;
+        //std::cout << que.Head_.pos << std::endl;
+        que.push(1); que.push(1);
+        que.push(1); que.push(1);
+        que.push(1); que.push(1);
+        que.print();
+        que.pop(); que.pop();que.pop();
+        que.print();
+        que.push(1); que.push(1);
+        que.push(1); que.push(1);
+        que.push(1); que.push(1);
+        que.push(1); que.push(1);
+        que.print();
+        que.pop(); que.pop(); que.pop();
+        que.print();
+        que.pop(); que.pop(); que.pop(); que.pop(); que.pop();
+        que.print();
+        que.pop();
+        que.print();
+        que.pop();
+        que.print();
+        que.pop();
+        que.print();
+        que.push(1); que.push(1);
+        que.push(1); que.push(1);
+        que.push(1); que.push(1);
+        que.push(1); que.push(1);
+        que.print();
+        que.push(1); que.push(1);
+        que.print();
+        que.push(1);
+        que.print();
 
 #endif
 
