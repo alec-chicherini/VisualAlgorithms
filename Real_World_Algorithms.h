@@ -1,7 +1,9 @@
 #pragma once
 #define PART2
-//generates random array
+#define PART1
+//generates random int
 #include <random>
+#include <functional>
 int RAND(int left, int right)
 {
     std::random_device rd;
@@ -466,7 +468,7 @@ private:
 public:
     bool is_full() { return b_is_full; }
     bool is_empty() { return b_is_empty; }
-    void push(T&& data)
+    void push(T data)
     {
         if (is_full()) std::cout << "push failed. queue is full" << std::endl;
         else if (is_empty())
@@ -547,6 +549,11 @@ struct graph
     std::vector<std::pair<T, T>> E;
     std::vector<bool> visited;
     bool first_DFS_iteration = true;
+    T last_visited_node;
+    int number_path_started = 0;
+  
+    T getLastVisitedNode() { return last_visited_node; }
+    int getNumberCurrentPath() { return number_path_started;}
  
     void print() {
         std::cout << "V = { ";
@@ -560,27 +567,34 @@ struct graph
 
     std::vector<int> makeAdjacencyList(int node) {
     
-        std::vector<int> vec;
+        std::vector<int> vec{};
         for (auto& e : E)
         {
-            if (e.first == node)vec.push_back(e.second);
-            else if (e.second == node)vec.push_back(e.first);
+            if (e.first == node&&!visited[e.second])vec.push_back(e.second);
+            else if (e.second == node && !visited[e.first])vec.push_back(e.first);
         }
 
         return std::move(vec);
 
     }
 
-    void DFS_recurcive(int node) {
-        
-        if (node<0 || node>N) { std::cout << "DFS error. first node not in range." << std::endl; }
+    void DFS_recurcive(int node, std::function<void()> visualisation_func = []{}) {
+       // std::cout << "getLastVisitedNode() = " << getLastVisitedNode() << std::endl;
+        if (node<0 || node>N) { std::cout << __FUNCDNAME__ << " error. first node not in range." << std::endl; }
 
         if (first_DFS_iteration) {
-            visited.resize(N + 1); std::cout << "DFS: "<<node;
+            visited.resize(N + 1);
+            std::cout << "DFS_Recurcive: "<<node;
             first_DFS_iteration = false;
+
+            for (size_t i = 0; i < visited.size(); i++)visited[i] = false;
+            
         }
 
         visited[node] = true;
+
+        last_visited_node = node;
+        visualisation_func();
 
         bool bl=true;
         for (auto b : visited) { bl = b && bl; }; 
@@ -592,9 +606,207 @@ struct graph
         for (auto& a : AdjacencyList) 
             if (!visited[a]){
                 std::cout << "->" << a;
-                DFS_recurcive(a);}
+                DFS_recurcive(a, visualisation_func);}
 
     };
+    void DFS_stack(int node, std::function<void()> visualisation_func = [] {})
+    {
+        if (node<0 || node>N) { std::cout <<__FUNCDNAME__<< " error. first node not in range." << std::endl; }
+        std::cout << std::endl;
+     
+        visited.resize(N + 1);
+        for (size_t i = 0; i < visited.size(); i++)visited[i] = false;
+       // std::cout << "DFS_Stack:visited: "; for (auto v : visited)std::cout << v; std::cout << std::endl;
+        std::cout << "DFS_Stack: " << node;
+        
+        ouMyStack<int,N*N> stack;
+        stack.push(node);
+        while (!stack.is_empty()) {
+            auto c = stack.top();
+            stack.pop();
+            visited[c] = true;
+            last_visited_node = c;
+            visualisation_func();
+            std::vector<int> AdjacencyList = makeAdjacencyList(c);
+            for (auto& a : AdjacencyList)
+            {
+                if (!visited[a]) {
+                std::cout << "->" << a;
+                stack.push(a);}
+            }
+        };
+    }
+
+    void DFS_stack_2(int  node, std::function<void()> visualisation_func = [] {})
+    {
+        if (node<0 || node>N) { std::cout << __FUNCDNAME__ << " error. first node not in range." << std::endl; }
+        std::cout << std::endl;
+        std::vector<int> instack;
+
+        instack.resize(N + 1);
+        visited.resize(N + 1);
+
+        for (size_t i = 0; i < visited.size(); i++) 
+        {
+            visited[i] = false; 
+            instack[i] = false;
+        }
+
+        //std::cout << "DFS_stack_2:visited: "; for (auto v : visited)std::cout << v; std::cout << std::endl;
+        std::cout << "DFS_stack_2: " << node;
+        
+        ouMyStack<int,N*N> stack;
+        stack.push(node);
+
+        instack[node] = true;
+
+        while (!stack.is_empty()) {
+            auto c = stack.top();
+            stack.pop();
+            instack[c] = false;
+            visited[c] = true;
+            last_visited_node = c;
+            visualisation_func();
+            std::vector<int> AdjacencyList = makeAdjacencyList(c);
+            for (auto& a : AdjacencyList)
+            {
+                if (!visited[a]&&!instack[a]) {
+                    std::cout << "->" << a;
+                    stack.push(a);
+                    instack[a] = true;
+                }
+            }
+        }//while
+        std::cout << std::endl;
+    }
+
+    void DFS_stack_2_random(int  node, std::function<void()> visualisation_func = [] {})
+    {
+        if (node<0 || node>N) { std::cout << __FUNCDNAME__ << " error. first node not in range." << std::endl; }
+        std::cout << std::endl;
+        std::vector<bool> instack;
+        std::vector<int> not_in_visited;
+        for (int i = 0; i < N; i++)not_in_visited.push_back(i);
+        instack.resize(N );
+        visited.resize(N );
+
+        for (size_t i = 0; i < visited.size(); i++)
+        {
+            visited[i] = false;
+            instack[i] = false;
+        }
+        
+        ouMyStack<int, N*N> stack;
+        stack.push(node);
+        instack[node] = true;
+        visited[node] = true;
+        auto current = stack.top();
+
+        auto iter = std::find(not_in_visited.begin(), not_in_visited.end(), current);
+        if (iter != not_in_visited.end())
+        not_in_visited.erase(iter);
+
+        bool all_visited_true = false;
+        std::vector<int> AdjacencyList = makeAdjacencyList(current);
+
+        while(!all_visited_true){
+            
+        while (AdjacencyList.empty()) {
+            
+            current = not_in_visited[RAND(0,not_in_visited.size()-1)];
+
+            AdjacencyList = makeAdjacencyList(current);
+            if (AdjacencyList.empty())AdjacencyList.push_back(current);
+            }
+            
+
+		while (!AdjacencyList.empty())
+		{
+            auto r = RAND(0, AdjacencyList.size() - 1); //std::cout << "AdjacencyList.size() = " << AdjacencyList.size() << " RAND(0, AdjacencyList.size()) = " << r << std::endl;
+            current = AdjacencyList[r];
+
+            auto iter = std::find(not_in_visited.begin(), not_in_visited.end(), current);
+            if (iter != not_in_visited.end())
+            not_in_visited.erase(iter);
+
+            if (!visited[current] && !instack[current])
+            {
+                stack.push(current);
+                instack[current] = true;
+                AdjacencyList.clear();
+                AdjacencyList = makeAdjacencyList(current);
+            }
+            else {
+                auto iter = std::find(AdjacencyList.begin(), AdjacencyList.end(), current);
+                if(iter!=AdjacencyList.end())
+                AdjacencyList.erase(iter);
+            }   
+		};
+
+        
+        while (!stack.is_empty()) 
+        {
+            current = stack.top();
+            visited[current] = true;
+            std::cout << "->" << current;
+            last_visited_node = current;
+            visualisation_func();
+            stack.pop();
+        
+            if(stack.is_empty())number_path_started++;
+        }
+
+        
+        bool bl = true;
+        for (auto b : visited) { bl = b && bl; };
+
+        if (bl)all_visited_true = true;
+        }
+        number_path_started = 0;
+        std::cout << std::endl;
+    }
+
+    void BFS(int  node, std::function<void()> visualisation_func = [] {})
+    {
+        std::cout << std::endl;
+        std::vector<int> inqueue;
+
+        inqueue.resize(N + 1);
+        visited.resize(N + 1);
+
+        for (size_t i = 0; i < visited.size(); i++)
+        {
+            visited[i] = false;
+            inqueue[i] = false;
+        }
+
+        std::cout << "DFS_stack_2:visited: "; for (auto v : visited)std::cout << v; std::cout << std::endl;
+        std::cout << "BFS: " << node;
+
+        ouMyQueue<int,N> queue;
+        queue.push(node);
+
+        inqueue[node] = true;
+
+        while (!queue.is_empty()) {
+            auto c = queue.pop();
+            inqueue[c] = false;
+            visited[c] = true;
+            last_visited_node = c;
+            visualisation_func();
+            std::vector<int> AdjacencyList = makeAdjacencyList(c);
+            for (auto& a : AdjacencyList)
+            {
+                if (!visited[a] && !inqueue[a]) {
+                    std::cout << "->" << a;
+                    queue.push(a);
+                    inqueue[a] = true;
+                }
+            }
+        }//while
+        std::cout << std::endl;
+    }
+   
 };
 
 template<typename T, int N = 10>
@@ -619,6 +831,30 @@ graph<T,N> generateRandomGraph() {
     G.E.erase(std::remove_if(G.E.begin(), G.E.end(), [](std::pair<int, int> pair) {return pair.first == pair.second; }));
 
     return G;
+}
+
+template<typename T,int X,int Y>
+graph<T, X * Y> generateLabirinthGraph()
+{
+    graph<T, X * Y> G;
+
+    for (int i = 0; i < X; i++)
+        for (int j = 0; j < Y; j++)
+        {
+            int xy =  i*Y + j;
+            G.V.push_back(xy);
+
+            if (i == X - 1 && j == Y - 1)break;
+            else if (i == X - 1)
+                G.E.push_back({xy,xy+1});
+            else if (j == Y - 1)
+                G.E.push_back({xy,xy+Y});
+            else {
+                G.E.push_back({ xy, xy + 1 });
+                G.E.push_back({ xy, xy + Y });
+            };
+        };
+    return std::move(G);
 }
 
 

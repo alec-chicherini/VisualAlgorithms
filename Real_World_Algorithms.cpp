@@ -140,10 +140,23 @@
         //2.3
         graph<int,5> gr1 = generateRandomGraph<int,5>();
         gr1.print();
-
+        std::cout << std::endl;
         gr1.DFS_recurcive(0);
+        gr1.DFS_stack(0);
+        gr1.DFS_stack_2(0);
+        gr1.BFS(0);
+
        
 
+        graph<int, 625> gr_labirinth = generateLabirinthGraph<int, 25, 25>();
+        //gr_labirinth.print();
+        gr_labirinth.DFS_stack_2_random(0);
+
+        graph<int, 8> gr_labirinth2 = generateLabirinthGraph<int, 2, 4>();
+        gr_labirinth2.print();
+
+        graph<int, 8> gr_labirinth3 = generateLabirinthGraph<int, 4, 2>();
+        gr_labirinth3.print();
         
 #endif
 
