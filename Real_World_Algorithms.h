@@ -401,6 +401,7 @@ public:
         }
         std::cout << "nullptr" << std::endl;
     };
+
     void cleanup() {
 
         while (first != nullptr) {
@@ -544,17 +545,34 @@ public:
 template<typename T,size_t N = 10>
 struct graph
 {
-
+    
     std::vector<T> V;
     std::vector<std::pair<T, T>> E;
     std::vector<bool> visited;
     bool first_DFS_iteration = true;
     T last_visited_node;
+    bool last_visited_node_color;
     int number_path_started = 0;
   
-    T getLastVisitedNode() { return last_visited_node; }
+    T getLastVisitedNode() { return last_visited_node;}
     int getNumberCurrentPath() { return number_path_started;}
+    bool getLastVisitedNodeColor() { return last_visited_node_color;}
  
+    void cleanup() {
+        V.clear();
+        E.clear();
+        visited.clear();
+        first_DFS_iteration = true;
+        number_path_started = 0;
+
+    }
+
+    bool isVisitedTrue() {
+        bool b=true;
+        for (auto v : visited) b = b && v;
+        return b;
+    }
+
     void print() {
         std::cout << "V = { ";
         for (auto& v : V)std::cout << v << " ";
@@ -572,6 +590,20 @@ struct graph
         {
             if (e.first == node&&!visited[e.second])vec.push_back(e.second);
             else if (e.second == node && !visited[e.first])vec.push_back(e.first);
+        }
+
+        return std::move(vec);
+
+    } 
+
+    //without visited checking
+    std::vector<int> makeAdjacencyList2(int node) {
+
+        std::vector<int> vec{};
+        for (auto& e : E)
+        {
+            if (e.first == node)vec.push_back(e.second);
+            else if (e.second == node)vec.push_back(e.first);
         }
 
         return std::move(vec);
@@ -768,8 +800,8 @@ struct graph
 
     void BFS(int  node, std::function<void()> visualisation_func = [] {})
     {
-        std::cout << std::endl;
-        std::vector<int> inqueue;
+
+        std::vector<bool> inqueue;
 
         inqueue.resize(N + 1);
         visited.resize(N + 1);
@@ -780,7 +812,7 @@ struct graph
             inqueue[i] = false;
         }
 
-        std::cout << "DFS_stack_2:visited: "; for (auto v : visited)std::cout << v; std::cout << std::endl;
+       
         std::cout << "BFS: " << node;
 
         ouMyQueue<int,N> queue;
@@ -806,12 +838,87 @@ struct graph
         }//while
         std::cout << std::endl;
     }
+
+  
+
+    bool bipartiteGraphCheck(int node, std::function<void()> visualisation_func = [] {})
+    {   
+      
+
+        enum class colors_enum:bool { RED, GREEN } current_color = colors_enum::RED;
+        using enum colors_enum;
+
+        std::vector<bool> color;
+        std::vector<bool> inqueue;
+
+        inqueue.resize(N+1);
+        visited.resize(N + 1);
+        color.resize(N + 1);
+
+        for (size_t i = 0; i < visited.size(); i++)
+        {
+            visited[i] = false;
+            inqueue[i] = false;
+            
+        }
+
+        std::cout << "BFS_colorify: " << node;
+
+        ouMyQueue<int, N> queue;
+        queue.push(node);
+
+        inqueue[node] = true;
+        color[node] = static_cast<bool>(current_color);
+
+        while (!queue.is_empty()) {
+            current_color=(current_color==RED?GREEN:RED);
+            auto c = queue.pop();
+            inqueue[c] = false;
+            visited[c] = true;
+
+            last_visited_node_color = color[c];
+            last_visited_node = c;
+            visualisation_func();
+
+            std::vector<int> AdjacencyList = makeAdjacencyList(c);
+            for (auto& a : AdjacencyList)
+            {
+
+                if (!visited[a] && !inqueue[a]) {
+                    color[a] = static_cast<bool>(current_color);
+                    std::cout << "->" << a << "(" << color[a] << ")";
+                    queue.push(a);
+                    inqueue[a] = true;
+                }
+               
+            }
+        }//while
+
+        
+        auto is_colorfied_biportied = [&] {
+
+            for (auto& v : V) {
+                auto alist = makeAdjacencyList2(v);
+                for (auto& a : alist)if(a!=v)if(color[a] == color[v])return false;
+            };
+
+            return true;
+        };
+
+        auto result = is_colorfied_biportied();
+        std::cout << "result: " << result << std::endl;;
+        this->print();
+        std::cout << std::endl;
+        return result;
+
+    }
    
 };
 
 template<typename T, int N = 10>
 graph<T,N> generateRandomGraph() {
     graph<T,N> G;
+    G.visited.resize(N + 1);
 
     for (int i = 0; i <= N; i++)
     {
@@ -825,10 +932,15 @@ graph<T,N> generateRandomGraph() {
     //remove duplicates
     std::sort(G.E.begin(), G.E.end());
     auto last = std::unique(G.E.begin(), G.E.end());
-    G.E.erase(last, G.E.end());
+    if(last!=G.E.end())
+     G.E.erase(last, G.E.end());
 
     //remove loops
-    G.E.erase(std::remove_if(G.E.begin(), G.E.end(), [](std::pair<int, int> pair) {return pair.first == pair.second; }));
+    auto loop = std::find_if(G.E.begin(), G.E.end(), [](std::pair<int, int>& pair) {return pair.first == pair.second; });
+    while(loop!=G.E.end()){
+        G.E.erase(loop);
+        loop = std::find_if(G.E.begin(), G.E.end(), [](std::pair<int, int>& pair) {return pair.first == pair.second; });
+    }
 
     return G;
 }

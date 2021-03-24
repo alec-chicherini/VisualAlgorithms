@@ -146,8 +146,6 @@
         gr1.DFS_stack_2(0);
         gr1.BFS(0);
 
-       
-
         graph<int, 625> gr_labirinth = generateLabirinthGraph<int, 25, 25>();
         //gr_labirinth.print();
         gr_labirinth.DFS_stack_2_random(0);
@@ -157,6 +155,15 @@
 
         graph<int, 8> gr_labirinth3 = generateLabirinthGraph<int, 4, 2>();
         gr_labirinth3.print();
+
+        graph<int, 3> bipartCheck;
+        bipartCheck.V = { 0,1,2,3 };
+        bipartCheck.E = { {1,0}, {2,0}, {2,3}, {3,1}, {3,1}, {3,3} };
+        bipartCheck.print();
+        bipartCheck.bipartiteGraphCheck(0);
+
+        auto rand_graph = generateRandomGraph<int, 5>();
+        rand_graph.print();
         
 #endif
 
