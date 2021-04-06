@@ -1,6 +1,7 @@
 #pragma once
-#define PART2
-#define PART1
+//#define PART2
+//#define PART1
+#define PART3
 //generates random int
 #include <random>
 #include <functional>
@@ -969,6 +970,110 @@ graph<T, X * Y> generateLabirinthGraph()
     return std::move(G);
 }
 
+
+
+#endif
+
+#ifdef PART3
+#include <sstream>
+#include <iomanip>
+
+//3.2
+
+template<class T>
+class ouMyPriorityQueue
+{ 
+public:   
+    enum class TypeOfPriority :bool { min_priority, max_priority };
+  
+    ouMyPriorityQueue() = delete;
+    ouMyPriorityQueue(bool queue_type, T root) :priority(queue_type) { queue.push_back(root); };
+    
+    void insert(T data) {
+        using enum TypeOfPriority;
+        if (priority == static_cast<bool>(min_priority))
+        {
+            auto data_ = data;
+            queue.push_back(data_);
+            auto current_ = (queue.end()-1);
+
+            while (data_ != queue.front())
+            {
+                auto parent_ = parent(current_);
+                std::iter_swap(current_, parent_);
+                current_ = parent_;
+
+                if (!(*current_ < *parent(current_)))break;
+            }
+
+        }
+        else
+        {
+
+        }
+    };
+
+    template<typename ... Ts>
+    void insert(Ts ... args) 
+    {
+        (insert(args),...);
+    };
+
+    T find();
+    T extract();
+    size_t size();
+    void print() 
+    {
+        for (auto& q : queue)std::cout << q << "  "; std::cout << std::endl;
+
+        int row = 0;
+        int pos_in_row = 0;
+
+        int num_of_rows = log2f(queue.size())+1;
+
+        for (auto& q : queue)
+        {
+            
+            int r = float(pow(2, num_of_rows - row)-1);
+
+            if (pos_in_row == 0)
+                r /= 2;
+             if (pos_in_row<(pow(2, row) - 1))
+             {
+                 
+                 pos_in_row ++;
+                
+                 while(r--)
+                 std::cout << "  ";
+                 std::cout << q;
+             }
+             else
+             {
+                 
+                 while (r--)
+                     std::cout << "  ";
+                 std::cout << q;
+                 pos_in_row=0;
+                 row++;
+
+                 std::cout << "\n";
+             }
+        }
+        std::cout << std::endl;
+    };
+
+private:
+    bool priority;
+    std::vector<T> queue;
+
+    std::vector<T>::iterator parent(std::vector<T>::iterator iter)
+    {
+        auto pos = (std::distance(queue.begin(), iter) - 1) / 2;
+
+        return queue.begin() + pos ;
+
+    };
+};
 
 
 #endif

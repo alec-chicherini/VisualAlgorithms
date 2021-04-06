@@ -167,5 +167,49 @@
         
 #endif
 
+#ifdef PART3
+       
+        std::string input("abcd");
+        std::cout << "str input: ";
+        std::cout << input << std::endl;
+
+        std::stringstream output;
+        std::cout << "str to int: ";
+        for(auto&c:input)
+        {
+            output<<std::hex<<int(c);
+            std::cout << int(c) << " ";
+        }
+        std::cout << std::endl;
+
+        std::string output_hex (output.str());
+        std::cout << "int to hex: ";
+        std::cout << output_hex <<std::endl;
+
+        std::cout << "hex to dec: ";
+        for (auto& c : output_hex)
+        {
+            std::cout <<int((c > 'a') ? (c - 'a' + 10) : (c - '0'));
+        }
+        std::cout << std::endl;
+
+        std::cout << "dec * 360/16: ";
+        for (auto& c : output_hex)
+        {
+            std::cout << float(int((c > 'a') ? (c - 'a' + 10) : (c - '0')) * 22.5f) << " ";
+        }
+
+        std::cout << std::endl;
+        std::cout << std::endl;
+
+        ouMyPriorityQueue Q1(0, 4);
+
+
+
+        Q1.insert(9, 8, 7, 6, 5, 3, 2, 1);
+        Q1.print();
+
+        
+#endif
     };
 
