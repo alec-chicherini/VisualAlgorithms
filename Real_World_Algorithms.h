@@ -977,19 +977,64 @@ graph<T, X * Y> generateLabirinthGraph()
 #ifdef PART3
 #include <sstream>
 #include <iomanip>
+#include <concepts>
+#include <tuple>
+#include <map>
+#include <vector>
+#include <iostream>
+#include <string>
+#include <utility>
+#include <algorithm>
+#include <set>
+
+template<typename T, typename ... Ts>
+concept allTheSame = (std::same_as<T, Ts>&&...);
 
 //3.2
+template<typename T>
+struct Node {
+    T data;
+    Node<T>* left = nullptr;
+    Node<T>* right = nullptr;
+};
+
+template<typename T>
+class tree;
 
 template<class T>
 class ouMyPriorityQueue
 { 
+  
 public:   
+    using T_Freq = std::pair<T, int>;
     enum class TypeOfPriority :bool { min_priority, max_priority };
   
+    using T_Freq_map =typename std::map<typename T_Freq::first_type, typename T_Freq::second_type>;
+
+    using Queue_Tree_T = typename ouMyPriorityQueue<tree<T>>;
+
     ouMyPriorityQueue() = delete;
-    ouMyPriorityQueue(bool queue_type, T root) :priority(queue_type) { queue.push_back(root); };
+    ouMyPriorityQueue(bool queue_type, T_Freq root) :priority(queue_type) { queue.push_back(root); };
+
+    ouMyPriorityQueue(bool queue_type, std::set<std::pair<int,char>> mp) :priority(queue_type)
+    {
     
-    void insert(T data) {
+        for (auto& m : mp)
+        {
+           tree<char> t;
+           auto pr = std::pair<char, int>{ m.second, m.first };
+           Node<std::pair<char,int>>* n = t.CreateTree(pr);
+
+           t.setRoot(n);
+
+            queue.push_back(T_Freq(t,m.first));
+
+        }
+
+
+    };
+  
+    void insert(T_Freq data)requires std::same_as<T, char> {
         using enum TypeOfPriority;
         if (priority == static_cast<bool>(min_priority))
         {
@@ -997,15 +1042,35 @@ public:
             queue.push_back(data_);
             auto current_ = (queue.end()-1);
 
-            while (data_ != queue.front())
+            while (current_ != queue.begin())
             {
                 auto parent_ = parent(current_);
+                if (!((current_->second) < (parent(current_)->second)))break;
                 std::iter_swap(current_, parent_);
                 current_ = parent_;
-
-                if (!(*current_ < *parent(current_)))break;
             }
+        }
+        else
+        {
 
+        }
+    };
+    //insert for ouMyPriorityQueue<tree<char>>
+    void insert(std::pair<tree<char>,int> data)requires std::same_as<T, tree<char>> {
+        using enum TypeOfPriority;
+        if (priority == static_cast<bool>(min_priority))
+        {
+            auto data_ = data;
+            queue.push_back(data_);
+            auto current_ = (queue.end() - 1);
+
+            while (current_ != queue.begin())
+            {
+                auto parent_ = parent(current_);
+                if (!((current_->second) < (parent(current_)->second)))break;
+                std::iter_swap(current_, parent_);
+                current_ = parent_;
+            }
         }
         else
         {
@@ -1014,17 +1079,88 @@ public:
     };
 
     template<typename ... Ts>
-    void insert(Ts ... args) 
+    void insert(Ts ... args) requires allTheSame<Ts...>
     {
         (insert(args),...);
     };
 
-    T find();
-    T extract();
-    size_t size();
-    void print() 
+    T_Freq find()
     {
-        for (auto& q : queue)std::cout << q << "  "; std::cout << std::endl;
+        if (!queue.empty())return queue.front();
+        else {
+            std::cout << "find() ERROR. queue is empty." << std::endl;
+            return 0;
+        }
+    };
+
+    T_Freq extract() requires std::same_as<T, char>
+    {
+        using enum TypeOfPriority;
+
+        auto result = queue.front();
+        std::iter_swap(queue.begin(), (queue.end() - 1));
+        queue.pop_back();
+        auto current_ = queue.begin();
+
+        if (priority == static_cast<bool>(min_priority))
+        {
+            while (hasChild(current_))
+            {
+                auto child_=min_child(current_);
+                if (current_->second < child_->second)break;
+                std::iter_swap(current_, child_);
+                current_ = child_;
+            }
+            return result;
+        }
+
+        else
+        {
+            return result;
+        }
+        return result;
+    };
+
+    T_Freq extract() requires std::same_as<T, tree<char>>
+    {
+        using enum TypeOfPriority;
+
+        auto result = queue.front();
+        std::iter_swap(queue.begin(), (queue.end() - 1));
+        queue.pop_back();
+        auto current_ = queue.begin();
+
+        if (priority == static_cast<bool>(min_priority))
+        {
+            while (hasChild(current_))
+            {
+                auto child_ = min_child(current_);
+                if (current_->second < child_->second)break;
+                std::iter_swap(current_, child_);
+                current_ = child_;
+            }
+            return result;
+        }
+
+        else
+        {
+            return result;
+        }
+        return result;
+    };
+    
+    size_t size() { return queue.size();};
+
+private:
+    bool priority;
+    std::vector<T_Freq> queue;
+
+public:
+   void print() requires std::same_as<T, char>
+    {
+       
+        for (auto& q : queue)std::cout <<q.first<<"("<<q.second<<") ";
+        std::cout << std::endl;
 
         int row = 0;
         int pos_in_row = 0;
@@ -1045,14 +1181,14 @@ public:
                 
                  while(r--)
                  std::cout << "  ";
-                 std::cout << q;
+                 std::cout << q.first << "(" << q.second << ")";
              }
              else
              {
                  
                  while (r--)
                      std::cout << "  ";
-                 std::cout << q;
+                 std::cout << q.first << "(" << q.second << ")";
                  pos_in_row=0;
                  row++;
 
@@ -1062,18 +1198,212 @@ public:
         std::cout << std::endl;
     };
 
-private:
-    bool priority;
-    std::vector<T> queue;
+   void print() requires std::same_as<T, tree<char>>
+   {
+       int i = 0;
+       for (auto& q : queue) {
+           std::cout << q.second << "[" << i++ << "] " << std::endl;
+           q.first.print();
+       }
+     
 
-    std::vector<T>::iterator parent(std::vector<T>::iterator iter)
+       std::cout << std::endl;
+   };
+
+    std::vector<T_Freq>::iterator parent(std::vector<T_Freq>::iterator iter)
     {
-        auto pos = (std::distance(queue.begin(), iter) - 1) / 2;
+        size_t pos = (std::distance(queue.begin(), iter) - 1) / 2;
 
         return queue.begin() + pos ;
-
     };
+
+    std::vector<T_Freq>::iterator child_left(std::vector<T_Freq>::iterator iter)
+    {
+        size_t pos = std::distance(queue.begin(), iter);
+        if (2 * pos + 1 < queue.size()) return queue.begin() + (2 * pos + 1);
+        else return queue.end();
+    }
+
+    std::vector<T_Freq>::iterator child_right(std::vector<T_Freq>::iterator iter)
+    {
+        size_t pos = std::distance(queue.begin(), iter);
+        if (2 * pos + 2 < queue.size()) return queue.begin() + (2 * pos + 2);
+        
+        else return queue.end();
+    }
+
+    bool hasChild(std::vector<T_Freq>::iterator iter)
+    {
+        if (child_left(iter) != queue.end() || child_right(iter) != queue.end()) return true;
+        else return false;
+
+    }
+
+    std::vector<T_Freq>::iterator min_child(std::vector<T_Freq>::iterator iter)
+    {
+		if (hasChild(iter))
+		{
+			if (child_left(iter) != queue.end() && child_right(iter) != queue.end())
+				if (child_left(iter)->second < child_right(iter)->second)return child_left(iter);
+				    else return child_right(iter);
+			else  if (child_left(iter) != queue.end())return child_left(iter);
+			      else return child_right(iter);
+		}
+		else return queue.end();
+    }
 };
 
+//3.4
+template<typename T>
+class tree
+{
+public:
 
+    using TF = ouMyPriorityQueue<T>::T_Freq;
+
+    Node<TF>* CreateTree(TF data, Node<TF>* left = nullptr, Node<TF>* right = nullptr)
+    {
+        return new Node<TF>(data, left, right);
+    };
+
+
+    void print(Node<TF>* root)
+    {
+     
+        std::cout << root->data.first<<"("<<root->data.second<<")";
+
+        std::cout << "(";
+        if (root->left) std::cout<<root->left->data.first << "(" << root->left->data.second << ")";
+        else std::cout << "nullptr";
+        std::cout << ",";
+        if (root->right) std::cout << root->right->data.first << "(" << root->right->data.second << ")";
+        else std::cout << "nullptr";
+        std::cout << ") " << std::endl;
+
+        if(root->left)  print(root->left); 
+        if(root->right) print(root->right);
+    };
+
+    void print()
+    {
+        print(root);
+       
+    }
+
+    void setRoot(Node<TF>* n) {root=n;}
+    auto getRoot() { return root; }
+
+    Node<TF>* root= nullptr;
+};
+
+#include <map>
+#include <bitset>
+class HuffmanCodding
+{
+    ouMyPriorityQueue<tree<char>>* PQ;
+    using TF = ouMyPriorityQueue<char>::T_Freq;
+    
+    std::set<std::pair<TF::second_type, TF::first_type>> charFrequency_;
+    std::map<char, std::string> alphabet;
+    tree<char> result_tree;
+    std::string text_;
+
+public:
+    HuffmanCodding(std::string text): text_(text)
+    {
+        charFrequency_ = charFrequency(text);
+        PQ = new ouMyPriorityQueue<tree<char>>(0,charFrequency_);
+
+        std::cout << text << std::endl;
+
+        PQ->print();
+
+        std::cout<<std::endl;
+
+        while (PQ->size() > 1) {
+            auto x = PQ->extract();
+            auto y = PQ->extract();
+            auto sum = x.second + y.second;
+            auto pr = TF{ '#', sum };
+            tree<char> t;
+            auto z = t.CreateTree(pr,x.first.getRoot(),y.first.getRoot());
+            PQ->insert(std::pair<tree<char>,int>(z,sum));
+        }
+        result_tree = PQ->extract().first;
+
+        //create new alphabet
+        for (auto& s : charFrequency_)
+        {
+           std::string result,str;
+            
+           tree_walking(result_tree.getRoot(), str, s.second, result);
+
+           alphabet[s.second] = result;
+        }
+    };
+
+   void tree_walking(Node<TF>* node, std::string way, char c,std::string& result)
+    {
+       if (node->data.first == c) {
+           result = way; return;
+       }
+
+        if (node->right) {
+            tree_walking(node->right, std::string(way + "1"), c, result);
+        }
+
+        if (node->left) {
+            tree_walking(node->left, std::string(way + "0"), c, result);
+        }
+    };
+
+    std::set<std::pair<TF::second_type, TF::first_type>> charFrequency(std::string text)
+    {
+        std::map<TF::first_type, TF::second_type> charFrequency_;
+
+        for (auto& c : text) charFrequency_[c]++;
+
+        std::set<std::pair<TF::second_type, TF::first_type>> charFreq;
+        for (auto const& [k, v] : charFrequency_) charFreq.emplace(v, k);
+
+   return charFreq;
+    }
+
+    void printQueue()
+    {
+        result_tree.print();
+    };
+
+    void printAlphabet()
+    {
+        std::cout << "alphabet:" << std::endl;
+        for (auto& a : alphabet)
+            std::cout << a.first << " - "<<a.second << std::endl;
+    };
+
+    int ascii_num_of_bits()
+    {
+
+        return text_.size() * 8;;
+    }
+
+    int huffman_num_of_bits()
+    {
+        int res(0);
+
+        for (auto& t : text_) 
+        {
+            auto code = alphabet[t];
+            for (auto& c : code)  res++;
+        }
+
+        return res;
+    }
+
+    int text_size() 
+    {
+        return text_.size();
+    }
+
+};
 #endif

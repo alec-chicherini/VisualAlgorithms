@@ -202,14 +202,53 @@
         std::cout << std::endl;
         std::cout << std::endl;
 
-        ouMyPriorityQueue Q1(0, 4);
-
-
-
-        Q1.insert(9, 8, 7, 6, 5, 3, 2, 1);
-        Q1.print();
+        //3.2
+        using TF = ouMyPriorityQueue<char>::T_Freq;
+        ouMyPriorityQueue<char> Q1(0, TF{'a',5});
 
         
+
+        Q1.insert(TF{'g',6 }, TF{ 'b',7 }, TF{ 'c',3 }, TF{ 'd',4 }, TF{ 'e',1 }, TF{ 'f',2 });
+        Q1.print();
+      
+        auto e1 = Q1.extract();
+        std::cout << e1.first<< " = " << e1.second << std::endl;
+        auto e2 = Q1.extract();
+        std::cout << e2.first << " = " << e2.second << std::endl;
+        auto e3 = Q1.extract();
+        std::cout << e3.first << " = " << e3.second << std::endl;
+        Q1.print();
+
+        //3.3
+        tree<char> t;
+        using TF = ouMyPriorityQueue<char>::T_Freq;
+        auto n1 = t.CreateTree(TF{ 'a',7 });
+        auto n2 = t.CreateTree(TF{ 'b',6 });
+        auto n3 = t.CreateTree(TF{ 'c',5 });
+      
+        auto n4 = t.CreateTree((TF{ 'd',4 }), n1, n2);
+        auto n5 = t.CreateTree((TF{ 'e',3 }), n3);
+
+        auto n6 = t.CreateTree((TF{ 'f',2 }), n4, n5);
+        t.setRoot(n6);
+
+        std::cout<<std::endl;
+        t.print();
+        std::cout << std::endl;
+
+        HuffmanCodding hc("So we’re driving along, a road in the middle of nowhere, a few trees now and then on each side of the road, mountains in the distance, there hasn’t been a town for ages and then you see this sign, not really a proper sign at all, just a piece of card with some words scribbled on it: ‘Bungee Jumping, 5km’, and an arrow pointing to the left. I can’t even see a road going left, and there’s certainly no sign of any bungee jumping, but you insist, the idea has taken you, you’re crazy about it, you’ve always wanted to do bungee jumping. I know, you think I’m boring because I don’t want to go.‘Go on!’ you insist.‘We don’t even have to do the bungee jumping, we can just go thereand see what’s happening.It’ll be interesting!’ As usual, you get your way.I give inand off we go along this dirt road, for what seems much more than five kilometres to me.But then, after driving for ages, suddenly, out of nowhere, some trees appear, like a small wood.‘This must be the place, ’ you say.The road narrows into just a path, so we pull over to the side of the road.I couldn’t drive down there if I wanted to.As soon as we’re out of the car we can hear voices : people shoutingand laughing.They sound like young people, they sound like they’re having a good time.We slowly walk to where the noiseand people are.In the middle of the wood there’s a group of about 20 people.The youngest are about 15 or 16, while some of them are perhaps in their late 20s.They look up and see us, then say hello to us.They’re polite, friendly even, but I feel like we’re interrupting a private party – gatecrashing something they’re doing.Once there had been a river running through the middle of the forest, but now there was just a dry ditch.It doesn’t matter; nobody is interested in swimming.A metal bridge crosses the ditch.The bridge doesn’t look too stable.I think the kids had built it themselves.There’s a big group of the kids in the middle of the bridge.They’re all leaning overand looking down into the ditch.They’re all shoutingand laughing.Another person is hanging from a long piece of elastic rope in the middle of the ditch.He is laughing like he is mad.The other people slowly pull him up to the bridge.As the guy comes to the top he looks exhilaratedand shocked, but also very, very happyI look at youand can see what you’re thinking.‘I want to do that!’ you say.I knew it.And you know what I want to say : ‘Danger!!!Damage to internal organs!Safety procedures!Damage to your eyes!The rope can burn you!You can get tangled up in the rope!You can dislocate your arm or your leg!It’s certain that you will get bruises on your arms!What happens if the rope breaks ? Who knows who these people are ? Have you any idea how far away from a hospital we are ? ’ I don’t say it, but, yes, you’re right, I am thinking it.I don’t say anything, because I know that you won’t have answers for any of my questions.You know that I’m right, really.You’ve always been a lot more adventurous than me.I know you think I’m boringand safeand always worried about dangerand risk.Perhaps you’re right.Perhaps I am too boring.I don’t know why people do it.I really don’t know.I remember when I was a kid, my friend had a bicycle that had no brakes.We used to take his bike without brakesand go down a big hill on it.I think about that, that old bike so many years ago, and I remember how I felt then.I breathe in, close my eyes, don’t think about anything.I jump.I think I’m going foreverand wonder when I’ll stop.But it feels great.I feel scaredand thrilledand alive.Then there’s a pulland I’m going back up again, and, yes, it is dangerous, but, yes, it is thrilling.But the most exciting, thrilling, wonderful thing of all is seeing your face as I come back up to the bridge.Chris Rose");
+        //HuffmanCodding hc("aaaabbbcccddd");
+        hc.printQueue();
+        hc.printAlphabet();
+
+        auto charVec = hc.ascii_num_of_bits();
+        auto boolVec = hc.huffman_num_of_bits();
+       
+        std::cout << "text size = " << hc.text_size() <<" symbols"<< std::endl;
+        std::cout << "ascii_num_of_bits = " << charVec << std::endl;
+        std::cout << "huffman_num_of_bits = " << boolVec << std::endl;
+        
+
 #endif
     };
 
