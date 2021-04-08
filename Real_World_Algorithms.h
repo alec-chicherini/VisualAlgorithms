@@ -1354,9 +1354,9 @@ public:
         charFrequency_ = charFrequency(text);
         PQ = new ouMyPriorityQueue<tree<char>>(0,charFrequency_);
 
-        std::cout << text << std::endl;
+       // std::cout << text << std::endl;
 
-        PQ->print();
+        //PQ->print();
 
         std::cout<<std::endl;
 
@@ -1468,5 +1468,29 @@ public:
         return text_.size();
     }
 
+    void printComparision() {
+
+        auto ascii = this->ascii_num_of_bits();
+        auto huffman = this->huffman_num_of_bits();
+        auto morse = this->morse_num_of_bits();
+      
+        std::cout << "text size = " << this->text_size() << " symbols" << std::endl;
+        std::cout << "ascii_num_of_bits = " << ascii << std::endl;
+        std::cout << "huffman_num_of_bits = " << huffman << std::endl;
+        std::cout << "morse_num_of_bits = " << morse << " (all symbols formatted to UPPER)" << std::endl;
+      
+    }
 };
+
+#include <random>
+std::string generateRandomString(size_t num)
+{
+    std::random_device r;
+    std::uniform_int_distribution<int> char_dist(1, 255);
+
+    std::string res;
+    while (num--)res += char(char_dist(r));
+    return res;
+
+}
 #endif

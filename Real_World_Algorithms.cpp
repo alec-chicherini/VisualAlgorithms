@@ -241,14 +241,13 @@
         hc.printQueue();
         hc.printAlphabet();
 
-        auto ascii = hc.ascii_num_of_bits();
-        auto huffman = hc.huffman_num_of_bits();
-        auto morse = hc.morse_num_of_bits();
-        std::cout << std::endl;
-        std::cout << "text size = " << hc.text_size() <<" symbols"<< std::endl;
-        std::cout << "ascii_num_of_bits = " << ascii << std::endl;
-        std::cout << "huffman_num_of_bits = " << huffman << std::endl;
-        std::cout << "morse_num_of_bits = " << morse <<" (all symbols formatted to UPPER)"<< std::endl;
+        hc.printComparision();
+
+        HuffmanCodding hc_rand(generateRandomString(100));
+        hc_rand.printComparision();
+
+        HuffmanCodding hc_rand2(generateRandomString(10000));
+        hc_rand2.printComparision();
 
 #endif
     };
