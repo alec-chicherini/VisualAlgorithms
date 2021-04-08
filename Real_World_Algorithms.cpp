@@ -241,13 +241,14 @@
         hc.printQueue();
         hc.printAlphabet();
 
-        auto charVec = hc.ascii_num_of_bits();
-        auto boolVec = hc.huffman_num_of_bits();
-       
+        auto ascii = hc.ascii_num_of_bits();
+        auto huffman = hc.huffman_num_of_bits();
+        auto morse = hc.morse_num_of_bits();
+        std::cout << std::endl;
         std::cout << "text size = " << hc.text_size() <<" symbols"<< std::endl;
-        std::cout << "ascii_num_of_bits = " << charVec << std::endl;
-        std::cout << "huffman_num_of_bits = " << boolVec << std::endl;
-        
+        std::cout << "ascii_num_of_bits = " << ascii << std::endl;
+        std::cout << "huffman_num_of_bits = " << huffman << std::endl;
+        std::cout << "morse_num_of_bits = " << morse <<" (all symbols formatted to UPPER)"<< std::endl;
 
 #endif
     };
