@@ -8,6 +8,10 @@
 #include <qradiobutton.h>
 #include <qbuttongroup.h>
 #include <qpushbutton.h>
+#include <qcheckbox.h>
+#include <qspinbox.h>
+#include <qlabel.h>
+
 
 class graph_menu : public QWidget
 {
@@ -17,13 +21,6 @@ public:
 	graph_menu(QWidget *parent = Q_NULLPTR);
 	~graph_menu();
 
-private:
-	
-	QGroupBox* gbox_graph_type;
-	QButtonGroup* btngroup_graph_type;
-	QStackedLayout* stacked_layout_graphs;
 
-	QGroupBox* gbox_genereate_vegraph;
-	QGroupBox* gbox_genereate_2dgraph;
 
 };

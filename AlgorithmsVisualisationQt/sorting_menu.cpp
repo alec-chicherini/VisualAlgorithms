@@ -7,7 +7,7 @@ sorting_menu::sorting_menu(QWidget *parent)
 	push_button_merge = new QPushButton("Start merge sort");
 	push_button_qsort = new QPushButton("Start qsort");
 
-	//main layout 
+	//main layout
 	QGridLayout* grid_layout_main = new QGridLayout;
 
 	grid_layout_main->addWidget(push_button_bubble, 0, 0);

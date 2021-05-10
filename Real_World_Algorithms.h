@@ -1,7 +1,7 @@
 #pragma once
-//#define PART2
+#define PART2
 //#define PART1
-#define PART3
+//#define PART3
 //generates random int
 #include <random>
 #include <functional>
@@ -640,8 +640,8 @@ struct graph
             if (!visited[a]){
                 std::cout << "->" << a;
                 DFS_recurcive(a, visualisation_func);}
-
     };
+
     void DFS_stack(int node, std::function<void()> visualisation_func = [] {})
     {
         if (node<0 || node>N) { std::cout <<__FUNCDNAME__<< " error. first node not in range." << std::endl; }
@@ -845,7 +845,6 @@ struct graph
     bool bipartiteGraphCheck(int node, std::function<void()> visualisation_func = [] {})
     {   
       
-
         enum class colors_enum:bool { RED, GREEN } current_color = colors_enum::RED;
         using enum colors_enum;
 
@@ -911,9 +910,7 @@ struct graph
         this->print();
         std::cout << std::endl;
         return result;
-
     }
-   
 };
 
 template<typename T, int N = 10>

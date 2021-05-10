@@ -42,7 +42,6 @@ vWindow::vWindow(QWidget *parent)
 	view->setRootEntity(rootEntity);
 	//
 
-
 	container = createWindowContainer(view,this);
 	container->setFixedSize(128, 128);
 	container->setFocusPolicy(Qt::TabFocus);
