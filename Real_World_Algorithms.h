@@ -1,18 +1,18 @@
 #pragma once
+
 #define PART2
-//#define PART1
+#define PART1
 //#define PART3
 //generates random int
+
+
 #include <random>
 #include <functional>
-int RAND(int left, int right)
-{
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_int_distribution<> dist(left, right);
+#include <iostream>
 
-    return dist(gen);
-}
+#include "S:\Code\ikvasir\Real_World_Algorithms\AlgorithmsVisualisationQt\enums.h"
+
+
 
 #ifdef PART1
 
@@ -97,20 +97,23 @@ void print(std::array<T, SIZE>* arr)
 
 //exercise 1.3.1. Stack
 
-template<class T, size_t SIZE = 100>
+template<class T>
 class ouMyStack
 {
+    size_t SIZE = 100;
     bool is_empty_bool = true;
     size_t current_pos = 0;
-    std::array<T, SIZE>* stack;
+    std::vector<T> stack;
+
 public:
-    ouMyStack() { stack = new std::array<T, SIZE>; }
+    ouMyStack() { stack.resize(SIZE); };
+    ouMyStack(size_t SIZE_) { SIZE = SIZE_; stack.resize(SIZE); };
     bool is_full() { return current_pos == SIZE - 1 ? true : false; }
     bool is_empty() { return is_empty_bool; }
     void push(T x)
     {
         if (!this->is_full()) {
-            stack->operator[](current_pos++) = x;
+            stack.operator[](current_pos++) = x;
             is_empty_bool = false;
         }
         else
@@ -128,7 +131,7 @@ public:
 
     T top()
     {
-        if (!is_empty_bool)return stack->operator[](current_pos - 1);
+        if (!is_empty_bool)return stack.operator[](current_pos - 1);
 
         else {
             std::cout << "Stack is empty! top failed.";
@@ -144,24 +147,25 @@ public:
         if (is_empty_bool)std::cout << "[empty]" << std::endl;
         else {
             std::cout << "[ ";
-            for (size_t i = 0; i < current_pos; i++)std::cout << stack->operator[](i) << " "; std::cout << "]";
+            for (size_t i = 0; i < current_pos; i++)std::cout << stack.operator[](i) << " "; std::cout << "]";
         }
     }
 
     void reverse()
     {
-        auto* newStack = new std::array<T, SIZE>;
-        for (size_t i = 0; i < current_pos; i++)newStack->operator[](i) = stack->operator[](current_pos - 1 - i);
-        delete stack;
+        std::vector<T> newStack; newStack.resize(SIZE);
+        for (size_t i = 0; i < current_pos; i++)newStack.operator[](i) = stack.operator[](current_pos - 1 - i);
+        
         stack = newStack;
     }
 };
 
 class Calc
 {
-    ouMyStack<std::string, 10> input;
-    ouMyStack<int, 100> output;
+    ouMyStack<std::string> input;//10
+    ouMyStack<int> output;//100
 public:
+    
     void getExpression(std::string&& str) {
         std::string current = "";
         for (size_t i = 0; i < str.size(); i++)
@@ -236,10 +240,10 @@ public:
 
 class bracers
 {
-    ouMyStack<char, 100> bracers_stack;
-    ouMyStack<char, 10> round_bracers_stack;
-    ouMyStack<char, 10> courvie_bracers_stack;
-    ouMyStack<char, 10> square_bracers_stack;
+    ouMyStack<char> bracers_stack;//100
+    ouMyStack<char> round_bracers_stack;//10
+    ouMyStack<char> courvie_bracers_stack;//10
+    ouMyStack<char> square_bracers_stack;//10
 
 public:
     void getExpression(std::string&& br)
@@ -416,18 +420,22 @@ public:
 };
 //2.2
 #include <array>
-template <class T, size_t SIZE = 10>
+template <class T>
 class ouMyQueue
 {
-    std::array<T, SIZE>* queue_;
 public:
-    ouMyQueue() { queue_ = new std::array<T, SIZE>; };
+    size_t SIZE = 10;
+    std::vector<T> queue_;
+
+    ouMyQueue() { queue_.resize(SIZE); };
+    ouMyQueue(size_t SIZE_) { SIZE = SIZE_; queue_.resize(SIZE); };
 
 public:
     struct possition {
+        size_t SIZE=10;
         size_t pos;
-        possition(size_t pos_) { pos = pos_; };
-        possition() { pos = 0; };
+        possition(size_t pos_, size_t SIZE_ = 10) { pos = pos_; SIZE = SIZE_; };
+        possition() =delete;
 
         possition& operator++()
         {
@@ -460,8 +468,8 @@ public:
 
     };
 private:
-    possition Head_;
-    possition Tail_;
+    possition Head_{ 0,SIZE };
+    possition Tail_{ 0,SIZE};
 
     bool b_is_full = false;
     bool b_is_empty = true;
@@ -475,7 +483,7 @@ public:
         if (is_full()) std::cout << "push failed. queue is full" << std::endl;
         else if (is_empty())
         {
-            queue_->operator[](Tail_.pos) = data;
+            queue_.operator[](Tail_.pos) = data;
             b_is_empty = false;
             b_is_one_element = true;
         }
@@ -483,7 +491,7 @@ public:
         {
             b_is_one_element = false;
             Tail_++;
-            queue_->operator[](Tail_.pos) = data;
+            queue_.operator[](Tail_.pos) = data;
             Tail_++;
             if (Tail_.pos == Head_.pos) b_is_full = true;
             Tail_--;
@@ -501,34 +509,34 @@ public:
             else Head_++;
 
             if (Tail_.pos == Head_.pos && !b_is_one_element) { b_is_one_element = true; }
-            return queue_->operator[](current);
+            return queue_.operator[](current);
         }
     };
 
     void print()
     {
-        possition current(Head_.pos);
-        std::array <std::string, SIZE>* print_array = new std::array <std::string, SIZE>;
-        for (auto& s : *print_array)s = " ";
+        possition current(Head_.pos,SIZE);
+        std::vector <std::string> print_array; print_array.resize(SIZE);
+        for (auto& s : print_array)s = " ";
 
         if (!is_empty())
             while (true)
             {
 
-                print_array->operator[](current.pos) = std::to_string(queue_->operator[](current.pos));
+                print_array[current.pos] = std::to_string(queue_[current.pos]);
                 if (b_is_one_element)break;
 
                 current++;
 
                 if (current.pos == Tail_.pos) {
-                    print_array->operator[](current.pos) = std::to_string(queue_->operator[](current.pos));
+                    print_array[current.pos] = std::to_string(queue_[current.pos]);
                     break;
                 };
             };
         for (size_t i = 0; i < SIZE; i++) std::cout << i << " ";
         std::cout << std::endl;
 
-        for (size_t i = 0; i < SIZE; i++) std::cout << print_array->operator[](i) << " ";
+        for (size_t i = 0; i < SIZE; i++) std::cout << print_array[i] << " ";
         std::cout << std::endl;
 
         for (size_t i = 0; i < SIZE; i++) if (Head_.pos == i)std::cout << "H"; else std::cout << "  ";
@@ -543,22 +551,41 @@ public:
 #include <vector>
 #include <tuple>
 //2.3
-template<typename T,size_t N = 10>
+template<typename T>
 struct graph
 {
-    
+    size_t N = 10;
     std::vector<T> V;
     std::vector<std::pair<T, T>> E;
     std::vector<bool> visited;
     bool first_DFS_iteration = true;
-    T last_visited_node;
-    bool last_visited_node_color;
+    T last_visited_node=T(0);
+    bool last_visited_node_color=false;
     int number_path_started = 0;
   
     T getLastVisitedNode() { return last_visited_node;}
     int getNumberCurrentPath() { return number_path_started;}
     bool getLastVisitedNodeColor() { return last_visited_node_color;}
  
+
+    graph(size_t N_) :N(N_) {};
+
+    graph<T>(graph<T>& gr_)
+    {
+        N = gr_.N;
+        V = gr_.V;
+        E = gr_.E;
+    }
+
+    int RAND(int left, int right)
+    {
+        std::random_device rd;
+        std::mt19937 gen(rd());
+        std::uniform_int_distribution<> dist(left, right);
+
+        return dist(gen);
+    }
+
     void cleanup() {
         V.clear();
         E.clear();
@@ -581,7 +608,25 @@ struct graph
             << "E = { ";
         for (auto& e : E)std::cout << "{" << e.first << "," << e.second << "} ";
         std::cout << " }" << std::endl;
+    }
 
+    std::string print_to_string()
+    {
+        std::string result;
+        result+= "V = { ";
+        for (auto& v : V) { result += std::to_string(v); result += " "; }
+        result += " }\n";
+        result += "E = { ";
+        for (auto& e : E)
+        {
+            result += "{";
+            result += std::to_string(e.first);
+            result += ",";
+            result += std::to_string(e.second);
+            result += "} ";
+        }
+        result += " }\n";
+        return result;
     }
 
     std::vector<int> makeAdjacencyList(int node) {
@@ -652,7 +697,7 @@ struct graph
        // std::cout << "DFS_Stack:visited: "; for (auto v : visited)std::cout << v; std::cout << std::endl;
         std::cout << "DFS_Stack: " << node;
         
-        ouMyStack<int,N*N> stack;
+        ouMyStack<int> stack(N * N);
         stack.push(node);
         while (!stack.is_empty()) {
             auto c = stack.top();
@@ -688,7 +733,7 @@ struct graph
         //std::cout << "DFS_stack_2:visited: "; for (auto v : visited)std::cout << v; std::cout << std::endl;
         std::cout << "DFS_stack_2: " << node;
         
-        ouMyStack<int,N*N> stack;
+        ouMyStack<int> stack(N * N);
         stack.push(node);
 
         instack[node] = true;
@@ -729,7 +774,7 @@ struct graph
             instack[i] = false;
         }
         
-        ouMyStack<int, N*N> stack;
+        ouMyStack<int> stack(N * N);
         stack.push(node);
         instack[node] = true;
         visited[node] = true;
@@ -746,7 +791,7 @@ struct graph
             
         while (AdjacencyList.empty()) {
             
-            current = not_in_visited[RAND(0,not_in_visited.size()-1)];
+            current = not_in_visited[RAND(0,int(not_in_visited.size())-1)];
 
             AdjacencyList = makeAdjacencyList(current);
             if (AdjacencyList.empty())AdjacencyList.push_back(current);
@@ -755,7 +800,7 @@ struct graph
 
 		while (!AdjacencyList.empty())
 		{
-            auto r = RAND(0, AdjacencyList.size() - 1); //std::cout << "AdjacencyList.size() = " << AdjacencyList.size() << " RAND(0, AdjacencyList.size()) = " << r << std::endl;
+            auto r = RAND(0, int(AdjacencyList.size()) - 1); //std::cout << "AdjacencyList.size() = " << AdjacencyList.size() << " RAND(0, AdjacencyList.size()) = " << r << std::endl;
             current = AdjacencyList[r];
 
             auto iter = std::find(not_in_visited.begin(), not_in_visited.end(), current);
@@ -816,7 +861,7 @@ struct graph
        
         std::cout << "BFS: " << node;
 
-        ouMyQueue<int,N> queue;
+        ouMyQueue<int> queue(N);
         queue.push(node);
 
         inqueue[node] = true;
@@ -864,7 +909,7 @@ struct graph
 
         std::cout << "BFS_colorify: " << node;
 
-        ouMyQueue<int, N> queue;
+        ouMyQueue<int> queue(N);
         queue.push(node);
 
         inqueue[node] = true;
@@ -894,7 +939,6 @@ struct graph
             }
         }//while
 
-        
         auto is_colorfied_biportied = [&] {
 
             for (auto& v : V) {
@@ -913,40 +957,102 @@ struct graph
     }
 };
 
-template<typename T, int N = 10>
-graph<T,N> generateRandomGraph() {
-    graph<T,N> G;
-    G.visited.resize(N + 1);
+template<typename T>
+auto generateRandomGraph(int V, int E_left, int E_right, std::underlying_type_t<GP> options) {
+    graph<T> G(V);
+    G.visited.resize(V + 1);
 
-    for (int i = 0; i <= N; i++)
+    for (int i = 0; i <= V; i++)
     {
         G.V.push_back(i);
-        G.E.push_back({ i,RAND(0,N) });
-        if (RAND(0, 1000) % 2)G.E.push_back({ i,RAND(0,N) });
-        if (RAND(0, 1000) % 3)G.E.push_back({ i,RAND(0,N) });
-        if (RAND(0, 1000) % 5)G.E.push_back({ i,RAND(0,N) });
     }
 
+    if ((options & static_cast<std::underlying_type_t<GP>>(GP::DIRECTED)) == static_cast<std::underlying_type_t<GP>>(GP::DIRECTED))
+    {
+        for (int i = 0; i <= V; i++)
+        {
+            int E_total = E_right - E_left + 1;
+            int E_min = E_left;
+
+            while (E_min--)
+                G.E.push_back({ i,G.RAND(0,V) });
+
+            while (E_total--)
+                if (G.RAND(0, 1000) % 2)
+                    G.E.push_back({ i,G.RAND(0,V) });
+        }
+    }
+    else
+    {
+        //same as directed
+        for (int i = 0; i <= V; i++)
+        {
+            int E_total = E_right - E_left + 1;
+            int E_min = E_left;
+
+            while(E_min--)
+                G.E.push_back({i,G.RAND(0,V)});
+
+            while (E_total--) 
+                if(G.RAND(0, 1000) % 2)
+                    G.E.push_back({ i,G.RAND(0,V) });
+            
+        }
+
+    }
+    if ((options & static_cast<std::underlying_type_t<GP>>(GP::WEIGHTED)) == static_cast<std::underlying_type_t<GP>>(GP::WEIGHTED))
+    {
+
+    }
+    
+    if ((options & static_cast<std::underlying_type_t<GP>>(GP::CONNECTED)) == static_cast<std::underlying_type_t<GP>>(GP::CONNECTED))
+    {
+
+    }
+    if ((options & static_cast<std::underlying_type_t<GP>>(GP::FULL)) == static_cast<std::underlying_type_t<GP>>(GP::FULL))
+    {
+
+    }
+    if ((options & static_cast<std::underlying_type_t<GP>>(GP::NONE)) == static_cast<std::underlying_type_t<GP>>(GP::NONE))
+    {
+
+    }
+ 
     //remove duplicates
     std::sort(G.E.begin(), G.E.end());
     auto last = std::unique(G.E.begin(), G.E.end());
     if(last!=G.E.end())
      G.E.erase(last, G.E.end());
 
-    //remove loops
+    if ((options & static_cast<std::underlying_type_t<GP>>(GP::LOOPS)) == static_cast<std::underlying_type_t<GP>>(GP::LOOPS))
+    {
+
+    }
+    else
+    {
     auto loop = std::find_if(G.E.begin(), G.E.end(), [](std::pair<int, int>& pair) {return pair.first == pair.second; });
     while(loop!=G.E.end()){
         G.E.erase(loop);
         loop = std::find_if(G.E.begin(), G.E.end(), [](std::pair<int, int>& pair) {return pair.first == pair.second; });
     }
 
+    }
+
     return G;
 }
 
-template<typename T,int X,int Y>
-graph<T, X * Y> generateLabirinthGraph()
+//single option overloading
+template<typename T>
+auto generateRandomGraph(int V, int E_left, int E_right, GP option = GP::NONE)
 {
-    graph<T, X * Y> G;
+    return generateRandomGraph<T>(V, E_left, E_right, static_cast<std::underlying_type_t<GP>>(option));
+};
+
+
+template<typename T>
+graph<T> generateLabirinthGraph(int X, int Y)
+{
+    graph<T> G(X * Y);
 
     for (int i = 0; i < X; i++)
         for (int j = 0; j < Y; j++)
@@ -964,7 +1070,7 @@ graph<T, X * Y> generateLabirinthGraph()
                 G.E.push_back({ xy, xy + Y });
             };
         };
-    return std::move(G);
+    return G;
 }
 
 
@@ -1162,7 +1268,7 @@ public:
         int row = 0;
         int pos_in_row = 0;
 
-        int num_of_rows = log2f(queue.size())+1;
+        int num_of_rows = log2f(float(queue.size()))+1;
 
         for (auto& q : queue)
         {
@@ -1421,7 +1527,7 @@ public:
     int ascii_num_of_bits()
     {
 
-        return text_.size() * 8;;
+        return int(text_.size()) * 8;;
     }
 
     int huffman_num_of_bits()
@@ -1462,7 +1568,7 @@ public:
 
     int text_size() 
     {
-        return text_.size();
+        return int(text_.size());
     }
 
     void printComparision() {
@@ -1491,3 +1597,4 @@ std::string generateRandomString(size_t num)
 
 }
 #endif
+

@@ -14,7 +14,7 @@
 
         //ex 1.3.1
         constexpr size_t STACK_SIZE = 3;
-        ouMyStack<int, STACK_SIZE> stack;
+        ouMyStack<int> stack(STACK_SIZE);
         stack.push(11);
         stack.push(12);
         std::cout << "stack.size() = " << stack.size() << " stack.top() = " << stack.top() << std::endl;
@@ -138,7 +138,7 @@
         que.print();
 
         //2.3
-        graph<int,5> gr1 = generateRandomGraph<int,5>();
+        graph<int> gr1 = generateRandomGraph<int>(5,1,3,GP::LOOPS|GP::FULL);
         gr1.print();
         std::cout << std::endl;
         gr1.DFS_recurcive(0);
@@ -146,23 +146,23 @@
         gr1.DFS_stack_2(0);
         gr1.BFS(0);
 
-        graph<int, 625> gr_labirinth = generateLabirinthGraph<int, 25, 25>();
+        graph<int> gr_labirinth(625); gr_labirinth = generateLabirinthGraph<int>(25,25);
         //gr_labirinth.print();
         gr_labirinth.DFS_stack_2_random(0);
 
-        graph<int, 8> gr_labirinth2 = generateLabirinthGraph<int, 2, 4>();
+        graph<int> gr_labirinth2(8); gr_labirinth2 = generateLabirinthGraph<int>(2,4);
         gr_labirinth2.print();
 
-        graph<int, 8> gr_labirinth3 = generateLabirinthGraph<int, 4, 2>();
+        graph<int> gr_labirinth3 = generateLabirinthGraph<int>(4,2);
         gr_labirinth3.print();
 
-        graph<int, 3> bipartCheck;
+        graph<int> bipartCheck(3);
         bipartCheck.V = { 0,1,2,3 };
         bipartCheck.E = { {1,0}, {2,0}, {2,3}, {3,1}, {3,1}, {3,3} };
         bipartCheck.print();
         bipartCheck.bipartiteGraphCheck(0);
 
-        auto rand_graph = generateRandomGraph<int, 5>();
+        auto rand_graph = generateRandomGraph<int>(5, 1, 3, GP::LOOPS);
         rand_graph.print();
         
 #endif

@@ -30,8 +30,8 @@ graph_menu::graph_menu(QWidget *parent)
 	//graph properties group box
 	QGroupBox* groupbox_graph_properties = new QGroupBox("Properties:");
 
-	QCheckBox* checkbox_directed = new QCheckBox("Directed");
-	QCheckBox* checkbox_weighted = new QCheckBox("Weighted");
+    checkbox_directed = new QCheckBox("Directed");
+    checkbox_weighted = new QCheckBox("Weighted");
 
 	QButtonGroup* btngroup_graph_properties = new QButtonGroup;
 	btngroup_graph_properties->setExclusive(false);
@@ -48,26 +48,31 @@ graph_menu::graph_menu(QWidget *parent)
 	//common graph generate group box
 	QGroupBox* groupbox_genereate_common_graph = new QGroupBox("Generate:");
 	QPushButton* pushbutton_generate_common_grraph = new QPushButton("ReGen Graph");
-	QCheckBox* checkbox_loops = new QCheckBox("Loops");
-	QCheckBox* checkbox_connected = new QCheckBox("Connected");
 
-	QLabel* label_vertex_num = new QLabel("Vertex number:");
-	QSpinBox* spinbox_vertex_num = new QSpinBox;
+	checkbox_loops = new QCheckBox("Loops");
+	checkbox_connected = new QCheckBox("Connected");
+
+	QLabel* label_vertex_num = new QLabel("Vertex number :");
+	spinbox_vertex_num = new QSpinBox;
 	label_vertex_num->setBuddy(spinbox_vertex_num);
 	spinbox_vertex_num->setValue(5);
 	
 
-	QLabel* label_edges_num = new QLabel("Edges number:");
-	QSpinBox* spinbox_edges_num_left = new QSpinBox;
+	QLabel* label_edges_num = new QLabel("Edges number :");
+    spinbox_edges_num_left = new QSpinBox;
 	spinbox_edges_num_left->setValue(1);
 	spinbox_edges_num_left->setFixedWidth(35);
 	label_edges_num->setBuddy(spinbox_edges_num_left);
 
 	QLabel* label_edges_separator = new QLabel("-");
-	QSpinBox* spinbox_edges_num_right = new QSpinBox;
+    spinbox_edges_num_right = new QSpinBox;
 	spinbox_edges_num_right->setValue(3);
 	spinbox_edges_num_right->setFixedWidth(35);
 	label_edges_separator->setBuddy(spinbox_edges_num_right);
+
+
+	connect(pushbutton_generate_common_grraph, &QAbstractButton::clicked,
+		    this, &graph_menu::regen_graph_button_pushed);
 
 	QGridLayout* groupbox_layout_generate_vegraph = new QGridLayout;
 

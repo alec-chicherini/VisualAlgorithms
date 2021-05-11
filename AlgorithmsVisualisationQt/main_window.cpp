@@ -21,7 +21,6 @@ main_window::main_window(QWidget *parent)
 	btn = new QPushButton("1234567890");
 
 	//main layout
-	
 	grid_layout_main = new QGridLayout;
 
 	grid_layout_main->addWidget(tab_menu_left,0,0,Qt::AlignTop);
@@ -39,6 +38,10 @@ main_window::main_window(QWidget *parent)
 
 	setLayout(grid_layout_main);
 	//
+
+
+	connect(graph_menu_, &graph_menu::regen_data_signal,
+		    this, &main_window::re_gen_graph);
 
 }
 
