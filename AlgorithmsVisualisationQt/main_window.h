@@ -12,16 +12,15 @@
 //main window widgets
 #include "graph_menu.h"
 #include "sorting_menu.h"
-#include "vWindow.h"
+#include "camera_menu.h"
+#include "viewport_window.h"
+#include "light_menu.h"
 
 //real world algorithms book
 #include "../Real_World_Algorithms.h"
 
+//debug
 #include <qmessagebox.h>
-
-
-
-
 
 class main_window : public QWidget
 {
@@ -36,8 +35,9 @@ private:
 	QTabWidget* tab_menu_left;
 	graph_menu* graph_menu_;
 	sorting_menu* sorting_menu_;
-	vWindow* visualisation_window_;
-	QPushButton* btn;
+	viewport_window* viewport_window_;
+	camera_menu* camera_menu_;
+	light_menu* light_menu_;
 
 	graph<int>* main_graph=Q_NULLPTR;
 	

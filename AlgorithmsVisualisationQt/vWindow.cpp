@@ -1,8 +1,25 @@
+//deprecated viewport from first experiments. now using viewport_window.cpp
+
 #include "vWindow.h"
 
 vWindow::vWindow(QWidget *parent)
 	: QWidget(parent)
 {
+	QFile load_config("graph_common_config.json");
+	if (!load_config.open(QIODevice::ReadOnly)) 
+	{
+		qWarning("Couldn`t open config file.");
+	
+	}
+
+	QByteArray config_data = load_config.readAll();
+	QJsonDocument config(QJsonDocument::fromJson(config_data));
+
+	QMessageBox msgBox;
+
+	msgBox.setText(QString(config["info"].toString()));
+	//msgBox.exec();
+
 	rootEntity = new Qt3DCore::QEntity();
 
 	//dummy 
@@ -26,7 +43,7 @@ vWindow::vWindow(QWidget *parent)
 	camera->setPosition(QVector3D(0, 0, 10.f));
 	camera->setViewCenter(QVector3D(0, 0, 0));
 
-	camController = new Qt3DExtras::QFirstPersonCameraController(rootEntity);
+	camController = new Qt3DExtras::QOrbitCameraController(rootEntity);
 	camController->setCamera(camera);
 
 	Qt3DCore::QEntity* lightEntity = new Qt3DCore::QEntity(rootEntity);
@@ -42,20 +59,21 @@ vWindow::vWindow(QWidget *parent)
 	view->setRootEntity(rootEntity);
 	//
 
+	//Add container to show window as widget
 	container = createWindowContainer(view,this);
 	container->setFixedSize(128, 128);
 	container->setFocusPolicy(Qt::TabFocus);
 	container->setContentsMargins(0, 0, 0, 0);
 
-	QGridLayout* gl = new QGridLayout;
-	gl->setSpacing(0);
-	gl->setContentsMargins(0, 0, 0, 0);
-	gl->addWidget(container);
+	QGridLayout* layout = new QGridLayout;
+	layout->setSpacing(0);
+	layout->setContentsMargins(0, 0, 0, 0);
+	layout->addWidget(container);
 	
 	this->setContentsMargins(1, 1, 1, 1);
 
-	setLayout(gl);
-
+	setLayout(layout);
+	//
 }
 
 vWindow::~vWindow()
@@ -66,8 +84,6 @@ vWindow::~vWindow()
 {
 	 container->setMaximumSize(4096,4096);
 	 container->setMinimumSize(128, 128);
-
-
 
 	 auto value = this->y();
 	 OutputDebugStringW(LPCWSTR(std::to_wstring(value).c_str()));

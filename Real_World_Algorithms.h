@@ -522,7 +522,6 @@ public:
         if (!is_empty())
             while (true)
             {
-
                 print_array[current.pos] = std::to_string(queue_[current.pos]);
                 if (b_is_one_element)break;
 
