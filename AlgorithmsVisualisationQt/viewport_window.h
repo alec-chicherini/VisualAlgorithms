@@ -32,6 +32,11 @@
 
 #include <qvariant.h>
 
+//debug
+#include "qdebug_helper.h"
+
+
+
 class viewport_window : public QWidget
 {
 	Q_OBJECT
@@ -55,23 +60,30 @@ private:
 
 	QWidget* container;
 
+	bool camera_menu_possition_signal_was_recived = false;
+	bool camera_menu_view_center_signal_was_recived = false;
+
 signals:
-	void viewport_camera_position_signal(const QVector3D& position);
+	void viewport_camera_position_signal(const QVector3D& position) ;
 	void viewport_camera_view_center_signal(const QVector3D& position);
 
 public slots:
 	void viewport_camera_possition_slot(QVector3D pos)
 	{
-		camera_main->blockSignals(true);
+		camera_menu_possition_signal_was_recived = true;
 		camera_main->setPosition(pos);
-		camera_main->blockSignals(false);
+		
+
+		 qDebug() << QDateTime::currentDateTimeUtc()<< QString("<----- call viewport_camera_possition_slot") << QString::number(camera_menu_possition_signal_was_recived);
 	};
 
 	void viewport_camera_view_center_slot(QVector3D pos)
 	{
-		camera_main->blockSignals(true);
+		camera_menu_view_center_signal_was_recived = true;
 		camera_main->setViewCenter(pos);
-		camera_main->blockSignals(false);
+
+		 qDebug() << QDateTime::currentDateTimeUtc()<< QString("<----- call viewport_camera_view_center_slot") << QString::number(camera_menu_view_center_signal_was_recived);
+	
 	};
 
 	void viewport_camera_controller_slot(int index)
@@ -96,19 +108,19 @@ public slots:
 	void viewport_light_color_slot(QColor clr)
 	{
 		point_light_main->setColor(clr);
-		OutputDebugStringW(LPCWSTR(std::to_wstring(clr.red()).c_str()));
-		OutputDebugStringW(L" <----- COLOR RED WAS CHANGED()\n");
-		OutputDebugStringW(LPCWSTR(std::to_wstring(clr.green()).c_str()));
-		OutputDebugStringW(L" <----- COLOR GREEN WAS CHANGED()\n");
-		OutputDebugStringW(LPCWSTR(std::to_wstring(clr.blue()).c_str()));
-		OutputDebugStringW(L" <----- COLOR BLUE WAS CHANGED()\n");
+		qDebug((std::to_string(clr.red()).c_str()));
+		qDebug(" <----- COLOR RED WAS CHANGED()");
+		qDebug((std::to_string(clr.green()).c_str()));
+		qDebug(" <----- COLOR GREEN WAS CHANGED()");
+		qDebug((std::to_string(clr.blue()).c_str()));
+		qDebug(" <----- COLOR BLUE WAS CHANGED()");
 	}
 
 	void viewport_light_intensity_slot(float intens)
 	{
 		point_light_main->setIntensity(intens);
-			OutputDebugStringW(LPCWSTR(std::to_wstring(intens).c_str()));
-			OutputDebugStringW(L" <----- LIGHT INTENSYTY WAS CHANGED()\n");
+			qDebug((std::to_string(intens).c_str()));
+			qDebug(" <----- LIGHT INTENSYTY WAS CHANGED()");
 	}
 
 

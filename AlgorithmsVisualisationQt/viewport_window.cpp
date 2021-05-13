@@ -3,7 +3,7 @@
 viewport_window::viewport_window(QWidget *parent)
 	: QWidget(parent)
 {
-
+	
 	window3d_main = new Qt3DExtras::Qt3DWindow();
 	window3d_main->defaultFrameGraph()->setClearColor(QColor(0, 128, 128, 0));
 
@@ -59,8 +59,21 @@ viewport_window::viewport_window(QWidget *parent)
 
 	setLayout(gl);
 	
-	connect(camera_main, &Qt3DRender::QCamera::positionChanged, this, &viewport_window::viewport_camera_position_signal);
-	connect(camera_main, &Qt3DRender::QCamera::viewVectorChanged, this, &viewport_window::viewport_camera_view_center_signal);
+	connect(camera_main, &Qt3DRender::QCamera::positionChanged,
+		this, [this](const QVector3D& vec)
+		{
+			if (camera_menu_possition_signal_was_recived)this->camera_menu_possition_signal_was_recived = false;
+			else emit viewport_camera_position_signal(vec);
+		}
+	);
+
+	connect(camera_main, &Qt3DRender::QCamera::viewVectorChanged,
+		   this, [this](const QVector3D& vec)
+	{
+		if (camera_menu_view_center_signal_was_recived)this->camera_menu_view_center_signal_was_recived = false;
+		else emit viewport_camera_view_center_signal(vec);
+	}
+	);
 
 }
 

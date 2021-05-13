@@ -93,3 +93,40 @@ namespace {
         }
     }//added to to_string_helpers_ namespace 
 }
+
+namespace {
+#include <type_traits>
+    enum class MeshType :int
+    {
+        CONE = 0,
+        CUBOID = 1,
+        CYLINDER =2,
+        PLANE = 3,
+        SPHERE =4,
+        TORUS =5
+    };
+
+    using MeshType_under = std::underlying_type_t<MeshType>;
+
+    namespace to_string_helpers_
+    {
+        std::string mesh_type_to_string(MeshType mt) noexcept
+        {
+            switch (static_cast<MeshType_under>(mt))
+            {
+                case static_cast<MeshType_under>(MeshType::CONE) : return "CONE";
+                case static_cast<MeshType_under>(MeshType::CUBOID) : return "CUBOID";
+                case static_cast<MeshType_under>(MeshType::CYLINDER) : return "CYLINDER";
+                case static_cast<MeshType_under>(MeshType::PLANE) : return "PLANE";
+                case static_cast<MeshType_under>(MeshType::SPHERE) : return "SPHERE";
+                case static_cast<MeshType_under>(MeshType::TORUS) : return "TORUS";
+            }
+            return "YOU-SEE-IMPOSSIBLE-MSG-NERD";
+        };
+
+        std::string mesh_type_to_string(MeshType_under mt)
+        {
+            return mesh_type_to_string(static_cast<MeshType>(mt));
+        }
+    }//added to to_string_helpers_ namespace 
+}

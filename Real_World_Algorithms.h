@@ -614,7 +614,7 @@ struct graph
         std::string result;
         result+= "V = { ";
         for (auto& v : V) { result += std::to_string(v); result += " "; }
-        result += " }\n";
+        result += " } ";
         result += "E = { ";
         for (auto& e : E)
         {
@@ -622,9 +622,9 @@ struct graph
             result += std::to_string(e.first);
             result += ",";
             result += std::to_string(e.second);
-            result += "} ";
+            result += "}";
         }
-        result += " }\n";
+        result += "}";
         return result;
     }
 

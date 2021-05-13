@@ -15,6 +15,9 @@
 //enums
 #include"enums.h"
 
+//debug
+#include "qdebug_helper.h"
+
 class graph_menu : public QWidget
 {
 	Q_OBJECT
@@ -46,12 +49,11 @@ private slots:
 			spinbox_edges_num_left->value(),
 			spinbox_edges_num_right->value(),
 			options);
-
 	}
-
 
 signals:
 	void regen_data_signal(const int V, const int E_left, const  int E_right, const  under_GP& properties);
+	void graph_type_signal(int);
 };
 
 

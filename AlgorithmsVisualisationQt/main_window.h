@@ -7,6 +7,7 @@
 
 //main layout
 #include <qgridlayout.h>
+#include <qstackedlayout.h>
 #include <qtabwidget.h>
 
 //main window widgets
@@ -16,11 +17,14 @@
 #include "viewport_window.h"
 #include "light_menu.h"
 
+//different graphs scene properties
+#include "scene_properties_common_graph.h"
+
 //real world algorithms book
 #include "../Real_World_Algorithms.h"
 
 //debug
-#include <qmessagebox.h>
+#include "qdebug_helper.h"
 
 class main_window : public QWidget
 {
@@ -33,18 +37,23 @@ public:
 private:
 	QGridLayout* grid_layout_main;
 	QTabWidget* tab_menu_left;
+	QTabWidget* tab_menu_right;
+	QStackedLayout* stacked_menu_right;
+
 	graph_menu* graph_menu_;
 	sorting_menu* sorting_menu_;
 	viewport_window* viewport_window_;
 	camera_menu* camera_menu_;
 	light_menu* light_menu_;
 
+	scene_properties_common_graph* scene_properties_common_graph_;
+
 	graph<int>* main_graph=Q_NULLPTR;
 	
 //protected:
 //	virtual void resizeEvent(QResizeEvent* event)override;
 
-public slots:
+private slots:
 	void re_gen_graph(const int V, const  int E_left, const  int E_right, const under_GP properties)
 	{
 		if (main_graph)
@@ -55,9 +64,21 @@ public slots:
 
 		main_graph =  new graph<int>(generateRandomGraph<int>(V, E_left, E_right, properties));
 
-		QMessageBox msgBox;
-
-		msgBox.setText(QString().fromStdString(main_graph->print_to_string()));
-		msgBox.exec();
+		qDebug()<<QString::fromStdString(main_graph->print_to_string());
+	
 	}
+
+	void graph_type_changed_slot(int id)
+	{
+		qDebug() << " GRAPH TYPE CHANGED = " << id;
+		switch(id)
+		{
+		case 0:tab_menu_right->setTabText(0, "Graph"); break;
+		case 1:tab_menu_right->setTabText(0, "Tree"); break;
+		case 2:tab_menu_right->setTabText(0, "2D graph"); break;
+		case 3:tab_menu_right->setTabText(0, "3D graph"); break;
+		}
+
+	}
+
 };

@@ -22,6 +22,10 @@ light_menu::light_menu(QWidget *parent)
 	gridlayout_color->addWidget(spinbox_g, 1, 2, 1, 1);
 	gridlayout_color->addWidget(spinbox_b, 2, 2, 1, 1);
 
+	gridlayout_color->setAlignment(Qt::AlignTop);
+	gridlayout_color->setSpacing(1);
+	gridlayout_color->setColumnMinimumWidth(2, 25);
+
 	spinbox_intensity = new QDoubleSpinBox;
 	spinbox_intensity->setRange(-FLT_MAX, FLT_MAX);
 
@@ -34,6 +38,7 @@ light_menu::light_menu(QWidget *parent)
 
 	QGridLayout* layout = new QGridLayout;
 	layout->addWidget(groupbox_light);
+	layout->setAlignment(Qt::AlignTop);
 
 	setLayout(layout);
 

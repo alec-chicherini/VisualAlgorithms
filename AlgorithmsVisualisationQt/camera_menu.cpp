@@ -3,6 +3,7 @@
 camera_menu::camera_menu(QWidget *parent)
 	: QWidget(parent)
 {
+
 	QGroupBox* groupbox_camera = new QGroupBox;
 
 	spinbox_possition_x = new QDoubleSpinBox;
@@ -33,7 +34,7 @@ camera_menu::camera_menu(QWidget *parent)
 	QGridLayout* gridlayout_possition = new QGridLayout;
 	gridlayout_possition->setAlignment(Qt::AlignTop);
 	gridlayout_possition->setSpacing(1);
-	gridlayout_possition->setColumnMinimumWidth(2, 75);
+	gridlayout_possition->setColumnMinimumWidth(2, 50);
 
 	gridlayout_possition->addWidget(new QLabel("Possition "), 0, 0, 1, 1);
 	gridlayout_possition->addWidget(new QLabel("x:"), 0, 1, 1, 1,Qt::AlignRight);
@@ -47,7 +48,7 @@ camera_menu::camera_menu(QWidget *parent)
 	QGridLayout* gridlayout_viewcenter = new QGridLayout;
 	gridlayout_viewcenter->setAlignment(Qt::AlignTop);
 	gridlayout_viewcenter->setSpacing(1);
-	gridlayout_viewcenter->setColumnMinimumWidth(2, 75);
+	gridlayout_viewcenter->setColumnMinimumWidth(2, 25);
 
 	gridlayout_viewcenter->addWidget(new QLabel("View center "), 3, 0, 1, 1);
 	gridlayout_viewcenter->addWidget(new QLabel("x:"), 3, 1, 1, 1, Qt::AlignRight);
@@ -60,7 +61,7 @@ camera_menu::camera_menu(QWidget *parent)
 	QGridLayout* gridlayout_fov = new QGridLayout;
 	gridlayout_fov->addWidget(new QLabel("Field of view:"), 0, 0, 1, 1);
 	gridlayout_fov->addWidget(spinbox_fov, 0, 1, 1, -1);
-	gridlayout_fov->setColumnMinimumWidth(1, 75);
+	gridlayout_fov->setColumnMinimumWidth(1, 25);
 
 	QGridLayout* gridlayout_this = new QGridLayout;
 	gridlayout_this->addLayout(gridlayout_possition, 0, 0, 1, -1);

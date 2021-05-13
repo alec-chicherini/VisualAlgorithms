@@ -5,6 +5,7 @@ main_window::main_window(QWidget *parent)
 {
 	//left menu
 	tab_menu_left = new QTabWidget(this);
+	tab_menu_right = new QTabWidget(this);
 	graph_menu_ = new graph_menu(this);
 	sorting_menu_ = new sorting_menu(this);
 	camera_menu_ = new camera_menu(this);
@@ -13,6 +14,23 @@ main_window::main_window(QWidget *parent)
 	tab_menu_left->addTab(graph_menu_,"Graph");
 	tab_menu_left->addTab(sorting_menu_, "Sort");
 	tab_menu_left->setTabPosition(QTabWidget::TabPosition::West);
+
+
+
+	//right menu
+	stacked_menu_right = new QStackedLayout;
+	scene_properties_common_graph_ = new scene_properties_common_graph;
+	stacked_menu_right->addWidget(scene_properties_common_graph_);
+
+
+	QWidget* menu_right = new QWidget();
+	menu_right->setLayout(stacked_menu_right);
+
+	tab_menu_right->addTab(menu_right, "Graph");
+	tab_menu_right->addTab(camera_menu_, "Camera");
+	tab_menu_right->addTab(light_menu_, "Light");
+	tab_menu_right->setTabPosition(QTabWidget::TabPosition::East);
+
 	//
 	
 	//visualisation window
@@ -26,12 +44,7 @@ main_window::main_window(QWidget *parent)
 	grid_layout_main->addWidget(tab_menu_left,0,0,Qt::AlignTop);
 	grid_layout_main->addWidget(viewport_window_, 0, 1);
 
-	QGridLayout* gridlayout_menu_right = new QGridLayout;
-	gridlayout_menu_right->setAlignment(Qt::AlignTop);
-	gridlayout_menu_right->addWidget(camera_menu_, 0, 0, Qt::AlignTop);
-	gridlayout_menu_right->addWidget(light_menu_, 1, 0, Qt::AlignTop);
-
-	grid_layout_main->addLayout(gridlayout_menu_right, 0, 2, Qt::AlignTop);
+	grid_layout_main->addWidget(tab_menu_right, 0, 2, Qt::AlignTop);
 
 	grid_layout_main->setColumnMinimumWidth(0, 100);
 	grid_layout_main->setColumnStretch(0, 0);
@@ -45,7 +58,10 @@ main_window::main_window(QWidget *parent)
 	setLayout(grid_layout_main);
 	//
 
+	//from menu
 	connect(graph_menu_, &graph_menu::regen_data_signal,this, &main_window::re_gen_graph);
+	connect(graph_menu_, &graph_menu::graph_type_signal, this, &main_window::graph_type_changed_slot);
+	//
 
 	//connections between viewport and menu camera possitions
 	connect(camera_menu_, &camera_menu::camera_possition_signal, viewport_window_, &viewport_window::viewport_camera_possition_slot);

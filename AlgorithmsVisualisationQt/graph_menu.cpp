@@ -126,6 +126,9 @@ graph_menu::graph_menu(QWidget *parent)
 
 	connect(btngroup_graph_type,   &QButtonGroup::idClicked,
 		    stacked_layout_graphs_generate, &QStackedLayout::setCurrentIndex);
+
+	connect(btngroup_graph_type, &QButtonGroup::idClicked,
+		    this, &graph_menu::graph_type_signal);
 	//
 
 	//main layout
