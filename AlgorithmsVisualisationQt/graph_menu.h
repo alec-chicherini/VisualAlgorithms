@@ -14,6 +14,7 @@
 
 //enums
 #include"enums.h"
+using namespace ENUMS_NAMESPACE;
 
 //debug
 #include "qdebug_helper.h"

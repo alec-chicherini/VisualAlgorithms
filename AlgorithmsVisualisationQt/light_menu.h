@@ -10,6 +10,8 @@
 #include <qlabel.h>
 #include<qgridlayout.h>
 
+#include "color_picker.h"
+
 class light_menu : public QWidget
 {
 	Q_OBJECT
@@ -20,22 +22,10 @@ public:
 
 private:
 	QDoubleSpinBox* spinbox_intensity;
-	QSpinBox* spinbox_r;
-	QSpinBox* spinbox_g;
-	QSpinBox* spinbox_b;
+	color_picker* property_color;
 
 signals:
 	void light_intencity_signal(float);
 	void light_color_signal(QColor);
-
-	private slots:
-	void light_color_changed_(int x)
-	{
-		emit light_color_signal(QColor(
-			spinbox_r->value(),
-			spinbox_g->value(),
-			spinbox_b->value()
-		));
-	};
 
 };
