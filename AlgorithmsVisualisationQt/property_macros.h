@@ -28,7 +28,7 @@ connect(spinbox_##ENTITY##_##NAME, &QSpinBox::valueChanged, this, &property_##PR
 #define ADD_CHECK_BOX_PROPERTY(PROPERTY,ENTITY, NAME, stringNAME, ROW)\
 ENTITY##_properties_layout->addWidget(new QLabel(#stringNAME), ROW, 0);\
 QCheckBox* checkbox_##ENTITY##_##NAME = new QCheckBox;\
-ENTITY##_properties_layout->addWidget(checkbox_##ENTITY##_##NAME, ROW, 1);\
+ENTITY##_properties_layout->addWidget(checkbox_##ENTITY##_##NAME, ROW, 1,Qt::AlignRight);\
 connect(checkbox_##ENTITY##_##NAME, &QCheckBox::stateChanged, this, &property_##PROPERTY##::property_##PROPERTY##_##ENTITY##_##NAME##_signal);
 
 #define ADD_COLOR_PICKER_PROPERTY(PROPERTY,ENTITY, NAME, stringNAME, ROW)\

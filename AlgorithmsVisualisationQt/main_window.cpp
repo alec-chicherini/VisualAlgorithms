@@ -16,27 +16,23 @@ main_window::main_window(QWidget *parent)
 	tab_menu_left->setTabPosition(QTabWidget::TabPosition::West);
 
 
-
 	//right menu
 	stacked_menu_right = new QStackedLayout;
-	scene_properties_common_graph_ = new scene_properties_common_graph;
+	scene_properties_common_graph_ = new scene_properties_common_graph(this);
 	stacked_menu_right->addWidget(scene_properties_common_graph_);
 
-
-	QWidget* menu_right = new QWidget();
+	QWidget* menu_right = new QWidget(this);
 	menu_right->setLayout(stacked_menu_right);
 
 	tab_menu_right->addTab(menu_right, "Graph");
 	tab_menu_right->addTab(camera_menu_, "Camera");
 	tab_menu_right->addTab(light_menu_, "Light");
 	tab_menu_right->setTabPosition(QTabWidget::TabPosition::East);
-
 	//
 	
 	//visualisation window
 	viewport_window_ = new viewport_window(this);
 	//
-
 
 	//main layout
 	grid_layout_main = new QGridLayout;
@@ -74,7 +70,7 @@ main_window::main_window(QWidget *parent)
 	//light
 	connect(light_menu_, &light_menu::light_color_signal, viewport_window_, &viewport_window::viewport_light_color_slot);
 	connect(light_menu_, &light_menu::light_intencity_signal, viewport_window_, &viewport_window::viewport_light_intensity_slot);
-
+	
 }
 
 main_window::~main_window()
@@ -82,19 +78,4 @@ main_window::~main_window()
 }
 
 
-//void main_window::resizeEvent(QResizeEvent* event)
-//{
-//
-//
-//	auto value = this->y();
-//	OutputDebugStringW(LPCWSTR(std::to_wstring(value).c_str()));
-//	OutputDebugStringW(L" <----- this->y()\n");
-//
-//	auto value2 = visualisation_window_->y();
-//	OutputDebugStringW(LPCWSTR(std::to_wstring(value2).c_str()));
-//	OutputDebugStringW(L" <----- visualisation_window_->y()\n");
-//
-//	auto value3 = tab_menu_left->y();
-//	OutputDebugStringW(LPCWSTR(std::to_wstring(value3).c_str()));
-//	OutputDebugStringW(L" <----- tab_menu_left->y()\n");
-//}
+

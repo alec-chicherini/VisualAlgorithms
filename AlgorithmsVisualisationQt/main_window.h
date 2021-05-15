@@ -9,6 +9,8 @@
 #include <qgridlayout.h>
 #include <qstackedlayout.h>
 #include <qtabwidget.h>
+#include <qscrollarea.h>
+#include <qsizepolicy.h>
 
 //main window widgets
 #include "graph_menu.h"
@@ -49,9 +51,8 @@ private:
 	scene_properties_common_graph* scene_properties_common_graph_;
 
 	graph<int>* main_graph=Q_NULLPTR;
+	bool resize_stoper=true;
 	
-//protected:
-//	virtual void resizeEvent(QResizeEvent* event)override;
 
 private slots:
 	void re_gen_graph(const int V, const  int E_left, const  int E_right, const under_GP properties)
