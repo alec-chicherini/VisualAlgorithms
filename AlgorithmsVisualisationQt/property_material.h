@@ -3,7 +3,6 @@
 #include <QWidget>
 #include "enums.h"
 
-#include <qgroupbox.h>
 #include <qcombobox.h>
 #include <qlabel.h>
 #include <qgridlayout.h>
@@ -27,10 +26,12 @@ private:
 	QComboBox* combobox_material;
 
 signals:
+
+	void property_material_type_signal(int);
 	//PHONG
 	ADD_SIGNAL_FOR_ENTITY(material, phong, ambient, QColor);
 	ADD_SIGNAL_FOR_ENTITY(material, phong, diffuse, QColor);
-	ADD_SIGNAL_FOR_ENTITY(material, phong, shininess, QColor);
+	ADD_SIGNAL_FOR_ENTITY(material, phong, shininess, double);
 	ADD_SIGNAL_FOR_ENTITY(material, phong, specular, QColor);
 	//
 

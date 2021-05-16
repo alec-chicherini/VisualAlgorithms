@@ -28,6 +28,7 @@
 //debug
 #include "qdebug_helper.h"
 
+
 class main_window : public QWidget
 {
 	Q_OBJECT
@@ -48,12 +49,16 @@ private:
 	camera_menu* camera_menu_;
 	light_menu* light_menu_;
 
-	scene_properties_common_graph* scene_properties_common_graph_;
-
-	graph<int>* main_graph=Q_NULLPTR;
-	bool resize_stoper=true;
 	
 
+	scene_properties_common_graph* scene_properties_common_graph_;
+
+	int current_graph_type=0;
+	graph<int>* main_graph=Q_NULLPTR;
+
+signals:
+	void type_graph_signal(int, graph<int>, under_GP);
+	
 private slots:
 	void re_gen_graph(const int V, const  int E_left, const  int E_right, const under_GP properties)
 	{
@@ -66,11 +71,14 @@ private slots:
 		main_graph =  new graph<int>(generateRandomGraph<int>(V, E_left, E_right, properties));
 
 		qDebug()<<QString::fromStdString(main_graph->print_to_string());
+
+		emit type_graph_signal(current_graph_type, *main_graph, properties);
 	
 	}
 
 	void graph_type_changed_slot(int id)
 	{
+		current_graph_type = id;
 		qDebug() << " GRAPH TYPE CHANGED = " << id;
 		switch(id)
 		{

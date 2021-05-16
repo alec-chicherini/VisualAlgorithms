@@ -8,8 +8,9 @@
 
 #include <Qt3DRender/QGeometryRenderer>
 
-//dummy
+//
 #include <Qt3DExtras/qspheremesh.h>
+#include <Qt3DExtras/qplanemesh.h>
 #include <Qt3DExtras/qphongmaterial.h>
 //
 
@@ -34,6 +35,9 @@
 
 //debug
 #include "qdebug_helper.h"
+
+//real world algorithms book
+#include "../Real_World_Algorithms.h"
 
 
 
@@ -63,6 +67,8 @@ private:
 	bool camera_menu_possition_signal_was_recived = false;
 	bool camera_menu_view_center_signal_was_recived = false;
 
+	void update_common_graph(graph<int>, std::underlying_type_t<GP>);
+
 signals:
 	void viewport_camera_position_signal(const QVector3D& position) ;
 	void viewport_camera_view_center_signal(const QVector3D& position);
@@ -73,7 +79,6 @@ public slots:
 		camera_menu_possition_signal_was_recived = true;
 		camera_main->setPosition(pos);
 		
-
 		 qDebug() << QDateTime::currentDateTimeUtc()<< QString("<----- call viewport_camera_possition_slot") << QString::number(camera_menu_possition_signal_was_recived);
 	};
 
@@ -122,6 +127,22 @@ public slots:
 			qDebug((std::to_string(intens).c_str()));
 			qDebug(" <----- LIGHT INTENSYTY WAS CHANGED()");
 	}
+
+
+	void viewport_graph_type_slot(int type,std::underlying_type_t<GP>options, graph<int> graph)
+	{
+		switch (type)
+		{
+		case 0:
+		{
+			update_common_graph(graph,options); break;
+		}
+		default:
+			break;
+		}
+
+	}
+
 
 
 };

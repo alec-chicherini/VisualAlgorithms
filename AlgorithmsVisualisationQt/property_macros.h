@@ -1,5 +1,6 @@
 #pragma once
-
+//MACROSES FOR PROPERTY GENERATION
+// 
 //#define ADD_SIGNALS_FOR_ENTITY(ENTITY, HEAD)\
 //void property_mesh_##ENTITY##_##HEAD##_signal(auto);
 //
@@ -36,5 +37,34 @@ color_picker* color_picker_##ENTITY##_##NAME## = new color_picker(#stringNAME);\
 ENTITY##_properties_layout->addWidget(color_picker_##ENTITY##_##NAME##, ROW, 0,1,-1);\
 connect(color_picker_##ENTITY##_##NAME, &color_picker::color_picker_signal, this, &property_##PROPERTY::property_##PROPERTY##_##ENTITY##_##NAME##_signal);
 
+//MACROSES FOR SIGNAL-SLOT-CONNECTION GENERATION 
 #define ADD_SIGNAL_FOR_ENTITY(PROPERTY,ENTITY,NAME,TYPE)\
 void property_##PROPERTY##_##ENTITY##_##NAME##_signal(TYPE);
+
+#define ADD_SLOT_FOR_ENTITY(PROPERTY,ENTITY,NAME,FUNCNAME,TYPE)\
+void property_##PROPERTY##_##ENTITY##_##NAME##_slot(TYPE value)\
+{\
+PROPERTY##_##ENTITY->##FUNCNAME##(value);\
+qDebug()<<__FUNCSIG__<<" CALLED !!! ";\
+};
+
+#define ADD_CONNECTION_PROPERTY_TO_STATE(ENTITY,COMPONENT,TYPE,PROPERTY)\
+connect(##ENTITY##_##COMPONENT##, &property_##COMPONENT##::property_##COMPONENT##_##TYPE##_##PROPERTY##_signal,component_states_##ENTITY##, &component_states::property_##COMPONENT##_##TYPE##_##PROPERTY##_slot);
+
+#define ADD_CONNECTION_TYPE_TO_TYPE(ENTITY,COMPONENT)\
+connect(##ENTITY##_##COMPONENT##, &property_##COMPONENT##::property_##COMPONENT##_type_signal,component_states_##ENTITY##, &component_states::property_##COMPONENT##_type_slot);
+
+
+//MACROSES FOR SCENE GENERATION IN QTREEWIDGET
+#define ADD_ROOT(ROOT, NAME)\
+QTreeWidgetItem* treeitem_##NAME## = new QTreeWidgetItem(##ROOT##);\
+treeitem_##NAME##->setText(0, QString(#NAME).replace(0, 1, QString(#NAME)[0].toUpper()));\
+tree_widget->insertTopLevelItem(0, treeitem_##NAME##);
+
+#define ADD_LEAF(PARENT,NAME)\
+property_##NAME##* ##PARENT##_##NAME## = new property_##NAME##;\
+QTreeWidgetItem* treeitem_##PARENT##_##NAME## = new QTreeWidgetItem(treeitem_##PARENT##);\
+treeitem_##PARENT##_##NAME##->setText(0, QString(#NAME).replace(0, 1, QString(#NAME)[0].toUpper()));\
+QTreeWidgetItem* treeitem_##PARENT##_##NAME##_property = new QTreeWidgetItem(treeitem_##PARENT##_##NAME##);\
+tree_widget->setItemWidget(treeitem_##PARENT##_##NAME##_property, 0, ##PARENT##_##NAME##);
+

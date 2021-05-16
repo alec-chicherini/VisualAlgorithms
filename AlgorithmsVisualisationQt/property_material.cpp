@@ -20,6 +20,7 @@ property_material::property_material(MaterialType mt, QWidget *parent)
 
 	combobox_material->setCurrentIndex(static_cast<MaterialType_under>(mt));
 
+	connect(combobox_material, &QComboBox::currentIndexChanged, this, &property_material::property_material_type_signal);
 	//PHONG
 	/*QWidget* phong_properties = new QWidget(this);
 	QGridLayout* phong_properties_layout = new QGridLayout;
@@ -34,7 +35,7 @@ property_material::property_material(MaterialType mt, QWidget *parent)
 	ADD_ENTITY(phong)
 	ADD_COLOR_PICKER_PROPERTY(material, phong, ambient, Ambient, 0);
 	ADD_COLOR_PICKER_PROPERTY(material, phong, diffuse, Diffuse, 1);
-	ADD_COLOR_PICKER_PROPERTY(material, phong, shininess, Shininess, 2);
+	ADD_DOUBLE_SPIN_BOX_PROPERTY(material, phong, shininess, Shininess, 2);
 	ADD_COLOR_PICKER_PROPERTY(material, phong, specular, Specular, 3);
 	//
 	
@@ -141,20 +142,10 @@ property_material::property_material(MaterialType mt, QWidget *parent)
 	stackedlayout_material->addWidget(phong_alpha_properties);//id 9
 	stackedlayout_material->addWidget(texture_properties);//id 10
 
-
-
-
 	connect(combobox_material, &QComboBox::currentIndexChanged, stackedlayout_material, &QStackedLayout::setCurrentIndex);
 	grid_layout_this->addLayout(stackedlayout_material, 2, 0, Qt::AlignTop);
 
-	QGroupBox* groupbox_main = new QGroupBox;
-	groupbox_main->setTitle("Material");
-	groupbox_main->setLayout(grid_layout_this);
-
-
-	QGridLayout* layout = new QGridLayout;
-	layout->addWidget(groupbox_main);
-	setLayout(layout);
+	setLayout(grid_layout_this);
 
 }
 

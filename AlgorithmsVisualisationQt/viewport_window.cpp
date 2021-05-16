@@ -27,9 +27,10 @@ viewport_window::viewport_window(QWidget *parent)
 	Qt3DCore::QEntity* sphere_entity = new Qt3DCore::QEntity(rootEntity);
 	sphere_entity->addComponent(sphere_mesh);
 	sphere_entity->addComponent(sphere_material);
+
 	//
 
-	//camera init
+	//camera
 	camera_main = window3d_main->camera();
 	camera_controller_main = new Qt3DExtras::QFirstPersonCameraController(rootEntity);
 	camera_controller_main->setCamera(camera_main);
@@ -79,6 +80,25 @@ viewport_window::viewport_window(QWidget *parent)
 
 viewport_window::~viewport_window()
 {
+}
+
+void viewport_window::update_common_graph(graph<int> g, std::underlying_type_t<GP> options)
+{
+	
+	//Qt3DCore::QEntity* plane = new Qt3DCore::QEntity(rootEntity);
+	
+	QVector<Qt3DCore::QEntity*> vertexes; vertexes.resize(g.V.size());
+	QVector<Qt3DCore::QEntity*> edges; edges.resize(g.E.size());
+	for (auto& v : vertexes)
+	{
+		//update_components(v);
+	}
+
+	for (auto& e : edges)
+	{
+		//update_components(e);
+	}
+
 }
 
 

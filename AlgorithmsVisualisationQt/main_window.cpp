@@ -17,7 +17,7 @@ main_window::main_window(QWidget *parent)
 
 
 	//right menu
-	stacked_menu_right = new QStackedLayout;
+	stacked_menu_right = new QStackedLayout(tab_menu_right);
 	scene_properties_common_graph_ = new scene_properties_common_graph(this);
 	stacked_menu_right->addWidget(scene_properties_common_graph_);
 
@@ -54,9 +54,10 @@ main_window::main_window(QWidget *parent)
 	setLayout(grid_layout_main);
 	//
 
-	//from menu
+	//from graph menu
 	connect(graph_menu_, &graph_menu::regen_data_signal,this, &main_window::re_gen_graph);
 	connect(graph_menu_, &graph_menu::graph_type_signal, this, &main_window::graph_type_changed_slot);
+	
 	//
 
 	//connections between viewport and menu camera possitions
@@ -70,7 +71,8 @@ main_window::main_window(QWidget *parent)
 	//light
 	connect(light_menu_, &light_menu::light_color_signal, viewport_window_, &viewport_window::viewport_light_color_slot);
 	connect(light_menu_, &light_menu::light_intencity_signal, viewport_window_, &viewport_window::viewport_light_intensity_slot);
-	
+
+
 }
 
 main_window::~main_window()

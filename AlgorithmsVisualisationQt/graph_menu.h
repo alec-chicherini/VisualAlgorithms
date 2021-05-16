@@ -46,10 +46,13 @@ private slots:
 		if (checkbox_weighted->isChecked())options = options | GP::WEIGHTED;
 		if (checkbox_directed->isChecked())options = options | GP::DIRECTED;
 	
+
 		emit regen_data_signal(spinbox_vertex_num->value(),
 			spinbox_edges_num_left->value(),
 			spinbox_edges_num_right->value(),
 			options);
+
+	
 	}
 
 signals:

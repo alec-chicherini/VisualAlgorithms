@@ -6,10 +6,21 @@
 #include "property_material.h"
 #include "property_transform.h"
 
-#include <qscrollarea.h>
 #include <qgridlayout.h>
 #include <qboxlayout.h>
 
+#include <qtreeview.h>
+#include <qstandarditemmodel.h>
+
+#include <qtreewidget.h>
+#include <qabstractitemview.h>
+
+#include <qscrollbar.h>
+
+#include "property_macros.h"
+
+//propertie windows states in objects
+#include "component_states.h"
 
 class scene_properties_common_graph : public QWidget
 {
@@ -20,6 +31,8 @@ public:
 	~scene_properties_common_graph();
 
 private:
-	QScrollArea* scroll_area_common_graph;
+	component_states* component_states_vertex;
+	component_states* component_states_edge;
+	component_states* component_states_plane;
 
 };
