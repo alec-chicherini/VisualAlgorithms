@@ -1,9 +1,9 @@
 #include "property_mesh.h"
 
-property_mesh::property_mesh(MeshType mt,QWidget *parent)
+property_mesh::property_mesh(QString parentPath,QWidget *parent)
 	: QWidget(parent)
 {
-	
+	parentPath_ = parentPath;
 	combobox_mesh = new QComboBox;
 	
 	combobox_mesh->addItem("CONE");//id 0
@@ -13,7 +13,7 @@ property_mesh::property_mesh(MeshType mt,QWidget *parent)
 	combobox_mesh->addItem("SPHERE");//id 4
 	combobox_mesh->addItem("TORUS");//id 5
 
-	combobox_mesh->setCurrentIndex(static_cast<MeshType_under>(mt));
+
 
 	connect(combobox_mesh, &QComboBox::currentIndexChanged, this, &property_mesh::property_mesh_type_signal);
 

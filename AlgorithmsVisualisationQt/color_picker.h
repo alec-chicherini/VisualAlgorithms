@@ -16,8 +16,15 @@ public:
 	color_picker(QString label,QWidget *parent = Q_NULLPTR);
 	~color_picker();
 
+	void setColor(int r, int g, int b)
+	{
+		spinbox_r->setValue(r);
+		spinbox_g->setValue(g);
+		spinbox_b->setValue(b);
+	}
 signals:
 	void color_picker_signal(QColor);
+	void color_picker_signal_int(int r, int g, int b);
 
 private slots:
 	void color_changed_(int)
@@ -25,8 +32,15 @@ private slots:
 		emit color_picker_signal(QColor(
 			spinbox_r->value(),
 			spinbox_g->value(),
+			spinbox_b->value()));
+
+		emit color_picker_signal_int(
+			spinbox_r->value(),
+			spinbox_g->value(),
 			spinbox_b->value()
-		));
+		);
 	}
+
+
 
 };

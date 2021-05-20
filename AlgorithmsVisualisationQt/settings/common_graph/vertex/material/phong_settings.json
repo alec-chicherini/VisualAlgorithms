@@ -1,0 +1,12 @@
+{
+    "material_phong_ambient_b_value": 100,
+    "material_phong_ambient_g_value": 100,
+    "material_phong_ambient_r_value": 100,
+    "material_phong_diffuse_b_value": 100,
+    "material_phong_diffuse_g_value": 100,
+    "material_phong_diffuse_r_value": 100,
+    "material_phong_shininess_value": 2,
+    "material_phong_specular_b_value": 100,
+    "material_phong_specular_g_value": 100,
+    "material_phong_specular_r_value": 100
+}

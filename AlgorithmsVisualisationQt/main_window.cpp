@@ -3,6 +3,7 @@
 main_window::main_window(QWidget *parent)
 	: QWidget(parent)
 {
+	root = new Qt3DCore::QEntity();
 	//left menu
 	tab_menu_left = new QTabWidget(this);
 	tab_menu_right = new QTabWidget(this);
@@ -18,8 +19,9 @@ main_window::main_window(QWidget *parent)
 
 	//right menu
 	stacked_menu_right = new QStackedLayout(tab_menu_right);
-	scene_properties_common_graph_ = new scene_properties_common_graph(this);
+	scene_properties_common_graph_ = new scene_properties_common_graph(root,this);
 	stacked_menu_right->addWidget(scene_properties_common_graph_);
+
 
 	QWidget* menu_right = new QWidget(this);
 	menu_right->setLayout(stacked_menu_right);
@@ -31,7 +33,7 @@ main_window::main_window(QWidget *parent)
 	//
 	
 	//visualisation window
-	viewport_window_ = new viewport_window(this);
+	viewport_window_ = new viewport_window(root,this);
 	//
 
 	//main layout
@@ -54,9 +56,16 @@ main_window::main_window(QWidget *parent)
 	setLayout(grid_layout_main);
 	//
 
+
+	//froms scenes
+	connect(scene_properties_common_graph_, &scene_properties_common_graph::scene_properties_common_graph_scene_entity,
+		viewport_window_, &viewport_window::viewport_scene_entity_slot);
+	
 	//from graph menu
 	connect(graph_menu_, &graph_menu::regen_data_signal,this, &main_window::re_gen_graph);
 	connect(graph_menu_, &graph_menu::graph_type_signal, this, &main_window::graph_type_changed_slot);
+
+	connect(this, &main_window::type_graph_signal, scene_properties_common_graph_, &scene_properties_common_graph::scene_properties_common_graph_type_slot);
 	
 	//
 

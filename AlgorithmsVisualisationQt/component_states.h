@@ -23,7 +23,8 @@
 #include <Qt3DExtras/qtorusmesh.h>
 
 #include "property_macros.h"
-
+#include "enums.h"
+#include <Qt3DCore/qcomponent.h>
 
 class component_states : public QWidget
 {
@@ -47,9 +48,6 @@ private:
 	Qt3DExtras::QPhongAlphaMaterial* material_phong_alpha;//id 9
 	Qt3DExtras::QTextureMaterial* material_texture;//id 10
 
-	int current_material = 0;
-
-
 	//all in app meshes
 	Qt3DExtras::QConeMesh* mesh_cone;//id 0
 	Qt3DExtras::QCuboidMesh* mesh_cuboid;//id 1
@@ -57,20 +55,91 @@ private:
 	Qt3DExtras::QPlaneMesh* mesh_plane;//id 3
 	Qt3DExtras::QSphereMesh* mesh_sphere;//id 4
 	Qt3DExtras::QTorusMesh* mesh_torus;//id 5
-	int current_mesh = 0;
+
+	//current component
+	MeshType current_mesh_type;
+	MaterialType current_material_type;
+
+
+signals:
+	void component_states_material_type_signal(Qt3DCore::QComponent*);
+	void component_states_mesh_type_signal(Qt3DCore::QComponent*);
 
 public slots:
 	
-
-	void property_material_type_slot(int id)
+	void component_states_material_type_slot(int id)
 	{
-		current_material = id;
+		current_material_type = static_cast<MaterialType>(id);
+		switch (current_material_type)
+		{
+		case ENUMS_NAMESPACE::MaterialType::PHONG:
+		{
+			emit component_states_material_type_signal( material_phong);
+			break;
+		}
+		case ENUMS_NAMESPACE::MaterialType::DIFFUSE_MAP:
+		{
+			emit component_states_material_type_signal( material_diffuse_map);
+			break;
+		}
+		case ENUMS_NAMESPACE::MaterialType::DIFFUSE_SPECULAR_MAP:
+		{
+			emit component_states_material_type_signal( material_diffuse_specular_map);
+			break;
+		}
+		case ENUMS_NAMESPACE::MaterialType::DIFFUSE_SPECULAR:
+		{
+			emit component_states_material_type_signal( material_diffuse_specular);
+			break;
+		}
+		case ENUMS_NAMESPACE::MaterialType::GOOCH:
+		{
+			emit component_states_material_type_signal( material_gooch);
+			break;
+		}
+		case ENUMS_NAMESPACE::MaterialType::METAL_ROUGH:
+		{
+			emit component_states_material_type_signal( material_metal_rough);
+			break;
+		}
+		case ENUMS_NAMESPACE::MaterialType::MORPH_PHONG:
+		{
+			emit component_states_material_type_signal( material_morph_phong);
+			break;
+		}
+		case ENUMS_NAMESPACE::MaterialType::NORMAL_DIFFUSE_MAP:
+		{
+			emit component_states_material_type_signal( material_normal_diffuse_map);
+			break;
+		}
+		case ENUMS_NAMESPACE::MaterialType::NORMAL_DIFFUSE_SPECULAR_MAP:
+		{
+			emit component_states_material_type_signal( material_normal_diffuse_specular_map);
+			break;
+		}
+		case ENUMS_NAMESPACE::MaterialType::PHONG_ALPHA:
+		{
+			emit component_states_material_type_signal( material_phong_alpha);
+			break;
+		}
+		case ENUMS_NAMESPACE::MaterialType::TEXTURE:
+		{
+			emit component_states_material_type_signal( material_texture);
+			break;
+		}
+		default:
+			break;
+		}
+
 		qDebug() << __FUNCSIG__ << " CALLED !!! "; 
 	}
 
-	void property_mesh_type_slot(int id)
+	
+	
+	void component_states_mesh_type_slot(int id)
 	{
-		current_mesh = id;
+		current_mesh_type = static_cast<MeshType>(id);
+
 		qDebug() << __FUNCSIG__ << " CALLED !!! "; 
 	}
 	

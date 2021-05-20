@@ -1,9 +1,9 @@
 #include "property_material.h"
 
-property_material::property_material(MaterialType mt, QWidget *parent)
+property_material::property_material(QString parentPath, QWidget *parent)
 	: QWidget(parent)
 {
-
+	parentPath_ = parentPath;
 	combobox_material = new QComboBox;
 
 	combobox_material->addItem("PHONG");//id 0
@@ -18,9 +18,7 @@ property_material::property_material(MaterialType mt, QWidget *parent)
 	combobox_material->addItem("PHONG_ALPHA");//id 9
 	combobox_material->addItem("TEXTURE");//id 10
 
-	combobox_material->setCurrentIndex(static_cast<MaterialType_under>(mt));
-
-	connect(combobox_material, &QComboBox::currentIndexChanged, this, &property_material::property_material_type_signal);
+	//connect(combobox_material, &QComboBox::currentIndexChanged, this, &property_material::property_material_type_signal);
 	//PHONG
 	/*QWidget* phong_properties = new QWidget(this);
 	QGridLayout* phong_properties_layout = new QGridLayout;
@@ -38,7 +36,8 @@ property_material::property_material(MaterialType mt, QWidget *parent)
 	ADD_DOUBLE_SPIN_BOX_PROPERTY(material, phong, shininess, Shininess, 2);
 	ADD_COLOR_PICKER_PROPERTY(material, phong, specular, Specular, 3);
 	//
-	
+
+
 	//DIFFUSE_MAP
 	ADD_ENTITY(diffuse_map)
 	ADD_COLOR_PICKER_PROPERTY(material, diffuse_map, ambient, Ambient, 0);

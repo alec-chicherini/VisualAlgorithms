@@ -367,4 +367,4 @@ FodyWeavers.xsd
 /AlgorithmsVisualisationQt/AlgorithmsVisualisationQt.vcxproj
 /AlgorithmsVisualisationQt/AlgorithmsVisualisationQt.vcxproj.filters
 /BitFlagEnumExample
-
+*.txt

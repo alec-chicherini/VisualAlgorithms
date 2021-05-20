@@ -38,6 +38,9 @@ public:
 	~main_window();
 
 private:
+	
+	Qt3DCore::QEntity* root;
+
 	QGridLayout* grid_layout_main;
 	QTabWidget* tab_menu_left;
 	QTabWidget* tab_menu_right;
@@ -48,8 +51,6 @@ private:
 	viewport_window* viewport_window_;
 	camera_menu* camera_menu_;
 	light_menu* light_menu_;
-
-	
 
 	scene_properties_common_graph* scene_properties_common_graph_;
 
@@ -76,13 +77,15 @@ private slots:
 	
 	}
 
+
 	void graph_type_changed_slot(int id)
 	{
+	
 		current_graph_type = id;
 		qDebug() << " GRAPH TYPE CHANGED = " << id;
 		switch(id)
 		{
-		case 0:tab_menu_right->setTabText(0, "Graph"); break;
+		case 0: {tab_menu_right->setTabText(0, "Graph"); break; }
 		case 1:tab_menu_right->setTabText(0, "Tree"); break;
 		case 2:tab_menu_right->setTabText(0, "2D graph"); break;
 		case 3:tab_menu_right->setTabText(0, "3D graph"); break;

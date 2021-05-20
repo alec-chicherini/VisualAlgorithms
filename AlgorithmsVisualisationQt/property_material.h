@@ -13,17 +13,44 @@
 
 #include "property_macros.h"
 
+#include <qjsonobject.h>
+#include <qfile.h>
+#include <qdir.h>
+#include <qjsondocument.h>
+#include <qjsonvalue.h>
+#include <qbytearray.h>
+
+
+
 
 class property_material : public QWidget
 {
 	Q_OBJECT
 
 public:
-	property_material(MaterialType mt = MaterialType::PHONG, QWidget *parent = Q_NULLPTR);
+	property_material(QString parentPath, QWidget *parent = Q_NULLPTR);
 	~property_material();
+
+	void read_json(const QJsonObject& json);
+	void write_json(QJsonObject& json);
 
 private:
 	QComboBox* combobox_material;
+	QString parentPath_;
+
+	
+
+	ADD_JSON_LOADER(phong)
+	ADD_JSON_LOADER(diffuse_map)
+	ADD_JSON_LOADER(diffuse_specular_map)
+	ADD_JSON_LOADER(diffuse_specular)
+	ADD_JSON_LOADER(gooch)
+	ADD_JSON_LOADER(metal_rough)
+	ADD_JSON_LOADER(morph_phong)
+	ADD_JSON_LOADER(normal_diffuse_map)
+	ADD_JSON_LOADER(normal_diffuse_specular_map)
+	ADD_JSON_LOADER(phong_alpha)
+	ADD_JSON_LOADER(texture)
 
 signals:
 

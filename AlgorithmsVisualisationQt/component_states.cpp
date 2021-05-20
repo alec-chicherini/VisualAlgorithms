@@ -25,6 +25,12 @@ component_states::component_states(QWidget *parent)
 	mesh_sphere = new Qt3DExtras::QSphereMesh;//id 4
 	mesh_torus = new Qt3DExtras::QTorusMesh;//id 5
 
+
+
+//#define[] MAT phong,diffuse_map,diffuse_specular_map,diffuse_specular,gooch,metal_rough,morph_phong,normal_diffuse_map,normal_diffuse_specular_map,phong_alpha,texture
+//#define[] MES cone,cuboid,cylinder,plane,sphere,torus
+
+
 }
 
 component_states::~component_states()

@@ -46,11 +46,12 @@ class viewport_window : public QWidget
 	Q_OBJECT
 
 public:
-	viewport_window(QWidget *parent = Q_NULLPTR);
+	viewport_window(Qt3DCore::QEntity* root, QWidget* parent = Q_NULLPTR);
 	~viewport_window();
 
 private:
 	Qt3DCore::QEntity* rootEntity;
+	Qt3DCore::QEntity* currentSceneEntity;
 	Qt3DExtras::Qt3DWindow* window3d_main;
 
 	//camera
@@ -69,9 +70,13 @@ private:
 
 	void update_common_graph(graph<int>, std::underlying_type_t<GP>);
 
+
+
+
 signals:
 	void viewport_camera_position_signal(const QVector3D& position) ;
 	void viewport_camera_view_center_signal(const QVector3D& position);
+
 
 public slots:
 	void viewport_camera_possition_slot(QVector3D pos)
@@ -97,14 +102,14 @@ public slots:
 		{
 			if (camera_controller_main != Q_NULLPTR)delete camera_controller_main;
 
-			camera_controller_main = new Qt3DExtras::QFirstPersonCameraController(rootEntity);
+			camera_controller_main = new Qt3DExtras::QFirstPersonCameraController(currentSceneEntity);
 			camera_controller_main->setCamera(camera_main);
 		}
 		else if (index == 1)
 		{
 			if (camera_controller_main != Q_NULLPTR)delete camera_controller_main;
 
-			camera_controller_main = new Qt3DExtras::QOrbitCameraController(rootEntity);
+			camera_controller_main = new Qt3DExtras::QOrbitCameraController(currentSceneEntity);
 			camera_controller_main->setCamera(camera_main);
 		}
 
@@ -142,6 +147,14 @@ public slots:
 		}
 
 	}
+
+
+	void viewport_scene_entity_slot(Qt3DCore::QEntity* scene)
+	{
+		currentSceneEntity = scene;
+	}
+
+
 
 
 

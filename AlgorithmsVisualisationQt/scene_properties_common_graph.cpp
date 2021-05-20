@@ -1,21 +1,25 @@
 #include "scene_properties_common_graph.h"
 
-scene_properties_common_graph::scene_properties_common_graph(QWidget *parent)
+scene_properties_common_graph::scene_properties_common_graph(Qt3DCore::QEntity* root,QWidget *parent)
 	: QWidget(parent)
 {
+	scene_entities_common_graph_ = new scene_entities_common_graph(root, this);
+
 	QTreeWidget* tree_widget = new QTreeWidget(this);
 
 	ADD_ROOT(tree_widget, vertex)
-		ADD_LEAF(vertex, mesh)
-		ADD_LEAF(vertex, material)
+		ADD_LEAF(common_graph,vertex, mesh)
+		ADD_LEAF(common_graph,vertex, material)
 
 	ADD_ROOT(tree_widget,edge)
-		ADD_LEAF(edge, mesh)
-		ADD_LEAF(edge, material)
+		ADD_LEAF(common_graph,edge, mesh)
+		ADD_LEAF(common_graph,edge, material)
 
 	ADD_ROOT(tree_widget, plane)
-		ADD_LEAF(plane, mesh)
-		ADD_LEAF(plane, material)
+		ADD_LEAF(common_graph,plane, mesh)
+		ADD_LEAF(common_graph,plane, material)
+
+		
 
 //////////////////////////////////////////////////////////////////////////////////
 	tree_widget->headerItem()->setText(0,"Common graph scene entities:");
@@ -34,9 +38,30 @@ scene_properties_common_graph::scene_properties_common_graph(QWidget *parent)
 	this->setMinimumHeight(550);
 
 //////////////////////////////////////////////////////////////////////////////////
+
+
+//////////////////////////////////////////////////////////////////////////////////
 	component_states_vertex = new component_states;
 	component_states_edge = new component_states;
 	component_states_plane = new component_states;
+
+	connect(component_states_vertex, &component_states::component_states_material_type_signal,
+		    this, &scene_properties_common_graph::graph_vertex_material_type_slot);
+
+	connect(component_states_vertex, &component_states::component_states_mesh_type_signal,
+		    this, &scene_properties_common_graph::graph_vertex_material_type_slot);
+
+	connect(component_states_edge, &component_states::component_states_material_type_signal,
+		this, &scene_properties_common_graph::graph_edge_material_type_slot);
+
+	connect(component_states_edge, &component_states::component_states_mesh_type_signal,
+		this, &scene_properties_common_graph::graph_edge_material_type_slot);
+
+	connect(component_states_plane, &component_states::component_states_material_type_signal,
+		this, &scene_properties_common_graph::graph_plane_material_type_slot);
+
+	connect(component_states_plane, &component_states::component_states_mesh_type_signal,
+		this, &scene_properties_common_graph::graph_plane_material_type_slot);
 
 	ADD_CONNECTION_TYPE_TO_TYPE(vertex, material);
 	ADD_CONNECTION_TYPE_TO_TYPE(vertex, mesh);
@@ -44,6 +69,22 @@ scene_properties_common_graph::scene_properties_common_graph(QWidget *parent)
 	ADD_CONNECTION_TYPE_TO_TYPE(edge, mesh);
 	ADD_CONNECTION_TYPE_TO_TYPE(plane, material);
 	ADD_CONNECTION_TYPE_TO_TYPE(plane, mesh);
+	/////////////////////////////////////////////////////////////////////////////////////////
+	//properties to entities connections
+	connect(this, &scene_properties_common_graph::graph_vertex_material_type_signal,
+		scene_entities_common_graph_, &scene_entities_common_graph::scene_entities_common_graph_vertex_material_type_slot);
+	connect(this, &scene_properties_common_graph::graph_vertex_mesh_type_signal,
+		scene_entities_common_graph_, &scene_entities_common_graph::scene_entities_common_graph_vertex_mesh_type_slot);
+	connect(this, &scene_properties_common_graph::graph_edge_material_type_signal,
+		scene_entities_common_graph_, &scene_entities_common_graph::scene_entities_common_graph_edge_material_type_slot);
+	connect(this, &scene_properties_common_graph::graph_edge_mesh_type_signal,
+		scene_entities_common_graph_, &scene_entities_common_graph::scene_entities_common_graph_edge_mesh_type_slot);
+	connect(this, &scene_properties_common_graph::graph_plane_material_type_signal,
+		scene_entities_common_graph_, &scene_entities_common_graph::scene_entities_common_graph_plane_material_type_slot);
+	connect(this, &scene_properties_common_graph::graph_plane_mesh_type_signal,
+		scene_entities_common_graph_, &scene_entities_common_graph::scene_entities_common_graph_plane_mesh_type_slot);
+
+
 
 
 	//vertex connections

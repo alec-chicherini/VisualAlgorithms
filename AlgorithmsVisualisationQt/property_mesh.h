@@ -10,18 +10,34 @@
 #include <qstackedlayout.h>
 #include <qcheckbox.h>
 #include <qspinbox.h>
+
 #include "property_macros.h"
+
+#include <qjsonobject.h>
+#include <qfile.h>
+#include <qdir.h>
+#include <qjsondocument.h>
+#include <qjsonvalue.h>
+#include <qbytearray.h>
 
 class property_mesh : public QWidget
 {
 	Q_OBJECT
 
 public:
-	property_mesh(MeshType mt = MeshType::SPHERE, QWidget *parent = Q_NULLPTR);
+	property_mesh(QString parentPath, QWidget *parent = Q_NULLPTR);
 	~property_mesh();
 
 private:
 	QComboBox* combobox_mesh;
+	QString parentPath_;
+	ADD_JSON_LOADER(sphere)
+	ADD_JSON_LOADER(cone)
+	ADD_JSON_LOADER(cuboid)
+	ADD_JSON_LOADER(cylinder)
+	ADD_JSON_LOADER(plane)
+	ADD_JSON_LOADER(torus)
+
 
 signals:
 

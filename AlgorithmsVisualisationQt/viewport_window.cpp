@@ -1,13 +1,14 @@
 #include "viewport_window.h"
 
-viewport_window::viewport_window(QWidget *parent)
+viewport_window::viewport_window(Qt3DCore::QEntity* root,QWidget *parent)
 	: QWidget(parent)
 {
 	
+
 	window3d_main = new Qt3DExtras::Qt3DWindow();
 	window3d_main->defaultFrameGraph()->setClearColor(QColor(0, 128, 128, 0));
 
-	rootEntity = new Qt3DCore::QEntity();
+	rootEntity = root;
 
 	container=QWidget::createWindowContainer(window3d_main);
 
@@ -15,29 +16,16 @@ viewport_window::viewport_window(QWidget *parent)
 	container->setMinimumSize(QSize(128, 128));
 	container->setMaximumSize(screenSize);
 
-	//dummy 
-	auto sphere_mesh = new Qt3DExtras::QSphereMesh;
-	sphere_mesh->setRadius(1.0f);
-	sphere_mesh->setRings(20);
-	sphere_mesh->setSlices(20);
-
-	auto sphere_material = new Qt3DExtras::QPhongMaterial;
-	sphere_material->setDiffuse(QColor(0, 128, 0));
-
-	Qt3DCore::QEntity* sphere_entity = new Qt3DCore::QEntity(rootEntity);
-	sphere_entity->addComponent(sphere_mesh);
-	sphere_entity->addComponent(sphere_material);
-
-	//
+	currentSceneEntity = rootEntity;
 
 	//camera
 	camera_main = window3d_main->camera();
-	camera_controller_main = new Qt3DExtras::QFirstPersonCameraController(rootEntity);
+	camera_controller_main = new Qt3DExtras::QFirstPersonCameraController(currentSceneEntity);
 	camera_controller_main->setCamera(camera_main);
 	//
 	
 	//light
-	light_main = new Qt3DCore::QEntity(rootEntity);
+	light_main = new Qt3DCore::QEntity(currentSceneEntity);
 	point_light_main = new Qt3DRender::QPointLight(light_main);
 	tansform_light_main = new Qt3DCore::QTransform(light_main);
 
@@ -49,7 +37,7 @@ viewport_window::viewport_window(QWidget *parent)
 	connect(camera_main, &Qt3DRender::QCamera::positionChanged, tansform_light_main, &Qt3DCore::QTransform::setTranslation);
 	//
 
-	window3d_main->setRootEntity(rootEntity);
+	window3d_main->setRootEntity(currentSceneEntity);
 
 	//this->setContentsMargins(0, 0, 0, 0);
 	//this->setContentsMargins(1, 1, 1, 1);
