@@ -20,9 +20,6 @@
 #include <qjsonvalue.h>
 #include <qbytearray.h>
 
-
-
-
 class property_material : public QWidget
 {
 	Q_OBJECT
@@ -38,8 +35,6 @@ private:
 	QComboBox* combobox_material;
 	QString parentPath_;
 
-	
-
 	ADD_JSON_LOADER(phong)
 	ADD_JSON_LOADER(diffuse_map)
 	ADD_JSON_LOADER(diffuse_specular_map)
@@ -51,6 +46,24 @@ private:
 	ADD_JSON_LOADER(normal_diffuse_specular_map)
 	ADD_JSON_LOADER(phong_alpha)
 	ADD_JSON_LOADER(texture)
+	ADD_JSON_LOADER(current_material_index)
+
+public:
+	template <typename T>
+	struct 	delayed_emit
+	{
+		QString signal_name;
+		T signal_data;
+	};
+	std::vector<delayed_emit<double>> e_vec_func_double;
+	std::vector<delayed_emit<int>> e_vec_func_int;
+	std::vector<delayed_emit<QColor>> e_vec_func_QColor;
+
+	void send_initialization_data()
+	{
+		qDebug() << __FUNCSIG__ << " CALLED !!! "; \
+		emit property_material_type_signal(combobox_material->currentIndex());
+	};
 
 signals:
 

@@ -140,6 +140,24 @@ public slots:
 	{
 		current_mesh_type = static_cast<MeshType>(id);
 
+		switch (current_mesh_type)
+		{
+		case ENUMS_NAMESPACE::MeshType::CONE:
+				{emit component_states_mesh_type_signal(mesh_cone);break;};
+		case ENUMS_NAMESPACE::MeshType::CUBOID:
+				{emit component_states_mesh_type_signal(mesh_cuboid);break;};
+		case ENUMS_NAMESPACE::MeshType::CYLINDER:
+				{emit component_states_mesh_type_signal(mesh_cylinder);break;};
+		case ENUMS_NAMESPACE::MeshType::PLANE:
+				{emit component_states_mesh_type_signal(mesh_plane);break;};
+		case ENUMS_NAMESPACE::MeshType::SPHERE:
+				{emit component_states_mesh_type_signal(mesh_sphere);break;};
+		case ENUMS_NAMESPACE::MeshType::TORUS:
+				{emit component_states_mesh_type_signal(mesh_torus);break;};
+		default:
+			break;	
+		}
+
 		qDebug() << __FUNCSIG__ << " CALLED !!! "; 
 	}
 	
@@ -222,7 +240,6 @@ public slots:
 	ADD_SLOT_FOR_ENTITY(material, texture, alpha_blending, setAlphaBlendingEnabled, bool);
 
 	//mesh slots
-
 	ADD_SLOT_FOR_ENTITY(mesh, sphere, radius, setRadius, double);
 	ADD_SLOT_FOR_ENTITY(mesh, sphere, rings, setRings, int);
 	ADD_SLOT_FOR_ENTITY(mesh, sphere, slices, setSlices, int);

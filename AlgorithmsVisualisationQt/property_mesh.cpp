@@ -16,7 +16,7 @@ property_mesh::property_mesh(QString parentPath,QWidget *parent)
 
 
 	connect(combobox_mesh, &QComboBox::currentIndexChanged, this, &property_mesh::property_mesh_type_signal);
-
+	
 		//Sphere
 		ADD_ENTITY(sphere)
 		ADD_DOUBLE_SPIN_BOX_PROPERTY(mesh, sphere, radius, Radius, 0)
@@ -52,8 +52,8 @@ property_mesh::property_mesh(QString parentPath,QWidget *parent)
 
 		//Plane
 		ADD_ENTITY(plane)
-		ADD_SPIN_BOX_PROPERTY(mesh, plane, height, Height, 0)
-		ADD_SPIN_BOX_PROPERTY(mesh, plane, width, Width, 1)
+			ADD_DOUBLE_SPIN_BOX_PROPERTY(mesh, plane, height, Height, 0)
+			ADD_DOUBLE_SPIN_BOX_PROPERTY(mesh, plane, width, Width, 1)
 		//
 
 		//Torus
@@ -79,6 +79,11 @@ property_mesh::property_mesh(QString parentPath,QWidget *parent)
 	connect(combobox_mesh, &QComboBox::currentIndexChanged, stackedlayout_mesh, &QStackedLayout::setCurrentIndex);
 	grid_layout_this->addLayout(stackedlayout_mesh,2,0,Qt::AlignTop);
 	
+	connect(combobox_mesh, &QComboBox::currentIndexChanged, this, [&](int value) {
+		read_write_current_mesh_index_json_(QIODevice::WriteOnly, "current_mesh_index", value); });
+
+	combobox_mesh->setCurrentIndex(read_write_current_mesh_index_json_(QIODevice::ReadOnly, "current_mesh_index", int()).toInt());
+
 	setLayout(grid_layout_this);
 }
 

@@ -60,54 +60,6 @@ public slots:
 		}
 	}
 
-	void graph_vertex_material_type_slot(Qt3DCore::QComponent* component) 
-	{
-		emit graph_vertex_material_type_signal(component);
-		qDebug() << __FUNCSIG__ << " CALLED !!! "; 
-	};
-
-	void graph_vertex_mesh_type_slot(Qt3DCore::QComponent* component)
-	{
-		emit graph_vertex_mesh_type_signal(component);
-		qDebug() << __FUNCSIG__ << " CALLED !!! "; 
-		
-	};
-
-	void graph_edge_material_type_slot(Qt3DCore::QComponent* component)
-	{
-		emit graph_edge_material_type_signal(component);
-		qDebug() << __FUNCSIG__ << " CALLED !!! ";
-	};
-
-	void graph_edge_mesh_type_slot(Qt3DCore::QComponent* component)
-	{
-		emit graph_edge_mesh_type_signal(component);
-		qDebug() << __FUNCSIG__ << " CALLED !!! ";
-	};
-
-	void graph_plane_material_type_slot(Qt3DCore::QComponent* component)
-	{
-		emit graph_plane_material_type_signal(component);
-		qDebug() << __FUNCSIG__ << " CALLED !!! ";
-	};
-
-	void graph_plane_mesh_type_slot(Qt3DCore::QComponent* component)
-	{
-		emit graph_plane_mesh_type_signal(component);
-		qDebug() << __FUNCSIG__ << " CALLED !!! ";
-	};
-
-signals:
-
-
-	void graph_vertex_material_type_signal(Qt3DCore::QComponent*);
-	void graph_vertex_mesh_type_signal(Qt3DCore::QComponent*);
-
-	void graph_edge_material_type_signal(Qt3DCore::QComponent*);
-	void graph_edge_mesh_type_signal(Qt3DCore::QComponent*);
-
-	void graph_plane_material_type_signal(Qt3DCore::QComponent*);
-	void graph_plane_mesh_type_signal(Qt3DCore::QComponent*);
 
 
 };

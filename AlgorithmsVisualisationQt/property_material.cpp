@@ -18,7 +18,7 @@ property_material::property_material(QString parentPath, QWidget *parent)
 	combobox_material->addItem("PHONG_ALPHA");//id 9
 	combobox_material->addItem("TEXTURE");//id 10
 
-	//connect(combobox_material, &QComboBox::currentIndexChanged, this, &property_material::property_material_type_signal);
+	connect(combobox_material, &QComboBox::currentIndexChanged, this, &property_material::property_material_type_signal);
 	//PHONG
 	/*QWidget* phong_properties = new QWidget(this);
 	QGridLayout* phong_properties_layout = new QGridLayout;
@@ -117,10 +117,7 @@ property_material::property_material(QString parentPath, QWidget *parent)
 	ADD_ENTITY(texture)
 	ADD_CHECK_BOX_PROPERTY(material, texture, alpha_blending, AlphaBlending, 0);
 	//
-
-
-
-
+	
 
 
 	QGridLayout* grid_layout_this = new QGridLayout;
@@ -142,6 +139,12 @@ property_material::property_material(QString parentPath, QWidget *parent)
 	stackedlayout_material->addWidget(texture_properties);//id 10
 
 	connect(combobox_material, &QComboBox::currentIndexChanged, stackedlayout_material, &QStackedLayout::setCurrentIndex);
+
+	connect(combobox_material, &QComboBox::currentIndexChanged, this, [&](int value) {
+		read_write_current_material_index_json_(QIODevice::WriteOnly, "current_material_index", value); });
+
+	combobox_material->setCurrentIndex(read_write_current_material_index_json_(QIODevice::ReadOnly, "current_material_index", int()).toInt());
+	
 	grid_layout_this->addLayout(stackedlayout_material, 2, 0, Qt::AlignTop);
 
 	setLayout(grid_layout_this);

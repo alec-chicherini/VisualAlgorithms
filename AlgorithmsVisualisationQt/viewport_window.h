@@ -41,6 +41,9 @@
 
 
 
+#include <qtorusmesh.h>
+#include <qcomponent.h>
+
 class viewport_window : public QWidget
 {
 	Q_OBJECT
@@ -69,9 +72,6 @@ private:
 	bool camera_menu_view_center_signal_was_recived = false;
 
 	void update_common_graph(graph<int>, std::underlying_type_t<GP>);
-
-
-
 
 signals:
 	void viewport_camera_position_signal(const QVector3D& position) ;
@@ -134,28 +134,10 @@ public slots:
 	}
 
 
-	void viewport_graph_type_slot(int type,std::underlying_type_t<GP>options, graph<int> graph)
-	{
-		switch (type)
-		{
-		case 0:
-		{
-			update_common_graph(graph,options); break;
-		}
-		default:
-			break;
-		}
-
-	}
-
 
 	void viewport_scene_entity_slot(Qt3DCore::QEntity* scene)
 	{
 		currentSceneEntity = scene;
 	}
-
-
-
-
 
 };

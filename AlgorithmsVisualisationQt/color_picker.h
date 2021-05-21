@@ -26,6 +26,15 @@ signals:
 	void color_picker_signal(QColor);
 	void color_picker_signal_int(int r, int g, int b);
 
+public :
+	QColor color_picker_color()
+	{
+		return QColor(
+			spinbox_r->value(),
+			spinbox_g->value(),
+			spinbox_b->value());
+	}
+
 private slots:
 	void color_changed_(int)
 	{

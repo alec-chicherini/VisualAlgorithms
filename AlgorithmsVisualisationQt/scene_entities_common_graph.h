@@ -5,6 +5,9 @@
 #include <Qt3DCore/qcomponent.h>
 #include <Qt3DCore/qtransform.h>
 
+#include <Qt3DExtras/qtorusmesh.h>
+#include <Qt3DExtras/qphongmaterial.h>
+
 class scene_entities_common_graph : public QWidget
 {
 	Q_OBJECT
@@ -34,38 +37,52 @@ public slots:
 
 	void scene_entities_common_graph_vertex_material_type_slot(Qt3DCore::QComponent* component)
 	{
+		qDebug() << __FUNCSIG__ << " CALLED !!! "; 
 		vertex->removeComponent(vertex_material);
 		vertex->addComponent(component);
-		qDebug() << __FUNCSIG__ << " CALLED !!! "; \
+		vertex_material = component;
+
 	}
 	void scene_entities_common_graph_vertex_mesh_type_slot(Qt3DCore::QComponent* component)
 	{
+		qDebug() << __FUNCSIG__ << " CALLED !!! ";
 		vertex->removeComponent(vertex_mesh);
 		vertex->addComponent(component);
-		qDebug() << __FUNCSIG__ << " CALLED !!! "; \
+		vertex_mesh = component;
+
+
 	}
 	void scene_entities_common_graph_edge_material_type_slot(Qt3DCore::QComponent* component)
 	{
+		qDebug() << __FUNCSIG__ << " CALLED !!! ";
 		edge->removeComponent(edge_material);
 		edge->addComponent(component);
-		qDebug() << __FUNCSIG__ << " CALLED !!! "; \
+		edge_material = component;
+	
 	}
 	void scene_entities_common_graph_edge_mesh_type_slot(Qt3DCore::QComponent* component)
 	{
+		qDebug() << __FUNCSIG__ << " CALLED !!! ";
 		edge->removeComponent(edge_mesh);
 		edge->addComponent(component);
-		qDebug() << __FUNCSIG__ << " CALLED !!! "; \
+		edge_mesh = component;
+
 	}
 	void scene_entities_common_graph_plane_material_type_slot(Qt3DCore::QComponent* component)
 	{
+		qDebug() << __FUNCSIG__ << " CALLED !!! ";
 		plane->removeComponent(plane_material);
 		plane->addComponent(component);
-		qDebug() << __FUNCSIG__ << " CALLED !!! "; \
+		plane_material = component;
+	 
 	}
 	void scene_entities_common_graph_plane_mesh_type_slot(Qt3DCore::QComponent* component)
 	{
+		qDebug() << __FUNCSIG__ << " CALLED !!! ";
 		plane->removeComponent(plane_mesh);
 		plane->addComponent(component);
-		qDebug() << __FUNCSIG__ << " CALLED !!! "; \
+		plane_mesh = component;
+
+		
 	}
 };

@@ -18,6 +18,30 @@ viewport_window::viewport_window(Qt3DCore::QEntity* root,QWidget *parent)
 
 	currentSceneEntity = rootEntity;
 
+	//Qt3DExtras::QTorusMesh* m_torus = new Qt3DExtras::QTorusMesh;
+	//m_torus->setRadius(1.0f);
+	//m_torus->setMinorRadius(0.4f);
+	//m_torus->setRings(100);
+	//m_torus->setSlices(20);
+
+	////Qt3DCore::QTransform* torusTransform = new Qt3DCore::QTransform();
+	////torusTransform->setScale(2.0f);
+	////torusTransform->setRotation(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 25.0f));
+	////torusTransform->setTranslation(QVector3D(5.0f, 4.0f, 0.0f));
+
+	//Qt3DExtras::QPhongMaterial* torusMaterial = new Qt3DExtras::QPhongMaterial;
+	//torusMaterial->setDiffuse(QColor(QRgb(0xbeb32b)));
+
+	//Qt3DCore::QEntity* m_torusEntity = new Qt3DCore::QEntity(currentSceneEntity);
+	//Qt3DCore::QComponent* first_comp = m_torus;
+	//Qt3DCore::QComponent* second_comp = torusMaterial;
+
+	//m_torusEntity->addComponent(first_comp);
+	//m_torusEntity->addComponent(second_comp);
+	//m_torusEntity->addComponent(torusTransform);
+
+	
+
 	//camera
 	camera_main = window3d_main->camera();
 	camera_controller_main = new Qt3DExtras::QFirstPersonCameraController(currentSceneEntity);
@@ -70,23 +94,5 @@ viewport_window::~viewport_window()
 {
 }
 
-void viewport_window::update_common_graph(graph<int> g, std::underlying_type_t<GP> options)
-{
-	
-	//Qt3DCore::QEntity* plane = new Qt3DCore::QEntity(rootEntity);
-	
-	QVector<Qt3DCore::QEntity*> vertexes; vertexes.resize(g.V.size());
-	QVector<Qt3DCore::QEntity*> edges; edges.resize(g.E.size());
-	for (auto& v : vertexes)
-	{
-		//update_components(v);
-	}
-
-	for (auto& e : edges)
-	{
-		//update_components(e);
-	}
-
-}
 
 
