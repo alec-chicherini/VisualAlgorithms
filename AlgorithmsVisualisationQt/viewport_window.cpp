@@ -46,7 +46,8 @@ viewport_window::viewport_window(Qt3DCore::QEntity* root,QWidget *parent)
 	camera_main = window3d_main->camera();
 	camera_controller_main = new Qt3DExtras::QFirstPersonCameraController(currentSceneEntity);
 	camera_controller_main->setCamera(camera_main);
-	//
+	
+
 	
 	//light
 	light_main = new Qt3DCore::QEntity(currentSceneEntity);

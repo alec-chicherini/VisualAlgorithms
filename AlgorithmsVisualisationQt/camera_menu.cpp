@@ -92,7 +92,12 @@ camera_menu::camera_menu(QWidget *parent)
 	connect(combobox_camera_controller, &QComboBox::currentIndexChanged, this, &camera_menu::camera_controller_signal);
 
 	//first initial init
+	spinbox_possition_z->setValue(100.f);
 	
+	QMetaObject::invokeMethod(this,
+		"camera_possition_signal",
+		Qt::QueuedConnection,
+		Q_ARG(QVector3D, QVector3D(0.,0.,100.)));
 
 }
 
