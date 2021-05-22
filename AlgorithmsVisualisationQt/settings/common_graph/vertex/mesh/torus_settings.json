@@ -1,4 +1,6 @@
 {
-    "mesh_torus_minor_radius_value": 0,
-    "mesh_torus_radius_value": 0
+    "mesh_torus_minor_radius_value": 1,
+    "mesh_torus_radius_value": 3,
+    "mesh_torus_rings_value": 16,
+    "mesh_torus_slices_value": 21
 }

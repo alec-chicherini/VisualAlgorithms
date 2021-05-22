@@ -48,7 +48,6 @@
 #define ADD_DOUBLE_SPIN_BOX_PROPERTY(PROPERTY,ENTITY, NAME, stringNAME, ROW)\
 ENTITY##_properties_layout->addWidget(new QLabel(#stringNAME), ROW, 0);\
 QDoubleSpinBox* spinbox_##ENTITY##_##NAME = new QDoubleSpinBox;\
-spinbox_##ENTITY##_##NAME->setValue(1.0);\
 ENTITY##_properties_layout->addWidget(spinbox_##ENTITY##_##NAME, ROW, 1);\
 connect(spinbox_##ENTITY##_##NAME, &QDoubleSpinBox::valueChanged, this, &property_##PROPERTY##::property_##PROPERTY##_##ENTITY##_##NAME##_signal);\
 connect(spinbox_##ENTITY##_##NAME, &QDoubleSpinBox::valueChanged, this, [&](double value){\
@@ -56,22 +55,36 @@ read_write_##ENTITY##_json_(QIODevice::WriteOnly,QString(QString(#PROPERTY)+QStr
 });\
 spinbox_##ENTITY##_##NAME->setValue(read_write_##ENTITY##_json_(QIODevice::ReadOnly,\
 QString(#PROPERTY)+QString("_")+QString(#ENTITY)+QString("_")+QString(#NAME)+QString("_")+QString("value"),double()).toDouble());\
+if((QString(#NAME)=="x_extent")||(QString(#NAME)=="y_extent")||(QString(#NAME)=="z_extent")||\
+   (QString(#NAME)=="height")||(QString(#NAME)=="width"))\
+{\
+    spinbox_##ENTITY##_##NAME->setMinimum(0.01f);\
+    if(spinbox_##ENTITY##_##NAME->value()<1.0)spinbox_##ENTITY##_##NAME->setValue((double)1.0);\
+}\
+if((QString(#ENTITY)=="cone"))\
+{\
+    spinbox_##ENTITY##_##NAME->setMinimum(0.00f);\
+}\
 e_vec_func_double.push_back({QString("property_")+QString(#PROPERTY)+QString("_")+QString(#ENTITY)+QString("_")+QString(#NAME)+QString("_signal"), spinbox_##ENTITY##_##NAME->value()});
-//emit property_##PROPERTY##_##ENTITY##_##NAME##_signal(spinbox_##ENTITY##_##NAME->value()); \
+
 
 #define ADD_SPIN_BOX_PROPERTY(PROPERTY,ENTITY, NAME, stringNAME, ROW)\
 ENTITY##_properties_layout->addWidget(new QLabel(#stringNAME), ROW, 0);\
 QSpinBox* spinbox_##ENTITY##_##NAME = new QSpinBox;\
-spinbox_##ENTITY##_##NAME->setValue(0);\
 ENTITY##_properties_layout->addWidget(spinbox_##ENTITY##_##NAME, ROW, 1);\
 connect(spinbox_##ENTITY##_##NAME, &QSpinBox::valueChanged, this, &property_##PROPERTY##::property_##PROPERTY##_##ENTITY##_##NAME##_signal);\
 connect(spinbox_##ENTITY##_##NAME, &QSpinBox::valueChanged, this, [&,this](int value){\
 read_write_##ENTITY##_json_(QIODevice::WriteOnly,QString(#PROPERTY)+QString("_")+QString(#ENTITY)+QString("_")+QString(#NAME)+QString("_")+QString("value"), value);\
 });\
 spinbox_##ENTITY##_##NAME->setValue(read_write_##ENTITY##_json_(QIODevice::ReadOnly,\
-QString(#PROPERTY)+QString("_")+QString(#ENTITY)+QString("_")+QString(#NAME)+QString("_")+QString("value"),int()).toInt());\
+QString(#PROPERTY)+QString("_")+QString(#ENTITY)+QString("_")+QString(#NAME)+QString("_")+QString("value"),double()).toInt());\
+if(QString(#NAME)=="rings"||QString(#NAME)=="slices")\
+{\
+    spinbox_##ENTITY##_##NAME->setRange(10,100);\
+   if(spinbox_##ENTITY##_##NAME->value()<10)spinbox_##ENTITY##_##NAME->setValue((int)10);\
+}\
 e_vec_func_int.push_back({QString("property_")+QString(#PROPERTY)+QString("_")+QString(#ENTITY)+QString("_")+QString(#NAME)+QString("_signal"), spinbox_##ENTITY##_##NAME->value()});
-//emit property_##PROPERTY##_##ENTITY##_##NAME##_signal(spinbox_##ENTITY##_##NAME->value());
+
 
 #define ADD_CHECK_BOX_PROPERTY(PROPERTY,ENTITY, NAME, stringNAME, ROW)\
 ENTITY##_properties_layout->addWidget(new QLabel(#stringNAME), ROW, 0);\
@@ -82,7 +95,8 @@ connect(checkbox_##ENTITY##_##NAME, &QCheckBox::stateChanged, this, [&,this](boo
 read_write_##ENTITY##_json_(QIODevice::WriteOnly,QString(#PROPERTY)+QString("_")+QString(#ENTITY)+QString("_")+QString(#NAME)+QString("_")+QString("value"), value);});\
 checkbox_##ENTITY##_##NAME->setChecked(read_write_##ENTITY##_json_(QIODevice::ReadOnly,\
 QString(#PROPERTY)+QString("_")+QString(#ENTITY)+QString("_")+QString(#NAME)+QString("_")+QString("value"),bool()).toBool());\
-emit property_##PROPERTY##_##ENTITY##_##NAME##_signal(checkbox_##ENTITY##_##NAME->isChecked());
+e_vec_func_int.push_back({QString("property_")+QString(#PROPERTY)+QString("_")+QString(#ENTITY)+QString("_")+QString(#NAME)+QString("_signal"), checkbox_##ENTITY##_##NAME->isChecked()});
+
 
 #define ADD_COLOR_PICKER_PROPERTY(PROPERTY,ENTITY, NAME, stringNAME, ROW)\
 color_picker* color_picker_##ENTITY##_##NAME## = new color_picker(#stringNAME);\
@@ -98,7 +112,8 @@ read_write_##ENTITY##_json_(QIODevice::WriteOnly,QString(#PROPERTY)+QString("_")
 read_write_##ENTITY##_json_(QIODevice::WriteOnly, QString(#PROPERTY) + QString("_") + QString(#ENTITY) + QString("_") + QString(#NAME) + QString("_") + QString("g_value"), g);\
 read_write_##ENTITY##_json_(QIODevice::WriteOnly, QString(#PROPERTY) + QString("_") + QString(#ENTITY) + QString("_") + QString(#NAME) + QString("_") + QString("b_value"), b);\
 });\
- emit property_##PROPERTY##_##ENTITY##_##NAME##_signal(color_picker_##ENTITY##_##NAME##->color_picker_color());
+e_vec_func_QColor.push_back({ QString("property_") + QString(#PROPERTY) + QString("_") + QString(#ENTITY) + QString("_") + QString(#NAME) + QString("_signal"), color_picker_##ENTITY##_##NAME->getColor() });
+ //emit property_##PROPERTY##_##ENTITY##_##NAME##_signal(color_picker_##ENTITY##_##NAME##->color_picker_color());
 
 
 //MACROSES FOR SIGNAL-SLOT-CONNECTION GENERATION 
@@ -108,8 +123,11 @@ void property_##PROPERTY##_##ENTITY##_##NAME##_signal(TYPE);
 #define ADD_SLOT_FOR_ENTITY(PROPERTY,ENTITY,NAME,FUNCNAME,TYPE)\
 void property_##PROPERTY##_##ENTITY##_##NAME##_slot(TYPE value)\
 {\
-PROPERTY##_##ENTITY->##FUNCNAME##(value);\
-qDebug()<<__FUNCSIG__<<" CALLED !!! ";\
+qDebug()<<QString(#PROPERTY)+QString("_")+QString(#ENTITY)+QString("->")+QString(#FUNCNAME)+QString("(")<<value<<QString(")");\
+try{PROPERTY##_##ENTITY->FUNCNAME##(value);}\
+catch(std::exception& e){\
+qDebug() << __FUNCSIG__<< "ERROR: " << e.what(); \
+return;}\
 };
 
 #define ADD_CONNECTION_PROPERTY_TO_STATE(ENTITY,COMPONENT,TYPE,PROPERTY)\
@@ -118,7 +136,7 @@ connect(##ENTITY##_##COMPONENT##, &property_##COMPONENT##::property_##COMPONENT#
 
 
 //#define ADD_CONNECTION_TYPE_TO_TYPE(ENTITY,COMPONENT)\
-connect(##ENTITY##_##COMPONENT##, &property_##COMPONENT##::property_##COMPONENT##_type_signal,component_states_##ENTITY##, &component_states::component_states_##COMPONENT##_type_slot);
+//connect(##ENTITY##_##COMPONENT##, &property_##COMPONENT##::property_##COMPONENT##_type_signal,component_states_##ENTITY##, &component_states::component_states_##COMPONENT##_type_slot);
 
 
 //MACROSES FOR SCENE GENERATION IN QTREEWIDGET
@@ -126,7 +144,7 @@ connect(##ENTITY##_##COMPONENT##, &property_##COMPONENT##::property_##COMPONENT#
 QTreeWidgetItem* treeitem_##NAME## = new QTreeWidgetItem(##ROOT##);\
 treeitem_##NAME##->setText(0, QString(#NAME).replace(0, 1, QString(#NAME)[0].toUpper()));\
 tree_widget->insertTopLevelItem(0, treeitem_##NAME##);\
-component_states_##NAME = new component_states;
+component_states_##NAME = new component_states(this);
 
 #define ADD_LEAF_BEGIN(TYPE,PARENT,NAME)\
 property_##NAME##* ##PARENT##_##NAME## = new property_##NAME##(QString("settings/")+QString(#TYPE)+QString("/")+QString(#PARENT)+QString("/")+QString(#NAME)+QString("/"));\

@@ -20,7 +20,6 @@
 #include <qjsonvalue.h>
 #include <qbytearray.h>
 
-#include <functional>
 #include <tuple>
 #include <qobject.h>
 
@@ -63,29 +62,29 @@ public:
 
 		QMetaObject::invokeMethod(this,
 			"property_mesh_type_signal",
-			Qt::DirectConnection,
+			Qt::QueuedConnection,
 			Q_ARG(int, combobox_mesh->currentIndex()));
 
-		/*for (auto& e : e_vec_func_double) {
+		for (auto& e : e_vec_func_double) {
 		qDebug() << "BEGIN::QMetaObject::invokeMethod(" << e.signal_name.toStdString().data() << "," << e.signal_data << ") - invoke data  ";
 		bool result = QMetaObject::invokeMethod(this,
 			e.signal_name.toStdString().data(),
-			Qt::DirectConnection,
+			Qt::QueuedConnection,
 			Q_ARG(double, e.signal_data));
 
-		qDebug() << "BEG::QMetaObject::invokeMethod(" << e.signal_name.toStdString().data() << "," << e.signal_data << ")invoke result is: " << result;
-	}*/
+		qDebug() << "END::QMetaObject::invokeMethod(" << e.signal_name.toStdString().data() << "," << e.signal_data << ")invoke result is: " << result;
+	}
 
-		/*for (auto& e : e_vec_func_int)
+		for (auto& e : e_vec_func_int)
 		{
 			qDebug() << "BEGIN::QMetaObject::invokeMethod(" << e.signal_name.toStdString().data() << "," << e.signal_data << ") - invoke data";
 			bool result = QMetaObject::invokeMethod(this,
 				e.signal_name.toStdString().data(),
-				Qt::DirectConnection,
+				Qt::QueuedConnection,
 				Q_ARG(int, e.signal_data));
 
-			qDebug() << "BEG::QMetaObject::invokeMethod(" << e.signal_name.toStdString().data() << "," << e.signal_data << ")invoke result is: " << result;
-		}*/
+			qDebug() << "END::QMetaObject::invokeMethod(" << e.signal_name.toStdString().data() << "," << e.signal_data << ")invoke result is: " << result;
+		}
 
 
 	};

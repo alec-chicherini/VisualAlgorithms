@@ -12,12 +12,6 @@ scene_entities_common_graph::scene_entities_common_graph(Qt3DCore::QEntity* root
 
 
 
-	Qt3DExtras::QTorusMesh* m_torus = new Qt3DExtras::QTorusMesh;
-m_torus->setRadius(1.0f);
-m_torus->setMinorRadius(0.4f);
-m_torus->setRings(100);
-m_torus->setSlices(20);
-
 Qt3DCore::QTransform* vertexTransform = new Qt3DCore::QTransform();
 vertexTransform->setScale(2.0f);
 vertexTransform->setTranslation(QVector3D(10.0f, 10.0f, 0));
@@ -35,14 +29,16 @@ plane->addComponent(planeTransform);
 Qt3DExtras::QPhongMaterial* torusMaterial = new Qt3DExtras::QPhongMaterial;
 torusMaterial->setDiffuse(QColor(QRgb(0xbeb32b)));
 
-vertex_material = torusMaterial;
- vertex_mesh = m_torus;
- edge_material = torusMaterial;
- edge_mesh = m_torus;
- plane_material = torusMaterial;
- plane_mesh = m_torus;
 
-	Qt3DCore::QComponent* dummy = new Qt3DCore::QComponent;
+	Qt3DCore::QComponent* dummy_material = new Qt3DCore::QComponent;
+	Qt3DCore::QComponent* dummy_mesh = new Qt3DCore::QComponent;
+
+	vertex_material = dummy_material;
+	edge_material = dummy_material;
+	plane_material = dummy_material;
+	vertex_mesh = dummy_mesh;
+	edge_mesh = dummy_mesh;
+	plane_mesh = dummy_mesh;
 
 vertex->addComponent(vertex_material);
 vertex->addComponent(vertex_mesh);

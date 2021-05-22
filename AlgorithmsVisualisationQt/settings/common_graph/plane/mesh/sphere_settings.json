@@ -1,3 +1,5 @@
 {
-    "mesh_sphere_radius_value": 0
+    "mesh_sphere_radius_value": 0,
+    "mesh_sphere_rings_value": 10,
+    "mesh_sphere_slices_value": 10
 }

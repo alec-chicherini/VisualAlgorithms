@@ -1,5 +1,17 @@
 {
-    "material_gooch_alpha_value": 0,
-    "material_gooch_beta_value": 0,
-    "material_gooch_shininess_value": 0
+    "material_gooch_alpha_value": 10,
+    "material_gooch_beta_value": 2,
+    "material_gooch_cool_b_value": 0,
+    "material_gooch_cool_g_value": 0,
+    "material_gooch_cool_r_value": 4,
+    "material_gooch_diffuse_b_value": 0,
+    "material_gooch_diffuse_g_value": 3,
+    "material_gooch_diffuse_r_value": 2,
+    "material_gooch_shininess_value": 3,
+    "material_gooch_specular_b_value": 0,
+    "material_gooch_specular_g_value": 0,
+    "material_gooch_specular_r_value": 10,
+    "material_gooch_warm_b_value": 0,
+    "material_gooch_warm_g_value": 2,
+    "material_gooch_warm_r_value": 0
 }

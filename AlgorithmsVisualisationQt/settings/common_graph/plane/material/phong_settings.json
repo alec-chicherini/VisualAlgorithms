@@ -1,3 +1,6 @@
 {
+    "material_phong_diffuse_b_value": 100,
+    "material_phong_diffuse_g_value": 0,
+    "material_phong_diffuse_r_value": 0,
     "material_phong_shininess_value": 0
 }

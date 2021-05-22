@@ -1,4 +1,10 @@
 {
-    "material_normal_diffuse_map_shininess_value": 0,
-    "material_normal_diffuse_map_texture_scale_value": 0
+    "material_normal_diffuse_map_ambient_b_value": 100,
+    "material_normal_diffuse_map_ambient_g_value": 0,
+    "material_normal_diffuse_map_ambient_r_value": 1,
+    "material_normal_diffuse_map_shininess_value": 2,
+    "material_normal_diffuse_map_specular_b_value": 100,
+    "material_normal_diffuse_map_specular_g_value": 0,
+    "material_normal_diffuse_map_specular_r_value": 0,
+    "material_normal_diffuse_map_texture_scale_value": 3
 }

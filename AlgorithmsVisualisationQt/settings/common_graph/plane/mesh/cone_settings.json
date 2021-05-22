@@ -1,5 +1,7 @@
 {
-    "mesh_cone_bottom_radius_value": 0,
-    "mesh_cone_length_value": 0,
-    "mesh_cone_top_radius_value": 0
+    "mesh_cone_bottom_radius_value": 1,
+    "mesh_cone_length_value": 1,
+    "mesh_cone_rings_value": 10,
+    "mesh_cone_slices_value": 10,
+    "mesh_cone_top_radius_value": 1
 }

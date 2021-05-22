@@ -22,12 +22,13 @@ public:
 		spinbox_g->setValue(g);
 		spinbox_b->setValue(b);
 	}
+
 signals:
 	void color_picker_signal(QColor);
 	void color_picker_signal_int(int r, int g, int b);
 
 public :
-	QColor color_picker_color()
+	QColor getColor()
 	{
 		return QColor(
 			spinbox_r->value(),

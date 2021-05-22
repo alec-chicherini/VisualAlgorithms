@@ -1,5 +1,5 @@
 {
-    "mesh_cuboid_x_extent_value": 25,
-    "mesh_cuboid_y_extent_value": 25,
-    "mesh_cuboid_z_extent_value": 1
+    "mesh_cuboid_x_extent_value": 10,
+    "mesh_cuboid_y_extent_value": 5,
+    "mesh_cuboid_z_extent_value": 5
 }

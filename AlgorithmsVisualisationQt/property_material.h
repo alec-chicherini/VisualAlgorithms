@@ -61,9 +61,50 @@ public:
 
 	void send_initialization_data()
 	{
-		qDebug() << __FUNCSIG__ << " CALLED !!! "; \
-		emit property_material_type_signal(combobox_material->currentIndex());
+		qDebug() << __FUNCSIG__ << " CALLED !!! ";
+		//emit property_mesh_type_signal(combobox_mesh->currentIndex());
+
+		QMetaObject::invokeMethod(this,
+			"property_material_type_signal",
+			Qt::QueuedConnection,
+			Q_ARG(int, combobox_material->currentIndex()));
+
+		for (auto& e : e_vec_func_double) {
+			qDebug() << "BEGIN::QMetaObject::invokeMethod(" << e.signal_name.toStdString().data() << "," << e.signal_data << ") - invoke data  ";
+			bool result = QMetaObject::invokeMethod(this,
+				e.signal_name.toStdString().data(),
+				Qt::QueuedConnection,
+				Q_ARG(double, e.signal_data));
+
+			qDebug() << "END::QMetaObject::invokeMethod(" << e.signal_name.toStdString().data() << "," << e.signal_data << ")invoke result is: " << result;
+		}
+
+		for (auto& e : e_vec_func_int)
+		{
+			qDebug() << "BEGIN::QMetaObject::invokeMethod(" << e.signal_name.toStdString().data() << "," << e.signal_data << ") - invoke data";
+			bool result = QMetaObject::invokeMethod(this,
+				e.signal_name.toStdString().data(),
+				Qt::QueuedConnection,
+				Q_ARG(int, e.signal_data));
+
+			qDebug() << "END::QMetaObject::invokeMethod(" << e.signal_name.toStdString().data() << "," << e.signal_data << ")invoke result is: " << result;
+		}
+
+		for (auto& e : e_vec_func_QColor)
+		{
+			qDebug() << "BEGIN::QMetaObject::invokeMethod(" << e.signal_name.toStdString().data() << "," << e.signal_data << ") - invoke data";
+			bool result = QMetaObject::invokeMethod(this,
+				e.signal_name.toStdString().data(),
+				Qt::QueuedConnection,
+				Q_ARG(QColor, e.signal_data));
+
+			qDebug() << "END::QMetaObject::invokeMethod(" << e.signal_name.toStdString().data() << "," << e.signal_data << ")invoke result is: " << result;
+		}
+
+
 	};
+
+
 
 signals:
 

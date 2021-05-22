@@ -1,4 +1,13 @@
 {
-    "material_diffuse_specular_shininess_value": 0,
-    "material_diffuse_specular_texture_scale_value": 0
+    "material_diffuse_specular_ambient_b_value": 0,
+    "material_diffuse_specular_ambient_g_value": 255,
+    "material_diffuse_specular_ambient_r_value": 0,
+    "material_diffuse_specular_diffuse_b_value": 0,
+    "material_diffuse_specular_diffuse_g_value": 50,
+    "material_diffuse_specular_diffuse_r_value": 0,
+    "material_diffuse_specular_shininess_value": 5,
+    "material_diffuse_specular_specular_b_value": 0,
+    "material_diffuse_specular_specular_g_value": 50,
+    "material_diffuse_specular_specular_r_value": 0,
+    "material_diffuse_specular_texture_scale_value": 5
 }
