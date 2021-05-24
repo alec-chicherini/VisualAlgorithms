@@ -368,3 +368,6 @@ FodyWeavers.xsd
 /AlgorithmsVisualisationQt/AlgorithmsVisualisationQt.vcxproj.filters
 /BitFlagEnumExample
 *.txt
+/GraphsVisualisationOLCGE/GraphsVisualisationOLCGE.sln
+/GraphsVisualisationOLCGE/GraphsVisualisationOLCGE.vcxproj
+/GraphsVisualisationOLCGE/GraphsVisualisationOLCGE.vcxproj.filters

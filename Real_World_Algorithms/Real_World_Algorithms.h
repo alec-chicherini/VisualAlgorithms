@@ -1049,7 +1049,7 @@ auto generateRandomGraph(int V, int E_left, int E_right, GP option = GP::NONE)
 
 
 template<typename T>
-graph<T> generateLabirinthGraph(int X, int Y)
+graph<T> generateLabirinthGraph(size_t X, size_t Y)
 {
     graph<T> G(X * Y);
 
