@@ -79,6 +79,11 @@ signals:
 
 
 public slots:
+
+	void viewport_camera_view_all_slot()
+	{
+		camera_main->viewAll();
+	}
 	void viewport_camera_possition_slot(QVector3D pos)
 	{
 		camera_menu_possition_signal_was_recived = true;

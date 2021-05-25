@@ -11,7 +11,6 @@ scene_entities_common_graph::scene_entities_common_graph(Qt3DCore::QEntity* root
 	plane = new Qt3DCore::QEntity(rootEntity);
 
 
-
 Qt3DCore::QTransform* vertexTransform = new Qt3DCore::QTransform();
 vertexTransform->setScale(2.0f);
 vertexTransform->setTranslation(QVector3D(10.0f, 10.0f, 0));

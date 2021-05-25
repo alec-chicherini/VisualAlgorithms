@@ -6,28 +6,28 @@ camera_menu::camera_menu(QWidget *parent)
 
 	QGroupBox* groupbox_camera = new QGroupBox;
 
-	spinbox_possition_x = new QDoubleSpinBox;
-	spinbox_possition_y = new QDoubleSpinBox;
-	spinbox_possition_z = new QDoubleSpinBox;
+	spinbox_possition_x = new QDoubleSpinBox(this);
+	spinbox_possition_y = new QDoubleSpinBox(this);
+	spinbox_possition_z = new QDoubleSpinBox(this);
 	spinbox_possition_x->setRange(-FLT_MAX, FLT_MAX);
 	spinbox_possition_y->setRange(-FLT_MAX, FLT_MAX);
 	spinbox_possition_z->setRange(-FLT_MAX, FLT_MAX);
 
-	spinbox_view_center_x = new QDoubleSpinBox;
-	spinbox_view_center_y = new QDoubleSpinBox;
-	spinbox_view_center_z = new QDoubleSpinBox;
+	spinbox_view_center_x = new QDoubleSpinBox(this);
+	spinbox_view_center_y = new QDoubleSpinBox(this);
+	spinbox_view_center_z = new QDoubleSpinBox(this);
 	spinbox_view_center_x->setRange(-FLT_MAX, FLT_MAX);
 	spinbox_view_center_y->setRange(-FLT_MAX, FLT_MAX);
 	spinbox_view_center_z->setRange(-FLT_MAX, FLT_MAX);
 
-	spinbox_fov = new QSpinBox;
+	spinbox_fov = new QSpinBox(this);
 	spinbox_fov->setRange(1, 360);
 	
-	combobox_projection = new QComboBox;
+	combobox_projection = new QComboBox(this);
 	combobox_projection->addItem("Orthographic");
 	combobox_projection->addItem("Perspective");
 
-	combobox_camera_controller = new QComboBox;
+	combobox_camera_controller = new QComboBox(this);
 	combobox_camera_controller->addItem("First Person Camera");
 	combobox_camera_controller->addItem("Orbit Camera");
 
@@ -44,7 +44,6 @@ camera_menu::camera_menu(QWidget *parent)
 	gridlayout_possition->addWidget(spinbox_possition_y, 1, 2, 1, 1);
 	gridlayout_possition->addWidget(spinbox_possition_z, 2, 2, 1, 1);
 	
-
 	QGridLayout* gridlayout_viewcenter = new QGridLayout;
 	gridlayout_viewcenter->setAlignment(Qt::AlignTop);
 	gridlayout_viewcenter->setSpacing(1);
@@ -63,6 +62,8 @@ camera_menu::camera_menu(QWidget *parent)
 	gridlayout_fov->addWidget(spinbox_fov, 0, 1, 1, -1);
 	gridlayout_fov->setColumnMinimumWidth(1, 25);
 
+	pushbtn_camera_view_all = new QPushButton("View all", this);
+
 	QGridLayout* gridlayout_this = new QGridLayout;
 	gridlayout_this->addLayout(gridlayout_possition, 0, 0, 1, -1);
 	gridlayout_this->addLayout(gridlayout_viewcenter, 1, 0, 1, -1);
@@ -74,10 +75,14 @@ camera_menu::camera_menu(QWidget *parent)
 	gridlayout_this->addWidget(new QLabel("Controller:"), 5, 0, 1, -1);
 	gridlayout_this->addWidget(combobox_camera_controller, 6, 0, 1, -1);
 
+	gridlayout_this->addWidget(pushbtn_camera_view_all, 7, 0, 1, -1);
+	
 	groupbox_camera->setLayout(gridlayout_this);
 	groupbox_camera->setTitle("Camera");
+	groupbox_camera->setAlignment(Qt::AlignTop);
 	
 	QGridLayout* layout = new QGridLayout;
+	layout->setAlignment(Qt::AlignTop);
 	layout->addWidget(groupbox_camera);
 	setLayout(layout);
 
@@ -91,6 +96,8 @@ camera_menu::camera_menu(QWidget *parent)
 
 	connect(combobox_camera_controller, &QComboBox::currentIndexChanged, this, &camera_menu::camera_controller_signal);
 
+	connect(pushbtn_camera_view_all, &QAbstractButton::pressed, this, &camera_menu::camera_view_all_signal);
+
 	//first initial init
 	spinbox_possition_z->setValue(100.f);
 	
@@ -98,7 +105,6 @@ camera_menu::camera_menu(QWidget *parent)
 		"camera_possition_signal",
 		Qt::QueuedConnection,
 		Q_ARG(QVector3D, QVector3D(0.,0.,100.)));
-
 }
 
 camera_menu::~camera_menu()

@@ -1,6 +1,6 @@
 {
-    "mesh_cylinder_length_value": 17,
-    "mesh_cylinder_radius_value": 4,
+    "mesh_cylinder_length_value": 64,
+    "mesh_cylinder_radius_value": 5,
     "mesh_cylinder_rings_value": 10,
     "mesh_cylinder_slices_value": 10
 }

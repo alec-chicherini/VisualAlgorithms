@@ -13,6 +13,7 @@
 #include <qlabel.h>
 #include <qspinbox.h>
 #include <qcombobox.h>
+#include <qpushbutton.h>
 
 //debug
 #include "qdebug_helper.h"
@@ -42,6 +43,8 @@ private:
 	QComboBox* combobox_projection;
 
 	QComboBox* combobox_camera_controller;
+	
+	QPushButton* pushbtn_camera_view_all;
 
 	bool viewport_possition_signal_was_recived = false;
 	bool viewport_view_center_signal_was_recived = false;
@@ -51,6 +54,7 @@ signals:
 		void camera_possition_signal(QVector3D pos);
 		void camera_view_center_signal(QVector3D pos);
 		void camera_controller_signal(int val);
+		void camera_view_all_signal();
 
 private slots:
 

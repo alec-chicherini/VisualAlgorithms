@@ -18,29 +18,7 @@ viewport_window::viewport_window(Qt3DCore::QEntity* root,QWidget *parent)
 
 	currentSceneEntity = rootEntity;
 
-	//Qt3DExtras::QTorusMesh* m_torus = new Qt3DExtras::QTorusMesh;
-	//m_torus->setRadius(1.0f);
-	//m_torus->setMinorRadius(0.4f);
-	//m_torus->setRings(100);
-	//m_torus->setSlices(20);
 
-	////Qt3DCore::QTransform* torusTransform = new Qt3DCore::QTransform();
-	////torusTransform->setScale(2.0f);
-	////torusTransform->setRotation(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 25.0f));
-	////torusTransform->setTranslation(QVector3D(5.0f, 4.0f, 0.0f));
-
-	//Qt3DExtras::QPhongMaterial* torusMaterial = new Qt3DExtras::QPhongMaterial;
-	//torusMaterial->setDiffuse(QColor(QRgb(0xbeb32b)));
-
-	//Qt3DCore::QEntity* m_torusEntity = new Qt3DCore::QEntity(currentSceneEntity);
-	//Qt3DCore::QComponent* first_comp = m_torus;
-	//Qt3DCore::QComponent* second_comp = torusMaterial;
-
-	//m_torusEntity->addComponent(first_comp);
-	//m_torusEntity->addComponent(second_comp);
-	//m_torusEntity->addComponent(torusTransform);
-
-	
 
 	//camera
 	camera_main = window3d_main->camera();
@@ -48,7 +26,6 @@ viewport_window::viewport_window(Qt3DCore::QEntity* root,QWidget *parent)
 	camera_controller_main->setCamera(camera_main);
 	
 
-	
 	//light
 	light_main = new Qt3DCore::QEntity(currentSceneEntity);
 	point_light_main = new Qt3DRender::QPointLight(light_main);
@@ -64,8 +41,6 @@ viewport_window::viewport_window(Qt3DCore::QEntity* root,QWidget *parent)
 
 	window3d_main->setRootEntity(currentSceneEntity);
 
-	//this->setContentsMargins(0, 0, 0, 0);
-	//this->setContentsMargins(1, 1, 1, 1);
 	QGridLayout* gl = new QGridLayout;
 	gl->setSpacing(0);
 	gl->setContentsMargins(0, 0, 0, 0);

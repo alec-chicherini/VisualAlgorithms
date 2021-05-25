@@ -77,6 +77,8 @@ main_window::main_window(QWidget *parent)
 
 	connect(camera_menu_, &camera_menu::camera_controller_signal, viewport_window_, &viewport_window::viewport_camera_controller_slot);
 
+	connect(camera_menu_, &camera_menu::camera_view_all_signal, viewport_window_, &viewport_window::viewport_camera_view_all_slot);
+
 	//light
 	connect(light_menu_, &light_menu::light_color_signal, viewport_window_, &viewport_window::viewport_light_color_slot);
 	connect(light_menu_, &light_menu::light_intencity_signal, viewport_window_, &viewport_window::viewport_light_intensity_slot);
