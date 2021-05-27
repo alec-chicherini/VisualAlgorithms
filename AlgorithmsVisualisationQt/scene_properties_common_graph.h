@@ -48,14 +48,14 @@ private:
 	scene_entities_common_graph* scene_entities_common_graph_;
 
 signals:
-	void scene_properties_common_graph_scene_entity(Qt3DCore::QEntity*);
+	void scene_properties_common_graph_type_signal(int type, graph<int> gr, under_GP options);
 
 public slots:
 	void scene_properties_common_graph_type_slot(int type, graph<int> gr, under_GP options)
 	{
 		if (type == 0)
 		{
-			emit scene_properties_common_graph_scene_entity(scene_entities_common_graph_->getRoot());
+			emit scene_properties_common_graph_type_signal(type, gr, options);
 
 		}
 	}

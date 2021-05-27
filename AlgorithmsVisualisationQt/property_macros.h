@@ -144,7 +144,7 @@ connect(##ENTITY##_##COMPONENT##, &property_##COMPONENT##::property_##COMPONENT#
 QTreeWidgetItem* treeitem_##NAME## = new QTreeWidgetItem(##ROOT##);\
 treeitem_##NAME##->setText(0, QString(#NAME).replace(0, 1, QString(#NAME)[0].toUpper()));\
 tree_widget->insertTopLevelItem(0, treeitem_##NAME##);\
-component_states_##NAME = new component_states(this);
+component_states_##NAME = new component_states(root,this);
 
 #define ADD_LEAF_BEGIN(TYPE,PARENT,NAME)\
 property_##NAME##* ##PARENT##_##NAME## = new property_##NAME##(QString("settings/")+QString(#TYPE)+QString("/")+QString(#PARENT)+QString("/")+QString(#NAME)+QString("/"));\

@@ -1,29 +1,31 @@
 #include "component_states.h"
 
-component_states::component_states(QWidget *parent)
+component_states::component_states(Qt3DCore::QEntity* root, QWidget *parent)
 	: QWidget(parent)
 {
+	rootEntity =  new Qt3DCore::QEntity(root);
+
 	//all in app materials
-	material_phong = new Qt3DExtras::QPhongMaterial;//id 0
-	material_diffuse_map = new Qt3DExtras::QDiffuseMapMaterial;//id 1
-	material_diffuse_specular_map = new Qt3DExtras::QDiffuseSpecularMapMaterial;//id 2
-	material_diffuse_specular = new Qt3DExtras::QDiffuseSpecularMaterial;//id 3
-	material_gooch = new Qt3DExtras::QGoochMaterial;//id 4
-	material_metal_rough = new Qt3DExtras::QMetalRoughMaterial;//id 5
-	material_morph_phong = new Qt3DExtras::QMorphPhongMaterial;//id 6
-	material_normal_diffuse_map = new Qt3DExtras::QNormalDiffuseMapMaterial;//id 7
-	material_normal_diffuse_specular_map = new Qt3DExtras::QNormalDiffuseSpecularMapMaterial;//id 8
-	material_phong_alpha = new Qt3DExtras::QPhongAlphaMaterial;//id 9
-	material_texture = new Qt3DExtras::QTextureMaterial;//id 10
+	material_phong = new Qt3DExtras::QPhongMaterial(rootEntity);//id 0
+	material_diffuse_map = new Qt3DExtras::QDiffuseMapMaterial(rootEntity);//id 1
+	material_diffuse_specular_map = new Qt3DExtras::QDiffuseSpecularMapMaterial(rootEntity);//id 2
+	material_diffuse_specular = new Qt3DExtras::QDiffuseSpecularMaterial(rootEntity);//id 3
+	material_gooch = new Qt3DExtras::QGoochMaterial(rootEntity);//id 4
+	material_metal_rough = new Qt3DExtras::QMetalRoughMaterial(rootEntity);//id 5
+	material_morph_phong = new Qt3DExtras::QMorphPhongMaterial(rootEntity);//id 6
+	material_normal_diffuse_map = new Qt3DExtras::QNormalDiffuseMapMaterial(rootEntity);//id 7
+	material_normal_diffuse_specular_map = new Qt3DExtras::QNormalDiffuseSpecularMapMaterial(rootEntity);//id 8
+	material_phong_alpha = new Qt3DExtras::QPhongAlphaMaterial(rootEntity);//id 9
+	material_texture = new Qt3DExtras::QTextureMaterial(rootEntity);//id 10
 
 
   //all in app meshes
-	mesh_cone = new Qt3DExtras::QConeMesh;//id 0
-	mesh_cuboid = new Qt3DExtras::QCuboidMesh;//id 1
-	mesh_cylinder = new Qt3DExtras::QCylinderMesh;//id 2
-	mesh_plane = new Qt3DExtras::QPlaneMesh;//id 3
-	mesh_sphere = new Qt3DExtras::QSphereMesh;//id 4
-	mesh_torus = new Qt3DExtras::QTorusMesh;//id 5
+	mesh_cone = new Qt3DExtras::QConeMesh(rootEntity);//id 0
+	mesh_cuboid = new Qt3DExtras::QCuboidMesh(rootEntity);//id 1
+	mesh_cylinder = new Qt3DExtras::QCylinderMesh(rootEntity);//id 2
+	mesh_plane = new Qt3DExtras::QPlaneMesh(rootEntity);//id 3
+	mesh_sphere = new Qt3DExtras::QSphereMesh(rootEntity);//id 4
+	mesh_torus = new Qt3DExtras::QTorusMesh(rootEntity);//id 5
 
 
 

@@ -57,10 +57,6 @@ main_window::main_window(QWidget *parent)
 	//
 
 
-	//froms scenes
-	connect(scene_properties_common_graph_, &scene_properties_common_graph::scene_properties_common_graph_scene_entity,
-		viewport_window_, &viewport_window::viewport_scene_entity_slot);
-	
 	//from graph menu
 	connect(graph_menu_, &graph_menu::regen_data_signal,this, &main_window::re_gen_graph);
 	connect(graph_menu_, &graph_menu::graph_type_signal, this, &main_window::graph_type_changed_slot);

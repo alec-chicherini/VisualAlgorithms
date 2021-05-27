@@ -81,31 +81,7 @@ scene_properties_common_graph::scene_properties_common_graph(Qt3DCore::QEntity* 
 		ADD_LEAF_END(common_graph, vertex, material)
 	
 	ADD_ROOT(tree_widget,edge)
-		ADD_LEAF_BEGIN(common_graph,edge, mesh)
-			ADD_CONNECTION_PROPERTY_TO_STATE(edge, mesh, sphere, radius);
-			ADD_CONNECTION_PROPERTY_TO_STATE(edge, mesh, sphere, rings);
-			ADD_CONNECTION_PROPERTY_TO_STATE(edge, mesh, sphere, slices);
-			ADD_CONNECTION_PROPERTY_TO_STATE(edge, mesh, cone, bottom_radius);
-			ADD_CONNECTION_PROPERTY_TO_STATE(edge, mesh, cone, length);
-			ADD_CONNECTION_PROPERTY_TO_STATE(edge, mesh, cone, top_radius);
-			ADD_CONNECTION_PROPERTY_TO_STATE(edge, mesh, cone, rings);
-			ADD_CONNECTION_PROPERTY_TO_STATE(edge, mesh, cone, slices);
-			ADD_CONNECTION_PROPERTY_TO_STATE(edge, mesh, cone, has_bottom_endcap);
-			ADD_CONNECTION_PROPERTY_TO_STATE(edge, mesh, cone, has_top_endcap);
-			ADD_CONNECTION_PROPERTY_TO_STATE(edge, mesh, cuboid, x_extent);
-			ADD_CONNECTION_PROPERTY_TO_STATE(edge, mesh, cuboid, y_extent);
-			ADD_CONNECTION_PROPERTY_TO_STATE(edge, mesh, cuboid, z_extent);
-			ADD_CONNECTION_PROPERTY_TO_STATE(edge, mesh, cylinder, length);
-			ADD_CONNECTION_PROPERTY_TO_STATE(edge, mesh, cylinder, radius);
-			ADD_CONNECTION_PROPERTY_TO_STATE(edge, mesh, cylinder, rings);
-			ADD_CONNECTION_PROPERTY_TO_STATE(edge, mesh, cylinder, slices);
-			ADD_CONNECTION_PROPERTY_TO_STATE(edge, mesh, plane, height);
-			ADD_CONNECTION_PROPERTY_TO_STATE(edge, mesh, plane, width);
-			ADD_CONNECTION_PROPERTY_TO_STATE(edge, mesh, torus, minor_radius);
-			ADD_CONNECTION_PROPERTY_TO_STATE(edge, mesh, torus, radius);
-			ADD_CONNECTION_PROPERTY_TO_STATE(edge, mesh, torus, rings);
-			ADD_CONNECTION_PROPERTY_TO_STATE(edge, mesh, torus, slices);
-		ADD_LEAF_END(common_graph, edge, mesh)
+		
 		ADD_LEAF_BEGIN(common_graph,edge, material)
 			ADD_CONNECTION_PROPERTY_TO_STATE(edge, material, phong, ambient);
 			ADD_CONNECTION_PROPERTY_TO_STATE(edge, material, phong, diffuse);
@@ -245,14 +221,8 @@ scene_properties_common_graph::scene_properties_common_graph(Qt3DCore::QEntity* 
 
 //////////////////////////////////////////////////////////////////////////////////
 
-
-	//property window to component states all ither data
 	
-
-	
-	
-	
-
+	connect(this, &scene_properties_common_graph::scene_properties_common_graph_type_signal, scene_entities_common_graph_, &scene_entities_common_graph::scene_entities_common_graph_type_slot);
 	
 }
 

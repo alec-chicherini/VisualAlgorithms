@@ -26,15 +26,18 @@
 #include "enums.h"
 #include <Qt3DCore/qcomponent.h>
 
+#include <Qt3DCore/qentity.h>
+
 class component_states : public QWidget
 {
 	Q_OBJECT
 
 public:
-	component_states(QWidget *parent = Q_NULLPTR);
+	component_states(Qt3DCore::QEntity* root, QWidget *parent = Q_NULLPTR);
 	~component_states();
 
 private:
+	Qt3DCore::QEntity* rootEntity;
 	//all in app materials
 	Qt3DExtras::QPhongMaterial* material_phong;//id 0
 	Qt3DExtras::QDiffuseMapMaterial* material_diffuse_map;//id 1
