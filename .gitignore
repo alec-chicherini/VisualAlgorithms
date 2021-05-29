@@ -372,3 +372,6 @@ FodyWeavers.xsd
 /GraphsVisualisationOLCGE/GraphsVisualisationOLCGE.vcxproj
 /GraphsVisualisationOLCGE/GraphsVisualisationOLCGE.vcxproj.filters
 /QuaternionRotationExample
+/QLineMesh_test/QLineMesh_test.vcxproj
+/QLineMesh_test/QLineMesh_test.vcxproj.filters
+/QLineMesh_test/qlinemesh_test.qrc
