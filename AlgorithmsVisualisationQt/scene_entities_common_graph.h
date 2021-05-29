@@ -100,11 +100,14 @@ public slots:
 			auto pos = qMakePair(vertexes_possitions[gr.E[i].first], vertexes_possitions[gr.E[i].second]);
 			qDebug() <<"pos = "<< pos.first.x() << pos.first.y() << pos.first.z() << " - " << pos.second.x() << pos.second.y() << pos.second.z();
 			QLineMesh* line = new QLineMesh(pos, edge);
+			//line->setWidth(0.05f);
 			edge->addComponent(line);
 
 			edges.push_back(edge);
 
 		}
+
+		qDebug() << "Adding entities to edges END";
 		
 	}
 
