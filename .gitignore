@@ -375,3 +375,4 @@ FodyWeavers.xsd
 /QLineMesh_test/QLineMesh_test.vcxproj
 /QLineMesh_test/QLineMesh_test.vcxproj.filters
 /QLineMesh_test/qlinemesh_test.qrc
+Doxyfile

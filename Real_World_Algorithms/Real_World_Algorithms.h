@@ -549,7 +549,9 @@ public:
 
 #include <vector>
 #include <tuple>
-//2.3
+
+/// @brief Template class consisted graph data and some functions to work with
+/// @tparam T Type of graph vertexes data
 template<typename T>
 struct graph
 {
@@ -561,14 +563,25 @@ struct graph
     T last_visited_node=T(0);
     bool last_visited_node_color=false;
     int number_path_started = 0;
-  
+
+    /// @brief Return last visited node value
+    /// @return Last visited node
     T getLastVisitedNode() { return last_visited_node;}
+
+    /// @brief Povide flag for DFS search graph visualisation
+    /// @return Current number of path started value
     int getNumberCurrentPath() { return number_path_started;}
+
+    /// @brief Return color of last visited node for red-black(true-false) graph.
+    /// @return Bool value of color.
     bool getLastVisitedNodeColor() { return last_visited_node_color;}
  
+    /// @brief constructor
+    /// @param N_ number of vertexes.
+    graph<T>(size_t N_) :N(N_) {};
 
-    graph(size_t N_) :N(N_) {};
-
+    /// @brief constructor
+    /// @param gr_ reference to another grpaph
     graph<T>(graph<T>& gr_)
     {
         N = gr_.N;
@@ -576,6 +589,10 @@ struct graph
         E = gr_.E;
     }
 
+    /// @brief uniform distributed random int value generated with mt19937
+    /// @param left left edge in [left,right] range
+    /// @param right right edge in [left,right] range
+    /// @return integer value in setted range
     int RAND(int left, int right)
     {
         std::random_device rd;
@@ -585,6 +602,7 @@ struct graph
         return dist(gen);
     }
 
+    /// @brief clear all members of this graph to zero states
     void cleanup() {
         V.clear();
         E.clear();
@@ -594,12 +612,15 @@ struct graph
 
     }
 
+    /// @brief check if all nodes of graph was visited
+    /// @return true if all nodes visited
     bool isVisitedTrue() {
         bool b=true;
         for (auto v : visited) b = b && v;
         return b;
     }
 
+    /// @brief print all graph edges and vertexes to std::cout
     void print() {
         std::cout << "V = { ";
         for (auto& v : V)std::cout << v << " ";
@@ -609,6 +630,8 @@ struct graph
         std::cout << " }" << std::endl;
     }
 
+    /// @brief print all graph edges and vertexes to std::string
+    /// @return std::string like "V = {0,1,2} E= {{0,1},{1,2},{0,2}}"
     std::string print_to_string()
     {
         std::string result;
@@ -628,6 +651,9 @@ struct graph
         return result;
     }
 
+    /// @brief Construct vector with adjacency vertexes in graph for current node. Nodes already visited excluded.
+    /// @param node current node
+    /// @return std::vector<int> of adjacency vertexes
     std::vector<int> makeAdjacencyList(int node) {
     
         std::vector<int> vec{};
@@ -641,7 +667,9 @@ struct graph
 
     } 
 
-    //without visited checking
+    /// @brief Construct vector with adjacency vertexes in graph for current node.
+    /// @param node  current node
+    /// @return std::vector<int> of adjacency vertexes
     std::vector<int> makeAdjacencyList2(int node) {
 
         std::vector<int> vec{};
@@ -654,7 +682,9 @@ struct graph
         return std::move(vec);
 
     }
-
+    /// @brief Depth-First Search recurcive algorithm for this graph
+    /// @param node first node where search begin
+    /// @param visualisation_func callback function for extern usage which allow to execute some code during each iteration of search. 
     void DFS_recurcive(int node, std::function<void()> visualisation_func = []{}) {
        // std::cout << "getLastVisitedNode() = " << getLastVisitedNode() << std::endl;
         if (node<0 || node>N) { std::cout << __FUNCDNAME__ << " error. first node not in range." << std::endl; }
@@ -686,6 +716,9 @@ struct graph
                 DFS_recurcive(a, visualisation_func);}
     };
 
+    /// @brief Depth-First Search stack algorithm for this graph
+    /// @param node first node where search begin
+    /// @param visualisation_func callback function for extern usage which allow to execute some code during each iteration of search. 
     void DFS_stack(int node, std::function<void()> visualisation_func = [] {})
     {
         if (node<0 || node>N) { std::cout <<__FUNCDNAME__<< " error. first node not in range." << std::endl; }
@@ -714,6 +747,9 @@ struct graph
         };
     }
 
+    /// @brief Depth-First Search stack algorithm for this graph, work without visiting the nodes which was already have been visited.
+    /// @param node first node where search begin
+    /// @param visualisation_func callback function for extern usage which allow to execute some code during each iteration of search. 
     void DFS_stack_2(int  node, std::function<void()> visualisation_func = [] {})
     {
         if (node<0 || node>N) { std::cout << __FUNCDNAME__ << " error. first node not in range." << std::endl; }
@@ -757,6 +793,9 @@ struct graph
         std::cout << std::endl;
     }
 
+    /// @brief it is like Depth-First Search stack algorithm. The next node chose only one and randomly from avaliable in adjacency list. After no avalible nodes in adjacency list presented for next step random vertex on graph chosed and etc. while all vertexes have not been visited.
+    /// @param node first node where search begin
+    /// @param visualisation_func callback function for extern usage which allow to execute some code during each iteration of search. 
     void DFS_stack_2_random(int  node, std::function<void()> visualisation_func = [] {})
     {
         if (node<0 || node>N) { std::cout << __FUNCDNAME__ << " error. first node not in range." << std::endl; }
@@ -842,7 +881,9 @@ struct graph
         number_path_started = 0;
         std::cout << std::endl;
     }
-
+    /// @brief Breadth-First Search algorithm for this graph.
+    /// @param node first node where search begin
+    /// @param visualisation_func callback function for extern usage which allow to execute some code during each iteration of search. 
     void BFS(int  node, std::function<void()> visualisation_func = [] {})
     {
 
@@ -885,7 +926,10 @@ struct graph
     }
 
   
-
+    /// @brief BFS search using on this graph where during it checks if graph bipartite or not
+    /// @param node first node where search begin
+    /// @param visualisation_func  callback function for extern usage which allow to execute some code during each iteration of search. 
+    /// @return true if graph is bipartite and false otherwise
     bool bipartiteGraphCheck(int node, std::function<void()> visualisation_func = [] {})
     {   
       
@@ -956,6 +1000,13 @@ struct graph
     }
 };
 
+/// @brief generate random graph with properties
+/// @tparam T type of vertexes stored in graph
+/// @param V number of vertexes
+/// @param E_left left edge of generated edges number. Result number of random edges will be in range [E_left, E_right]
+/// @param E_right right edge of generated edges number. Result number of random edges will be in range [E_left, E_right]
+/// @param options bit flag with properties(GraphProperties enum) of generated graph. For example it generate diricted, conencted graph with loops than options is GP::DIRECTED|GP::CONNECTED|GP::LOOPS
+/// @return instance of graph wit random generated data
 template<typename T>
 auto generateRandomGraph(int V, int E_left, int E_right, std::underlying_type_t<GP> options) {
     graph<T> G(V);
@@ -1040,14 +1091,18 @@ auto generateRandomGraph(int V, int E_left, int E_right, std::underlying_type_t<
     return G;
 }
 
-//single option overloading
+/// @brief overloading of generateRandomGraph(int V, int E_left, int E_right, std::underlying_type_t<GP> options) with single option.
 template<typename T>
 auto generateRandomGraph(int V, int E_left, int E_right, GP option = GP::NONE)
 {
     return generateRandomGraph<T>(V, E_left, E_right, static_cast<std::underlying_type_t<GP>>(option));
 };
 
-
+/// @brief generate graph like 2D field of vertexes with fixed number of rows and columns with adjacent edges like in chess king possible move rule.
+/// @tparam T type of values stored in graph vertexes
+/// @param X number of columns
+/// @param Y number of rows
+/// @return instance of graph type T
 template<typename T>
 graph<T> generateLabirinthGraph(size_t X, size_t Y)
 {
