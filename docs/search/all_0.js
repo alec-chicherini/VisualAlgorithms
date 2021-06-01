@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['bfs_0',['BFS',['../structgraph.html#a68dee4d3ffad5f309d9df82c12b68fce',1,'graph']]],
-  ['bipartitegraphcheck_1',['bipartiteGraphCheck',['../structgraph.html#a1fa5fbbc3d6e7118d611c920313ddd2d',1,'graph']]],
-  ['bracers_2',['bracers',['../classbracers.html',1,'']]]
+  ['bfs_0',['BFS',['../structreal__world__algorithm_1_1graph.html#ac1fb6fbccbe412ab1f73c5e11f2706a3',1,'real_world_algorithm::graph']]],
+  ['bipartitegraphcheck_1',['bipartiteGraphCheck',['../structreal__world__algorithm_1_1graph.html#a36ec9e117dee02421d24c58a482faf3b',1,'real_world_algorithm::graph']]]
 ];

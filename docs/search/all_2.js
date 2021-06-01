@@ -1,8 +1,7 @@
 var searchData=
 [
-  ['delayed_5femit_8',['delayed_emit',['../structproperty__material_1_1delayed__emit.html',1,'property_material']]],
-  ['dfs_5frecurcive_9',['DFS_recurcive',['../structgraph.html#adf4ba24846ef391e48e699fce5553521',1,'graph']]],
-  ['dfs_5fstack_10',['DFS_stack',['../structgraph.html#ab5bfe5e7b91eee64d63b729bfed7a669',1,'graph']]],
-  ['dfs_5fstack_5f2_11',['DFS_stack_2',['../structgraph.html#ad4e287c37258adbc6f6fab2fb8c4ee1d',1,'graph']]],
-  ['dfs_5fstack_5f2_5frandom_12',['DFS_stack_2_random',['../structgraph.html#a75186f270f7284d34719ed65efe9fb23',1,'graph']]]
+  ['dfs_5frecurcive_10',['DFS_recurcive',['../structreal__world__algorithm_1_1graph.html#a13484e52d5d0266284ccedfe2158d778',1,'real_world_algorithm::graph']]],
+  ['dfs_5fstack_11',['DFS_stack',['../structreal__world__algorithm_1_1graph.html#a1273edd196b03774fe116e872ec2a895',1,'real_world_algorithm::graph']]],
+  ['dfs_5fstack_5f2_12',['DFS_stack_2',['../structreal__world__algorithm_1_1graph.html#ac1aaabd9b04d0f3f83f1190a6a2b2071',1,'real_world_algorithm::graph']]],
+  ['dfs_5fstack_5f2_5frandom_13',['DFS_stack_2_random',['../structreal__world__algorithm_1_1graph.html#a964d002588b6db75baa53197163c2115',1,'real_world_algorithm::graph']]]
 ];

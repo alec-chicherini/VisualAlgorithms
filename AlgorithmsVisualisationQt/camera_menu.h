@@ -18,13 +18,15 @@
 //debug
 #include "qdebug_helper.h"
 
-
+/// @brief  class holds the global camera current possition settings
 class camera_menu : public QWidget
 {
 	Q_OBJECT
 
 public:
+	/// @brief default constructor
 	camera_menu(QWidget *parent = Q_NULLPTR);
+	/// @brief default destructor
 	~camera_menu();
 
 
@@ -51,12 +53,21 @@ private:
 
 
 signals:
+		/// @brief camera possition signal
+		/// @param pos Current QVector3D data from spinboxes in this widget.
 		void camera_possition_signal(QVector3D pos);
+
+		/// @brief camera view center signal
+		/// @param pos Current QVector3D data from spinboxes in this widget.
 		void camera_view_center_signal(QVector3D pos);
+		/// @brief camera controller type signal
+		/// @param val if  0 camera first person, if 1 camera is orbit
 		void camera_controller_signal(int val);
+		/// @brief send signal if button View All pressed
 		void camera_view_all_signal();
 
 private slots:
+
 
 	void camera_possition_update_(double value)
 	{
@@ -81,7 +92,9 @@ private slots:
 	}
 
 public slots:
-
+		
+	/// @brief camera possition slot to change spinboxes values in menu if camera possition changed from another sources. For example from drag camera from viewport.
+	/// @param pos New updated possition of camera
 		void camera_possition_slot(const QVector3D& pos) 
 		{
 			qDebug() << QDateTime::currentDateTimeUtc()<< QString("<----- call camera_possition_slot") << QString::number(viewport_possition_signal_was_recived);
@@ -93,7 +106,8 @@ public slots:
 			viewport_possition_signal_was_recived = true;
 			spinbox_possition_z->setValue(pos.z());
 		}
-
+		/// @brief camera view center slot to change spinboxes values in menu if camera view center slot changed from another sources. For example from drag camera from viewport.
+		/// @param pos New updated camera view port slot of camera
 		void camera_view_center_slot(const QVector3D& pos)
 		{
 			qDebug() << QDateTime::currentDateTimeUtc()<< QString("<----- call camera_view_center_slot") << QString::number(viewport_view_center_signal_was_recived);

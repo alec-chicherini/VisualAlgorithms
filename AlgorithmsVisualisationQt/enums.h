@@ -1,7 +1,9 @@
 #pragma once
 
+/// @brief all enums shared between all project
 namespace ENUMS_NAMESPACE {
 #include <type_traits>
+    /// @brief graph properties(or settings) enum class each value is shifted for make like bit flags usage possible. Example of flags: auto options = GraphProperties::DIRECTED|GraphProperties::LOOPS;
     enum class GraphProperties :unsigned long long int
     {
         DIRECTED = ((unsigned long long int)1 << 0),
@@ -17,16 +19,20 @@ namespace ENUMS_NAMESPACE {
     using GP = GraphProperties;
     using under_GP = std::underlying_type_t<GraphProperties>;
 
+   /// @brief operator| overloading to allow bitwise operations with GraphProperties enum
+   /// @return result of operator|
    inline  std::underlying_type_t<GP> operator|(GP left, GP right)
     {
         return static_cast<std::underlying_type_t<GP>>(left) | static_cast<std::underlying_type_t<GP>>(right);
     };
-
+   /// @brief operator| overloading to allow bitwise operations with GraphProperties enum
+    /// @return result of operator| 
    inline std::underlying_type_t<GP> operator|(std::underlying_type_t<GP> left, GP right)
     {
         return (left | (static_cast<std::underlying_type_t<GP>>(right)));
     };
-
+   /// @brief operator| overloading to allow bitwise operations with GraphProperties enum
+/// @return result of operator|
    inline std::underlying_type_t<GP> operator|(GP left, std::underlying_type_t<GP> right)
     {
         return static_cast<std::underlying_type_t<GP>>(left) | right;
@@ -34,6 +40,9 @@ namespace ENUMS_NAMESPACE {
 
     namespace to_string_helpers_
     {
+        /// @brief return the string representation of enum value
+        /// @param gp current GraphProperties value
+        /// @return equivalent string
         inline std::string graph_properties_to_string(GP gp) noexcept
         {
             switch (static_cast<std::underlying_type_t<GP>>(gp))
@@ -48,6 +57,9 @@ namespace ENUMS_NAMESPACE {
             return "YOU-SEE-IMPOSSIBLE-MSG-NERD";
         };
 
+        /// @brief generate the string representation of enum value - overloaded version for multiple flags
+        /// @param gp current GraphProperties value
+        /// @return equivalent string
         inline std::string graph_properties_to_string(std::underlying_type_t<GP> gp)
         {
             std::string res;
@@ -95,7 +107,8 @@ namespace ENUMS_NAMESPACE {
 
     
     ////////////////////////////////////////////////////////////////////////////////////////////////
-    
+   
+    /// @brief mesh type enum class eqivalet of Qt3DExtras meshes types
     enum class MeshType :int
     {
         CONE = 0,
@@ -110,6 +123,9 @@ namespace ENUMS_NAMESPACE {
 
     namespace to_string_helpers_
     {
+        /// @brief return the string representation of enum value
+/// @param mt current MeshType value
+/// @return equivalent string
         inline std::string mesh_type_to_string(MeshType mt) noexcept
         {
             switch (static_cast<MeshType_under>(mt))
@@ -124,6 +140,9 @@ namespace ENUMS_NAMESPACE {
             return "YOU-SEE-IMPOSSIBLE-MSG-NERD";
         };
 
+        /// @brief return the string representation of enum value
+        /// @param mt current MeshType value
+        /// @return equivalent string
         inline std::string mesh_type_to_string(MeshType_under mt)
         {
             return mesh_type_to_string(static_cast<MeshType>(mt));
@@ -132,6 +151,7 @@ namespace ENUMS_NAMESPACE {
 
        ////////////////////////////////////////////////////////////////////////////////////////////////
 
+    /// @brief list of materials from Qt3D::QMaterial types
     enum class MaterialType :int
     {
 		PHONG = 0,
@@ -151,6 +171,9 @@ namespace ENUMS_NAMESPACE {
 
     namespace to_string_helpers_
     {
+        /// @brief return the string representation of enum value
+/// @param mt current MaterialType value
+/// @return equivalent string
         inline std::string Material_type_to_string(MaterialType mt) noexcept
         {
             switch (static_cast<MaterialType_under>(mt))
@@ -169,7 +192,9 @@ namespace ENUMS_NAMESPACE {
             }
             return "YOU-SEE-IMPOSSIBLE-MSG-NERD";
         };
-
+        /// @brief return the string representation of enum value
+/// @param mt current MaterialType value
+/// @return equivalent string
         inline std::string Material_type_to_string(MaterialType_under mt)
         {
             return Material_type_to_string(static_cast<MaterialType>(mt));

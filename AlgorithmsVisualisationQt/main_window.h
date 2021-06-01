@@ -28,13 +28,18 @@
 //debug
 #include "qdebug_helper.h"
 
-
+/// @brief The main window of app. Holds the three big parts.
+/// @brief 1) Left menu widget - parts of book picker. Graphs algorithms, sorting algorithms and their settings.
+/// @brief 2) Middle viewport widget - show Qt3D objects.
+/// @brief 3) Right menu widget - show current properties of scene presenting in viewport.
 class main_window : public QWidget
 {
 	Q_OBJECT
 
 public:
+	/// @brief default constructor
 	main_window(QWidget *parent = Q_NULLPTR);
+	/// @brief default destructor
 	~main_window();
 
 private:
@@ -58,6 +63,7 @@ private:
 	graph<int>* main_graph=Q_NULLPTR;
 
 signals:
+	/// @brief graph signal retranslation to pass the generated graph to entities in this 
 	void type_graph_signal(int, graph<int>, under_GP);
 	
 private slots:

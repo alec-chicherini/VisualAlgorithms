@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['isvisitedtrue_79',['isVisitedTrue',['../structgraph.html#a1ded5d943159ae0a76f8b63a24220d58',1,'graph']]]
+  ['isvisitedtrue_64',['isVisitedTrue',['../structreal__world__algorithm_1_1graph.html#a094a173a05d08f6661848480302a47c3',1,'real_world_algorithm::graph']]]
 ];

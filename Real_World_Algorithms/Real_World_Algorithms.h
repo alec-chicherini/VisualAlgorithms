@@ -1,22 +1,38 @@
 #pragma once
 
+
+#include <functional>
+
 #define PART2
 #define PART1
 //#define PART3
-//generates random int
 
 
+
+
+#include "S:\Code\ikvasir\Real_World_Algorithms\AlgorithmsVisualisationQt\enums.h"
+#include <array>
 #include <random>
-#include <functional>
+#include <type_traits>
+#include <sstream>
+#include <iomanip>
+#include <concepts>
+#include <tuple>
+#include <map>
+#include <vector>
 #include <iostream>
+#include <string>
+#include <utility>
+#include <algorithm>
+#include <set>
 
-#include "S:\Code\ikvasir\Real_World_Algorithms\AlgorithmsVisualisationQt\enums.h"
+
+#include <bitset>
 
 
-
+namespace real_world_algorithm {
 #ifdef PART1
 
-#include <array>
 
 //Algorithm 1.1
 template <typename T, size_t SIZE>
@@ -45,7 +61,7 @@ std::array<T, SIZE>* SimpleStockSpan(std::array<T, SIZE>* quotes)
     return spans;
 }
 //Algorithm 1.2
-#include <vector>
+
 template <typename T, size_t SIZE>
 std::array<T, SIZE>* StackStockSpan(std::array<T, SIZE>* quotes)
 {
@@ -69,8 +85,6 @@ std::array<T, SIZE>* StackStockSpan(std::array<T, SIZE>* quotes)
     return spans;
 }
 
-#include <random>
-#include <type_traits>
 
 //generates random array
 template<typename T, size_t SIZE>
@@ -419,7 +433,7 @@ public:
 
 };
 //2.2
-#include <array>
+
 template <class T>
 class ouMyQueue
 {
@@ -547,8 +561,6 @@ public:
     };
 };
 
-#include <vector>
-#include <tuple>
 
 /// @brief Template class consisted graph data and some functions to work with
 /// @tparam T Type of graph vertexes data
@@ -1132,17 +1144,7 @@ graph<T> generateLabirinthGraph(size_t X, size_t Y)
 #endif
 
 #ifdef PART3
-#include <sstream>
-#include <iomanip>
-#include <concepts>
-#include <tuple>
-#include <map>
-#include <vector>
-#include <iostream>
-#include <string>
-#include <utility>
-#include <algorithm>
-#include <set>
+
 
 template<typename T, typename ... Ts>
 concept allTheSame = (std::same_as<T, Ts>&&...);
@@ -1453,8 +1455,7 @@ public:
     Node<TF>* root= nullptr;
 };
 
-#include <map>
-#include <bitset>
+
 class HuffmanCodding
 {
     ouMyPriorityQueue<tree<char>>* PQ;
@@ -1639,7 +1640,7 @@ public:
     }
 };
 
-#include <random>
+
 std::string generateRandomString(size_t num)
 {
     std::random_device r;
@@ -1652,3 +1653,7 @@ std::string generateRandomString(size_t num)
 }
 #endif
 
+
+
+}
+using namespace real_world_algorithm;

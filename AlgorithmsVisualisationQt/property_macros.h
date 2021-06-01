@@ -8,11 +8,13 @@
 // void property_mesh_##ENTITY##_##HEAD##_signal(auto);\
 // ADD_SIGNALS_FOR_ENTITY(ENTITY,__VA_ARGS__)
 
+///@brief macro used to add new properties entity
 #define ADD_ENTITY(ENTITY) \
 	QWidget* ENTITY##_properties = new QWidget(this);\
 	QGridLayout* ENTITY##_properties_layout = new QGridLayout;\
 	ENTITY##_properties_layout->setAlignment(Qt::AlignTop);\
     ENTITY##_properties->setLayout(ENTITY##_properties_layout);
+
 
 #define ADD_JSON_LOADER(ENTITY) \
     template<typename T>\
@@ -117,6 +119,8 @@ e_vec_func_QColor.push_back({ QString("property_") + QString(#PROPERTY) + QStrin
 
 
 //MACROSES FOR SIGNAL-SLOT-CONNECTION GENERATION 
+
+/// @brief macro epanded to 
 #define ADD_SIGNAL_FOR_ENTITY(PROPERTY,ENTITY,NAME,TYPE)\
 void property_##PROPERTY##_##ENTITY##_##NAME##_signal(TYPE);
 

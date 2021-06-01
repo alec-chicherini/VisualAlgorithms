@@ -18,13 +18,16 @@ using namespace ENUMS_NAMESPACE;
 
 //debug
 #include "qdebug_helper.h"
-
+/// @brief graph menu class holds controls to choose and set up generation of graphs visualisation
 class graph_menu : public QWidget
 {
 	Q_OBJECT
 
 public:
+	/// @brief default constructor
 	graph_menu(QWidget *parent = Q_NULLPTR);
+	
+	/// @brief default destructor
 	~graph_menu();
 
 private:
@@ -56,7 +59,14 @@ private slots:
 	}
 
 signals:
+	/// @brief send current graph properties choosen in this widget
+	/// @param V number of vertexes
+	/// @param E_left left edge of generated edges number. Result number of random edges will be in range [E_left, E_right]
+	/// @param E_right right edge of generated edges number. Result number of random edges will be in range [E_left, E_right]
+	/// @param properties bit flag with properties(GraphProperties enum) of generated graph. For example the buttons picked, conencted graph with loops than properties is GP::DIRECTED|GP::CONNECTED|GP::LOOPS
 	void regen_data_signal(const int V, const int E_left, const  int E_right, const  under_GP& properties);
+
+	/// @brief current graph type signal emmited after select the graph type
 	void graph_type_signal(int);
 };
 

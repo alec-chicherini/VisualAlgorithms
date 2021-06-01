@@ -82,7 +82,7 @@ public slots:
 			vertex->addComponent(vertex_mesh);
 			
 			Qt3DCore::QTransform* transform = new Qt3DCore::QTransform();
-			QVector3D coord = { float(gr.RAND(10, 90)), float(gr.RAND(10, 90)), 50.f};:
+			QVector3D coord = { float(gr.RAND(10, 90)), float(gr.RAND(10, 90)), 50.f};
 			transform->setTranslation(coord);
 			
 			vertex->addComponent(transform);

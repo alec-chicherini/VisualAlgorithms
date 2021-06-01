@@ -17,7 +17,9 @@ class light_menu : public QWidget
 	Q_OBJECT
 
 public:
+	/// @brief default constructor
 	light_menu(QWidget *parent = Q_NULLPTR);
+	/// @brief default destructor
 	~light_menu();
 
 private:
@@ -25,7 +27,9 @@ private:
 	color_picker* property_color;
 
 signals:
+	/// @brief signal emits on intencity change from this this
 	void light_intencity_signal(float);
+	/// @brief signal emits on color change from this this
 	void light_color_signal(QColor);
 
 };

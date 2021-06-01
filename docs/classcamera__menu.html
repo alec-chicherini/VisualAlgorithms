@@ -91,58 +91,251 @@ $(document).ready(function(){initNavTree('classcamera__menu.html',''); initResiz
 <div class="title">camera_menu Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="dynheader">
-Inheritance diagram for camera_menu:</div>
-<div class="dyncontent">
-<div class="center"><img src="classcamera__menu__inherit__graph.png" border="0" usemap="#acamera__menu_inherit__map" alt="Inheritance graph"/></div>
-<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
-<div class="dynheader">
-Collaboration diagram for camera_menu:</div>
-<div class="dyncontent">
-<div class="center"><img src="classcamera__menu__coll__graph.png" border="0" usemap="#acamera__menu_coll__map" alt="Collaboration graph"/></div>
-<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
+
+<p>class holds the global camera current possition settings  
+ <a href="classcamera__menu.html#details">More...</a></p>
+
+<p><code>#include &lt;camera_menu.h&gt;</code></p>
+
+<p>Inherits QWidget.</p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-slots"></a>
 Public Slots</h2></td></tr>
-<tr class="memitem:a2c94f6660ea2d120b1565be557e7114e"><td class="memItemLeft" align="right" valign="top"><a id="a2c94f6660ea2d120b1565be557e7114e"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>camera_possition_slot</b> (const QVector3D &amp;pos)</td></tr>
+<tr class="memitem:a2c94f6660ea2d120b1565be557e7114e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcamera__menu.html#a2c94f6660ea2d120b1565be557e7114e">camera_possition_slot</a> (const QVector3D &amp;pos)</td></tr>
+<tr class="memdesc:a2c94f6660ea2d120b1565be557e7114e"><td class="mdescLeft">&#160;</td><td class="mdescRight">camera possition slot to change spinboxes values in menu if camera possition changed from another sources. For example from drag camera from viewport.  <a href="classcamera__menu.html#a2c94f6660ea2d120b1565be557e7114e">More...</a><br /></td></tr>
 <tr class="separator:a2c94f6660ea2d120b1565be557e7114e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a68602889e5e12187dcc5c910a6fca91d"><td class="memItemLeft" align="right" valign="top"><a id="a68602889e5e12187dcc5c910a6fca91d"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>camera_view_center_slot</b> (const QVector3D &amp;pos)</td></tr>
+<tr class="memitem:a68602889e5e12187dcc5c910a6fca91d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcamera__menu.html#a68602889e5e12187dcc5c910a6fca91d">camera_view_center_slot</a> (const QVector3D &amp;pos)</td></tr>
+<tr class="memdesc:a68602889e5e12187dcc5c910a6fca91d"><td class="mdescLeft">&#160;</td><td class="mdescRight">camera view center slot to change spinboxes values in menu if camera view center slot changed from another sources. For example from drag camera from viewport.  <a href="classcamera__menu.html#a68602889e5e12187dcc5c910a6fca91d">More...</a><br /></td></tr>
 <tr class="separator:a68602889e5e12187dcc5c910a6fca91d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="signals"></a>
 Signals</h2></td></tr>
-<tr class="memitem:a53fb28a30f6ee1e176d043d0858c9897"><td class="memItemLeft" align="right" valign="top"><a id="a53fb28a30f6ee1e176d043d0858c9897"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>camera_possition_signal</b> (QVector3D pos)</td></tr>
+<tr class="memitem:a53fb28a30f6ee1e176d043d0858c9897"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcamera__menu.html#a53fb28a30f6ee1e176d043d0858c9897">camera_possition_signal</a> (QVector3D pos)</td></tr>
+<tr class="memdesc:a53fb28a30f6ee1e176d043d0858c9897"><td class="mdescLeft">&#160;</td><td class="mdescRight">camera possition signal  <a href="classcamera__menu.html#a53fb28a30f6ee1e176d043d0858c9897">More...</a><br /></td></tr>
 <tr class="separator:a53fb28a30f6ee1e176d043d0858c9897"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4c0c099d9ca00d2a4d8e6e863cd36c56"><td class="memItemLeft" align="right" valign="top"><a id="a4c0c099d9ca00d2a4d8e6e863cd36c56"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>camera_view_center_signal</b> (QVector3D pos)</td></tr>
+<tr class="memitem:a4c0c099d9ca00d2a4d8e6e863cd36c56"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcamera__menu.html#a4c0c099d9ca00d2a4d8e6e863cd36c56">camera_view_center_signal</a> (QVector3D pos)</td></tr>
+<tr class="memdesc:a4c0c099d9ca00d2a4d8e6e863cd36c56"><td class="mdescLeft">&#160;</td><td class="mdescRight">camera view center signal  <a href="classcamera__menu.html#a4c0c099d9ca00d2a4d8e6e863cd36c56">More...</a><br /></td></tr>
 <tr class="separator:a4c0c099d9ca00d2a4d8e6e863cd36c56"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afb3cabf1f59e35c6eb94db0cec4fa90f"><td class="memItemLeft" align="right" valign="top"><a id="afb3cabf1f59e35c6eb94db0cec4fa90f"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>camera_controller_signal</b> (int val)</td></tr>
+<tr class="memitem:afb3cabf1f59e35c6eb94db0cec4fa90f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcamera__menu.html#afb3cabf1f59e35c6eb94db0cec4fa90f">camera_controller_signal</a> (int val)</td></tr>
+<tr class="memdesc:afb3cabf1f59e35c6eb94db0cec4fa90f"><td class="mdescLeft">&#160;</td><td class="mdescRight">camera controller type signal  <a href="classcamera__menu.html#afb3cabf1f59e35c6eb94db0cec4fa90f">More...</a><br /></td></tr>
 <tr class="separator:afb3cabf1f59e35c6eb94db0cec4fa90f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a60dac8c5453c68e50098da94fcd2dee6"><td class="memItemLeft" align="right" valign="top"><a id="a60dac8c5453c68e50098da94fcd2dee6"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>camera_view_all_signal</b> ()</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcamera__menu.html#a60dac8c5453c68e50098da94fcd2dee6">camera_view_all_signal</a> ()</td></tr>
+<tr class="memdesc:a60dac8c5453c68e50098da94fcd2dee6"><td class="mdescLeft">&#160;</td><td class="mdescRight">send signal if button View All pressed <br /></td></tr>
 <tr class="separator:a60dac8c5453c68e50098da94fcd2dee6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ae339e4e904191591a1a73dc97988b3e7"><td class="memItemLeft" align="right" valign="top"><a id="ae339e4e904191591a1a73dc97988b3e7"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>camera_menu</b> (QWidget *parent=Q_NULLPTR)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcamera__menu.html#ae339e4e904191591a1a73dc97988b3e7">camera_menu</a> (QWidget *parent=Q_NULLPTR)</td></tr>
+<tr class="memdesc:ae339e4e904191591a1a73dc97988b3e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">default constructor <br /></td></tr>
 <tr class="separator:ae339e4e904191591a1a73dc97988b3e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af66d935421369e5a547c706e2a814590"><td class="memItemLeft" align="right" valign="top"><a id="af66d935421369e5a547c706e2a814590"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcamera__menu.html#af66d935421369e5a547c706e2a814590">~camera_menu</a> ()</td></tr>
+<tr class="memdesc:af66d935421369e5a547c706e2a814590"><td class="mdescLeft">&#160;</td><td class="mdescRight">default destructor <br /></td></tr>
+<tr class="separator:af66d935421369e5a547c706e2a814590"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/>The documentation for this class was generated from the following files:<ul>
-<li><a class="el" href="camera__menu_8h_source.html">camera_menu.h</a></li>
-<li>camera_menu.cpp</li>
-</ul>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>class holds the global camera current possition settings </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="afb3cabf1f59e35c6eb94db0cec4fa90f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb3cabf1f59e35c6eb94db0cec4fa90f">&#9670;&nbsp;</a></span>camera_controller_signal</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void camera_menu::camera_controller_signal </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>val</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">signal</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>camera controller type signal </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">val</td><td>if 0 camera first person, if 1 camera is orbit </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a53fb28a30f6ee1e176d043d0858c9897"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a53fb28a30f6ee1e176d043d0858c9897">&#9670;&nbsp;</a></span>camera_possition_signal</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void camera_menu::camera_possition_signal </td>
+          <td>(</td>
+          <td class="paramtype">QVector3D&#160;</td>
+          <td class="paramname"><em>pos</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">signal</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>camera possition signal </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pos</td><td>Current QVector3D data from spinboxes in this widget. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a2c94f6660ea2d120b1565be557e7114e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2c94f6660ea2d120b1565be557e7114e">&#9670;&nbsp;</a></span>camera_possition_slot</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void camera_menu::camera_possition_slot </td>
+          <td>(</td>
+          <td class="paramtype">const QVector3D &amp;&#160;</td>
+          <td class="paramname"><em>pos</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">slot</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>camera possition slot to change spinboxes values in menu if camera possition changed from another sources. For example from drag camera from viewport. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pos</td><td>New updated possition of camera </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="fragment"><div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        {</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;            qDebug() &lt;&lt; QDateTime::currentDateTimeUtc()&lt;&lt; QString(<span class="stringliteral">&quot;&lt;----- call camera_possition_slot&quot;</span>) &lt;&lt; QString::number(viewport_possition_signal_was_recived);</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        </div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;            viewport_possition_signal_was_recived = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;            spinbox_possition_x-&gt;setValue(pos.x());</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;            viewport_possition_signal_was_recived = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;            spinbox_possition_y-&gt;setValue(pos.y());</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;            viewport_possition_signal_was_recived = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;            spinbox_possition_z-&gt;setValue(pos.z());</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a4c0c099d9ca00d2a4d8e6e863cd36c56"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c0c099d9ca00d2a4d8e6e863cd36c56">&#9670;&nbsp;</a></span>camera_view_center_signal</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void camera_menu::camera_view_center_signal </td>
+          <td>(</td>
+          <td class="paramtype">QVector3D&#160;</td>
+          <td class="paramname"><em>pos</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">signal</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>camera view center signal </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pos</td><td>Current QVector3D data from spinboxes in this widget. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a68602889e5e12187dcc5c910a6fca91d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a68602889e5e12187dcc5c910a6fca91d">&#9670;&nbsp;</a></span>camera_view_center_slot</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void camera_menu::camera_view_center_slot </td>
+          <td>(</td>
+          <td class="paramtype">const QVector3D &amp;&#160;</td>
+          <td class="paramname"><em>pos</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">slot</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>camera view center slot to change spinboxes values in menu if camera view center slot changed from another sources. For example from drag camera from viewport. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pos</td><td>New updated camera view port slot of camera </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="fragment"><div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        {</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;            qDebug() &lt;&lt; QDateTime::currentDateTimeUtc()&lt;&lt; QString(<span class="stringliteral">&quot;&lt;----- call camera_view_center_slot&quot;</span>) &lt;&lt; QString::number(viewport_view_center_signal_was_recived);</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    </div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;            viewport_view_center_signal_was_recived = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;            spinbox_view_center_x-&gt;setValue(pos.x());</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;            viewport_view_center_signal_was_recived = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;            spinbox_view_center_y-&gt;setValue(pos.y());</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;            viewport_view_center_signal_was_recived = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;            spinbox_view_center_z-&gt;setValue(pos.z());</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160; </div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;        }</div>
+</div><!-- fragment -->
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classcamera__menu.html">camera_menu</a></li>
-    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Tue Jun 1 2021 17:27:13 for Real World Algorithms by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

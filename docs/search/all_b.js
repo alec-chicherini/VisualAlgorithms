@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['scene_5fentities_5fcommon_5fgraph_38',['scene_entities_common_graph',['../classscene__entities__common__graph.html',1,'']]],
-  ['scene_5fproperties_5fcommon_5fgraph_39',['scene_properties_common_graph',['../classscene__properties__common__graph.html',1,'']]],
-  ['sorting_5fmenu_40',['sorting_menu',['../classsorting__menu.html',1,'']]]
+  ['_7ecamera_5fmenu_35',['~camera_menu',['../classcamera__menu.html#af66d935421369e5a547c706e2a814590',1,'camera_menu']]],
+  ['_7egraph_5fmenu_36',['~graph_menu',['../classgraph__menu.html#a1905981c889ccb2172c0136542c5c1f0',1,'graph_menu']]],
+  ['_7emain_5fwindow_37',['~main_window',['../classmain__window.html#a9cc2af90d9219251076e37f3f9f58b76',1,'main_window']]]
 ];

@@ -1,8 +1,8 @@
 {
-    "mesh_cone_bottom_radius_value": 6,
+    "mesh_cone_bottom_radius_value": 8,
     "mesh_cone_has_bottom_endcap_value": true,
     "mesh_cone_has_top_endcap_value": true,
-    "mesh_cone_length_value": 11,
+    "mesh_cone_length_value": 21,
     "mesh_cone_rings_value": 10,
     "mesh_cone_slices_value": 10,
     "mesh_cone_top_radius_value": 0
