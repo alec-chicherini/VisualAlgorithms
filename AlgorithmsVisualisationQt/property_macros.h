@@ -17,6 +17,9 @@
 
 
 #define ADD_JSON_LOADER(ENTITY) \
+/*!
+@brief function to read  from or write to json file current values of ENTITY properties 
+*/\
     template<typename T>\
     QJsonValue read_write_##ENTITY##_json_(QIODevice::OpenModeFlag mode,QString key, T value={}){\
     if(mode==QIODevice::ReadOnly){\
@@ -115,32 +118,35 @@ read_write_##ENTITY##_json_(QIODevice::WriteOnly, QString(#PROPERTY) + QString("
 read_write_##ENTITY##_json_(QIODevice::WriteOnly, QString(#PROPERTY) + QString("_") + QString(#ENTITY) + QString("_") + QString(#NAME) + QString("_") + QString("b_value"), b);\
 });\
 e_vec_func_QColor.push_back({ QString("property_") + QString(#PROPERTY) + QString("_") + QString(#ENTITY) + QString("_") + QString(#NAME) + QString("_signal"), color_picker_##ENTITY##_##NAME->getColor() });
- //emit property_##PROPERTY##_##ENTITY##_##NAME##_signal(color_picker_##ENTITY##_##NAME##->color_picker_color());
 
 
-//MACROSES FOR SIGNAL-SLOT-CONNECTION GENERATION 
-
-/// @brief macro epanded to 
 #define ADD_SIGNAL_FOR_ENTITY(PROPERTY,ENTITY,NAME,TYPE)\
+/*!
+* @brief ROPERTY##_##ENTITY signal for NAME
+*/\
 void property_##PROPERTY##_##ENTITY##_##NAME##_signal(TYPE);
 
+
 #define ADD_SLOT_FOR_ENTITY(PROPERTY,ENTITY,NAME,FUNCNAME,TYPE)\
+/*!
+@brief Set value for PROPERTY##_##ENTITY using FUNCNAME
+@code
+try{PROPERTY##_##ENTITY->FUNCNAME##(value);}
+@endcode
+@code
+catch(std::exception& e){qDebug() << __FUNCSIG__<< "ERROR: " << e.what();}
+@endcode
+*/\
 void property_##PROPERTY##_##ENTITY##_##NAME##_slot(TYPE value)\
-{\
-qDebug()<<QString(#PROPERTY)+QString("_")+QString(#ENTITY)+QString("->")+QString(#FUNCNAME)+QString("(")<<value<<QString(")");\
+{qDebug()<<QString(#PROPERTY)+QString("_")+QString(#ENTITY)+QString("->")+QString(#FUNCNAME)+QString("(")<<value<<QString(")");\
 try{PROPERTY##_##ENTITY->FUNCNAME##(value);}\
 catch(std::exception& e){\
 qDebug() << __FUNCSIG__<< "ERROR: " << e.what(); \
-return;}\
-};
+return;}};
 
 #define ADD_CONNECTION_PROPERTY_TO_STATE(ENTITY,COMPONENT,TYPE,PROPERTY)\
 connect(##ENTITY##_##COMPONENT##, &property_##COMPONENT##::property_##COMPONENT##_##TYPE##_##PROPERTY##_signal,\
         component_states_##ENTITY##, &component_states::property_##COMPONENT##_##TYPE##_##PROPERTY##_slot);
-
-
-//#define ADD_CONNECTION_TYPE_TO_TYPE(ENTITY,COMPONENT)\
-//connect(##ENTITY##_##COMPONENT##, &property_##COMPONENT##::property_##COMPONENT##_type_signal,component_states_##ENTITY##, &component_states::component_states_##COMPONENT##_type_slot);
 
 
 //MACROSES FOR SCENE GENERATION IN QTREEWIDGET

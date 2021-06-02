@@ -23,12 +23,21 @@
 #include <tuple>
 #include <qobject.h>
 
+/*! @brief Widget which show the the meshes properties from lists of Qt3DExtras meshes.
+   Also  write current values to json file and read file on pograms start if such json file exist.
+   Provide signals on every property changed.
+   */
 class property_mesh : public QWidget
 {
 	Q_OBJECT
 
 public:
+
+	/// @brief default constructor
+/// @param parentPath previous path to store json configs
+/// @param parent parent QWidget
 	property_mesh(QString parentPath, QWidget *parent = Q_NULLPTR);
+	/// @brief default destructor
 	~property_mesh();
 
 private:
@@ -43,18 +52,23 @@ private:
 		ADD_JSON_LOADER(torus)
 		ADD_JSON_LOADER(current_mesh_index)
 
+	/// @brief plain structure to store signal name and signal data
 	template <typename T>
 	struct 	delayed_emit
 	{
 		QString signal_name;
 		T signal_data;
 	};
-
+	
+	/// @brief list of all signals and their datas type of double
 	std::vector<delayed_emit<double>> e_vec_func_double;
+	/// @brief list of all signals and their datas type of int
 	std::vector<delayed_emit<int>> e_vec_func_int;
 	//std::vector<delayed_emit<QColor>> e_vec_func_QColor;
 
 public:
+	/// @brief initialisation function to call in constructor and set all data from json to different properties in widget window
+	/// @return void
 	void send_initialization_data()
 	{
 		qDebug() << __FUNCSIG__ << " CALLED !!! ";
@@ -89,7 +103,7 @@ public:
 
 	};
 signals:
-
+	/// @brief mesh type signal emits on combobox changes
 	void property_mesh_type_signal(int);
 
 

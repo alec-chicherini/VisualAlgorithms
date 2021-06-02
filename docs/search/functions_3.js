@@ -1,9 +1,7 @@
 var searchData=
 [
-  ['getlastvisitednode_58',['getLastVisitedNode',['../structreal__world__algorithm_1_1graph.html#a6574226342f057b9da9603017f5c20be',1,'real_world_algorithm::graph']]],
-  ['getlastvisitednodecolor_59',['getLastVisitedNodeColor',['../structreal__world__algorithm_1_1graph.html#a1aa400bcb60ff738252610ba0942b45f',1,'real_world_algorithm::graph']]],
-  ['getnumbercurrentpath_60',['getNumberCurrentPath',['../structreal__world__algorithm_1_1graph.html#abd20eba00bdb99db0ae3a05444ae1d0d',1,'real_world_algorithm::graph']]],
-  ['graph_61',['graph',['../structreal__world__algorithm_1_1graph.html#abea142034f4ff13d066f4dacf7a70029',1,'real_world_algorithm::graph::graph(size_t N_)'],['../structreal__world__algorithm_1_1graph.html#a0dfd8aa02eadec15e99420f6e8694d28',1,'real_world_algorithm::graph::graph(graph&lt; T &gt; &amp;gr_)']]],
-  ['graph_5fmenu_62',['graph_menu',['../classgraph__menu.html#a04b1bfcbe58d248b37c60ba11bb3c1da',1,'graph_menu']]],
-  ['graph_5ftype_5fsignal_63',['graph_type_signal',['../classgraph__menu.html#a365b0d88adfe01e911efe0d638b55f5c',1,'graph_menu']]]
+  ['dfs_5frecurcive_201',['DFS_recurcive',['../structreal__world__algorithm_1_1graph.html#a13484e52d5d0266284ccedfe2158d778',1,'real_world_algorithm::graph']]],
+  ['dfs_5fstack_202',['DFS_stack',['../structreal__world__algorithm_1_1graph.html#a1273edd196b03774fe116e872ec2a895',1,'real_world_algorithm::graph']]],
+  ['dfs_5fstack_5f2_203',['DFS_stack_2',['../structreal__world__algorithm_1_1graph.html#ac1aaabd9b04d0f3f83f1190a6a2b2071',1,'real_world_algorithm::graph']]],
+  ['dfs_5fstack_5f2_5frandom_204',['DFS_stack_2_random',['../structreal__world__algorithm_1_1graph.html#a964d002588b6db75baa53197163c2115',1,'real_world_algorithm::graph']]]
 ];

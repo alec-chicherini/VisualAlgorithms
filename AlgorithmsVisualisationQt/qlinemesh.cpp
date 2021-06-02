@@ -83,32 +83,81 @@ QLineMesh::~QLineMesh()
 {
 }
 
-inline void QLineMesh::generateVertexData() 
+
+inline void QLineMesh::generateIndexData()
+{
+	index_buf = new QByteArray();
+	index_buf->resize(3 * 8 * sizeof(ushort));
+	ushort* indeces = reinterpret_cast<ushort*>(index_buf->data());
+
+	//021
+	*indeces++ = 0;
+	*indeces++ = 2;
+	*indeces++ = 1;
+
+	//014
+	*indeces++ = 0;
+	*indeces++ = 1;
+	*indeces++ = 4;
+
+	//045
+	*indeces++ = 0;
+	*indeces++ = 4;
+	*indeces++ = 5;
+
+	//435
+	*indeces++ = 4;
+	*indeces++ = 3;
+	*indeces++ = 5;
+
+	//052
+	*indeces++ = 0;
+	*indeces++ = 5;
+	*indeces++ = 2;
+
+	//253
+	*indeces++ = 2;
+	*indeces++ = 5;
+	*indeces++ = 3;
+
+	//123
+	*indeces++ = 1;
+	*indeces++ = 2;
+	*indeces++ = 3;
+
+	//134
+	*indeces++ = 1;
+	*indeces++ = 3;
+	*indeces++ = 4;
+
+}
+
+inline void QLineMesh::generateVertexData()
 {
 	float r = m_width * qSqrt<float>(3.f) / 6.f;
-	float R = r*2.f;
+	float R = r * 2.f;
 	float wd2 = m_width / 2.f;
 	/*
 	  m_possition.first is center of 0-1-2, m_possition.second is center of 3-4-5.
 
-	      1 ________________________________4
-           |\                              /|
-	       | \                            / |
-	       |  \                          /  |
+		  1 ________________________________4
+		   |\                              /|
+		   | \                            / |
+		   |  \                          /  |
 		   |  0\________________________/5  |
 		   |   /                        \   |
 		   |  /                          \  |
 		   | /                            \ |
-          2|/______________________________\|3
+		  2|/______________________________\|3
 
 		*/
-	//vertexes coord of mesh
+		//vertexes coord of mesh
 	QVector3D A = m_possition.first;
 	QVector3D B = m_possition.second;
 
-	QVector3D v0(A.x(), A.y()+R, A.z());
-	QVector3D v1(A.x()-wd2, A.y() - r, A.z());
-	QVector3D v2(A.x()+wd2, A.y() - r, A.z());
+	QVector3D v0(A.x(), A.y() + R, A.z());
+	QVector3D v1(A.x() - wd2, A.y() - r, A.z());
+	QVector3D v2(A.x() + wd2, A.y() - r, A.z());
 	QVector3D v3(B.x() + wd2, B.y() - r, B.z());
 	QVector3D v4(B.x() - wd2, B.y() - r, B.z());
 	QVector3D v5(B.x(), B.y() + R, B.z());
@@ -173,11 +222,11 @@ inline void QLineMesh::generateVertexData()
 		v3 << n3 <<
 		v4 << n4 <<
 		v5 << n5;
-	QByteArray* vertex_buf_temp=nullptr;
+	QByteArray* vertex_buf_temp = nullptr;
 	if (vertex_buf)vertex_buf_temp = vertex_buf;
 
 	vertex_buf = new QByteArray();
-	vertex_buf->resize((3+3) * 6 * sizeof(float));
+	vertex_buf->resize((3 + 3) * 6 * sizeof(float));
 	float* possitions = reinterpret_cast<float*>(vertex_buf->data());
 	int index = 0;
 
@@ -188,54 +237,7 @@ inline void QLineMesh::generateVertexData()
 		possitions[index++] = v.z();
 	}
 
+
 	if (vertex_buf_temp)delete vertex_buf_temp;
 };
 
-inline void QLineMesh::generateIndexData()
-{
-	index_buf = new QByteArray();
-	index_buf->resize(3*8 * sizeof(ushort));
-	ushort* indeces = reinterpret_cast<ushort*>(index_buf->data());
-	
-	//021
-	*indeces++ = 0;
-	*indeces++ = 2;
-	*indeces++ = 1;
-
-	//014
-	*indeces++ = 0;
-	*indeces++ = 1;
-	*indeces++ = 4;
-
-	//045
-	*indeces++ = 0;
-	*indeces++ = 4;
-	*indeces++ = 5;
-
-	//435
-	*indeces++ = 4;
-	*indeces++ = 3;
-	*indeces++ = 5;
-
-	//052
-	*indeces++ = 0;
-	*indeces++ = 5;
-	*indeces++ = 2;
-
-	//253
-	*indeces++ = 2;
-	*indeces++ = 5;
-	*indeces++ = 3;
-
-	//123
-	*indeces++ = 1;
-	*indeces++ = 2;
-	*indeces++ = 3;
-
-	//134
-	*indeces++ = 1;
-	*indeces++ = 3;
-	*indeces++ = 4;
-
-
-}

@@ -31,13 +31,15 @@
 #include "../Real_World_Algorithms/Real_World_Algorithms.h"
 
 
-
+/// @brief 3d scene for graphs visualisation properties. 
 class scene_properties_common_graph : public QWidget
 {
 	Q_OBJECT
 
 public:
+	/// @brief default constructor
 	scene_properties_common_graph(Qt3DCore::QEntity* root, QWidget* parent = Q_NULLPTR);
+	/// @brief default destructor
 	~scene_properties_common_graph();
 
 private:
@@ -51,6 +53,8 @@ signals:
 	void scene_properties_common_graph_type_signal(int type, graph<int> gr, under_GP options);
 
 public slots:
+	/// @brief if graph type is common graph this scene start to work
+	/// @return void
 	void scene_properties_common_graph_type_slot(int type, graph<int> gr, under_GP options)
 	{
 		if (type == 0)

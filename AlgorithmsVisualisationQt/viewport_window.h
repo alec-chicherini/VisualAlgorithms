@@ -44,12 +44,18 @@
 #include <qtorusmesh.h>
 #include <qcomponent.h>
 
+/// @brief viewport widget to show Qt3D objects
 class viewport_window : public QWidget
 {
 	Q_OBJECT
 
 public:
+	/// @brief default constructor
+	/// @param root root entity for 3d objects
+	/// @param parent paretnt for this instance
 	viewport_window(Qt3DCore::QEntity* root, QWidget* parent = Q_NULLPTR);
+
+	/// @brief default destructor
 	~viewport_window();
 
 private:
@@ -71,19 +77,35 @@ private:
 	bool camera_menu_possition_signal_was_recived = false;
 	bool camera_menu_view_center_signal_was_recived = false;
 
-	void update_common_graph(graph<int>, std::underlying_type_t<GP>);
-
+	
 signals:
+
+	/// @brief update current showed graph data
+	/// @param gr graph
+	/// @param op options
+	void update_common_graph(graph<int> gr, std::underlying_type_t<GP> op);
+
+	/// @brief signal from viewport after changing camera possition using camera controller 
+	/// @param position new possition of camera
 	void viewport_camera_position_signal(const QVector3D& position) ;
+
+	/// @brief signal from viewport fter changing camera view center using camera controller 
+	/// @param position new view center possition
 	void viewport_camera_view_center_signal(const QVector3D& position);
 
 
 public slots:
 
+	/// @brief slot to set camera possition using QCamera::viewAll()
+	/// @return void
 	void viewport_camera_view_all_slot()
 	{
 		camera_main->viewAll();
 	}
+
+	/// @brief slot to update camera possition from another source like camera_menu widget
+	/// @param pos new camera possition
+	/// @return void
 	void viewport_camera_possition_slot(QVector3D pos)
 	{
 		camera_menu_possition_signal_was_recived = true;
@@ -92,6 +114,9 @@ public slots:
 		 qDebug() << QDateTime::currentDateTimeUtc()<< QString("<----- call viewport_camera_possition_slot") << QString::number(camera_menu_possition_signal_was_recived);
 	};
 
+	/// @brief slot to update camera view center from another source like camera_menu widget
+	/// @param pos new camera view center
+	/// @return void
 	void viewport_camera_view_center_slot(QVector3D pos)
 	{
 		camera_menu_view_center_signal_was_recived = true;
@@ -101,6 +126,9 @@ public slots:
 	
 	};
 
+	/// @brief slot to set current type of camera controller
+	/// @param index 0 - normal; 1 - orbital;
+	/// @return void
 	void viewport_camera_controller_slot(int index)
 	{
 		if (index == 0)
@@ -119,7 +147,9 @@ public slots:
 		}
 
 	}
-
+	/// @brief slot to update light color
+	/// @param clr
+	/// @return void
 	void viewport_light_color_slot(QColor clr)
 	{
 		point_light_main->setColor(clr);
@@ -130,7 +160,9 @@ public slots:
 		qDebug((std::to_string(clr.blue()).c_str()));
 		qDebug(" <----- COLOR BLUE WAS CHANGED()");
 	}
-
+	/// @brief slot to update light intensity
+	/// @param intens intensity
+	/// @return void
 	void viewport_light_intensity_slot(float intens)
 	{
 		point_light_main->setIntensity(intens);
@@ -139,7 +171,9 @@ public slots:
 	}
 
 
-
+	/// @brief slot to set current scene by switching second entity after root
+	/// @param scene scene entity
+	/// @return void
 	void viewport_scene_entity_slot(Qt3DCore::QEntity* scene)
 	{
 		currentSceneEntity = scene;

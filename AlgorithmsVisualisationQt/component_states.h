@@ -1,5 +1,6 @@
 #pragma once
 
+
 #include <QWidget>
 
 #include <Qt3DExtras/qphongalphamaterial.h>
@@ -28,11 +29,15 @@
 
 #include <Qt3DCore/qentity.h>
 
+/// @brief class which store all instances of materials and meshes with current settings. So later if some entity switch component from one to another it just switch pointer to existing version in this.
 class component_states : public QWidget
 {
 	Q_OBJECT
 
 public:
+	/// @brief default constructor
+	/// @param root root entity for materials and meshes
+	/// @param parent QWidget for this
 	component_states(Qt3DCore::QEntity* root, QWidget *parent = Q_NULLPTR);
 	~component_states();
 
@@ -65,11 +70,15 @@ private:
 
 
 signals:
+	/// @brief on changing current material type emit pointer to new component
 	void component_states_material_type_signal(Qt3DCore::QComponent*);
+
+	/// @brief on changing current mesh type emit pointer to new component
 	void component_states_mesh_type_signal(Qt3DCore::QComponent*);
 
 public slots:
 	
+	/// @brief slot to change current material
 	void component_states_material_type_slot(int id)
 	{
 		current_material_type = static_cast<MaterialType>(id);
@@ -138,7 +147,7 @@ public slots:
 	}
 
 	
-	
+	/// @brief slot to change current mesh
 	void component_states_mesh_type_slot(int id)
 	{
 		current_mesh_type = static_cast<MeshType>(id);

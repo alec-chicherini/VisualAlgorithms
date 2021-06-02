@@ -1,4 +1,7 @@
 var searchData=
 [
-  ['enums_5fnamespace_14',['ENUMS_NAMESPACE',['../namespace_e_n_u_m_s___n_a_m_e_s_p_a_c_e.html',1,'']]]
+  ['dfs_5frecurcive_19',['DFS_recurcive',['../structreal__world__algorithm_1_1graph.html#a13484e52d5d0266284ccedfe2158d778',1,'real_world_algorithm::graph']]],
+  ['dfs_5fstack_20',['DFS_stack',['../structreal__world__algorithm_1_1graph.html#a1273edd196b03774fe116e872ec2a895',1,'real_world_algorithm::graph']]],
+  ['dfs_5fstack_5f2_21',['DFS_stack_2',['../structreal__world__algorithm_1_1graph.html#ac1aaabd9b04d0f3f83f1190a6a2b2071',1,'real_world_algorithm::graph']]],
+  ['dfs_5fstack_5f2_5frandom_22',['DFS_stack_2_random',['../structreal__world__algorithm_1_1graph.html#a964d002588b6db75baa53197163c2115',1,'real_world_algorithm::graph']]]
 ];

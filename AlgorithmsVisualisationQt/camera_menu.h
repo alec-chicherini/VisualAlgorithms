@@ -95,6 +95,7 @@ public slots:
 		
 	/// @brief camera possition slot to change spinboxes values in menu if camera possition changed from another sources. For example from drag camera from viewport.
 	/// @param pos New updated possition of camera
+	/// @return void
 		void camera_possition_slot(const QVector3D& pos) 
 		{
 			qDebug() << QDateTime::currentDateTimeUtc()<< QString("<----- call camera_possition_slot") << QString::number(viewport_possition_signal_was_recived);
@@ -108,6 +109,7 @@ public slots:
 		}
 		/// @brief camera view center slot to change spinboxes values in menu if camera view center slot changed from another sources. For example from drag camera from viewport.
 		/// @param pos New updated camera view port slot of camera
+		/// @return void
 		void camera_view_center_slot(const QVector3D& pos)
 		{
 			qDebug() << QDateTime::currentDateTimeUtc()<< QString("<----- call camera_view_center_slot") << QString::number(viewport_view_center_signal_was_recived);

@@ -10,12 +10,12 @@
 
 
 
-
+	/// @brief custom mesh for Qt3D - draw looks like line triangular prism
 	class QLineMesh : public Qt3DRender::QGeometryRenderer
 	{
 		Q_OBJECT
-			//Q_PROPERTY(QPair<QVector3D,QVector3D> possition MEMBER m_possition READ possition WRITE setPossition NOTIFY possitionChanged)
-			//Q_PROPERTY(float width MEMBER m_width READ width WRITE setWidth NOTIFY widthChanged)
+			Q_PROPERTY(QPair<QVector3D,QVector3D> possition MEMBER m_possition READ possition WRITE setPossition NOTIFY possitionChanged)
+			Q_PROPERTY(float width MEMBER m_width READ width WRITE setWidth NOTIFY widthChanged)
 			
 	public:
 		QPair<QVector3D, QVector3D> m_possition;
@@ -36,23 +36,37 @@
 		QByteArray* vertex_buf=nullptr;
 		QByteArray* index_buf = nullptr;
 
-	private:
-		inline void generateVertexData() ;
-		inline void generateIndexData() ;
 
+		/// @brief generate vertexes data to QGeometryRenderer from input
+		/// @return void
+		inline void generateVertexData();
+		
+		/// @brief generate indexes data to QGeometryRenderer from input
+		/// @return void
+		inline void generateIndexData();
+	
 	signals:
+		/// @brief mesh coordinates signal
 		void possitionChanged(const QPair<QVector3D, QVector3D>&);
+
+		/// @brief line mesh width signal
 		void widthChanged(const float&);
 
 	public slots:
 
+
+		/// @brief set new line coordinates
+		/// @param pos line coordinates from <first point, second point>
+		/// @return void
 		void setPossition(QPair<QVector3D, QVector3D>& pos)
 		{
 			m_possition = pos;
 		    generateVertexData();
 			m_vertexBuffer->setData(*vertex_buf);
 		}
-
+		/// @brief set triangular prism edge width
+		/// @param w size of edge
+	    /// @return void
 		void setWidth(float w)
 		{
 			m_width = w;
@@ -62,18 +76,30 @@
 
 
 	public:
+		
+		/// @brief default constructor
+		/// @param pos line coordinates
+		/// @param root root entity for this mesh
 		QLineMesh(QPair<QVector3D, QVector3D>& pos, Qt3DCore::QNode* root = Q_NULLPTR);
+
+		/// @param default destructor
 		~QLineMesh();
 
+		/// @brief get current possition of line points
+		/// @return pair of two QVector3D points
 		QPair<QVector3D, QVector3D> possition() const 
 		{
 			return m_possition;
 		};
 
+		/// @brief get current line width
+		/// @return value of width
 		float width() const
 		{
 			return m_width;
 		}
+
+
 
 	};
 

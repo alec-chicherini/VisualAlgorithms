@@ -17,14 +17,19 @@
 //real world algorithms
 #include "../Real_World_Algorithms/Real_World_Algorithms.h"
 
+/// @brief 3d scene for graphs visualisation entities. Hold all entities use in this scene and cnnection between them and tis scene materials and meshes. 
 class scene_entities_common_graph : public QWidget
 {
 	Q_OBJECT
 
 public:
+	/// @brief default constructor
 	scene_entities_common_graph(Qt3DCore::QEntity*  root,QWidget *parent = Q_NULLPTR);
+	/// @brief default destructor
 	~scene_entities_common_graph();
 
+	/// @brief Get root of common graph scene.
+	/// @return pointer to this root
 	Qt3DCore::QEntity* getRoot();
 
 private:
@@ -47,6 +52,8 @@ private:
 
 public slots:
 
+	/// @brief get the graph with options and construct current scene states for entities their meshes and materials.
+	/// @return void
 	void scene_entities_common_graph_type_slot(int type, graph<int> gr, under_GP options)
 	{
 		qDebug() << __FUNCSIG__ << " CALLED !!! ";
@@ -111,6 +118,8 @@ public slots:
 		
 	}
 
+	/// @brief recive pointer to changed QComponent with specific entity
+	/// @return void
 	void scene_entities_common_graph_vertex_material_type_slot(Qt3DCore::QComponent* component)
 	{
 		qDebug() << __FUNCSIG__ << " CALLED !!! ";
@@ -122,6 +131,8 @@ public slots:
 		vertex_material = component;
 
 	}
+	/// @brief recive pointer to changed QComponent with specific entity
+	/// @return void
 	void scene_entities_common_graph_vertex_mesh_type_slot(Qt3DCore::QComponent* component)
 	{
 		qDebug() << __FUNCSIG__ << " CALLED !!! ";
@@ -133,6 +144,8 @@ public slots:
 		vertex_mesh = component;
 
 	}
+	/// @brief recive pointer to changed QComponent with specific entity
+	/// @return void
 	void scene_entities_common_graph_edge_material_type_slot(Qt3DCore::QComponent* component)
 	{
 		qDebug() << __FUNCSIG__ << " CALLED !!! ";
@@ -146,6 +159,8 @@ public slots:
 	
 	}
 	
+	/// @brief recive pointer to changed QComponent with specific entity
+	/// @return void
 	void scene_entities_common_graph_plane_material_type_slot(Qt3DCore::QComponent* component)
 	{
 		qDebug() << __FUNCSIG__ << " CALLED !!! ";
@@ -154,6 +169,8 @@ public slots:
 		plane_material = component;
 	 
 	}
+	/// @brief recive pointer to changed QComponent with specific entity
+	/// @return void
 	void scene_entities_common_graph_plane_mesh_type_slot(Qt3DCore::QComponent* component)
 	{
 		qDebug() << __FUNCSIG__ << " CALLED !!! ";

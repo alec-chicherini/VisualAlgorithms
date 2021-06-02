@@ -20,16 +20,22 @@
 #include <qjsonvalue.h>
 #include <qbytearray.h>
 
+/*! @brief Widget which show the the materials properties from lists of Qt3DExtras materials.
+   Also  write current values to json file and read file on pograms start if such json file exist.
+   Provide signals on every property changed.
+   */
 class property_material : public QWidget
 {
 	Q_OBJECT
 
 public:
+	/// @brief default constructor
+	/// @param parentPath previous path to store json configs
+	/// @param parent parent QWidget
 	property_material(QString parentPath, QWidget *parent = Q_NULLPTR);
-	~property_material();
 
-	void read_json(const QJsonObject& json);
-	void write_json(QJsonObject& json);
+	/// @brief default destructor
+	~property_material();
 
 private:
 	QComboBox* combobox_material;
@@ -49,16 +55,22 @@ private:
 	ADD_JSON_LOADER(current_material_index)
 
 public:
+
+	/// @brief plain structure to store signal name and signal data
 	template <typename T>
 	struct 	delayed_emit
 	{
 		QString signal_name;
 		T signal_data;
 	};
+	/// @brief list of all signals and their datas type of double
 	std::vector<delayed_emit<double>> e_vec_func_double;
+	/// @brief list of all signals and their datas type of int
 	std::vector<delayed_emit<int>> e_vec_func_int;
+	/// @brief list of all signals and their datas type of QColor
 	std::vector<delayed_emit<QColor>> e_vec_func_QColor;
 
+	/// @brief initialisation function to call in constructor and set all data from json to different properties in widget window
 	void send_initialization_data()
 	{
 		qDebug() << __FUNCSIG__ << " CALLED !!! ";
@@ -108,6 +120,7 @@ public:
 
 signals:
 
+	/// @brief material type signal emits on combobox changes
 	void property_material_type_signal(int);
 	//PHONG
 	ADD_SIGNAL_FOR_ENTITY(material, phong, ambient, QColor);

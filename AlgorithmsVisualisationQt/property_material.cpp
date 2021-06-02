@@ -19,6 +19,7 @@ property_material::property_material(QString parentPath, QWidget *parent)
 	combobox_material->addItem("TEXTURE");//id 10
 
 	connect(combobox_material, &QComboBox::currentIndexChanged, this, &property_material::property_material_type_signal);
+
 	//PHONG
 	/*QWidget* phong_properties = new QWidget(this);
 	QGridLayout* phong_properties_layout = new QGridLayout;

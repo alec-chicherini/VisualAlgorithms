@@ -3,7 +3,9 @@
 /// @brief all enums shared between all project
 namespace ENUMS_NAMESPACE {
 #include <type_traits>
-    /// @brief graph properties(or settings) enum class each value is shifted for make like bit flags usage possible. Example of flags: auto options = GraphProperties::DIRECTED|GraphProperties::LOOPS;
+    /// @brief graph properties(or settings) enum class each value is shifted for make like bit flags usage possible. Example of flags:
+    /// @code auto options = GraphProperties::DIRECTED|GraphProperties::LOOPS;
+    /// @endcode
     enum class GraphProperties :unsigned long long int
     {
         DIRECTED = ((unsigned long long int)1 << 0),
