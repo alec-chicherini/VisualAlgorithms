@@ -3,6 +3,7 @@
 main_window::main_window(QWidget *parent)
 	: QWidget(parent)
 {
+	main_graph=generateRandomGraph<int>(1, 1, 1, 0);
 	root = new Qt3DCore::QEntity();
 	//left menu
 	tab_menu_left = new QTabWidget(this);

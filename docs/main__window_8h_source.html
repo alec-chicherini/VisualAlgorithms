@@ -152,64 +152,67 @@ $(document).ready(function(){initNavTree('main__window_8h_source.html',''); init
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <a class="code" href="classscene__properties__common__graph.html">scene_properties_common_graph</a>* scene_properties_common_graph_;</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordtype">int</span> current_graph_type=0;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <a class="code" href="structreal__world__algorithm_1_1graph.html">graph&lt;int&gt;</a>* main_graph=Q_NULLPTR;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;signals:</div>
-<div class="line"><a name="l00067"></a><span class="lineno"><a class="line" href="classmain__window.html#ad158ecbe19575fdfb2ef139cdc085e7e">   67</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classmain__window.html#ad158ecbe19575fdfb2ef139cdc085e7e">type_graph_signal</a>(<span class="keywordtype">int</span>, <a class="code" href="structreal__world__algorithm_1_1graph.html">graph&lt;int&gt;</a>, under_GP);</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="keyword">private</span> slots:</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keywordtype">void</span> re_gen_graph(<span class="keyword">const</span> <span class="keywordtype">int</span> V, <span class="keyword">const</span>  <span class="keywordtype">int</span> E_left, <span class="keyword">const</span>  <span class="keywordtype">int</span> E_right, <span class="keyword">const</span> under_GP properties)</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    {</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        <span class="keywordflow">if</span> (main_graph)</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        {</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;            main_graph-&gt;<a class="code" href="structreal__world__algorithm_1_1graph.html#a5e05c81dee35f7dffc34903e2f3e97ca">cleanup</a>();</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;            <span class="keyword">delete</span> main_graph;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        };</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        main_graph =  <span class="keyword">new</span> <a class="code" href="structreal__world__algorithm_1_1graph.html">graph&lt;int&gt;</a>(generateRandomGraph&lt;int&gt;(V, E_left, E_right, properties));</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <a class="code" href="structreal__world__algorithm_1_1graph.html">graph&lt;int&gt;</a> main_graph;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    under_GP current_graph_properties;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;signals:</div>
+<div class="line"><a name="l00068"></a><span class="lineno"><a class="line" href="classmain__window.html#a8d8b6f78b38359e25882b2793933ae71">   68</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classmain__window.html#a8d8b6f78b38359e25882b2793933ae71">type_graph_signal</a>(<span class="keywordtype">int</span>&amp;, <a class="code" href="structreal__world__algorithm_1_1graph.html">graph&lt;int&gt;</a>&amp;, under_GP&amp;);</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    </div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="keyword">private</span> slots:</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keywordtype">void</span> re_gen_graph(<span class="keyword">const</span> <span class="keywordtype">int</span> V, <span class="keyword">const</span>  <span class="keywordtype">int</span> E_left, <span class="keyword">const</span>  <span class="keywordtype">int</span> E_right, <span class="keyword">const</span> under_GP properties)</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    {</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        current_graph_properties = properties;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        <span class="comment">//if (main_graph)</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        <span class="comment">//{</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        <span class="comment">//  main_graph-&gt;cleanup();</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        <span class="comment">//  delete main_graph;</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        <span class="comment">//};</span></div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        qDebug()&lt;&lt;QString::fromStdString(main_graph-&gt;<a class="code" href="structreal__world__algorithm_1_1graph.html#ac5b26f50838dbe2a0935b67303259803">print_to_string</a>());</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        emit <a class="code" href="classmain__window.html#ad158ecbe19575fdfb2ef139cdc085e7e">type_graph_signal</a>(current_graph_type, *main_graph, properties);</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    </div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    }</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <span class="keywordtype">void</span> graph_type_changed_slot(<span class="keywordtype">int</span> <span class="keywordtype">id</span>)</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    {</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    </div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        current_graph_type = id;</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        qDebug() &lt;&lt; <span class="stringliteral">&quot; GRAPH TYPE CHANGED = &quot;</span> &lt;&lt; id;</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        <span class="keywordflow">switch</span>(<span class="keywordtype">id</span>)</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        {</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        <span class="keywordflow">case</span> 0: {tab_menu_right-&gt;setTabText(0, <span class="stringliteral">&quot;Graph&quot;</span>); <span class="keywordflow">break</span>; }</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        <span class="keywordflow">case</span> 1:tab_menu_right-&gt;setTabText(0, <span class="stringliteral">&quot;Tree&quot;</span>); <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        <span class="keywordflow">case</span> 2:tab_menu_right-&gt;setTabText(0, <span class="stringliteral">&quot;2D graph&quot;</span>); <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        <span class="keywordflow">case</span> 3:tab_menu_right-&gt;setTabText(0, <span class="stringliteral">&quot;3D graph&quot;</span>); <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        }</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    }</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;};</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        main_graph.<a class="code" href="structreal__world__algorithm_1_1graph.html#a5e05c81dee35f7dffc34903e2f3e97ca">cleanup</a>();</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        main_graph = generateRandomGraph&lt;int&gt;(V, E_left, E_right, properties);</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        qDebug()&lt;&lt;QString::fromStdString(main_graph.<a class="code" href="structreal__world__algorithm_1_1graph.html#ac5b26f50838dbe2a0935b67303259803">print_to_string</a>());</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        emit <a class="code" href="classmain__window.html#a8d8b6f78b38359e25882b2793933ae71">type_graph_signal</a>(current_graph_type, main_graph, current_graph_properties);</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    </div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    }</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keywordtype">void</span> graph_type_changed_slot(<span class="keywordtype">int</span> <span class="keywordtype">id</span>)</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    {</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    </div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        current_graph_type = id;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        qDebug() &lt;&lt; <span class="stringliteral">&quot; GRAPH TYPE CHANGED = &quot;</span> &lt;&lt; id;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        <span class="keywordflow">switch</span>(<span class="keywordtype">id</span>)</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        {</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        <span class="keywordflow">case</span> 0: {tab_menu_right-&gt;setTabText(0, <span class="stringliteral">&quot;Graph&quot;</span>); <span class="keywordflow">break</span>; }</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        <span class="keywordflow">case</span> 1:tab_menu_right-&gt;setTabText(0, <span class="stringliteral">&quot;Tree&quot;</span>); <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        <span class="keywordflow">case</span> 2:tab_menu_right-&gt;setTabText(0, <span class="stringliteral">&quot;2D graph&quot;</span>); <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        <span class="keywordflow">case</span> 3:tab_menu_right-&gt;setTabText(0, <span class="stringliteral">&quot;3D graph&quot;</span>); <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        }</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    }</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160; </div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;};</div>
 <div class="ttc" id="aclasscamera__menu_html"><div class="ttname"><a href="classcamera__menu.html">camera_menu</a></div><div class="ttdoc">class holds the global camera current possition settings</div><div class="ttdef"><b>Definition:</b> camera_menu.h:23</div></div>
 <div class="ttc" id="aclassgraph__menu_html"><div class="ttname"><a href="classgraph__menu.html">graph_menu</a></div><div class="ttdoc">graph menu class holds controls to choose and set up generation of graphs visualisation</div><div class="ttdef"><b>Definition:</b> graph_menu.h:23</div></div>
 <div class="ttc" id="aclassmain__window_html"><div class="ttname"><a href="classmain__window.html">main_window</a></div><div class="ttdoc">The main window of app. Holds the three big parts.</div><div class="ttdef"><b>Definition:</b> main_window.h:36</div></div>
 <div class="ttc" id="aclassmain__window_html_a28cfed9b4d2093cd88e2821711021038"><div class="ttname"><a href="classmain__window.html#a28cfed9b4d2093cd88e2821711021038">main_window::main_window</a></div><div class="ttdeci">main_window(QWidget *parent=Q_NULLPTR)</div><div class="ttdoc">default constructor</div><div class="ttdef"><b>Definition:</b> main_window.cpp:3</div></div>
-<div class="ttc" id="aclassmain__window_html_a9cc2af90d9219251076e37f3f9f58b76"><div class="ttname"><a href="classmain__window.html#a9cc2af90d9219251076e37f3f9f58b76">main_window::~main_window</a></div><div class="ttdeci">~main_window()</div><div class="ttdoc">default destructor</div><div class="ttdef"><b>Definition:</b> main_window.cpp:85</div></div>
-<div class="ttc" id="aclassmain__window_html_ad158ecbe19575fdfb2ef139cdc085e7e"><div class="ttname"><a href="classmain__window.html#ad158ecbe19575fdfb2ef139cdc085e7e">main_window::type_graph_signal</a></div><div class="ttdeci">void type_graph_signal(int, graph&lt; int &gt;, under_GP)</div><div class="ttdoc">graph signal retranslation to pass the generated graph to entities in this</div></div>
+<div class="ttc" id="aclassmain__window_html_a8d8b6f78b38359e25882b2793933ae71"><div class="ttname"><a href="classmain__window.html#a8d8b6f78b38359e25882b2793933ae71">main_window::type_graph_signal</a></div><div class="ttdeci">void type_graph_signal(int &amp;, graph&lt; int &gt; &amp;, under_GP &amp;)</div><div class="ttdoc">graph signal retranslation to pass the generated graph to entities in this</div></div>
+<div class="ttc" id="aclassmain__window_html_a9cc2af90d9219251076e37f3f9f58b76"><div class="ttname"><a href="classmain__window.html#a9cc2af90d9219251076e37f3f9f58b76">main_window::~main_window</a></div><div class="ttdeci">~main_window()</div><div class="ttdoc">default destructor</div><div class="ttdef"><b>Definition:</b> main_window.cpp:86</div></div>
 <div class="ttc" id="aclassscene__properties__common__graph_html"><div class="ttname"><a href="classscene__properties__common__graph.html">scene_properties_common_graph</a></div><div class="ttdoc">3d scene for graphs visualisation properties.</div><div class="ttdef"><b>Definition:</b> scene_properties_common_graph.h:36</div></div>
 <div class="ttc" id="aclasssorting__menu_html"><div class="ttname"><a href="classsorting__menu.html">sorting_menu</a></div><div class="ttdoc">widget for choose sorting generation propertes</div><div class="ttdef"><b>Definition:</b> sorting_menu.h:10</div></div>
 <div class="ttc" id="aclassviewport__window_html"><div class="ttname"><a href="classviewport__window.html">viewport_window</a></div><div class="ttdoc">viewport widget to show Qt3D objects</div><div class="ttdef"><b>Definition:</b> viewport_window.h:49</div></div>
 <div class="ttc" id="astructreal__world__algorithm_1_1graph_html"><div class="ttname"><a href="structreal__world__algorithm_1_1graph.html">real_world_algorithm::graph&lt; int &gt;</a></div></div>
-<div class="ttc" id="astructreal__world__algorithm_1_1graph_html_a5e05c81dee35f7dffc34903e2f3e97ca"><div class="ttname"><a href="structreal__world__algorithm_1_1graph.html#a5e05c81dee35f7dffc34903e2f3e97ca">real_world_algorithm::graph::cleanup</a></div><div class="ttdeci">void cleanup()</div><div class="ttdoc">clear all members of this graph to zero states</div><div class="ttdef"><b>Definition:</b> Real_World_Algorithms.h:618</div></div>
-<div class="ttc" id="astructreal__world__algorithm_1_1graph_html_ac5b26f50838dbe2a0935b67303259803"><div class="ttname"><a href="structreal__world__algorithm_1_1graph.html#ac5b26f50838dbe2a0935b67303259803">real_world_algorithm::graph::print_to_string</a></div><div class="ttdeci">std::string print_to_string()</div><div class="ttdoc">print all graph edges and vertexes to std::string</div><div class="ttdef"><b>Definition:</b> Real_World_Algorithms.h:647</div></div>
+<div class="ttc" id="astructreal__world__algorithm_1_1graph_html_a5e05c81dee35f7dffc34903e2f3e97ca"><div class="ttname"><a href="structreal__world__algorithm_1_1graph.html#a5e05c81dee35f7dffc34903e2f3e97ca">real_world_algorithm::graph::cleanup</a></div><div class="ttdeci">void cleanup()</div><div class="ttdoc">clear all members of this graph to zero states</div><div class="ttdef"><b>Definition:</b> Real_World_Algorithms.h:620</div></div>
+<div class="ttc" id="astructreal__world__algorithm_1_1graph_html_ac5b26f50838dbe2a0935b67303259803"><div class="ttname"><a href="structreal__world__algorithm_1_1graph.html#ac5b26f50838dbe2a0935b67303259803">real_world_algorithm::graph::print_to_string</a></div><div class="ttdeci">std::string print_to_string()</div><div class="ttdoc">print all graph edges and vertexes to std::string</div><div class="ttdef"><b>Definition:</b> Real_World_Algorithms.h:649</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_d6567b76b5fdcf4fd541a950a1494110.html">AlgorithmsVisualisationQt</a></li><li class="navelem"><b>main_window.h</b></li>
-    <li class="footer">Generated on Wed Jun 2 2021 18:37:32 for Real World Algorithms by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="navelem"><b>main_window.h</b></li>
+    <li class="footer">Generated on Sat Jun 5 2021 15:57:58 for Real World Algorithms by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

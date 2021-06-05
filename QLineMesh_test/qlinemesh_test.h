@@ -53,6 +53,9 @@
 #include <Qt3DCore/QBuffer>
 
 #include <QPropertyAnimation>
+#include <vector>
+
+#include<qpushbutton.h>
 
 //
 
@@ -71,7 +74,45 @@ private:
 	Qt3DRender::QCamera* camera;
 	Qt3DExtras::QOrbitCameraController* camController;
 	QWidget* container;
-	QLineMesh* line;
+	
+	std::vector<Qt3DCore::QEntity*> vec;
+
+	QPushButton* btn_regen;
+
+	void regen_lines()
+	{
+        qDebug()<< "regen_lines cleanup BEGIN";
+		if (vec.size())
+		{
+			for (auto& v : vec)
+			{
+				for (auto& comp : v->components())
+					delete comp;
+				delete v;
+
+			}
+			vec.clear();
+		}
+
+        qDebug()<< "regen_lines create BEGIN";
+		auto material = new Qt3DExtras::QPhongMaterial;
+		material->setDiffuse(QColor(0, 128, 0));
+
+        for (int i = 100; i != 0; i--)
+		{
+			auto line_data = std::make_pair(QVector3D(0, 0, 0), QVector3D(rand() % 10, rand() % 10, rand() % 10));
+			auto line = new QLineMesh(line_data, rootEntity);
+			line->setWidth(0.5f);
+
+			Qt3DCore::QEntity* entity = new Qt3DCore::QEntity(rootEntity);
+			entity->addComponent(material);
+			entity->addComponent(line);
+
+			vec.push_back(entity);
+
+		}
+        qDebug() << "regen_lines END";
+	}
 
 protected:
 	virtual void resizeEvent(QResizeEvent* event)override;

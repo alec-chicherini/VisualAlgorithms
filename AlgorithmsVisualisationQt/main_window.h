@@ -60,26 +60,29 @@ private:
 	scene_properties_common_graph* scene_properties_common_graph_;
 
 	int current_graph_type=0;
-	graph<int>* main_graph=Q_NULLPTR;
+	graph<int> main_graph;
+	under_GP current_graph_properties;
 
 signals:
 	/// @brief graph signal retranslation to pass the generated graph to entities in this 
-	void type_graph_signal(int, graph<int>, under_GP);
+	void type_graph_signal(int&, graph<int>&, under_GP&);
 	
 private slots:
 	void re_gen_graph(const int V, const  int E_left, const  int E_right, const under_GP properties)
 	{
-		if (main_graph)
-		{
-			main_graph->cleanup();
-			delete main_graph;
-		};
+		current_graph_properties = properties;
+		//if (main_graph)
+		//{
+		//	main_graph->cleanup();
+		//	delete main_graph;
+		//};
 
-		main_graph =  new graph<int>(generateRandomGraph<int>(V, E_left, E_right, properties));
+		main_graph.cleanup();
+		main_graph = generateRandomGraph<int>(V, E_left, E_right, properties);
 
-		qDebug()<<QString::fromStdString(main_graph->print_to_string());
+		qDebug()<<QString::fromStdString(main_graph.print_to_string());
 
-		emit type_graph_signal(current_graph_type, *main_graph, properties);
+		emit type_graph_signal(current_graph_type, main_graph, current_graph_properties);
 	
 	}
 

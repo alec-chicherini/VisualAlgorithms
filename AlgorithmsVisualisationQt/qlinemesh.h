@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Qt3DRender/qgeometryrenderer.h>
-#include <qpair.h>
+#include <tuple>
 #include <qvector3d.h>
 #include <Qt3DCore/qattribute.h>
 #include <Qt3DCore/qgeometry.h>
@@ -14,11 +14,11 @@
 	class QLineMesh : public Qt3DRender::QGeometryRenderer
 	{
 		Q_OBJECT
-			Q_PROPERTY(QPair<QVector3D,QVector3D> possition MEMBER m_possition READ possition WRITE setPossition NOTIFY possitionChanged)
+			Q_PROPERTY(std::pair<QVector3D,QVector3D> possition MEMBER m_possition READ possition WRITE setPossition NOTIFY possitionChanged)
 			Q_PROPERTY(float width MEMBER m_width READ width WRITE setWidth NOTIFY widthChanged)
 			
 	public:
-		QPair<QVector3D, QVector3D> m_possition;
+		std::pair<QVector3D, QVector3D> m_possition;
 		float m_width;
 
 		Qt3DCore::QAttribute* m_positionAttribute;
@@ -31,10 +31,8 @@
 		Qt3DCore::QGeometryView* view;
 		Qt3DCore::QGeometry* geometry;
 
-		Qt3DRender::QGeometryRenderer* line;
-
-		QByteArray* vertex_buf=nullptr;
-		QByteArray* index_buf = nullptr;
+		QByteArray vertex_buf;
+		QByteArray index_buf;
 
 
 		/// @brief generate vertexes data to QGeometryRenderer from input
@@ -47,7 +45,7 @@
 	
 	signals:
 		/// @brief mesh coordinates signal
-		void possitionChanged(const QPair<QVector3D, QVector3D>&);
+		void possitionChanged(const std::pair<QVector3D, QVector3D>&);
 
 		/// @brief line mesh width signal
 		void widthChanged(const float&);
@@ -58,11 +56,11 @@
 		/// @brief set new line coordinates
 		/// @param pos line coordinates from <first point, second point>
 		/// @return void
-		void setPossition(QPair<QVector3D, QVector3D>& pos)
+		void setPossition(std::pair<QVector3D, QVector3D>& pos)
 		{
 			m_possition = pos;
 		    generateVertexData();
-			m_vertexBuffer->setData(*vertex_buf);
+			m_vertexBuffer->setData(vertex_buf);
 		}
 		/// @brief set triangular prism edge width
 		/// @param w size of edge
@@ -71,7 +69,7 @@
 		{
 			m_width = w;
 			generateVertexData();
-			m_vertexBuffer->setData(*vertex_buf);
+			m_vertexBuffer->setData(vertex_buf);
 		}
 
 
@@ -80,14 +78,14 @@
 		/// @brief default constructor
 		/// @param pos line coordinates
 		/// @param root root entity for this mesh
-		QLineMesh(QPair<QVector3D, QVector3D>& pos, Qt3DCore::QNode* root = Q_NULLPTR);
+		explicit QLineMesh(std::pair<QVector3D, QVector3D>& pos, Qt3DCore::QNode* root = Q_NULLPTR);
 
 		/// @param default destructor
 		~QLineMesh();
 
 		/// @brief get current possition of line points
 		/// @return pair of two QVector3D points
-		QPair<QVector3D, QVector3D> possition() const 
+		std::pair<QVector3D, QVector3D> possition() const 
 		{
 			return m_possition;
 		};

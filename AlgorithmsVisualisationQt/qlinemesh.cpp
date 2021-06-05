@@ -1,6 +1,6 @@
 #include "qlinemesh.h"
 
-QLineMesh::QLineMesh(QPair<QVector3D, QVector3D>& pos, Qt3DCore::QNode* root)
+QLineMesh::QLineMesh(std::pair<QVector3D, QVector3D>& pos, Qt3DCore::QNode* root)
 	: QGeometryRenderer(root)
 {
 	qDebug() << "QLineMesh CTOR BEGIN";
@@ -18,14 +18,11 @@ QLineMesh::QLineMesh(QPair<QVector3D, QVector3D>& pos, Qt3DCore::QNode* root)
     m_vertexBuffer = new Qt3DCore::QBuffer(geometry);
 	m_indexBuffer = new Qt3DCore::QBuffer(geometry);
 
-	vertex_buf = nullptr;
-	 index_buf = nullptr;
-
 	generateVertexData();
-	m_vertexBuffer->setData(*vertex_buf);
+	m_vertexBuffer->setData(vertex_buf);
 
 	generateIndexData();
-	m_indexBuffer->setData(*index_buf);
+	m_indexBuffer->setData(index_buf);
 	
 	m_positionAttribute->setName(Qt3DCore::QAttribute::defaultPositionAttributeName());
 	m_positionAttribute->setVertexBaseType(Qt3DCore::QAttribute::Float);
@@ -81,14 +78,24 @@ QLineMesh::QLineMesh(QPair<QVector3D, QVector3D>& pos, Qt3DCore::QNode* root)
 
 QLineMesh::~QLineMesh()
 {
+	delete m_positionAttribute;
+	delete m_normalAttribute;
+	delete m_texCoordAttribute;
+	delete m_indexAttribute;
+	delete m_vertexBuffer;
+	delete m_indexBuffer;
+
+	delete view;
+	delete geometry;
+
 }
 
 
 inline void QLineMesh::generateIndexData()
 {
-	index_buf = new QByteArray();
-	index_buf->resize(3 * 8 * sizeof(ushort));
-	ushort* indeces = reinterpret_cast<ushort*>(index_buf->data());
+	index_buf.clear();
+	index_buf.resize(3 * 8 * sizeof(ushort));
+	ushort* indeces = reinterpret_cast<ushort*>(index_buf.data());
 
 	//021
 	*indeces++ = 0;
@@ -214,7 +221,6 @@ inline void QLineMesh::generateVertexData()
 	QVector3D n4 = QVector3D(n435 + n014 + n045 + n134).normalized();
 	QVector3D n5 = QVector3D(n435 + n253 + n045 + n052).normalized();
 
-
 	QVector<QVector3D> vertices = QVector<QVector3D>() <<
 		v0 << n0 <<
 		v1 << n1 <<
@@ -222,12 +228,11 @@ inline void QLineMesh::generateVertexData()
 		v3 << n3 <<
 		v4 << n4 <<
 		v5 << n5;
-	QByteArray* vertex_buf_temp = nullptr;
-	if (vertex_buf)vertex_buf_temp = vertex_buf;
 
-	vertex_buf = new QByteArray();
-	vertex_buf->resize((3 + 3) * 6 * sizeof(float));
-	float* possitions = reinterpret_cast<float*>(vertex_buf->data());
+	vertex_buf.clear();
+	
+	vertex_buf.resize((3 + 3) * 6 * sizeof(float));
+	float* possitions = reinterpret_cast<float*>(vertex_buf.data());
 	int index = 0;
 
 	for (auto& v : vertices)
@@ -237,7 +242,5 @@ inline void QLineMesh::generateVertexData()
 		possitions[index++] = v.z();
 	}
 
-
-	if (vertex_buf_temp)delete vertex_buf_temp;
 };
 

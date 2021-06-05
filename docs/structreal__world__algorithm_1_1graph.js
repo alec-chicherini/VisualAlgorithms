@@ -1,5 +1,6 @@
 var structreal__world__algorithm_1_1graph =
 [
+    [ "graph", "structreal__world__algorithm_1_1graph.html#aa21dda1c45abfe8c179ca3a000e31813", null ],
     [ "graph", "structreal__world__algorithm_1_1graph.html#abea142034f4ff13d066f4dacf7a70029", null ],
     [ "graph", "structreal__world__algorithm_1_1graph.html#a0dfd8aa02eadec15e99420f6e8694d28", null ],
     [ "BFS", "structreal__world__algorithm_1_1graph.html#ac1fb6fbccbe412ab1f73c5e11f2706a3", null ],

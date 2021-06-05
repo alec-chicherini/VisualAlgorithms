@@ -16,6 +16,4 @@ static void qDebug_(Ts...args)
 		((res << args << " "), ...);
 	}, t);*/
 
-
-
 };

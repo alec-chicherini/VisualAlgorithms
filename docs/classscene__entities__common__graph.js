@@ -6,7 +6,7 @@ var classscene__entities__common__graph =
     [ "scene_entities_common_graph_edge_material_type_slot", "classscene__entities__common__graph.html#aa5c886be5349d38d5913276738b0d740", null ],
     [ "scene_entities_common_graph_plane_material_type_slot", "classscene__entities__common__graph.html#ae84101c33b292a7dde3552165af1c723", null ],
     [ "scene_entities_common_graph_plane_mesh_type_slot", "classscene__entities__common__graph.html#a2960ab0bc97b0379b81c7b334987670c", null ],
-    [ "scene_entities_common_graph_type_slot", "classscene__entities__common__graph.html#a2fda4f01a2c2a57e97ea4b210b2e59fb", null ],
+    [ "scene_entities_common_graph_type_slot", "classscene__entities__common__graph.html#a912fc0bddff11620ef3f2470276c4d2b", null ],
     [ "scene_entities_common_graph_vertex_material_type_slot", "classscene__entities__common__graph.html#a94da8fbb1cc857106892876c27629883", null ],
     [ "scene_entities_common_graph_vertex_mesh_type_slot", "classscene__entities__common__graph.html#a83ede5cd4a8c4a6a720c538b10bacdbb", null ]
 ];

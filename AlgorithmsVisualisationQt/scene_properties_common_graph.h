@@ -50,12 +50,12 @@ private:
 	scene_entities_common_graph* scene_entities_common_graph_;
 
 signals:
-	void scene_properties_common_graph_type_signal(int type, graph<int> gr, under_GP options);
+	void scene_properties_common_graph_type_signal(int& type, graph<int>& gr, under_GP& options);
 
 public slots:
 	/// @brief if graph type is common graph this scene start to work
 	/// @return void
-	void scene_properties_common_graph_type_slot(int type, graph<int> gr, under_GP options)
+	void scene_properties_common_graph_type_slot(int& type, graph<int>& gr, under_GP& options)
 	{
 		if (type == 0)
 		{

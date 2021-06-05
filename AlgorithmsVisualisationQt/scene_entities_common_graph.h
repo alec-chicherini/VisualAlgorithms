@@ -12,7 +12,7 @@
 
 #include "qlinemesh.h"
 
-#include "qpair.h"
+#include <tuple>
 
 //real world algorithms
 #include "../Real_World_Algorithms/Real_World_Algorithms.h"
@@ -48,18 +48,55 @@ private:
 	Qt3DCore::QComponent* plane_material;
 	Qt3DCore::QComponent* plane_mesh;
 
-
-
-public slots:
-
-	/// @brief get the graph with options and construct current scene states for entities their meshes and materials.
-	/// @return void
-	void scene_entities_common_graph_type_slot(int type, graph<int> gr, under_GP options)
+	inline void re_gen_graph(graph<int>& gr, under_GP& options)
 	{
 		qDebug() << __FUNCSIG__ << " CALLED !!! ";
+		for (int i = 0; i < gr.V.size(); i++)
+		{
+			qDebug() << i;
+			Qt3DCore::QEntity* vertex = new Qt3DCore::QEntity(rootEntity);
+			vertex->addComponent(vertex_material);
+			vertex->addComponent(vertex_mesh);
 
+			Qt3DCore::QTransform* transform = new Qt3DCore::QTransform(vertex);
+			QVector3D coord = { float(gr.RAND(10, 90)), float(gr.RAND(10, 90)), 50.f };
+			transform->setTranslation(coord);
+
+			vertex->addComponent(transform);
+
+			vertexes.push_back(vertex);
+			vertexes_possitions.push_back(coord);
+
+		}
+
+		for (int i = 0; i < gr.E.size(); i++)
+		{
+			qDebug() << i;
+			Qt3DCore::QEntity* edge = new Qt3DCore::QEntity(rootEntity);
+			edge->addComponent(edge_material);
+
+			auto first_point = gr.E[i].first;
+			auto second_point = gr.E[i].second;
+
+			auto pos = std::pair(vertexes_possitions[first_point], vertexes_possitions[second_point]);
+			qDebug() << "pos = " << pos.first.x() << pos.first.y() << pos.first.z() << " - " << pos.second.x() << pos.second.y() << pos.second.z();
+			QLineMesh* line = new QLineMesh(pos, rootEntity);
+			//line->setWidth(0.05f);
+			edge->addComponent(line);
+
+			edges.push_back(edge);
+
+		}
+
+		qDebug() << __FUNCSIG__ << " END";
+	};
+
+
+	inline void scene_entities_clear()
+	{
+		qDebug() << __FUNCSIG__ << " CALLED !!! ";
 		if (vertexes.size()) {
-			for (auto vertex : vertexes) {
+			for (auto& vertex : vertexes) {
 
 				vertex->removeComponent(vertex_material);
 				vertex->removeComponent(vertex_mesh);
@@ -78,43 +115,25 @@ public slots:
 			edges.clear();
 		}
 
-		if (vertexes_possitions.size()) 
+		if (vertexes_possitions.size())
 			vertexes_possitions.clear();
-		
 
-		for (int i = 0; i < gr.V.size(); i++)
-		{
-			Qt3DCore::QEntity* vertex = new Qt3DCore::QEntity(rootEntity);
-			vertex->addComponent(vertex_material);
-			vertex->addComponent(vertex_mesh);
-			
-			Qt3DCore::QTransform* transform = new Qt3DCore::QTransform();
-			QVector3D coord = { float(gr.RAND(10, 90)), float(gr.RAND(10, 90)), 50.f};
-			transform->setTranslation(coord);
-			
-			vertex->addComponent(transform);
+		qDebug() << __FUNCSIG__ << " END";
 
-			vertexes.push_back(vertex);
-			vertexes_possitions.push_back(coord);
-			
-		}
+	}
 
-		for (int i = 0; i < gr.E.size(); i++)
-		{
-			Qt3DCore::QEntity* edge = new Qt3DCore::QEntity(rootEntity);
-			edge->addComponent(edge_material);
+public slots:
 
-			auto pos = qMakePair(vertexes_possitions[gr.E[i].first], vertexes_possitions[gr.E[i].second]);
-			qDebug() <<"pos = "<< pos.first.x() << pos.first.y() << pos.first.z() << " - " << pos.second.x() << pos.second.y() << pos.second.z();
-			QLineMesh* line = new QLineMesh(pos, edge);
-			//line->setWidth(0.05f);
-			edge->addComponent(line);
+	/// @brief get the graph with options and construct current scene states for entities their meshes and materials.
+	/// @return void
+	void scene_entities_common_graph_type_slot(int& type, graph<int>& gr, under_GP& options)
+	{
+		qDebug() << __FUNCSIG__ << " CALLED !!! ";
 
-			edges.push_back(edge);
+		scene_entities_clear();
+		re_gen_graph(gr, options);
 
-		}
-
-		qDebug() << "Adding entities to edges END";
+		qDebug() << __FUNCSIG__ << " END";
 		
 	}
 

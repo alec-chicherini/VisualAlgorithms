@@ -587,7 +587,9 @@ struct graph
     /// @brief Return color of last visited node for red-black(true-false) graph.
     /// @return Bool value of color.
     bool getLastVisitedNodeColor() { return last_visited_node_color;}
- 
+
+    ///@brief default constructor
+    graph<T>() {};
     /// @brief constructor
     /// @param N_ number of vertexes.
     graph<T>(size_t N_) :N(N_) {};
