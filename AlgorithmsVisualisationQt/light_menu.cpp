@@ -26,7 +26,7 @@ light_menu::light_menu(QWidget *parent)
 	setLayout(layout);
 
 	connect(property_color, &color_picker::color_picker_signal, this, &light_menu::light_color_signal);
-	connect(spinbox_intensity, &QDoubleSpinBox::valueChanged, this, &light_menu::light_intencity_signal);
+	connect(spinbox_intensity, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this, &light_menu::light_intencity_signal);
 }
 
 light_menu::~light_menu()

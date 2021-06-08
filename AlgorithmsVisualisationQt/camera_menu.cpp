@@ -86,15 +86,15 @@ camera_menu::camera_menu(QWidget *parent)
 	layout->addWidget(groupbox_camera);
 	setLayout(layout);
 
-	connect(spinbox_possition_x, &QDoubleSpinBox::valueChanged,this, &camera_menu::camera_possition_update_);
-	connect(spinbox_possition_y, &QDoubleSpinBox::valueChanged,this, &camera_menu::camera_possition_update_);
-	connect(spinbox_possition_z, &QDoubleSpinBox::valueChanged,this, &camera_menu::camera_possition_update_);
+	connect(spinbox_possition_x, QOverload<double>::of(&QDoubleSpinBox::valueChanged),this, &camera_menu::camera_possition_update_);
+	connect(spinbox_possition_y, QOverload<double>::of(&QDoubleSpinBox::valueChanged),this, &camera_menu::camera_possition_update_);
+	connect(spinbox_possition_z, QOverload<double>::of(&QDoubleSpinBox::valueChanged),this, &camera_menu::camera_possition_update_);
 
-	connect(spinbox_view_center_x, &QDoubleSpinBox::valueChanged, this, &camera_menu::camera_view_center_update_);
-	connect(spinbox_view_center_y, &QDoubleSpinBox::valueChanged, this, &camera_menu::camera_view_center_update_);
-	connect(spinbox_view_center_z, &QDoubleSpinBox::valueChanged, this, &camera_menu::camera_view_center_update_);
+	connect(spinbox_view_center_x, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this, &camera_menu::camera_view_center_update_);
+	connect(spinbox_view_center_y, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this, &camera_menu::camera_view_center_update_);
+	connect(spinbox_view_center_z, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this, &camera_menu::camera_view_center_update_);
 
-	connect(combobox_camera_controller, &QComboBox::currentIndexChanged, this, &camera_menu::camera_controller_signal);
+	connect(combobox_camera_controller, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &camera_menu::camera_controller_signal);
 
 	connect(pushbtn_camera_view_all, &QAbstractButton::pressed, this, &camera_menu::camera_view_all_signal);
 

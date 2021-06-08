@@ -194,7 +194,7 @@ Private Attributes</h2></td></tr>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    connect(combobox_mesh, &amp;QComboBox::currentIndexChanged, <span class="keyword">this</span>, &amp;<a class="code" href="classproperty__mesh.html#ad4d56f96337d600133987a9f88b6943b">property_mesh::property_mesh_type_signal</a>);</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    connect(combobox_mesh, QOverload&lt;int&gt;::of(&amp;QComboBox::currentIndexChanged), <span class="keyword">this</span>, &amp;<a class="code" href="classproperty__mesh.html#ad4d56f96337d600133987a9f88b6943b">property_mesh::property_mesh_type_signal</a>);</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    </div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        <span class="comment">//Sphere</span></div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        ADD_ENTITY(sphere)</div>
@@ -255,10 +255,10 @@ Private Attributes</h2></td></tr>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    stackedlayout_mesh-&gt;addWidget(sphere_properties);<span class="comment">//id 4</span></div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    stackedlayout_mesh-&gt;addWidget(torus_properties);<span class="comment">//id 5</span></div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    connect(combobox_mesh, &amp;QComboBox::currentIndexChanged, stackedlayout_mesh, &amp;QStackedLayout::setCurrentIndex);</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    connect(combobox_mesh, QOverload&lt;<span class="keywordtype">int</span>&gt;::of(&amp;QComboBox::currentIndexChanged), stackedlayout_mesh, &amp;QStackedLayout::setCurrentIndex);</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    grid_layout_this-&gt;addLayout(stackedlayout_mesh,2,0,Qt::AlignTop);</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    </div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    connect(combobox_mesh, &amp;QComboBox::currentIndexChanged, this, [&amp;](<span class="keywordtype">int</span> value) {</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    connect(combobox_mesh, QOverload&lt;<span class="keywordtype">int</span>&gt;::of(&amp;QComboBox::currentIndexChanged), this, [&amp;](<span class="keywordtype">int</span> value) {</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        read_write_current_mesh_index_json_(QIODevice::WriteOnly, <span class="stringliteral">&quot;current_mesh_index&quot;</span>, value); });</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    combobox_mesh-&gt;setCurrentIndex(read_write_current_mesh_index_json_(QIODevice::ReadOnly, <span class="stringliteral">&quot;current_mesh_index&quot;</span>, <span class="keywordtype">int</span>()).toInt());</div>
@@ -468,7 +468,7 @@ Private Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classproperty__mesh.html">property_mesh</a></li>
-    <li class="footer">Generated on Sat Jun 5 2021 15:57:58 for Real World Algorithms by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Tue Jun 8 2021 08:31:59 for Real World Algorithms by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

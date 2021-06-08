@@ -54,8 +54,8 @@
 ENTITY##_properties_layout->addWidget(new QLabel(#stringNAME), ROW, 0);\
 QDoubleSpinBox* spinbox_##ENTITY##_##NAME = new QDoubleSpinBox;\
 ENTITY##_properties_layout->addWidget(spinbox_##ENTITY##_##NAME, ROW, 1);\
-connect(spinbox_##ENTITY##_##NAME, &QDoubleSpinBox::valueChanged, this, &property_##PROPERTY##::property_##PROPERTY##_##ENTITY##_##NAME##_signal);\
-connect(spinbox_##ENTITY##_##NAME, &QDoubleSpinBox::valueChanged, this, [&](double value){\
+connect(spinbox_##ENTITY##_##NAME, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this, &property_##PROPERTY##::property_##PROPERTY##_##ENTITY##_##NAME##_signal);\
+connect(spinbox_##ENTITY##_##NAME, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this, [&](double value){\
 read_write_##ENTITY##_json_(QIODevice::WriteOnly,QString(QString(#PROPERTY)+QString("_")+QString(#ENTITY)+QString("_")+QString(#NAME)+QString("_")+QString("value")), value);\
 });\
 spinbox_##ENTITY##_##NAME->setValue(read_write_##ENTITY##_json_(QIODevice::ReadOnly,\
@@ -77,8 +77,8 @@ e_vec_func_double.push_back({QString("property_")+QString(#PROPERTY)+QString("_"
 ENTITY##_properties_layout->addWidget(new QLabel(#stringNAME), ROW, 0);\
 QSpinBox* spinbox_##ENTITY##_##NAME = new QSpinBox;\
 ENTITY##_properties_layout->addWidget(spinbox_##ENTITY##_##NAME, ROW, 1);\
-connect(spinbox_##ENTITY##_##NAME, &QSpinBox::valueChanged, this, &property_##PROPERTY##::property_##PROPERTY##_##ENTITY##_##NAME##_signal);\
-connect(spinbox_##ENTITY##_##NAME, &QSpinBox::valueChanged, this, [&,this](int value){\
+connect(spinbox_##ENTITY##_##NAME, QOverload<int>::of(&QSpinBox::valueChanged), this, &property_##PROPERTY##::property_##PROPERTY##_##ENTITY##_##NAME##_signal);\
+connect(spinbox_##ENTITY##_##NAME, QOverload<int>::of(&QSpinBox::valueChanged), this, [&,this](int value){\
 read_write_##ENTITY##_json_(QIODevice::WriteOnly,QString(#PROPERTY)+QString("_")+QString(#ENTITY)+QString("_")+QString(#NAME)+QString("_")+QString("value"), value);\
 });\
 spinbox_##ENTITY##_##NAME->setValue(read_write_##ENTITY##_json_(QIODevice::ReadOnly,\

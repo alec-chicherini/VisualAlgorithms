@@ -12,13 +12,15 @@ viewport_window::viewport_window(Qt3DCore::QEntity* root,QWidget *parent)
 
 	container=QWidget::createWindowContainer(window3d_main);
 
-	QSize screenSize = window3d_main->screen()->size();
+	QSize screenSize = window3d_main->
+#if QT_VERSION == QT_VERSION_CHECK(6,1,0)
+		screen()->
+#endif
+		size();
 	container->setMinimumSize(QSize(128, 128));
 	container->setMaximumSize(screenSize);
 
 	currentSceneEntity = rootEntity;
-
-
 
 	//camera
 	camera_main = window3d_main->camera();
@@ -31,7 +33,7 @@ viewport_window::viewport_window(Qt3DCore::QEntity* root,QWidget *parent)
 	point_light_main = new Qt3DRender::QPointLight(light_main);
 	tansform_light_main = new Qt3DCore::QTransform(light_main);
 
-	point_light_main->setColor(QColor(0, 0, 0));
+	point_light_main->setColor(QColor(255, 255, 255));
 	point_light_main->setIntensity(1.f);
 	light_main->addComponent(point_light_main);
 	light_main->addComponent(tansform_light_main);

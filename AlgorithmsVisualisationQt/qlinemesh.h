@@ -1,13 +1,29 @@
 #pragma once
 
+#include <QtGlobal>
 #include <Qt3DRender/qgeometryrenderer.h>
 #include <tuple>
 #include <qvector3d.h>
+#if QT_VERSION == QT_VERSION_CHECK(6,1,0)
 #include <Qt3DCore/qattribute.h>
 #include <Qt3DCore/qgeometry.h>
 #include <Qt3DCore/qbuffer.h>
-#include <qquaternion.h>
+using ATTRIBUTE_TYPE = Qt3DCore::QAttribute;
+using GEOMETRY_TYPE = Qt3DCore::QGeometry;
+using BUFFER_TYPE = Qt3DCore::QBuffer;
 
+#elif QT_VERSION == QT_VERSION_CHECK(5,15,2)
+#include <Qt3dRender/qattribute.h>
+#include <Qt3dRender/qgeometry.h>
+#include <Qt3dRender/qbuffer.h>
+using ATTRIBUTE_TYPE = Qt3DRender::QAttribute;
+using GEOMETRY_TYPE = Qt3DRender::QGeometry;
+using BUFFER_TYPE = Qt3DRender::QBuffer;
+
+#endif
+
+
+#include <qquaternion.h>
 
 
 	/// @brief custom mesh for Qt3D - draw looks like line triangular prism
@@ -21,27 +37,25 @@
 		std::pair<QVector3D, QVector3D> m_possition;
 		float m_width;
 
-		Qt3DCore::QAttribute* m_positionAttribute;
-		Qt3DCore::QAttribute* m_normalAttribute;
-		Qt3DCore::QAttribute* m_texCoordAttribute;
-		Qt3DCore::QAttribute* m_indexAttribute;
-		Qt3DCore::QBuffer* m_vertexBuffer;
-		Qt3DCore::QBuffer* m_indexBuffer;
+		ATTRIBUTE_TYPE* m_positionAttribute;
+		ATTRIBUTE_TYPE* m_normalAttribute;
+		ATTRIBUTE_TYPE* m_texCoordAttribute;
+		ATTRIBUTE_TYPE* m_indexAttribute;
+		BUFFER_TYPE* m_vertexBuffer;
+		BUFFER_TYPE* m_indexBuffer;
 
+#if QT_VERSION == QT_VERSION_CHECK(6,1,0)
 		Qt3DCore::QGeometryView* view;
-		Qt3DCore::QGeometry* geometry;
-
-		QByteArray vertex_buf;
-		QByteArray index_buf;
-
+#endif
+		GEOMETRY_TYPE* geometry;
 
 		/// @brief generate vertexes data to QGeometryRenderer from input
 		/// @return void
-		inline void generateVertexData();
+		 QByteArray generateVertexData();
 		
 		/// @brief generate indexes data to QGeometryRenderer from input
 		/// @return void
-		inline void generateIndexData();
+		 QByteArray generateIndexData();
 	
 	signals:
 		/// @brief mesh coordinates signal
@@ -59,8 +73,8 @@
 		void setPossition(std::pair<QVector3D, QVector3D>& pos)
 		{
 			m_possition = pos;
-		    generateVertexData();
-			m_vertexBuffer->setData(vertex_buf);
+		    
+			m_vertexBuffer->setData(this->generateVertexData());
 		}
 		/// @brief set triangular prism edge width
 		/// @param w size of edge
@@ -68,8 +82,8 @@
 		void setWidth(float w)
 		{
 			m_width = w;
-			generateVertexData();
-			m_vertexBuffer->setData(vertex_buf);
+			
+			m_vertexBuffer->setData(this->generateVertexData());
 		}
 
 

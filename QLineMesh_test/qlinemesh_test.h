@@ -35,27 +35,36 @@
 
 //
 #include <QGuiApplication>
-
-
 #include <Qt3DCore/QEntity>
-
 #include <Qt3DCore/QTransform>
 #include <Qt3DCore/QAspectEngine>
-
 #include <Qt3DInput/QInputAspect>
-
-
 #include <Qt3DExtras/QPerVertexColorMaterial>
-
 #include <Qt3DRender/QGeometryRenderer>
-#include <Qt3DCore/QGeometry>
-#include <Qt3DCore/QAttribute>
-#include <Qt3DCore/QBuffer>
+
+#if QT_VERSION == QT_VERSION_CHECK(6,1,0)
+#include <Qt3DCore/qattribute.h>
+#include <Qt3DCore/qgeometry.h>
+#include <Qt3DCore/qbuffer.h>
+using ATTRIBUTE_TYPE = ATTRIBUTE_TYPE;
+using GEOMETRY_TYPE = GEOMETRY_TYPE
+#elif QT_VERSION == QT_VERSION_CHECK(5,15,2)
+#include <Qt3dRender/qattribute.h>
+#include <Qt3dRender/qgeometry.h>
+#include <Qt3dRender/qbuffer.h>
+using ATTRIBUTE_TYPE = Qt3DRender::QAttribute;
+using GEOMETRY_TYPE = Qt3DRender::QGeometry;
+using BUFFER_TYPE = Qt3DRender::QBuffer;
+
+#endif
+#include <qbytearray.h>
 
 #include <QPropertyAnimation>
 #include <vector>
 
 #include<qpushbutton.h>
+
+#include <QVector>
 
 //
 
@@ -75,10 +84,11 @@ private:
 	Qt3DExtras::QOrbitCameraController* camController;
 	QWidget* container;
 	
-	std::vector<Qt3DCore::QEntity*> vec;
+	QVector<Qt3DCore::QEntity*> vec;
 
 	QPushButton* btn_regen;
 
+public slots:
 	void regen_lines()
 	{
         qDebug()<< "regen_lines cleanup BEGIN";
@@ -87,7 +97,11 @@ private:
 			for (auto& v : vec)
 			{
 				for (auto& comp : v->components())
-					delete comp;
+				{
+					v->removeComponent(comp);
+					
+				}
+					
 				delete v;
 
 			}
@@ -102,7 +116,7 @@ private:
 		{
 			auto line_data = std::make_pair(QVector3D(0, 0, 0), QVector3D(rand() % 10, rand() % 10, rand() % 10));
 			auto line = new QLineMesh(line_data, rootEntity);
-			line->setWidth(0.5f);
+			//line->setWidth(0.5f);
 
 			Qt3DCore::QEntity* entity = new Qt3DCore::QEntity(rootEntity);
 			entity->addComponent(material);
@@ -111,7 +125,18 @@ private:
 			vec.push_back(entity);
 
 		}
+
+			//		auto line_data = std::make_pair(QVector3D(0, 0, 0), QVector3D(rand() % 10, rand() % 10, rand() % 10));
+			//auto line = new QLineMesh(line_data, rootEntity);
+			////line->setWidth(0.5f);
+
+			//Qt3DCore::QEntity* entity = new Qt3DCore::QEntity(rootEntity);
+			//entity->addComponent(material);
+			//entity->addComponent(line);
+
+
         qDebug() << "regen_lines END";
+
 	}
 
 protected:

@@ -149,8 +149,8 @@ $(document).ready(function(){initNavTree('property__macros_8h_source.html',''); 
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="preprocessor">ENTITY##_properties_layout-&gt;addWidget(new QLabel(#stringNAME), ROW, 0);\</span></div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="preprocessor">QDoubleSpinBox* spinbox_##ENTITY##_##NAME = new QDoubleSpinBox;\</span></div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="preprocessor">ENTITY##_properties_layout-&gt;addWidget(spinbox_##ENTITY##_##NAME, ROW, 1);\</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="preprocessor">connect(spinbox_##ENTITY##_##NAME, &amp;QDoubleSpinBox::valueChanged, this, &amp;property_##PROPERTY##::property_##PROPERTY##_##ENTITY##_##NAME##_signal);\</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="preprocessor">connect(spinbox_##ENTITY##_##NAME, &amp;QDoubleSpinBox::valueChanged, this, [&amp;](double value){\</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="preprocessor">connect(spinbox_##ENTITY##_##NAME, QOverload&lt;double&gt;::of(&amp;QDoubleSpinBox::valueChanged), this, &amp;property_##PROPERTY##::property_##PROPERTY##_##ENTITY##_##NAME##_signal);\</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="preprocessor">connect(spinbox_##ENTITY##_##NAME, QOverload&lt;double&gt;::of(&amp;QDoubleSpinBox::valueChanged), this, [&amp;](double value){\</span></div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="preprocessor">read_write_##ENTITY##_json_(QIODevice::WriteOnly,QString(QString(#PROPERTY)+QString(&quot;_&quot;</span>)+QString(#ENTITY)+QString(&quot;_&quot;)+QString(#NAME)+QString(&quot;_&quot;)+QString(&quot;value&quot;)), value);\</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;});\</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;spinbox_##ENTITY##_##NAME-&gt;setValue(read_write_##ENTITY##_json_(QIODevice::ReadOnly,\</div>
@@ -172,8 +172,8 @@ $(document).ready(function(){initNavTree('property__macros_8h_source.html',''); 
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="preprocessor">ENTITY##_properties_layout-&gt;addWidget(new QLabel(#stringNAME), ROW, 0);\</span></div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="preprocessor">QSpinBox* spinbox_##ENTITY##_##NAME = new QSpinBox;\</span></div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="preprocessor">ENTITY##_properties_layout-&gt;addWidget(spinbox_##ENTITY##_##NAME, ROW, 1);\</span></div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="preprocessor">connect(spinbox_##ENTITY##_##NAME, &amp;QSpinBox::valueChanged, this, &amp;property_##PROPERTY##::property_##PROPERTY##_##ENTITY##_##NAME##_signal);\</span></div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="preprocessor">connect(spinbox_##ENTITY##_##NAME, &amp;QSpinBox::valueChanged, this, [&amp;,this](int value){\</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="preprocessor">connect(spinbox_##ENTITY##_##NAME, QOverload&lt;int&gt;::of(&amp;QSpinBox::valueChanged), this, &amp;property_##PROPERTY##::property_##PROPERTY##_##ENTITY##_##NAME##_signal);\</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="preprocessor">connect(spinbox_##ENTITY##_##NAME, QOverload&lt;int&gt;::of(&amp;QSpinBox::valueChanged), this, [&amp;,this](int value){\</span></div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="preprocessor">read_write_##ENTITY##_json_(QIODevice::WriteOnly,QString(#PROPERTY)+QString(&quot;_&quot;</span>)+QString(#ENTITY)+QString(&quot;_&quot;)+QString(#NAME)+QString(&quot;_&quot;)+QString(&quot;value&quot;), value);\</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;});\</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;spinbox_##ENTITY##_##NAME-&gt;setValue(read_write_##ENTITY##_json_(QIODevice::ReadOnly,\</div>
@@ -260,7 +260,7 @@ $(document).ready(function(){initNavTree('property__macros_8h_source.html',''); 
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><b>property_macros.h</b></li>
-    <li class="footer">Generated on Sat Jun 5 2021 15:57:58 for Real World Algorithms by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Tue Jun 8 2021 08:31:59 for Real World Algorithms by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

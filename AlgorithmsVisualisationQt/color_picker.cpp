@@ -26,9 +26,9 @@ color_picker::color_picker(QString label, QWidget *parent)
 
 	setLayout(gridlayout_color);
 
-	connect(spinbox_r, &QSpinBox::valueChanged, this, &color_picker::color_changed_);
-	connect(spinbox_g, &QSpinBox::valueChanged, this, &color_picker::color_changed_);
-	connect(spinbox_b, &QSpinBox::valueChanged, this, &color_picker::color_changed_);
+	connect(spinbox_r, QOverload<int>::of(&QSpinBox::valueChanged), this, &color_picker::color_changed_);
+	connect(spinbox_g, QOverload<int>::of(&QSpinBox::valueChanged), this, &color_picker::color_changed_);
+	connect(spinbox_b, QOverload<int>::of(&QSpinBox::valueChanged), this, &color_picker::color_changed_);
 	setContentsMargins(0, 0, 0, 0);
 }
 

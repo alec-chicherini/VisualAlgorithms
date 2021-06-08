@@ -100,7 +100,12 @@ public slots:
 	/// @return void
 	void viewport_camera_view_all_slot()
 	{
+#if QT_VERSION == QT_VERSION_CHECK(6,1,0)
 		camera_main->viewAll();
+#elif QT_VERSION == QT_VERSION_CHECK(5,15,2)
+		camera_main->viewSphere({ 0,0,0 }, 50);
+#endif
+
 	}
 
 	/// @brief slot to update camera possition from another source like camera_menu widget

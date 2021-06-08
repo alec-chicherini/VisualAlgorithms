@@ -15,7 +15,7 @@ property_mesh::property_mesh(QString parentPath,QWidget *parent)
 
 
 
-	connect(combobox_mesh, &QComboBox::currentIndexChanged, this, &property_mesh::property_mesh_type_signal);
+	connect(combobox_mesh, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &property_mesh::property_mesh_type_signal);
 	
 		//Sphere
 		ADD_ENTITY(sphere)
@@ -76,10 +76,10 @@ property_mesh::property_mesh(QString parentPath,QWidget *parent)
     stackedlayout_mesh->addWidget(sphere_properties);//id 4
 	stackedlayout_mesh->addWidget(torus_properties);//id 5
 
-	connect(combobox_mesh, &QComboBox::currentIndexChanged, stackedlayout_mesh, &QStackedLayout::setCurrentIndex);
+	connect(combobox_mesh, QOverload<int>::of(&QComboBox::currentIndexChanged), stackedlayout_mesh, &QStackedLayout::setCurrentIndex);
 	grid_layout_this->addLayout(stackedlayout_mesh,2,0,Qt::AlignTop);
 	
-	connect(combobox_mesh, &QComboBox::currentIndexChanged, this, [&](int value) {
+	connect(combobox_mesh, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [&](int value) {
 		read_write_current_mesh_index_json_(QIODevice::WriteOnly, "current_mesh_index", value); });
 
 	combobox_mesh->setCurrentIndex(read_write_current_mesh_index_json_(QIODevice::ReadOnly, "current_mesh_index", int()).toInt());

@@ -26,12 +26,13 @@ qlinemesh_test::qlinemesh_test(QWidget* parent)
 	Qt3DCore::QEntity* lightEntity = new Qt3DCore::QEntity(rootEntity);
 	Qt3DRender::QPointLight* light = new Qt3DRender::QPointLight(lightEntity);
 
-	light->setColor(QColor(0, 0, 0));
+	light->setColor(QColor(255, 255, 255));
 	light->setIntensity(1.f);
 	lightEntity->addComponent(light);
 	Qt3DCore::QTransform* lightTransform = new Qt3DCore::QTransform(lightEntity);
 	lightTransform->setTranslation(camera->position());
 	lightEntity->addComponent(lightTransform);
+	lightEntity->addComponent(light);
 
 	view->setRootEntity(rootEntity);
 	//
@@ -55,7 +56,7 @@ qlinemesh_test::qlinemesh_test(QWidget* parent)
 	setLayout(layout);
 	//
 
-	connect(btn_regen, &QAbstractButton::clicked, this, [this] {regen_lines(); });
+	connect(btn_regen, &QAbstractButton::clicked, this, &qlinemesh_test::regen_lines);
 }
 
 qlinemesh_test::~qlinemesh_test()

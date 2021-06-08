@@ -247,15 +247,15 @@ Public Member Functions</h2></td></tr>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    layout-&gt;addWidget(groupbox_camera);</div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    setLayout(layout);</div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    connect(spinbox_possition_x, &amp;QDoubleSpinBox::valueChanged,<span class="keyword">this</span>, &amp;camera_menu::camera_possition_update_);</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    connect(spinbox_possition_y, &amp;QDoubleSpinBox::valueChanged,<span class="keyword">this</span>, &amp;camera_menu::camera_possition_update_);</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    connect(spinbox_possition_z, &amp;QDoubleSpinBox::valueChanged,<span class="keyword">this</span>, &amp;camera_menu::camera_possition_update_);</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    connect(spinbox_possition_x, QOverload&lt;double&gt;::of(&amp;QDoubleSpinBox::valueChanged),<span class="keyword">this</span>, &amp;camera_menu::camera_possition_update_);</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    connect(spinbox_possition_y, QOverload&lt;double&gt;::of(&amp;QDoubleSpinBox::valueChanged),<span class="keyword">this</span>, &amp;camera_menu::camera_possition_update_);</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    connect(spinbox_possition_z, QOverload&lt;double&gt;::of(&amp;QDoubleSpinBox::valueChanged),<span class="keyword">this</span>, &amp;camera_menu::camera_possition_update_);</div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    connect(spinbox_view_center_x, &amp;QDoubleSpinBox::valueChanged, <span class="keyword">this</span>, &amp;camera_menu::camera_view_center_update_);</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    connect(spinbox_view_center_y, &amp;QDoubleSpinBox::valueChanged, <span class="keyword">this</span>, &amp;camera_menu::camera_view_center_update_);</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    connect(spinbox_view_center_z, &amp;QDoubleSpinBox::valueChanged, <span class="keyword">this</span>, &amp;camera_menu::camera_view_center_update_);</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    connect(spinbox_view_center_x, QOverload&lt;double&gt;::of(&amp;QDoubleSpinBox::valueChanged), <span class="keyword">this</span>, &amp;camera_menu::camera_view_center_update_);</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    connect(spinbox_view_center_y, QOverload&lt;double&gt;::of(&amp;QDoubleSpinBox::valueChanged), <span class="keyword">this</span>, &amp;camera_menu::camera_view_center_update_);</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    connect(spinbox_view_center_z, QOverload&lt;double&gt;::of(&amp;QDoubleSpinBox::valueChanged), <span class="keyword">this</span>, &amp;camera_menu::camera_view_center_update_);</div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    connect(combobox_camera_controller, &amp;QComboBox::currentIndexChanged, <span class="keyword">this</span>, &amp;<a class="code" href="classcamera__menu.html#afb3cabf1f59e35c6eb94db0cec4fa90f">camera_menu::camera_controller_signal</a>);</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    connect(combobox_camera_controller, QOverload&lt;int&gt;::of(&amp;QComboBox::currentIndexChanged), <span class="keyword">this</span>, &amp;<a class="code" href="classcamera__menu.html#afb3cabf1f59e35c6eb94db0cec4fa90f">camera_menu::camera_controller_signal</a>);</div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    connect(pushbtn_camera_view_all, &amp;QAbstractButton::pressed, <span class="keyword">this</span>, &amp;<a class="code" href="classcamera__menu.html#a60dac8c5453c68e50098da94fcd2dee6">camera_menu::camera_view_all_signal</a>);</div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
@@ -520,7 +520,7 @@ Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classcamera__menu.html">camera_menu</a></li>
-    <li class="footer">Generated on Sat Jun 5 2021 15:57:58 for Real World Algorithms by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Tue Jun 8 2021 08:31:59 for Real World Algorithms by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>
