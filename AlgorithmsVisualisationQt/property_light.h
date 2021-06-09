@@ -12,15 +12,15 @@
 
 #include "color_picker.h"
 
-class light_menu : public QWidget
+class property_light : public QWidget
 {
 	Q_OBJECT
 
 public:
 	/// @brief default constructor
-	light_menu(QWidget *parent = Q_NULLPTR);
+	property_light(QWidget *parent = Q_NULLPTR);
 	/// @brief default destructor
-	~light_menu();
+	~property_light();
 
 private:
 	QDoubleSpinBox* spinbox_intensity;

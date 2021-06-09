@@ -150,106 +150,83 @@ Public Member Functions</h2></td></tr>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;{</div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;    main_graph=generateRandomGraph&lt;int&gt;(1, 1, 1, 0);</div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;    root = <span class="keyword">new</span> Qt3DCore::QEntity();</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    <span class="comment">//left menu</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    tab_menu_left = <span class="keyword">new</span> QTabWidget(<span class="keyword">this</span>);</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    tab_menu_right = <span class="keyword">new</span> QTabWidget(<span class="keyword">this</span>);</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    graph_menu_ = <span class="keyword">new</span> <a class="code" href="classgraph__menu.html">graph_menu</a>(<span class="keyword">this</span>);</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    sorting_menu_ = <span class="keyword">new</span> <a class="code" href="classsorting__menu.html">sorting_menu</a>(<span class="keyword">this</span>);</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    camera_menu_ = <span class="keyword">new</span> <a class="code" href="classcamera__menu.html">camera_menu</a>(<span class="keyword">this</span>);</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    light_menu_ = <span class="keyword">new</span> light_menu(<span class="keyword">this</span>);</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    tab_menu_left-&gt;addTab(graph_menu_,<span class="stringliteral">&quot;Graph&quot;</span>);</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    tab_menu_left-&gt;addTab(sorting_menu_, <span class="stringliteral">&quot;Sort&quot;</span>);</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    tab_menu_left-&gt;setTabPosition(QTabWidget::TabPosition::West);</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="comment">//right menu</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    stacked_menu_right = <span class="keyword">new</span> QStackedLayout(tab_menu_right);</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    scene_properties_common_graph_ = <span class="keyword">new</span> <a class="code" href="classscene__properties__common__graph.html">scene_properties_common_graph</a>(root,<span class="keyword">this</span>);</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    stacked_menu_right-&gt;addWidget(scene_properties_common_graph_);</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    QWidget* menu_right = <span class="keyword">new</span> QWidget(<span class="keyword">this</span>);</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    menu_right-&gt;setLayout(stacked_menu_right);</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    tab_menu_right-&gt;addTab(menu_right, <span class="stringliteral">&quot;Graph&quot;</span>);</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    tab_menu_right-&gt;addTab(camera_menu_, <span class="stringliteral">&quot;Camera&quot;</span>);</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    tab_menu_right-&gt;addTab(light_menu_, <span class="stringliteral">&quot;Light&quot;</span>);</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    tab_menu_right-&gt;setTabPosition(QTabWidget::TabPosition::East);</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="comment">//</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    qDebug() &lt;&lt; root &lt;&lt; <span class="stringliteral">&quot;&lt;&lt;&lt;&lt;------------- root main_window PARENT VALUE &quot;</span>;</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    <span class="comment">//left menu</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    tab_menu_left = <span class="keyword">new</span> QTabWidget(<span class="keyword">this</span>);</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    graph_menu_ = <span class="keyword">new</span> <a class="code" href="classgraph__menu.html">graph_menu</a>(<span class="keyword">this</span>);</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    sorting_menu_ = <span class="keyword">new</span> <a class="code" href="classsorting__menu.html">sorting_menu</a>(<span class="keyword">this</span>);</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    tab_menu_left-&gt;addTab(graph_menu_,<span class="stringliteral">&quot;Graph&quot;</span>);</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    tab_menu_left-&gt;addTab(sorting_menu_, <span class="stringliteral">&quot;Sort&quot;</span>);</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    tab_menu_left-&gt;setTabPosition(QTabWidget::TabPosition::West);</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="comment">//visualisation window</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    viewport_window_ = <span class="keyword">new</span> <a class="code" href="classviewport__window.html">viewport_window</a>(root, <span class="keyword">this</span>);</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="comment">//</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    </div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="comment">//right menu</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    property_menu_right = <span class="keyword">new</span> QWidget(<span class="keyword">this</span>);</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    stacked_menu_right = <span class="keyword">new</span> QStackedLayout(property_menu_right);</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    scene_properties_common_graph_ = <span class="keyword">new</span> <a class="code" href="classscene__properties__common__graph.html">scene_properties_common_graph</a>(root,<span class="keyword">this</span>);</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    stacked_menu_right-&gt;addWidget(scene_properties_common_graph_);</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    property_menu_right-&gt;setLayout(stacked_menu_right);</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="comment">//</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="comment">//main layout</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    grid_layout_main = <span class="keyword">new</span> QGridLayout;</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="comment">//visualisation window</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    viewport_window_ = <span class="keyword">new</span> <a class="code" href="classviewport__window.html">viewport_window</a>(root,<span class="keyword">this</span>);</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="comment">//</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="comment">//main layout</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    grid_layout_main = <span class="keyword">new</span> QGridLayout;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    grid_layout_main-&gt;addWidget(tab_menu_left,0,0,Qt::AlignTop);</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    grid_layout_main-&gt;addWidget(viewport_window_, 0, 1);</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    grid_layout_main-&gt;addWidget(tab_menu_right, 0, 2, Qt::AlignTop);</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    grid_layout_main-&gt;setColumnMinimumWidth(0, 100);</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    grid_layout_main-&gt;setColumnStretch(0, 0);</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    grid_layout_main-&gt;setColumnMinimumWidth(1, 300);</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    grid_layout_main-&gt;setColumnStretch(1, 1);</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    grid_layout_main-&gt;addWidget(tab_menu_left,0,0,Qt::AlignTop);</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    grid_layout_main-&gt;addWidget(viewport_window_, 0, 1);</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    grid_layout_main-&gt;addWidget(property_menu_right, 0, 2, Qt::AlignTop);</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    grid_layout_main-&gt;setColumnMinimumWidth(0, 100);</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    grid_layout_main-&gt;setColumnStretch(0, 0);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    grid_layout_main-&gt;setColumnMinimumWidth(1, 300);</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    grid_layout_main-&gt;setColumnStretch(1, 1);</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    grid_layout_main-&gt;setColumnMinimumWidth(2, 100);</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    grid_layout_main-&gt;setColumnStretch(2, 0);</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    setLayout(grid_layout_main);</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="comment">//</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    grid_layout_main-&gt;setColumnMinimumWidth(2, 100);</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    grid_layout_main-&gt;setColumnStretch(2, 0);</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    setLayout(grid_layout_main);</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="comment">//</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="comment">//from graph menu</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    connect(graph_menu_, &amp;<a class="code" href="classgraph__menu.html#aa5301fb676c39ea453d623b11e71b56c">graph_menu::regen_data_signal</a>,<span class="keyword">this</span>, &amp;main_window::re_gen_graph);</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    connect(graph_menu_, &amp;<a class="code" href="classgraph__menu.html#a365b0d88adfe01e911efe0d638b55f5c">graph_menu::graph_type_signal</a>, <span class="keyword">this</span>, &amp;main_window::graph_type_changed_slot);</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    connect(<span class="keyword">this</span>, &amp;<a class="code" href="classmain__window.html#a8d8b6f78b38359e25882b2793933ae71">main_window::type_graph_signal</a>, scene_properties_common_graph_, &amp;<a class="code" href="classscene__properties__common__graph.html#acc122d2244c96f8ba56ab7a553ec9932">scene_properties_common_graph::scene_properties_common_graph_type_slot</a>);</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="comment">//</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="comment">//connections between viewport and menu camera possitions</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    connect(camera_menu_, &amp;<a class="code" href="classcamera__menu.html#a53fb28a30f6ee1e176d043d0858c9897">camera_menu::camera_possition_signal</a>, viewport_window_, &amp;<a class="code" href="classviewport__window.html#a787b79ec31d30fe7086bbff0d4854de9">viewport_window::viewport_camera_possition_slot</a>);</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    connect(camera_menu_, &amp;<a class="code" href="classcamera__menu.html#a4c0c099d9ca00d2a4d8e6e863cd36c56">camera_menu::camera_view_center_signal</a>, viewport_window_, &amp;<a class="code" href="classviewport__window.html#a859d52483105dd876fa7a9c722d7e885">viewport_window::viewport_camera_view_center_slot</a>);</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    connect(viewport_window_, &amp;<a class="code" href="classviewport__window.html#aef87c16ca301b7b28854b27939910704">viewport_window::viewport_camera_position_signal</a>, camera_menu_, &amp;<a class="code" href="classcamera__menu.html#a2c94f6660ea2d120b1565be557e7114e">camera_menu::camera_possition_slot</a>);</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    connect(viewport_window_, &amp;<a class="code" href="classviewport__window.html#aff599d6954e4185ab60bdcb3c38f16aa">viewport_window::viewport_camera_view_center_signal</a>, camera_menu_, &amp;<a class="code" href="classcamera__menu.html#a68602889e5e12187dcc5c910a6fca91d">camera_menu::camera_view_center_slot</a>);</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    connect(camera_menu_, &amp;<a class="code" href="classcamera__menu.html#afb3cabf1f59e35c6eb94db0cec4fa90f">camera_menu::camera_controller_signal</a>, viewport_window_, &amp;<a class="code" href="classviewport__window.html#a5e75c4b38ff947b5c1c06a6a78cb1d33">viewport_window::viewport_camera_controller_slot</a>);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="comment">//from graph menu</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    connect(graph_menu_, &amp;<a class="code" href="classgraph__menu.html#aa5301fb676c39ea453d623b11e71b56c">graph_menu::regen_data_signal</a>,<span class="keyword">this</span>, &amp;main_window::re_gen_graph);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    connect(graph_menu_, &amp;<a class="code" href="classgraph__menu.html#a365b0d88adfe01e911efe0d638b55f5c">graph_menu::graph_type_signal</a>, <span class="keyword">this</span>, &amp;main_window::graph_type_changed_slot);</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    connect(<span class="keyword">this</span>, &amp;<a class="code" href="classmain__window.html#a8d8b6f78b38359e25882b2793933ae71">main_window::type_graph_signal</a>, scene_properties_common_graph_, &amp;<a class="code" href="classscene__properties__common__graph.html#acc122d2244c96f8ba56ab7a553ec9932">scene_properties_common_graph::scene_properties_common_graph_type_slot</a>);</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    </div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="comment">//connections between viewport and menu camera possitions</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    connect(viewport_window_, &amp;viewport_window::viewport_camera_signal, scene_properties_common_graph_, &amp;scene_properties_common_graph::scene_properties_common_graph_camera_slot);</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="comment">//connect(property_camera_, &amp;property_camera::camera_possition_signal, viewport_window_, &amp;viewport_window::viewport_camera_possition_slot);</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="comment">//connect(property_camera_, &amp;property_camera::camera_view_center_signal, viewport_window_, &amp;viewport_window::viewport_camera_view_center_slot);</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="comment">//connect(viewport_window_, &amp;viewport_window::viewport_camera_position_signal, property_camera_, &amp;property_camera::camera_possition_slot);</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="comment">//connect(viewport_window_, &amp;viewport_window::viewport_camera_view_center_signal, property_camera_, &amp;property_camera::camera_view_center_slot);</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="comment">//connect(property_camera_, &amp;property_camera::camera_controller_signal, viewport_window_, &amp;viewport_window::viewport_camera_controller_slot);</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="comment">//connect(property_camera_, &amp;property_camera::camera_view_all_signal, viewport_window_, &amp;viewport_window::viewport_camera_view_all_slot);</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="comment">//connect(property_light_, &amp;property_light::light_color_signal, viewport_window_, &amp;viewport_window::viewport_light_color_slot);</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="comment">//connect(property_light_, &amp;property_light::light_intencity_signal, viewport_window_, &amp;viewport_window::viewport_light_intensity_slot);</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    connect(camera_menu_, &amp;<a class="code" href="classcamera__menu.html#a60dac8c5453c68e50098da94fcd2dee6">camera_menu::camera_view_all_signal</a>, viewport_window_, &amp;<a class="code" href="classviewport__window.html#a9e28d944a995b56a4d251c29c1010af3">viewport_window::viewport_camera_view_all_slot</a>);</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="comment">//light</span></div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    connect(light_menu_, &amp;light_menu::light_color_signal, viewport_window_, &amp;<a class="code" href="classviewport__window.html#ab2942a4f615745cb5261dfbf29d6f389">viewport_window::viewport_light_color_slot</a>);</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    connect(light_menu_, &amp;light_menu::light_intencity_signal, viewport_window_, &amp;<a class="code" href="classviewport__window.html#a8c529c3f2784699fa34cb59023fbc733">viewport_window::viewport_light_intensity_slot</a>);</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;}</div>
-<div class="ttc" id="aclasscamera__menu_html"><div class="ttname"><a href="classcamera__menu.html">camera_menu</a></div><div class="ttdoc">class holds the global camera current possition settings</div><div class="ttdef"><b>Definition:</b> camera_menu.h:23</div></div>
-<div class="ttc" id="aclasscamera__menu_html_a2c94f6660ea2d120b1565be557e7114e"><div class="ttname"><a href="classcamera__menu.html#a2c94f6660ea2d120b1565be557e7114e">camera_menu::camera_possition_slot</a></div><div class="ttdeci">void camera_possition_slot(const QVector3D &amp;pos)</div><div class="ttdoc">camera possition slot to change spinboxes values in menu if camera possition changed from another sou...</div><div class="ttdef"><b>Definition:</b> camera_menu.h:99</div></div>
-<div class="ttc" id="aclasscamera__menu_html_a4c0c099d9ca00d2a4d8e6e863cd36c56"><div class="ttname"><a href="classcamera__menu.html#a4c0c099d9ca00d2a4d8e6e863cd36c56">camera_menu::camera_view_center_signal</a></div><div class="ttdeci">void camera_view_center_signal(QVector3D pos)</div><div class="ttdoc">camera view center signal</div></div>
-<div class="ttc" id="aclasscamera__menu_html_a53fb28a30f6ee1e176d043d0858c9897"><div class="ttname"><a href="classcamera__menu.html#a53fb28a30f6ee1e176d043d0858c9897">camera_menu::camera_possition_signal</a></div><div class="ttdeci">void camera_possition_signal(QVector3D pos)</div><div class="ttdoc">camera possition signal</div></div>
-<div class="ttc" id="aclasscamera__menu_html_a60dac8c5453c68e50098da94fcd2dee6"><div class="ttname"><a href="classcamera__menu.html#a60dac8c5453c68e50098da94fcd2dee6">camera_menu::camera_view_all_signal</a></div><div class="ttdeci">void camera_view_all_signal()</div><div class="ttdoc">send signal if button View All pressed</div></div>
-<div class="ttc" id="aclasscamera__menu_html_a68602889e5e12187dcc5c910a6fca91d"><div class="ttname"><a href="classcamera__menu.html#a68602889e5e12187dcc5c910a6fca91d">camera_menu::camera_view_center_slot</a></div><div class="ttdeci">void camera_view_center_slot(const QVector3D &amp;pos)</div><div class="ttdoc">camera view center slot to change spinboxes values in menu if camera view center slot changed from an...</div><div class="ttdef"><b>Definition:</b> camera_menu.h:113</div></div>
-<div class="ttc" id="aclasscamera__menu_html_afb3cabf1f59e35c6eb94db0cec4fa90f"><div class="ttname"><a href="classcamera__menu.html#afb3cabf1f59e35c6eb94db0cec4fa90f">camera_menu::camera_controller_signal</a></div><div class="ttdeci">void camera_controller_signal(int val)</div><div class="ttdoc">camera controller type signal</div></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;}</div>
 <div class="ttc" id="aclassgraph__menu_html"><div class="ttname"><a href="classgraph__menu.html">graph_menu</a></div><div class="ttdoc">graph menu class holds controls to choose and set up generation of graphs visualisation</div><div class="ttdef"><b>Definition:</b> graph_menu.h:23</div></div>
 <div class="ttc" id="aclassgraph__menu_html_a365b0d88adfe01e911efe0d638b55f5c"><div class="ttname"><a href="classgraph__menu.html#a365b0d88adfe01e911efe0d638b55f5c">graph_menu::graph_type_signal</a></div><div class="ttdeci">void graph_type_signal(int)</div><div class="ttdoc">current graph type signal emmited after select the graph type</div></div>
 <div class="ttc" id="aclassgraph__menu_html_aa5301fb676c39ea453d623b11e71b56c"><div class="ttname"><a href="classgraph__menu.html#aa5301fb676c39ea453d623b11e71b56c">graph_menu::regen_data_signal</a></div><div class="ttdeci">void regen_data_signal(const int V, const int E_left, const int E_right, const under_GP &amp;properties)</div><div class="ttdoc">send current graph properties choosen in this widget</div></div>
 <div class="ttc" id="aclassmain__window_html_a8d8b6f78b38359e25882b2793933ae71"><div class="ttname"><a href="classmain__window.html#a8d8b6f78b38359e25882b2793933ae71">main_window::type_graph_signal</a></div><div class="ttdeci">void type_graph_signal(int &amp;, graph&lt; int &gt; &amp;, under_GP &amp;)</div><div class="ttdoc">graph signal retranslation to pass the generated graph to entities in this</div></div>
-<div class="ttc" id="aclassscene__properties__common__graph_html"><div class="ttname"><a href="classscene__properties__common__graph.html">scene_properties_common_graph</a></div><div class="ttdoc">3d scene for graphs visualisation properties.</div><div class="ttdef"><b>Definition:</b> scene_properties_common_graph.h:36</div></div>
-<div class="ttc" id="aclassscene__properties__common__graph_html_acc122d2244c96f8ba56ab7a553ec9932"><div class="ttname"><a href="classscene__properties__common__graph.html#acc122d2244c96f8ba56ab7a553ec9932">scene_properties_common_graph::scene_properties_common_graph_type_slot</a></div><div class="ttdeci">void scene_properties_common_graph_type_slot(int &amp;type, graph&lt; int &gt; &amp;gr, under_GP &amp;options)</div><div class="ttdoc">if graph type is common graph this scene start to work</div><div class="ttdef"><b>Definition:</b> scene_properties_common_graph.h:58</div></div>
+<div class="ttc" id="aclassscene__properties__common__graph_html"><div class="ttname"><a href="classscene__properties__common__graph.html">scene_properties_common_graph</a></div><div class="ttdoc">3d scene for graphs visualisation properties.</div><div class="ttdef"><b>Definition:</b> scene_properties_common_graph.h:38</div></div>
+<div class="ttc" id="aclassscene__properties__common__graph_html_acc122d2244c96f8ba56ab7a553ec9932"><div class="ttname"><a href="classscene__properties__common__graph.html#acc122d2244c96f8ba56ab7a553ec9932">scene_properties_common_graph::scene_properties_common_graph_type_slot</a></div><div class="ttdeci">void scene_properties_common_graph_type_slot(int &amp;type, graph&lt; int &gt; &amp;gr, under_GP &amp;options)</div><div class="ttdoc">if graph type is common graph this scene start to work</div><div class="ttdef"><b>Definition:</b> scene_properties_common_graph.h:64</div></div>
 <div class="ttc" id="aclasssorting__menu_html"><div class="ttname"><a href="classsorting__menu.html">sorting_menu</a></div><div class="ttdoc">widget for choose sorting generation propertes</div><div class="ttdef"><b>Definition:</b> sorting_menu.h:10</div></div>
-<div class="ttc" id="aclassviewport__window_html"><div class="ttname"><a href="classviewport__window.html">viewport_window</a></div><div class="ttdoc">viewport widget to show Qt3D objects</div><div class="ttdef"><b>Definition:</b> viewport_window.h:49</div></div>
-<div class="ttc" id="aclassviewport__window_html_a5e75c4b38ff947b5c1c06a6a78cb1d33"><div class="ttname"><a href="classviewport__window.html#a5e75c4b38ff947b5c1c06a6a78cb1d33">viewport_window::viewport_camera_controller_slot</a></div><div class="ttdeci">void viewport_camera_controller_slot(int index)</div><div class="ttdoc">slot to set current type of camera controller</div><div class="ttdef"><b>Definition:</b> viewport_window.h:137</div></div>
-<div class="ttc" id="aclassviewport__window_html_a787b79ec31d30fe7086bbff0d4854de9"><div class="ttname"><a href="classviewport__window.html#a787b79ec31d30fe7086bbff0d4854de9">viewport_window::viewport_camera_possition_slot</a></div><div class="ttdeci">void viewport_camera_possition_slot(QVector3D pos)</div><div class="ttdoc">slot to update camera possition from another source like camera_menu widget</div><div class="ttdef"><b>Definition:</b> viewport_window.h:114</div></div>
-<div class="ttc" id="aclassviewport__window_html_a859d52483105dd876fa7a9c722d7e885"><div class="ttname"><a href="classviewport__window.html#a859d52483105dd876fa7a9c722d7e885">viewport_window::viewport_camera_view_center_slot</a></div><div class="ttdeci">void viewport_camera_view_center_slot(QVector3D pos)</div><div class="ttdoc">slot to update camera view center from another source like camera_menu widget</div><div class="ttdef"><b>Definition:</b> viewport_window.h:125</div></div>
-<div class="ttc" id="aclassviewport__window_html_a8c529c3f2784699fa34cb59023fbc733"><div class="ttname"><a href="classviewport__window.html#a8c529c3f2784699fa34cb59023fbc733">viewport_window::viewport_light_intensity_slot</a></div><div class="ttdeci">void viewport_light_intensity_slot(float intens)</div><div class="ttdoc">slot to update light intensity</div><div class="ttdef"><b>Definition:</b> viewport_window.h:171</div></div>
-<div class="ttc" id="aclassviewport__window_html_a9e28d944a995b56a4d251c29c1010af3"><div class="ttname"><a href="classviewport__window.html#a9e28d944a995b56a4d251c29c1010af3">viewport_window::viewport_camera_view_all_slot</a></div><div class="ttdeci">void viewport_camera_view_all_slot()</div><div class="ttdoc">slot to set camera possition using QCamera::viewAll()</div><div class="ttdef"><b>Definition:</b> viewport_window.h:101</div></div>
-<div class="ttc" id="aclassviewport__window_html_ab2942a4f615745cb5261dfbf29d6f389"><div class="ttname"><a href="classviewport__window.html#ab2942a4f615745cb5261dfbf29d6f389">viewport_window::viewport_light_color_slot</a></div><div class="ttdeci">void viewport_light_color_slot(QColor clr)</div><div class="ttdoc">slot to update light color</div><div class="ttdef"><b>Definition:</b> viewport_window.h:158</div></div>
-<div class="ttc" id="aclassviewport__window_html_aef87c16ca301b7b28854b27939910704"><div class="ttname"><a href="classviewport__window.html#aef87c16ca301b7b28854b27939910704">viewport_window::viewport_camera_position_signal</a></div><div class="ttdeci">void viewport_camera_position_signal(const QVector3D &amp;position)</div><div class="ttdoc">signal from viewport after changing camera possition using camera controller</div></div>
-<div class="ttc" id="aclassviewport__window_html_aff599d6954e4185ab60bdcb3c38f16aa"><div class="ttname"><a href="classviewport__window.html#aff599d6954e4185ab60bdcb3c38f16aa">viewport_window::viewport_camera_view_center_signal</a></div><div class="ttdeci">void viewport_camera_view_center_signal(const QVector3D &amp;position)</div><div class="ttdoc">signal from viewport fter changing camera view center using camera controller</div></div>
+<div class="ttc" id="aclassviewport__window_html"><div class="ttname"><a href="classviewport__window.html">viewport_window</a></div><div class="ttdoc">viewport widget to show Qt3D objects</div><div class="ttdef"><b>Definition:</b> viewport_window.h:46</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -269,8 +246,8 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>default destructor </p>
-<div class="fragment"><div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;{</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;}</div>
+<div class="fragment"><div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;{</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -325,7 +302,7 @@ Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classmain__window.html">main_window</a></li>
-    <li class="footer">Generated on Tue Jun 8 2021 08:31:59 for Real World Algorithms by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Jun 9 2021 19:14:10 for Real World Algorithms by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

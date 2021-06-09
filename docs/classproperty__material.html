@@ -197,108 +197,108 @@ Private Attributes</h2></td></tr>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    combobox_material-&gt;addItem(<span class="stringliteral">&quot;PHONG_ALPHA&quot;</span>);<span class="comment">//id 9</span></div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    combobox_material-&gt;addItem(<span class="stringliteral">&quot;TEXTURE&quot;</span>);<span class="comment">//id 10</span></div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    connect(combobox_material, QOverload&lt;int&gt;::of(&amp;QComboBox::currentIndexChanged), <span class="keyword">this</span>, &amp;<a class="code" href="classproperty__material.html#a88881048da571cd8e96c20dcd0cbd98c">property_material::property_material_type_signal</a>);</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="comment">//PHONG</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="comment">/*QWidget* phong_properties = new QWidget(this);</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">    QGridLayout* phong_properties_layout = new QGridLayout;</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">    phong_properties_layout-&gt;setAlignment(Qt::AlignTop);</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">    phong_properties-&gt;setLayout(phong_properties_layout);</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">    color_picker* color_picker_phong_ambient = new color_picker(&quot;Ambient &quot;);</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">    phong_properties_layout-&gt;addWidget(color_picker_phong_ambient, 0, 0);</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">    connect(color_picker_phong_ambient, &amp;color_picker::color_picker_signal, this, &amp;property_material::property_material_phong_ambient_signal);*/</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="comment">//PHONG</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    ADD_ENTITY(phong)</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    ADD_COLOR_PICKER_PROPERTY(material, phong, ambient, Ambient, 0);</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    ADD_COLOR_PICKER_PROPERTY(material, phong, diffuse, Diffuse, 1);</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    ADD_DOUBLE_SPIN_BOX_PROPERTY(material, phong, shininess, Shininess, 2);</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    ADD_COLOR_PICKER_PROPERTY(material, phong, specular, Specular, 3);</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="comment">//</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    connect(combobox_material, QOverload&lt;int&gt;::of(&amp;QComboBox::currentIndexChanged),</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;            <span class="keyword">this</span>, &amp;<a class="code" href="classproperty__material.html#a88881048da571cd8e96c20dcd0cbd98c">property_material::property_material_type_signal</a>);</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="comment">//PHONG</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="comment">/*QWidget* phong_properties = new QWidget(this);</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">    QGridLayout* phong_properties_layout = new QGridLayout;</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">    phong_properties_layout-&gt;setAlignment(Qt::AlignTop);</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">    phong_properties-&gt;setLayout(phong_properties_layout);</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">    color_picker* color_picker_phong_ambient = new color_picker(&quot;Ambient &quot;);</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">    phong_properties_layout-&gt;addWidget(color_picker_phong_ambient, 0, 0);</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">    connect(color_picker_phong_ambient, &amp;color_picker::color_picker_signal, this, &amp;property_material::property_material_phong_ambient_signal);*/</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="comment">//PHONG</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    ADD_ENTITY(phong)</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    ADD_COLOR_PICKER_PROPERTY(material, phong, ambient, Ambient, 0);</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    ADD_COLOR_PICKER_PROPERTY(material, phong, diffuse, Diffuse, 1);</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    ADD_DOUBLE_SPIN_BOX_PROPERTY(material, phong, shininess, Shininess, 2);</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    ADD_COLOR_PICKER_PROPERTY(material, phong, specular, Specular, 3);</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="comment">//</span></div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="comment">//DIFFUSE_MAP</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    ADD_ENTITY(diffuse_map)</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    ADD_COLOR_PICKER_PROPERTY(material, diffuse_map, ambient, Ambient, 0);</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    ADD_COLOR_PICKER_PROPERTY(material, diffuse_map, specular, Specular, 1);</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    ADD_DOUBLE_SPIN_BOX_PROPERTY(material, diffuse_map, shininess, Shininess, 2);</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    ADD_DOUBLE_SPIN_BOX_PROPERTY(material, diffuse_map, texture_scale, TextureScale, 3);</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="comment">//</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="comment">//DIFFUSE_SPECULAR_MAP</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    ADD_ENTITY(diffuse_specular_map)</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    ADD_COLOR_PICKER_PROPERTY(material, diffuse_specular_map, ambient, Ambient, 0);</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    ADD_DOUBLE_SPIN_BOX_PROPERTY(material, diffuse_specular_map, shininess, Shininess, 1);</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    ADD_DOUBLE_SPIN_BOX_PROPERTY(material, diffuse_specular_map, texture_scale, TextureScale, 2);</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="comment">//</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="comment">//DIFFUSE_SPECULAR</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    ADD_ENTITY(diffuse_specular)</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    ADD_CHECK_BOX_PROPERTY(material, diffuse_specular, alpha_blending, AlphaBlending, 0);</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    ADD_COLOR_PICKER_PROPERTY(material, diffuse_specular, ambient, Ambient, 1);</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    ADD_COLOR_PICKER_PROPERTY(material, diffuse_specular, diffuse, Diffuse, 2);</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    ADD_COLOR_PICKER_PROPERTY(material, diffuse_specular, specular, Specular, 3);</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    ADD_DOUBLE_SPIN_BOX_PROPERTY(material, diffuse_specular, shininess, Shininess, 4);</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    ADD_DOUBLE_SPIN_BOX_PROPERTY(material, diffuse_specular, texture_scale, TextureScale, 5);</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="comment">//</span></div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="comment">//GOOCH</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    ADD_ENTITY(gooch)</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    ADD_DOUBLE_SPIN_BOX_PROPERTY(material, gooch, alpha, Alpha, 0);</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    ADD_DOUBLE_SPIN_BOX_PROPERTY(material, gooch, beta, Beta, 1);</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    ADD_DOUBLE_SPIN_BOX_PROPERTY(material, gooch, shininess, Shininess, 2);</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    ADD_COLOR_PICKER_PROPERTY(material, gooch, specular, Specular, 3);</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    ADD_COLOR_PICKER_PROPERTY(material, gooch, warm, Warm, 4);</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    ADD_COLOR_PICKER_PROPERTY(material, gooch, diffuse, Diffuse, 5);</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    ADD_COLOR_PICKER_PROPERTY(material, gooch, cool, Cool, 6);</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="comment">//</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    </div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="comment">//METAL_ROUGH</span></div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    ADD_ENTITY(metal_rough)</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    ADD_COLOR_PICKER_PROPERTY(material, metal_rough, base_color, BaseColor, 0);</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    ADD_DOUBLE_SPIN_BOX_PROPERTY(material, metal_rough, texture_scale, TextureScale, 1);</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="comment">//</span></div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="comment">//MORPH_PHONG</span></div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    ADD_ENTITY(morph_phong)</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    ADD_COLOR_PICKER_PROPERTY(material, morph_phong, ambient, Ambient, 0);</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    ADD_COLOR_PICKER_PROPERTY(material, morph_phong, diffuse, Diffuse, 1);</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    ADD_COLOR_PICKER_PROPERTY(material, morph_phong, specular, Specular, 2);</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    ADD_DOUBLE_SPIN_BOX_PROPERTY(material, morph_phong, shininess, Shininess, 3);</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    ADD_DOUBLE_SPIN_BOX_PROPERTY(material, morph_phong, interpolator, Interpolator, 4);</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="comment">//</span></div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="comment">//NORMAL_DIFFUSE_MAP</span></div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    ADD_ENTITY(normal_diffuse_map)</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    ADD_COLOR_PICKER_PROPERTY(material, normal_diffuse_map, ambient, Ambient, 0);</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    ADD_COLOR_PICKER_PROPERTY(material, normal_diffuse_map, specular, Specular, 1);</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    ADD_DOUBLE_SPIN_BOX_PROPERTY(material, normal_diffuse_map, shininess, Shininess, 2);</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    ADD_DOUBLE_SPIN_BOX_PROPERTY(material, normal_diffuse_map, texture_scale, TextureScale, 3);</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="comment">//</span></div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <span class="comment">//NORMAL_DIFFUSE_SPECULAR_MAP</span></div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    ADD_ENTITY(normal_diffuse_specular_map)</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    ADD_COLOR_PICKER_PROPERTY(material, normal_diffuse_specular_map, ambient, Ambient, 0);</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    ADD_DOUBLE_SPIN_BOX_PROPERTY(material, normal_diffuse_specular_map, shininess, Shininess, 1);</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    ADD_DOUBLE_SPIN_BOX_PROPERTY(material, normal_diffuse_specular_map, texture_scale, TextureScale, 2);</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="comment">//</span></div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160; </div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    <span class="comment">//PHONG_ALPHA</span></div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    ADD_ENTITY(phong_alpha)</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    ADD_COLOR_PICKER_PROPERTY(material, phong_alpha, ambient, Ambient, 0);</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    ADD_COLOR_PICKER_PROPERTY(material, phong_alpha, diffuse, Diffuse, 1);</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    ADD_COLOR_PICKER_PROPERTY(material, phong_alpha, specular, Specular, 2);</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    ADD_DOUBLE_SPIN_BOX_PROPERTY(material, phong_alpha, shininess, Shininess, 3);</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    ADD_DOUBLE_SPIN_BOX_PROPERTY(material, phong_alpha, alpha, Alpha, 4);</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    <span class="comment">//</span></div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160; </div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    <span class="comment">//TEXTURE</span></div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    ADD_ENTITY(texture)</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    ADD_CHECK_BOX_PROPERTY(material, texture, alpha_blending, AlphaBlending, 0);</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    <span class="comment">//</span></div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    </div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="comment">//DIFFUSE_MAP</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    ADD_ENTITY(diffuse_map)</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    ADD_COLOR_PICKER_PROPERTY(material, diffuse_map, ambient, Ambient, 0);</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    ADD_COLOR_PICKER_PROPERTY(material, diffuse_map, specular, Specular, 1);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    ADD_DOUBLE_SPIN_BOX_PROPERTY(material, diffuse_map, shininess, Shininess, 2);</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    ADD_DOUBLE_SPIN_BOX_PROPERTY(material, diffuse_map, texture_scale, TextureScale, 3);</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="comment">//</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="comment">//DIFFUSE_SPECULAR_MAP</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    ADD_ENTITY(diffuse_specular_map)</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    ADD_COLOR_PICKER_PROPERTY(material, diffuse_specular_map, ambient, Ambient, 0);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    ADD_DOUBLE_SPIN_BOX_PROPERTY(material, diffuse_specular_map, shininess, Shininess, 1);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    ADD_DOUBLE_SPIN_BOX_PROPERTY(material, diffuse_specular_map, texture_scale, TextureScale, 2);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="comment">//</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="comment">//DIFFUSE_SPECULAR</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    ADD_ENTITY(diffuse_specular)</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    ADD_CHECK_BOX_PROPERTY(material, diffuse_specular, alpha_blending, AlphaBlending, 0);</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    ADD_COLOR_PICKER_PROPERTY(material, diffuse_specular, ambient, Ambient, 1);</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    ADD_COLOR_PICKER_PROPERTY(material, diffuse_specular, diffuse, Diffuse, 2);</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    ADD_COLOR_PICKER_PROPERTY(material, diffuse_specular, specular, Specular, 3);</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    ADD_DOUBLE_SPIN_BOX_PROPERTY(material, diffuse_specular, shininess, Shininess, 4);</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    ADD_DOUBLE_SPIN_BOX_PROPERTY(material, diffuse_specular, texture_scale, TextureScale, 5);</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="comment">//</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="comment">//GOOCH</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    ADD_ENTITY(gooch)</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    ADD_DOUBLE_SPIN_BOX_PROPERTY(material, gooch, alpha, Alpha, 0);</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    ADD_DOUBLE_SPIN_BOX_PROPERTY(material, gooch, beta, Beta, 1);</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    ADD_DOUBLE_SPIN_BOX_PROPERTY(material, gooch, shininess, Shininess, 2);</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    ADD_COLOR_PICKER_PROPERTY(material, gooch, specular, Specular, 3);</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    ADD_COLOR_PICKER_PROPERTY(material, gooch, warm, Warm, 4);</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    ADD_COLOR_PICKER_PROPERTY(material, gooch, diffuse, Diffuse, 5);</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    ADD_COLOR_PICKER_PROPERTY(material, gooch, cool, Cool, 6);</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="comment">//</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    </div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="comment">//METAL_ROUGH</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    ADD_ENTITY(metal_rough)</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    ADD_COLOR_PICKER_PROPERTY(material, metal_rough, base_color, BaseColor, 0);</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    ADD_DOUBLE_SPIN_BOX_PROPERTY(material, metal_rough, texture_scale, TextureScale, 1);</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="comment">//</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="comment">//MORPH_PHONG</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    ADD_ENTITY(morph_phong)</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    ADD_COLOR_PICKER_PROPERTY(material, morph_phong, ambient, Ambient, 0);</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    ADD_COLOR_PICKER_PROPERTY(material, morph_phong, diffuse, Diffuse, 1);</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    ADD_COLOR_PICKER_PROPERTY(material, morph_phong, specular, Specular, 2);</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    ADD_DOUBLE_SPIN_BOX_PROPERTY(material, morph_phong, shininess, Shininess, 3);</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    ADD_DOUBLE_SPIN_BOX_PROPERTY(material, morph_phong, interpolator, Interpolator, 4);</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="comment">//</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <span class="comment">//NORMAL_DIFFUSE_MAP</span></div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    ADD_ENTITY(normal_diffuse_map)</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    ADD_COLOR_PICKER_PROPERTY(material, normal_diffuse_map, ambient, Ambient, 0);</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    ADD_COLOR_PICKER_PROPERTY(material, normal_diffuse_map, specular, Specular, 1);</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    ADD_DOUBLE_SPIN_BOX_PROPERTY(material, normal_diffuse_map, shininess, Shininess, 2);</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    ADD_DOUBLE_SPIN_BOX_PROPERTY(material, normal_diffuse_map, texture_scale, TextureScale, 3);</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <span class="comment">//</span></div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="comment">//NORMAL_DIFFUSE_SPECULAR_MAP</span></div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    ADD_ENTITY(normal_diffuse_specular_map)</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    ADD_COLOR_PICKER_PROPERTY(material, normal_diffuse_specular_map, ambient, Ambient, 0);</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    ADD_DOUBLE_SPIN_BOX_PROPERTY(material, normal_diffuse_specular_map, shininess, Shininess, 1);</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    ADD_DOUBLE_SPIN_BOX_PROPERTY(material, normal_diffuse_specular_map, texture_scale, TextureScale, 2);</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <span class="comment">//</span></div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160; </div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    <span class="comment">//PHONG_ALPHA</span></div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    ADD_ENTITY(phong_alpha)</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    ADD_COLOR_PICKER_PROPERTY(material, phong_alpha, ambient, Ambient, 0);</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    ADD_COLOR_PICKER_PROPERTY(material, phong_alpha, diffuse, Diffuse, 1);</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    ADD_COLOR_PICKER_PROPERTY(material, phong_alpha, specular, Specular, 2);</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    ADD_DOUBLE_SPIN_BOX_PROPERTY(material, phong_alpha, shininess, Shininess, 3);</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    ADD_DOUBLE_SPIN_BOX_PROPERTY(material, phong_alpha, alpha, Alpha, 4);</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    <span class="comment">//</span></div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; </div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    <span class="comment">//TEXTURE</span></div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    ADD_ENTITY(texture)</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    ADD_CHECK_BOX_PROPERTY(material, texture, alpha_blending, AlphaBlending, 0);</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    <span class="comment">//</span></div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    </div>
 <div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160; </div>
 <div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    QGridLayout* grid_layout_this = <span class="keyword">new</span> QGridLayout;</div>
 <div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    grid_layout_this-&gt;addWidget(<span class="keyword">new</span> QLabel(<span class="stringliteral">&quot;Material type:&quot;</span>), 0, 0, Qt::AlignTop);</div>
@@ -318,18 +318,19 @@ Private Attributes</h2></td></tr>
 <div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;    stackedlayout_material-&gt;addWidget(phong_alpha_properties);<span class="comment">//id 9</span></div>
 <div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;    stackedlayout_material-&gt;addWidget(texture_properties);<span class="comment">//id 10</span></div>
 <div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160; </div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;    connect(combobox_material, QOverload&lt;int&gt;::of(&amp;QComboBox::currentIndexChanged), stackedlayout_material, &amp;QStackedLayout::setCurrentIndex);</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160; </div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;    connect(combobox_material, QOverload&lt;int&gt;::of(&amp;QComboBox::currentIndexChanged), <span class="keyword">this</span>, [&amp;](<span class="keywordtype">int</span> value) {</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;        read_write_current_material_index_json_(QIODevice::WriteOnly, <span class="stringliteral">&quot;current_material_index&quot;</span>, value); });</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160; </div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    combobox_material-&gt;setCurrentIndex(read_write_current_material_index_json_(QIODevice::ReadOnly, <span class="stringliteral">&quot;current_material_index&quot;</span>, <span class="keywordtype">int</span>()).toInt());</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;    </div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;    grid_layout_this-&gt;addLayout(stackedlayout_material, 2, 0, Qt::AlignTop);</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160; </div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;    setLayout(grid_layout_this);</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160; </div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;}</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;    connect(combobox_material, QOverload&lt;int&gt;::of(&amp;QComboBox::currentIndexChanged),</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;        stackedlayout_material, &amp;QStackedLayout::setCurrentIndex);</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160; </div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;    connect(combobox_material, QOverload&lt;int&gt;::of(&amp;QComboBox::currentIndexChanged), <span class="keyword">this</span>, [&amp;](<span class="keywordtype">int</span> value) {</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;        read_write_current_material_index_json_(QIODevice::WriteOnly, <span class="stringliteral">&quot;current_material_index&quot;</span>, value); });</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160; </div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;    combobox_material-&gt;setCurrentIndex(read_write_current_material_index_json_(QIODevice::ReadOnly, <span class="stringliteral">&quot;current_material_index&quot;</span>, <span class="keywordtype">int</span>()).toInt());</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;    </div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;    grid_layout_this-&gt;addLayout(stackedlayout_material, 2, 0, Qt::AlignTop);</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160; </div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    setLayout(grid_layout_this);</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160; </div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;}</div>
 <div class="ttc" id="aclassproperty__material_html_a88881048da571cd8e96c20dcd0cbd98c"><div class="ttname"><a href="classproperty__material.html#a88881048da571cd8e96c20dcd0cbd98c">property_material::property_material_type_signal</a></div><div class="ttdeci">void property_material_type_signal(int)</div><div class="ttdoc">material type signal emits on combobox changes</div></div>
 </div><!-- fragment -->
 </div>
@@ -350,8 +351,8 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>default destructor </p>
-<div class="fragment"><div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;{</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;}</div>
+<div class="fragment"><div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;{</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -409,7 +410,7 @@ Private Attributes</h2></td></tr>
 
 <p>initialisation function to call in constructor and set all data from json to different properties in widget window </p>
 <div class="fragment"><div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    {</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        qDebug() &lt;&lt; __FUNCSIG__ &lt;&lt; <span class="stringliteral">&quot; CALLED !!! &quot;</span>;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        qDebug() &lt;&lt; Q_FUNC_INFO &lt;&lt; <span class="stringliteral">&quot; CALLED !!! &quot;</span>;</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        <span class="comment">//emit property_mesh_type_signal(combobox_mesh-&gt;currentIndex());</span></div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        QMetaObject::invokeMethod(<span class="keyword">this</span>,</div>
@@ -448,9 +449,7 @@ Private Attributes</h2></td></tr>
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160; </div>
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;            qDebug() &lt;&lt; <span class="stringliteral">&quot;END::QMetaObject::invokeMethod(&quot;</span> &lt;&lt; e.signal_name.toStdString().data() &lt;&lt; <span class="stringliteral">&quot;,&quot;</span> &lt;&lt; e.signal_data &lt;&lt; <span class="stringliteral">&quot;)invoke result is: &quot;</span> &lt;&lt; result;</div>
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        }</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; </div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160; </div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    };</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    };</div>
 <div class="ttc" id="aclassproperty__material_html_a0fa8482c1d25c3c7cc23679cf69a6f37"><div class="ttname"><a href="classproperty__material.html#a0fa8482c1d25c3c7cc23679cf69a6f37">property_material::e_vec_func_QColor</a></div><div class="ttdeci">std::vector&lt; delayed_emit&lt; QColor &gt; &gt; e_vec_func_QColor</div><div class="ttdoc">list of all signals and their datas type of QColor</div><div class="ttdef"><b>Definition:</b> property_material.h:71</div></div>
 <div class="ttc" id="aclassproperty__material_html_a40c3f77f87954b0dec921c682fa2efc9"><div class="ttname"><a href="classproperty__material.html#a40c3f77f87954b0dec921c682fa2efc9">property_material::e_vec_func_double</a></div><div class="ttdeci">ADD_JSON_LOADER(phong) ADD_JSON_LOADER(diffuse_map) ADD_JSON_LOADER(diffuse_specular_map) ADD_JSON_LOADER(diffuse_specular) ADD_JSON_LOADER(gooch) ADD_JSON_LOADER(metal_rough) ADD_JSON_LOADER(morph_phong) ADD_JSON_LOADER(normal_diffuse_map) ADD_JSON_LOADER(normal_diffuse_specular_map) ADD_JSON_LOADER(phong_alpha) ADD_JSON_LOADER(texture) ADD_JSON_LOADER(current_material_index) public std::vector&lt; delayed_emit&lt; double &gt; &gt; e_vec_func_double</div><div class="ttdoc">list of all signals and their datas type of double</div><div class="ttdef"><b>Definition:</b> property_material.h:44</div></div>
 <div class="ttc" id="aclassproperty__material_html_a980a8a8be881c9b77b910549486df289"><div class="ttname"><a href="classproperty__material.html#a980a8a8be881c9b77b910549486df289">property_material::e_vec_func_int</a></div><div class="ttdeci">std::vector&lt; delayed_emit&lt; int &gt; &gt; e_vec_func_int</div><div class="ttdoc">list of all signals and their datas type of int</div><div class="ttdef"><b>Definition:</b> property_material.h:69</div></div>
@@ -536,7 +535,7 @@ Private Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classproperty__material.html">property_material</a></li>
-    <li class="footer">Generated on Tue Jun 8 2021 08:31:59 for Real World Algorithms by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Jun 9 2021 19:14:10 for Real World Algorithms by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

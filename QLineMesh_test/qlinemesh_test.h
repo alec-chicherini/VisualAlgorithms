@@ -99,7 +99,6 @@ public slots:
 				for (auto& comp : v->components())
 				{
 					v->removeComponent(comp);
-					
 				}
 					
 				delete v;

@@ -28,21 +28,18 @@
 
 //for QWidget container
 #include <qgridlayout.h>
-
 #include <QResizeEvent>
-
 #include <qvariant.h>
+#include <Qt3DExtras/qt3dwindow.h>
 
-//debug
-#include "qdebug_helper.h"
 
 //real world algorithms book
 #include "../Real_World_Algorithms/Real_World_Algorithms.h"
-
-
-
 #include <qtorusmesh.h>
 #include <qcomponent.h>
+
+
+#include<qpushbutton.h>
 
 /// @brief viewport widget to show Qt3D objects
 class viewport_window : public QWidget
@@ -74,114 +71,67 @@ private:
 
 	QWidget* container;
 
-	bool camera_menu_possition_signal_was_recived = false;
-	bool camera_menu_view_center_signal_was_recived = false;
 
-	
 signals:
+	void viewport_camera_signal(Qt3DRender::QCamera*);
 
 	/// @brief update current showed graph data
 	/// @param gr graph
 	/// @param op options
 	void update_common_graph(graph<int> gr, std::underlying_type_t<GP> op);
 
-	/// @brief signal from viewport after changing camera possition using camera controller 
-	/// @param position new possition of camera
-	void viewport_camera_position_signal(const QVector3D& position) ;
-
-	/// @brief signal from viewport fter changing camera view center using camera controller 
-	/// @param position new view center possition
-	void viewport_camera_view_center_signal(const QVector3D& position);
-
-
-public slots:
-
-	/// @brief slot to set camera possition using QCamera::viewAll()
-	/// @return void
-	void viewport_camera_view_all_slot()
-	{
-#if QT_VERSION == QT_VERSION_CHECK(6,1,0)
-		camera_main->viewAll();
-#elif QT_VERSION == QT_VERSION_CHECK(5,15,2)
-		camera_main->viewSphere({ 0,0,0 }, 50);
-#endif
-
-	}
-
-	/// @brief slot to update camera possition from another source like camera_menu widget
-	/// @param pos new camera possition
-	/// @return void
-	void viewport_camera_possition_slot(QVector3D pos)
-	{
-		camera_menu_possition_signal_was_recived = true;
-		camera_main->setPosition(pos);
-		
-		 qDebug() << QDateTime::currentDateTimeUtc()<< QString("<----- call viewport_camera_possition_slot") << QString::number(camera_menu_possition_signal_was_recived);
-	};
-
-	/// @brief slot to update camera view center from another source like camera_menu widget
-	/// @param pos new camera view center
-	/// @return void
-	void viewport_camera_view_center_slot(QVector3D pos)
-	{
-		camera_menu_view_center_signal_was_recived = true;
-		camera_main->setViewCenter(pos);
-
-		 qDebug() << QDateTime::currentDateTimeUtc()<< QString("<----- call viewport_camera_view_center_slot") << QString::number(camera_menu_view_center_signal_was_recived);
-	
-	};
-
-	/// @brief slot to set current type of camera controller
-	/// @param index 0 - normal; 1 - orbital;
-	/// @return void
-	void viewport_camera_controller_slot(int index)
-	{
-		if (index == 0)
-		{
-			if (camera_controller_main != Q_NULLPTR)delete camera_controller_main;
-
-			camera_controller_main = new Qt3DExtras::QFirstPersonCameraController(currentSceneEntity);
-			camera_controller_main->setCamera(camera_main);
-		}
-		else if (index == 1)
-		{
-			if (camera_controller_main != Q_NULLPTR)delete camera_controller_main;
-
-			camera_controller_main = new Qt3DExtras::QOrbitCameraController(currentSceneEntity);
-			camera_controller_main->setCamera(camera_main);
-		}
-
-	}
-	/// @brief slot to update light color
-	/// @param clr
-	/// @return void
-	void viewport_light_color_slot(QColor clr)
-	{
-		point_light_main->setColor(clr);
-		qDebug((std::to_string(clr.red()).c_str()));
-		qDebug(" <----- COLOR RED WAS CHANGED()");
-		qDebug((std::to_string(clr.green()).c_str()));
-		qDebug(" <----- COLOR GREEN WAS CHANGED()");
-		qDebug((std::to_string(clr.blue()).c_str()));
-		qDebug(" <----- COLOR BLUE WAS CHANGED()");
-	}
-	/// @brief slot to update light intensity
-	/// @param intens intensity
-	/// @return void
-	void viewport_light_intensity_slot(float intens)
-	{
-		point_light_main->setIntensity(intens);
-			qDebug((std::to_string(intens).c_str()));
-			qDebug(" <----- LIGHT INTENSYTY WAS CHANGED()");
-	}
-
-
-	/// @brief slot to set current scene by switching second entity after root
-	/// @param scene scene entity
-	/// @return void
-	void viewport_scene_entity_slot(Qt3DCore::QEntity* scene)
-	{
-		currentSceneEntity = scene;
-	}
+//public slots:
+//	/// @brief slot to set current type of camera controller
+//	/// @param index 0 - normal; 1 - orbital;
+//	/// @return void
+//	void viewport_camera_controller_slot(int index)
+//	{
+//		if (index == 0)
+//		{
+//			if (camera_controller_main != Q_NULLPTR)delete camera_controller_main;
+//
+//			camera_controller_main = new Qt3DExtras::QFirstPersonCameraController(currentSceneEntity);
+//			camera_controller_main->setCamera(camera_main);
+//		}
+//		else if (index == 1)
+//		{
+//			if (camera_controller_main != Q_NULLPTR)delete camera_controller_main;
+//
+//			camera_controller_main = new Qt3DExtras::QOrbitCameraController(currentSceneEntity);
+//			camera_controller_main->setCamera(camera_main);
+//		}
+//	}
+//
+//	/// @brief slot to update light color
+//	/// @param clr
+//	/// @return void
+//	void viewport_light_color_slot(QColor clr)
+//	{
+//		point_light_main->setColor(clr);
+//		qDebug((std::to_string(clr.red()).c_str()));
+//		qDebug(" <----- COLOR RED WAS CHANGED()");
+//		qDebug((std::to_string(clr.green()).c_str()));
+//		qDebug(" <----- COLOR GREEN WAS CHANGED()");
+//		qDebug((std::to_string(clr.blue()).c_str()));
+//		qDebug(" <----- COLOR BLUE WAS CHANGED()");
+//	}
+//	/// @brief slot to update light intensity
+//	/// @param intens intensity
+//	/// @return void
+//	void viewport_light_intensity_slot(float intens)
+//	{
+//		point_light_main->setIntensity(intens);
+//			qDebug((std::to_string(intens).c_str()));
+//			qDebug(" <----- LIGHT INTENSYTY WAS CHANGED()");
+//	}
+//
+//
+//	/// @brief slot to set current scene by switching second entity after root
+//	/// @param scene scene entity
+//	/// @return void
+//	void viewport_scene_entity_slot(Qt3DCore::QEntity* scene)
+//	{
+//		currentSceneEntity = scene;
+//	}
 
 };

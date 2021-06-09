@@ -130,7 +130,7 @@ scene_properties_common_graph::scene_properties_common_graph(Qt3DCore::QEntity* 
 		ADD_LEAF_END(common_graph, edge, material)
 
 	ADD_ROOT(tree_widget, plane)
-		ADD_LEAF_BEGIN(common_graph,plane, mesh)
+		/*ADD_LEAF_BEGIN(common_graph,plane, mesh)
 			ADD_CONNECTION_PROPERTY_TO_STATE(plane, mesh, sphere, radius);
 			ADD_CONNECTION_PROPERTY_TO_STATE(plane, mesh, sphere, rings);
 			ADD_CONNECTION_PROPERTY_TO_STATE(plane, mesh, sphere, slices);
@@ -154,8 +154,8 @@ scene_properties_common_graph::scene_properties_common_graph(Qt3DCore::QEntity* 
 			ADD_CONNECTION_PROPERTY_TO_STATE(plane, mesh, torus, radius);
 			ADD_CONNECTION_PROPERTY_TO_STATE(plane, mesh, torus, rings);
 			ADD_CONNECTION_PROPERTY_TO_STATE(plane, mesh, torus, slices);
-		ADD_LEAF_END(common_graph, plane, mesh)
-		ADD_LEAF_BEGIN(common_graph,plane, material)
+		ADD_LEAF_END(common_graph, plane, mesh)*/
+		ADD_LEAF_BEGIN(common_graph, plane, material)
 			ADD_CONNECTION_PROPERTY_TO_STATE(plane, material, phong, ambient);
 			ADD_CONNECTION_PROPERTY_TO_STATE(plane, material, phong, diffuse);
 			ADD_CONNECTION_PROPERTY_TO_STATE(plane, material, phong, shininess);
@@ -201,6 +201,41 @@ scene_properties_common_graph::scene_properties_common_graph(Qt3DCore::QEntity* 
 			ADD_CONNECTION_PROPERTY_TO_STATE(plane, material, phong_alpha, alpha);
 			ADD_CONNECTION_PROPERTY_TO_STATE(plane, material, texture, alpha_blending);
 		ADD_LEAF_END(common_graph, plane, material)
+
+	ADD_ROOT(tree_widget, camera)
+
+	    ADD_LEAF_BEGIN(common_graph, camera, camera)
+			ADD_CONNECTION_PROPERTY_TO_STATE(camera, camera, camera, aspect_ratio);
+		    ADD_CONNECTION_PROPERTY_TO_STATE(camera, camera, camera, bottom);
+		    ADD_CONNECTION_PROPERTY_TO_STATE(camera, camera, camera, exposure);
+		    ADD_CONNECTION_PROPERTY_TO_STATE(camera, camera, camera, far_plane);
+		    ADD_CONNECTION_PROPERTY_TO_STATE(camera, camera, camera, near_plane);
+		    ADD_CONNECTION_PROPERTY_TO_STATE(camera, camera, camera, field_of_view);
+		    ADD_CONNECTION_PROPERTY_TO_STATE(camera, camera, camera, left);
+		    ADD_CONNECTION_PROPERTY_TO_STATE(camera, camera, camera, right);
+		    ADD_CONNECTION_PROPERTY_TO_STATE(camera, camera, camera, top);
+		    ADD_CONNECTION_PROPERTY_TO_STATE(camera, camera, camera, position);
+		    ADD_CONNECTION_PROPERTY_TO_STATE(camera, camera, camera, view_center);
+		    ADD_CONNECTION_PROPERTY_TO_STATE(camera, camera, camera, up_vector);
+		    ADD_CONNECTION_PROPERTY_TO_STATE(camera, camera, camera, projection_type);
+		    ADD_CONNECTION_PROPERTY_TO_STATE(camera, camera, camera, projection_matrix);
+		ADD_LEAF_END(common_graph, camera, camera)
+
+		ADD_LEAF_BEGIN(common_graph, camera, camera_controller)
+			ADD_CONNECTION_PROPERTY_TO_STATE(camera,camera_controller,first_person, acceleration);
+            ADD_CONNECTION_PROPERTY_TO_STATE(camera,camera_controller,first_person, deceleration);
+            ADD_CONNECTION_PROPERTY_TO_STATE(camera,camera_controller,first_person, linear_speed);
+            ADD_CONNECTION_PROPERTY_TO_STATE(camera,camera_controller,first_person, look_speed);
+            ADD_CONNECTION_PROPERTY_TO_STATE(camera,camera_controller,first_person, camera);					
+            ADD_CONNECTION_PROPERTY_TO_STATE(camera,camera_controller,orbit, acceleration);
+            ADD_CONNECTION_PROPERTY_TO_STATE(camera,camera_controller,orbit, deceleration);
+            ADD_CONNECTION_PROPERTY_TO_STATE(camera,camera_controller,orbit, linear_speed);
+            ADD_CONNECTION_PROPERTY_TO_STATE(camera,camera_controller,orbit, look_speed);
+            ADD_CONNECTION_PROPERTY_TO_STATE(camera,camera_controller,orbit, camera);
+            ADD_CONNECTION_PROPERTY_TO_STATE(camera,camera_controller,orbit, zoom_in_limit);
+		ADD_LEAF_END(common_graph, camera, camera_controller)
+
+	//ADD_ROOT(tree_widget, light)
 	//
 
 //////////////////////////////////////////////////////////////////////////////////
@@ -222,8 +257,16 @@ scene_properties_common_graph::scene_properties_common_graph(Qt3DCore::QEntity* 
 //////////////////////////////////////////////////////////////////////////////////
 
 	
-	connect(this, &scene_properties_common_graph::scene_properties_common_graph_type_signal, scene_entities_common_graph_, &scene_entities_common_graph::scene_entities_common_graph_type_slot);
+connect(this, &scene_properties_common_graph::scene_properties_common_graph_type_signal,
+	scene_entities_common_graph_, &scene_entities_common_graph::scene_entities_common_graph_type_slot);
 	
+connect(this, &scene_properties_common_graph::scene_properties_common_graph_camera_signal,
+	scene_entities_common_graph_, &scene_entities_common_graph::scene_entities_common_graph_camera_slot);
+
+connect(this, &scene_properties_common_graph::scene_properties_common_graph_camera_signal,
+	camera_camera, &property_camera::property_camera_camera_slot);
+
+
 }
 
 scene_properties_common_graph::~scene_properties_common_graph()

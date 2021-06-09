@@ -15,9 +15,9 @@
 //main window widgets
 #include "graph_menu.h"
 #include "sorting_menu.h"
-#include "camera_menu.h"
+#include "property_camera.h"
 #include "viewport_window.h"
-#include "light_menu.h"
+#include "property_light.h"
 
 //different graphs scene properties
 #include "scene_properties_common_graph.h"
@@ -48,14 +48,12 @@ private:
 
 	QGridLayout* grid_layout_main;
 	QTabWidget* tab_menu_left;
-	QTabWidget* tab_menu_right;
 	QStackedLayout* stacked_menu_right;
-
+	QWidget* property_menu_right;
 	graph_menu* graph_menu_;
 	sorting_menu* sorting_menu_;
 	viewport_window* viewport_window_;
-	camera_menu* camera_menu_;
-	light_menu* light_menu_;
+
 
 	scene_properties_common_graph* scene_properties_common_graph_;
 
@@ -66,6 +64,7 @@ private:
 signals:
 	/// @brief graph signal retranslation to pass the generated graph to entities in this 
 	void type_graph_signal(int&, graph<int>&, under_GP&);
+	
 	
 private slots:
 	void re_gen_graph(const int V, const  int E_left, const  int E_right, const under_GP properties)
@@ -94,10 +93,10 @@ private slots:
 		qDebug() << " GRAPH TYPE CHANGED = " << id;
 		switch(id)
 		{
-		case 0: {tab_menu_right->setTabText(0, "Graph"); break; }
-		case 1:tab_menu_right->setTabText(0, "Tree"); break;
-		case 2:tab_menu_right->setTabText(0, "2D graph"); break;
-		case 3:tab_menu_right->setTabText(0, "3D graph"); break;
+		case 0:qDebug()<<"Graph"; break; 
+		case 1:qDebug()<<"Tree"; break;
+		case 2:qDebug()<<"2D graph"; break;
+		case 3:qDebug()<<"3D graph"; break;
 		}
 
 	}

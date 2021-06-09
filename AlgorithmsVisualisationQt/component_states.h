@@ -1,6 +1,5 @@
 #pragma once
 
-
 #include <QWidget>
 
 #include <Qt3DExtras/qphongalphamaterial.h>
@@ -28,6 +27,21 @@
 #include <Qt3DCore/qcomponent.h>
 
 #include <Qt3DCore/qentity.h>
+
+//cameras environment
+#include <Qt3DRender/qcamera.h>
+#include <Qt3DRender/qcameralens.h>
+#include <Qt3DExtras/qfirstpersoncameracontroller.h>
+#include <Qt3DExtras/qorbitcameracontroller.h>
+#include <qabstractcameracontroller.h>
+
+//light
+#include <QAbstractLight>
+#include <Qt3DRender/qpointlight.h>
+#include <QDirectionalLight>
+#include <QPointLight>
+#include <QSpotLight>
+// 
 
 /// @brief class which store all instances of materials and meshes with current settings. So later if some entity switch component from one to another it just switch pointer to existing version in this.
 class component_states : public QWidget
@@ -64,9 +78,23 @@ private:
 	Qt3DExtras::QSphereMesh* mesh_sphere;//id 4
 	Qt3DExtras::QTorusMesh* mesh_torus;//id 5
 
+	//camera
+	Qt3DRender::QCamera* camera_camera;
+	Qt3DExtras::QFirstPersonCameraController* camera_controller_first_person; //id 0
+	Qt3DExtras::QOrbitCameraController* camera_controller_orbit;//id 1
+	//
+	 
+	//light
+	Qt3DRender::QPointLight* light_point;//id 0
+	Qt3DRender::QDirectionalLight* light_directional;//id 1
+	Qt3DRender::QSpotLight* light_spot;//id 2
+	//
+   
 	//current component
 	MeshType current_mesh_type;
 	MaterialType current_material_type;
+	bool current_camera_controller_type;
+	Qt3DRender::QAbstractLight::Type current_light_type;
 
 
 signals:
@@ -75,6 +103,16 @@ signals:
 
 	/// @brief on changing current mesh type emit pointer to new component
 	void component_states_mesh_type_signal(Qt3DCore::QComponent*);
+
+	/// @brief on changing current camera controller type emit pointer to current camera controller
+	void component_states_camera_controller_type_signal(Qt3DExtras::QAbstractCameraController*);
+
+	/// @brief dummy to prevent macroses generating errors - do nothing
+	void component_states_camera_type_signal();
+
+/// @brief on changing current light type emit pointer to current light type
+	void component_states_light_type_signal(Qt3DRender::QAbstractLight*);
+
 
 public slots:
 	
@@ -143,7 +181,7 @@ public slots:
 			break;
 		}
 
-		qDebug() << __FUNCSIG__ << " CALLED !!! "; 
+		qDebug() << Q_FUNC_INFO << " CALLED !!! "; 
 	}
 
 	
@@ -170,9 +208,42 @@ public slots:
 			break;	
 		}
 
-		qDebug() << __FUNCSIG__ << " CALLED !!! "; 
+		qDebug() << Q_FUNC_INFO << " CALLED !!! "; 
 	}
 	
+
+	///@brief slot to change current camera controller
+	void component_states_camera_controller_type_slot(int type)
+	{
+		current_camera_controller_type = type;
+
+		if (current_camera_controller_type==1)
+			emit component_states_camera_controller_type_signal(camera_controller_orbit);
+		else if (current_camera_controller_type == 0)
+			emit component_states_camera_controller_type_signal(camera_controller_first_person);
+		qDebug() << Q_FUNC_INFO << "| type = "<<type;
+	};
+
+	/// @brief slot to set current camera to pointer from camera in viewport qwindow_3d
+	void component_states_camera_slot(Qt3DRender::QCamera* camera)
+	{
+		camera_camera = camera;
+
+		//qDebug() << camera_camera << "<<<<---camera_camera component_states pointer ";
+	};
+
+	/// @brief dummy to prevent macroses generating errors - do nothing
+	void component_states_camera_type_slot()
+	{
+
+	};
+
+	///@brief slot to change current light
+	void component_states_light_type_slot(Qt3DRender::QAbstractLight* light) 
+	{
+
+	};
+
 	//material slots
 	
 	//PHONG
@@ -280,4 +351,58 @@ public slots:
 	ADD_SLOT_FOR_ENTITY(mesh, torus, radius, setRadius, double);
 	ADD_SLOT_FOR_ENTITY(mesh, torus, rings, setRings, int);
 	ADD_SLOT_FOR_ENTITY(mesh, torus, slices, setSlices, int);
+
+	//light slots
+	ADD_SLOT_FOR_ENTITY(light, point, color, setColor, QColor);
+	ADD_SLOT_FOR_ENTITY(light, point, intensity, setIntensity, float);
+	ADD_SLOT_FOR_ENTITY(light, point, constant_attenuation, setConstantAttenuation, float);
+	ADD_SLOT_FOR_ENTITY(light, point, linear_attenuation, setLinearAttenuation, float);
+	ADD_SLOT_FOR_ENTITY(light, point, quadratic_attenuation, setQuadraticAttenuation, float);
+
+	ADD_SLOT_FOR_ENTITY(light, spot, color, setColor, QColor);
+	ADD_SLOT_FOR_ENTITY(light, spot, intensity, setIntensity, float);
+	ADD_SLOT_FOR_ENTITY(light, spot, constant_attenuation, setConstantAttenuation, float);
+	ADD_SLOT_FOR_ENTITY(light, spot, linear_attenuation, setLinearAttenuation, float);
+	ADD_SLOT_FOR_ENTITY(light, spot, quadratic_attenuation, setQuadraticAttenuation, float);
+	ADD_SLOT_FOR_ENTITY(light, spot, cut_off_angle, setCutOffAngle, float);
+	ADD_SLOT_FOR_ENTITY(light, spot, local_direction, setLocalDirection, QVector3D);
+
+	ADD_SLOT_FOR_ENTITY(light, directional, color, setColor, QColor);
+	ADD_SLOT_FOR_ENTITY(light, directional, intensity, setIntensity, float);
+	ADD_SLOT_FOR_ENTITY(light, directional, world_direction, setWorldDirection, QVector3D);
+
+
+	//camera controllers
+	ADD_SLOT_FOR_ENTITY(camera_controller, first_person, acceleration, setAcceleration, float);
+	ADD_SLOT_FOR_ENTITY(camera_controller, first_person, deceleration, setDeceleration, float);
+	ADD_SLOT_FOR_ENTITY(camera_controller, first_person, linear_speed, setLinearSpeed, float);
+	ADD_SLOT_FOR_ENTITY(camera_controller, first_person, look_speed, setLookSpeed, float);
+	ADD_SLOT_FOR_ENTITY(camera_controller, first_person, camera, setCamera, Qt3DRender::QCamera*);
+
+	ADD_SLOT_FOR_ENTITY(camera_controller, orbit, acceleration, setAcceleration, float);
+	ADD_SLOT_FOR_ENTITY(camera_controller, orbit, deceleration, setDeceleration, float);
+	ADD_SLOT_FOR_ENTITY(camera_controller, orbit, linear_speed, setLinearSpeed, float);
+	ADD_SLOT_FOR_ENTITY(camera_controller, orbit, look_speed, setLookSpeed, float);
+	ADD_SLOT_FOR_ENTITY(camera_controller, orbit, camera, setCamera, Qt3DRender::QCamera*);
+	ADD_SLOT_FOR_ENTITY(camera_controller, orbit, zoom_in_limit, setZoomInLimit, float);
+
+	//camera
+	ADD_SLOT_FOR_ENTITY(camera, camera, aspect_ratio, setAspectRatio, float);
+	ADD_SLOT_FOR_ENTITY(camera, camera, bottom, setBottom, float);
+	ADD_SLOT_FOR_ENTITY(camera, camera, exposure, setExposure, float);
+	ADD_SLOT_FOR_ENTITY(camera, camera, far_plane, setFarPlane, float);
+	ADD_SLOT_FOR_ENTITY(camera, camera, near_plane, setNearPlane, float);
+	ADD_SLOT_FOR_ENTITY(camera, camera, field_of_view, setFieldOfView, float);
+	ADD_SLOT_FOR_ENTITY(camera, camera, left, setLeft, float);
+	ADD_SLOT_FOR_ENTITY(camera, camera, right, setRight, float);
+	ADD_SLOT_FOR_ENTITY(camera, camera, top, setTop, float);
+
+	ADD_SLOT_FOR_ENTITY(camera, camera, position, setPosition, QVector3D);
+	ADD_SLOT_FOR_ENTITY(camera, camera, view_center, setViewCenter, QVector3D);
+	ADD_SLOT_FOR_ENTITY(camera, camera, up_vector, setUpVector, QVector3D);
+
+	ADD_SLOT_FOR_ENTITY(camera, camera, projection_type, setProjectionType, Qt3DRender::QCameraLens::ProjectionType);
+
+	ADD_SLOT_FOR_ENTITY(camera, camera, projection_matrix, setProjectionMatrix, QMatrix4x4);
+
 };

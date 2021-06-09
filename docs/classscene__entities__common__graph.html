@@ -128,6 +128,12 @@ Public Slots</h2></td></tr>
 <tr class="memitem:a2960ab0bc97b0379b81c7b334987670c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classscene__entities__common__graph.html#a2960ab0bc97b0379b81c7b334987670c">scene_entities_common_graph_plane_mesh_type_slot</a> (Qt3DCore::QComponent *component)</td></tr>
 <tr class="memdesc:a2960ab0bc97b0379b81c7b334987670c"><td class="mdescLeft">&#160;</td><td class="mdescRight">recive pointer to changed QComponent with specific entity  <a href="classscene__entities__common__graph.html#a2960ab0bc97b0379b81c7b334987670c">More...</a><br /></td></tr>
 <tr class="separator:a2960ab0bc97b0379b81c7b334987670c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:accd8c1029866ba09d70dd5fcdeeae391"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classscene__entities__common__graph.html#accd8c1029866ba09d70dd5fcdeeae391">scene_entities_common_graph_camera_camera_controller_type_slot</a> (Qt3DExtras::QAbstractCameraController *controller)</td></tr>
+<tr class="memdesc:accd8c1029866ba09d70dd5fcdeeae391"><td class="mdescLeft">&#160;</td><td class="mdescRight">recive pointer to changed QComponent with specific entity  <a href="classscene__entities__common__graph.html#accd8c1029866ba09d70dd5fcdeeae391">More...</a><br /></td></tr>
+<tr class="separator:accd8c1029866ba09d70dd5fcdeeae391"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace3a90ef62c6c01fa75a5490affbadae"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classscene__entities__common__graph.html#ace3a90ef62c6c01fa75a5490affbadae">scene_entities_common_graph_camera_camera_type_slot</a> ()</td></tr>
+<tr class="memdesc:ace3a90ef62c6c01fa75a5490affbadae"><td class="mdescLeft">&#160;</td><td class="mdescRight">dummy to prevent changing macrogeneration behaviour  <a href="classscene__entities__common__graph.html#ace3a90ef62c6c01fa75a5490affbadae">More...</a><br /></td></tr>
+<tr class="separator:ace3a90ef62c6c01fa75a5490affbadae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -174,8 +180,8 @@ Public Member Functions</h2></td></tr>
 <div class="fragment"><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;    : QWidget(parent)</div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;{</div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;    rootEntity = <span class="keyword">new</span> Qt3DCore::QEntity(root);</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;    <span class="comment">//rootEntity = new Qt3DCore::QEntity(root);</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    rootEntity = root;</div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    plane = <span class="keyword">new</span> Qt3DCore::QEntity(rootEntity);</div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    Qt3DCore::QTransform* planeTransform = <span class="keyword">new</span> Qt3DCore::QTransform(rootEntity);</div>
@@ -192,21 +198,50 @@ Public Member Functions</h2></td></tr>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    vertex_mesh = dummy_mesh;</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    plane_mesh = dummy_mesh;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="comment">/*for (auto&amp; vertex : vertexes) {</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">        vertex-&gt;addComponent(vertex_material);</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">        vertex-&gt;addComponent(vertex_mesh);</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">    }</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">    for (auto&amp; edge : edges) {</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">        edge-&gt;addComponent(edge_material);</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">        </span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">    }*/</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    plane-&gt;addComponent(plane_material);</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    plane-&gt;addComponent(plane_mesh);</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;}</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    camera_controller = Q_NULLPTR;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    dummy_camera = <span class="keyword">new</span> Qt3DRender::QCamera(rootEntity);</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="comment">/*for (auto&amp; vertex : vertexes) {</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">        vertex-&gt;addComponent(vertex_material);</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">        vertex-&gt;addComponent(vertex_mesh);</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">    }</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">    for (auto&amp; edge : edges) {</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">        edge-&gt;addComponent(edge_material);</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">        </span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">    }*/</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    plane-&gt;addComponent(plane_material);</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    plane-&gt;addComponent(plane_mesh);</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="comment">//test sphere</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="comment">//auto mesh = new Qt3DExtras::QSphereMesh(rootEntity);</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="comment">//auto material = new Qt3DExtras::QPhongMaterial(rootEntity);</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="comment">//auto transform = new Qt3DCore::QTransform(rootEntity);</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="comment">//auto entity = new Qt3DCore::QEntity(rootEntity);</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="comment">//material-&gt;setAmbient(QColor(255, 255, 0));</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="comment">//transform-&gt;setTranslation(QVector3D(0,0,10));</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="comment">//mesh-&gt;setRadius(5);</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="comment">//mesh-&gt;setSlices(10);</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="comment">//mesh-&gt;setRings(10);</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="comment">//entity-&gt;addComponent(transform);</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="comment">//entity-&gt;addComponent(mesh);</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="comment">//entity-&gt;addComponent(material);</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="comment">//light</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keyword">auto</span> light_main = <span class="keyword">new</span> Qt3DCore::QEntity(rootEntity);</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keyword">auto</span> point_light_main = <span class="keyword">new</span> Qt3DRender::QPointLight(rootEntity);</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keyword">auto</span> tansform_light_main = <span class="keyword">new</span> Qt3DCore::QTransform(rootEntity);</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    point_light_main-&gt;setColor(QColor(255, 255, 255));</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    point_light_main-&gt;setIntensity(1.f);</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    light_main-&gt;addComponent(point_light_main);</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    light_main-&gt;addComponent(tansform_light_main);</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -226,8 +261,8 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>default destructor </p>
-<div class="fragment"><div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;{</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;}</div>
+<div class="fragment"><div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;{</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -249,10 +284,80 @@ Public Member Functions</h2></td></tr>
 
 <p>Get root of common graph scene. </p>
 <dl class="section return"><dt>Returns</dt><dd>pointer to this root </dd></dl>
-<div class="fragment"><div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;{</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordflow">return</span> rootEntity;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;}</div>
+<div class="fragment"><div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;{</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keywordflow">return</span> rootEntity;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    </div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="accd8c1029866ba09d70dd5fcdeeae391"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#accd8c1029866ba09d70dd5fcdeeae391">&#9670;&nbsp;</a></span>scene_entities_common_graph_camera_camera_controller_type_slot</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void scene_entities_common_graph::scene_entities_common_graph_camera_camera_controller_type_slot </td>
+          <td>(</td>
+          <td class="paramtype">Qt3DExtras::QAbstractCameraController *&#160;</td>
+          <td class="paramname"><em>controller</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">slot</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>recive pointer to changed QComponent with specific entity </p>
+<dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
+<div class="fragment"><div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;    {</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;        <span class="keywordflow">if</span>(camera_controller!=Q_NULLPTR)</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;        camera_controller-&gt;setCamera(dummy_camera);</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;        camera_controller = controller;</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;        controller-&gt;setCamera(camera);</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160; </div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;        qDebug() &lt;&lt; Q_FUNC_INFO &lt;&lt; <span class="stringliteral">&quot; CALLED !!! &quot;</span>;</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;        </div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;    }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ace3a90ef62c6c01fa75a5490affbadae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ace3a90ef62c6c01fa75a5490affbadae">&#9670;&nbsp;</a></span>scene_entities_common_graph_camera_camera_type_slot</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void scene_entities_common_graph::scene_entities_common_graph_camera_camera_type_slot </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">slot</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>dummy to prevent changing macrogeneration behaviour </p>
+<dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
+<div class="fragment"><div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;    {</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;        qDebug() &lt;&lt; Q_FUNC_INFO &lt;&lt; <span class="stringliteral">&quot; CALLED !!! &quot;</span>;</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160; </div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -282,17 +387,17 @@ Public Member Functions</h2></td></tr>
 
 <p>recive pointer to changed QComponent with specific entity </p>
 <dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
-<div class="fragment"><div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;    {</div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;        qDebug() &lt;&lt; __FUNCSIG__ &lt;&lt; <span class="stringliteral">&quot; CALLED !!! &quot;</span>;</div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; edge : edges) {</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;            </div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;            edge-&gt;removeComponent(edge_material);</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;            edge-&gt;addComponent(component);</div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;            </div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;        }</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;        edge_material = component;</div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;    </div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;    }</div>
+<div class="fragment"><div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;    {</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;        qDebug() &lt;&lt; Q_FUNC_INFO &lt;&lt; <span class="stringliteral">&quot; CALLED !!! &quot;</span>;</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; edge : edges) {</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;            </div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;            edge-&gt;removeComponent(edge_material);</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;            edge-&gt;addComponent(component);</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;            </div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;        }</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;        edge_material = component;</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;    </div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -322,13 +427,13 @@ Public Member Functions</h2></td></tr>
 
 <p>recive pointer to changed QComponent with specific entity </p>
 <dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
-<div class="fragment"><div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;    {</div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;        qDebug() &lt;&lt; __FUNCSIG__ &lt;&lt; <span class="stringliteral">&quot; CALLED !!! &quot;</span>;</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;        plane-&gt;removeComponent(plane_material);</div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;        plane-&gt;addComponent(component);</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;        plane_material = component;</div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;     </div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;    }</div>
+<div class="fragment"><div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;    {</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;        qDebug() &lt;&lt; Q_FUNC_INFO &lt;&lt; <span class="stringliteral">&quot; CALLED !!! &quot;</span>;</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;        plane-&gt;removeComponent(plane_material);</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;        plane-&gt;addComponent(component);</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;        plane_material = component;</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;     </div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -358,14 +463,12 @@ Public Member Functions</h2></td></tr>
 
 <p>recive pointer to changed QComponent with specific entity </p>
 <dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
-<div class="fragment"><div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;    {</div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;        qDebug() &lt;&lt; __FUNCSIG__ &lt;&lt; <span class="stringliteral">&quot; CALLED !!! &quot;</span>;</div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;        plane-&gt;removeComponent(plane_mesh);</div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;        plane-&gt;addComponent(component);</div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;        plane_mesh = component;</div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160; </div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;        </div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;    }</div>
+<div class="fragment"><div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;    {</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;        qDebug() &lt;&lt; Q_FUNC_INFO &lt;&lt; <span class="stringliteral">&quot; CALLED !!! &quot;</span>;</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;        plane-&gt;removeComponent(plane_mesh);</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;        plane-&gt;addComponent(component);</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;        plane_mesh = component;</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -411,15 +514,15 @@ Public Member Functions</h2></td></tr>
 
 <p>get the graph with options and construct current scene states for entities their meshes and materials. </p>
 <dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
-<div class="fragment"><div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    {</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;        qDebug() &lt;&lt; __FUNCSIG__ &lt;&lt; <span class="stringliteral">&quot; CALLED !!! &quot;</span>;</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160; </div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;        scene_entities_clear();</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;        re_gen_graph(gr, options);</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160; </div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;        qDebug() &lt;&lt; __FUNCSIG__ &lt;&lt; <span class="stringliteral">&quot; END&quot;</span>;</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;        </div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;    }</div>
+<div class="fragment"><div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;    {</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;        qDebug() &lt;&lt; Q_FUNC_INFO &lt;&lt; <span class="stringliteral">&quot; CALLED !!! &quot;</span>;</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160; </div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;        scene_entities_clear();</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;        re_gen_graph(gr, options);</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160; </div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;        qDebug() &lt;&lt; Q_FUNC_INFO &lt;&lt; <span class="stringliteral">&quot; END&quot;</span>;</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;        </div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -449,16 +552,16 @@ Public Member Functions</h2></td></tr>
 
 <p>recive pointer to changed QComponent with specific entity </p>
 <dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
-<div class="fragment"><div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;    {</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;        qDebug() &lt;&lt; __FUNCSIG__ &lt;&lt; <span class="stringliteral">&quot; CALLED !!! &quot;</span>;</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; vertex : vertexes) {</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;        vertex-&gt;removeComponent(vertex_material);</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;        vertex-&gt;addComponent(component);</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;        </div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;    }</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;        vertex_material = component;</div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160; </div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    }</div>
+<div class="fragment"><div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;    {</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;        qDebug() &lt;&lt; Q_FUNC_INFO &lt;&lt; <span class="stringliteral">&quot; CALLED !!! &quot;</span>;</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; vertex : vertexes) {</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;        vertex-&gt;removeComponent(vertex_material);</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;        vertex-&gt;addComponent(component);</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;        </div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;    }</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;        vertex_material = component;</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160; </div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -488,16 +591,16 @@ Public Member Functions</h2></td></tr>
 
 <p>recive pointer to changed QComponent with specific entity </p>
 <dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
-<div class="fragment"><div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;    {</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;        qDebug() &lt;&lt; __FUNCSIG__ &lt;&lt; <span class="stringliteral">&quot; CALLED !!! &quot;</span>;</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; vertex : vertexes) {</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;            </div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;            vertex-&gt;removeComponent(vertex_mesh);</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;            vertex-&gt;addComponent(component);</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;        }</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;        vertex_mesh = component;</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160; </div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;    }</div>
+<div class="fragment"><div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;    {</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;        qDebug() &lt;&lt; Q_FUNC_INFO &lt;&lt; <span class="stringliteral">&quot; CALLED !!! &quot;</span>;</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; vertex : vertexes) {</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;            </div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;            vertex-&gt;removeComponent(vertex_mesh);</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;            vertex-&gt;addComponent(component);</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;        }</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;        vertex_mesh = component;</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160; </div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -507,7 +610,7 @@ Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classscene__entities__common__graph.html">scene_entities_common_graph</a></li>
-    <li class="footer">Generated on Tue Jun 8 2021 08:31:59 for Real World Algorithms by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Jun 9 2021 19:14:10 for Real World Algorithms by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

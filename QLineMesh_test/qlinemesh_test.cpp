@@ -54,7 +54,6 @@ qlinemesh_test::qlinemesh_test(QWidget* parent)
 	this->setContentsMargins(1, 1, 1, 1);
 
 	setLayout(layout);
-	//
 
 	connect(btn_regen, &QAbstractButton::clicked, this, &qlinemesh_test::regen_lines);
 }

@@ -26,8 +26,8 @@
         if (!QDir().exists(parentPath_ + QString(#ENTITY)))QDir().mkpath(parentPath_); \
             QFile ENTITY##_settings_file(parentPath_ + QString(#ENTITY) + QString("_settings.json")); \
     if(ENTITY##_settings_file.open(QIODevice::ReadWrite) && ENTITY##_settings_file.exists())\
-    /*qDebug()<<"File Oppened:"<<parentPath_+QString(#ENTITY)+QString("_settings.json")*/;\
-    else qDebug()<<"Can`t open:"<<parentPath_+QString(#ENTITY)+QString("_settings.json");\
+   /* qDebug()<<"File Oppened:"<<parentPath_+QString(#ENTITY)+QString("_settings.json")*/;\
+    else /*qDebug()<<"Can`t open:"<<parentPath_+QString(#ENTITY)+QString("_settings.json")*/;\
     QByteArray ENTITY##_data = ENTITY##_settings_file.readAll();\
     QJsonDocument doc(QJsonDocument::fromJson(ENTITY##_data));\
     return doc.object().take(key);}\
@@ -35,16 +35,16 @@
     if(!QDir().exists(parentPath_+QString(#ENTITY)))QDir().mkpath(parentPath_);\
     QFile ENTITY##_settings_file (parentPath_+QString(#ENTITY)+QString("_settings.json"));\
     if(ENTITY##_settings_file.open(QIODevice::ReadOnly) && ENTITY##_settings_file.exists())\
-    /*qDebug()<<"File Oppened:"<<parentPath_+QString(#ENTITY)+QString("_settings.json")*/;\
-    else qDebug()<<"Can`t open:"<<parentPath_+QString(#ENTITY)+QString("_settings.json");\
+   /* qDebug()<<"File Oppened:"<<parentPath_+QString(#ENTITY)+QString("_settings.json")*/;\
+    else /*qDebug()<<"Can`t open:"<<parentPath_+QString(#ENTITY)+QString("_settings.json")*/;\
     QByteArray ENTITY##_data = ENTITY##_settings_file.readAll();\
     QJsonDocument doc(QJsonDocument::fromJson(ENTITY##_data));\
     QJsonObject obj(doc.object());\
     obj.insert(key, value);\
     QFile ENTITY##_settings_file2(parentPath_ + QString(#ENTITY) + QString("_settings.json")); \
     if(ENTITY##_settings_file2.open(QIODevice::WriteOnly) && ENTITY##_settings_file.exists())\
-    /*qDebug()<<"File Oppened:"<<parentPath_+QString(#ENTITY)+QString("_settings.json")*/;\
-    else qDebug()<<"Can`t open:"<<parentPath_+QString(#ENTITY)+QString("_settings.json");\
+   /* qDebug()<<"File Oppened:"<<parentPath_+QString(#ENTITY)+QString("_settings.json")*/;\
+    else /*qDebug()<<"Can`t open:"<<parentPath_+QString(#ENTITY)+QString("_settings.json")*/;\
     ENTITY##_settings_file2.write(QJsonDocument(obj).toJson());\
     return QJsonValue(1); }; return QJsonValue(1);};
   
@@ -103,6 +103,14 @@ QString(#PROPERTY)+QString("_")+QString(#ENTITY)+QString("_")+QString(#NAME)+QSt
 e_vec_func_int.push_back({QString("property_")+QString(#PROPERTY)+QString("_")+QString(#ENTITY)+QString("_")+QString(#NAME)+QString("_signal"), checkbox_##ENTITY##_##NAME->isChecked()});
 
 
+//#define ADD_HIDDEN_PROPERTY(PROPERTY,ENTITY, NAME, TYPE)\
+//TYPE* TYPE##_##ENTITY##_##NAME = new TYPE();\
+//connect(checkbox_##ENTITY##_##NAME, &QCheckBox::stateChanged, this, [&,this](bool value){\
+//read_write_##ENTITY##_json_(QIODevice::WriteOnly,QString(#PROPERTY)+QString("_")+QString(#ENTITY)+QString("_")+QString(#NAME)+QString("_")+QString("value"), value);});\
+//checkbox_##ENTITY##_##NAME->setChecked(read_write_##ENTITY##_json_(QIODevice::ReadOnly,\
+//QString(#PROPERTY)+QString("_")+QString(#ENTITY)+QString("_")+QString(#NAME)+QString("_")+QString("value"),bool()).toBool());\
+//e_vec_func_int.push_back({QString("property_")+QString(#PROPERTY)+QString("_")+QString(#ENTITY)+QString("_")+QString(#NAME)+QString("_signal"), checkbox_##ENTITY##_##NAME->isChecked()});
+
 #define ADD_COLOR_PICKER_PROPERTY(PROPERTY,ENTITY, NAME, stringNAME, ROW)\
 color_picker* color_picker_##ENTITY##_##NAME## = new color_picker(#stringNAME);\
 ENTITY##_properties_layout->addWidget(color_picker_##ENTITY##_##NAME##, ROW, 0,1,-1);\
@@ -119,6 +127,30 @@ read_write_##ENTITY##_json_(QIODevice::WriteOnly, QString(#PROPERTY) + QString("
 });\
 e_vec_func_QColor.push_back({ QString("property_") + QString(#PROPERTY) + QString("_") + QString(#ENTITY) + QString("_") + QString(#NAME) + QString("_signal"), color_picker_##ENTITY##_##NAME->getColor() });
 
+#define ADD_XYZ_PICKER_PROPERTY_DEFINITION(PROPERTY,ENTITY, NAME)\
+xyz_picker* xyz_picker_##ENTITY##_##NAME;\
+bool bool_##PROPERTY##_##ENTITY##_##NAME;
+
+#define ADD_XYZ_PICKER_PROPERTY_DECLARATION(PROPERTY,ENTITY, NAME, stringNAME, ROW)\
+xyz_picker_##ENTITY##_##NAME## = new xyz_picker(#stringNAME);\
+ENTITY##_properties_layout->addWidget(xyz_picker_##ENTITY##_##NAME##, ROW, 0,1,-1);\
+bool_##PROPERTY##_##ENTITY##_##NAME = true;\
+connect(xyz_picker_##ENTITY##_##NAME, &xyz_picker::xyz_picker_signal, this,\
+ [&,this]( QVector3D vec){\
+   if(bool_##PROPERTY##_##ENTITY##_##NAME)\
+    emit property_##PROPERTY##_##ENTITY##_##NAME##_signal(vec);\
+    });\
+xyz_picker_##ENTITY##_##NAME##->setXYZ(\
+read_write_##ENTITY##_json_(QIODevice::ReadOnly,QString(#PROPERTY) + QString("_") + QString(#ENTITY) + QString("_") + QString(#NAME) + QString("_") + QString("x_value"),double()).toDouble(),\
+read_write_##ENTITY##_json_(QIODevice::ReadOnly,QString(#PROPERTY) + QString("_") + QString(#ENTITY) + QString("_") + QString(#NAME) + QString("_") + QString("y_value"),double()).toDouble(),\
+read_write_##ENTITY##_json_(QIODevice::ReadOnly,QString(#PROPERTY) + QString("_") + QString(#ENTITY) + QString("_") + QString(#NAME) + QString("_") + QString("z_value"),double()).toDouble()\
+);\
+connect(xyz_picker_##ENTITY##_##NAME, &xyz_picker::xyz_picker_signal_double, this, [&, this](double x, double y, double z) {\
+read_write_##ENTITY##_json_(QIODevice::WriteOnly,QString(#PROPERTY)+QString("_")+QString(#ENTITY)+QString("_")+QString(#NAME)+QString("_")+QString("x_value"), x);\
+read_write_##ENTITY##_json_(QIODevice::WriteOnly, QString(#PROPERTY) + QString("_") + QString(#ENTITY) + QString("_") + QString(#NAME) + QString("_") + QString("y_value"), y);\
+read_write_##ENTITY##_json_(QIODevice::WriteOnly, QString(#PROPERTY) + QString("_") + QString(#ENTITY) + QString("_") + QString(#NAME) + QString("_") + QString("z_value"), z);\
+});\
+e_vec_func_QVector3D.push_back({ QString("property_") + QString(#PROPERTY) + QString("_") + QString(#ENTITY) + QString("_") + QString(#NAME) + QString("_signal"), xyz_picker_##ENTITY##_##NAME->getXYZ() });
 
 #define ADD_SIGNAL_FOR_ENTITY(PROPERTY,ENTITY,NAME,TYPE)\
 /*!
@@ -134,14 +166,14 @@ void property_##PROPERTY##_##ENTITY##_##NAME##_signal(TYPE);
 try{PROPERTY##_##ENTITY->FUNCNAME##(value);}
 @endcode
 @code
-catch(std::exception& e){qDebug() << __FUNCSIG__<< "ERROR: " << e.what();}
+catch(std::exception& e){qDebug() << Q_FUNC_INFO<< "ERROR: " << e.what();}
 @endcode
 */\
 void property_##PROPERTY##_##ENTITY##_##NAME##_slot(TYPE value)\
 {qDebug()<<QString(#PROPERTY)+QString("_")+QString(#ENTITY)+QString("->")+QString(#FUNCNAME)+QString("(")<<value<<QString(")");\
 try{PROPERTY##_##ENTITY->FUNCNAME##(value);}\
 catch(std::exception& e){\
-qDebug() << __FUNCSIG__<< "ERROR: " << e.what(); \
+qDebug() << Q_FUNC_INFO<< "ERROR: " << e.what(); \
 return;}};
 
 #define ADD_CONNECTION_PROPERTY_TO_STATE(ENTITY,COMPONENT,TYPE,PROPERTY)\
@@ -154,7 +186,9 @@ connect(##ENTITY##_##COMPONENT##, &property_##COMPONENT##::property_##COMPONENT#
 QTreeWidgetItem* treeitem_##NAME## = new QTreeWidgetItem(##ROOT##);\
 treeitem_##NAME##->setText(0, QString(#NAME).replace(0, 1, QString(#NAME)[0].toUpper()));\
 tree_widget->insertTopLevelItem(0, treeitem_##NAME##);\
-component_states_##NAME = new component_states(root,this);
+component_states_##NAME = new component_states(root,this);\
+connect(this,&scene_properties_common_graph::scene_properties_common_graph_camera_signal,\
+        component_states_##NAME, &component_states::component_states_camera_slot);
 
 #define ADD_LEAF_BEGIN(TYPE,PARENT,NAME)\
 property_##NAME##* ##PARENT##_##NAME## = new property_##NAME##(QString("settings/")+QString(#TYPE)+QString("/")+QString(#PARENT)+QString("/")+QString(#NAME)+QString("/"));\
@@ -162,10 +196,9 @@ QTreeWidgetItem* treeitem_##PARENT##_##NAME## = new QTreeWidgetItem(treeitem_##P
 treeitem_##PARENT##_##NAME##->setText(0, QString(#NAME).replace(0, 1, QString(#NAME)[0].toUpper()));\
 QTreeWidgetItem* treeitem_##PARENT##_##NAME##_property = new QTreeWidgetItem(treeitem_##PARENT##_##NAME##);\
 tree_widget->setItemWidget(treeitem_##PARENT##_##NAME##_property, 0, ##PARENT##_##NAME##);\
-connect(##PARENT##_##NAME##, &property_##NAME##::property_##NAME##_type_signal,component_states_##PARENT##, &component_states::component_states_##NAME##_type_slot);\
+connect(##PARENT##_##NAME##, &property_##NAME##::property_##NAME##_type_signal,\
+component_states_##PARENT##, &component_states::component_states_##NAME##_type_slot);\
 connect(component_states_##PARENT##, &component_states::component_states_##NAME##_type_signal,\
 scene_entities_common_graph_, &scene_entities_common_graph::scene_entities_common_graph_##PARENT##_##NAME##_type_slot);
 
 #define ADD_LEAF_END(TYPE,PARENT,NAME) PARENT##_##NAME##->send_initialization_data();
-
-

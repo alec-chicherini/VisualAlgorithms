@@ -14,8 +14,21 @@
 
 #include <tuple>
 
+//cameras environment
+#include <Qt3DRender/qcamera.h>
+#include <Qt3DRender/qcameralens.h>
+#include <Qt3DExtras/qfirstpersoncameracontroller.h>
+#include <Qt3DExtras/qorbitcameracontroller.h>
+#include <qabstractcameracontroller.h>
+
 //real world algorithms
 #include "../Real_World_Algorithms/Real_World_Algorithms.h"
+
+//light
+#include <Qt3DRender/qpointlight.h>
+#include <Qt3DCore/qtransform.h>
+#include <qspheremesh.h>
+// 
 
 /// @brief 3d scene for graphs visualisation entities. Hold all entities use in this scene and cnnection between them and tis scene materials and meshes. 
 class scene_entities_common_graph : public QWidget
@@ -47,10 +60,14 @@ private:
 	std::vector<QLineMesh*>edge_meshes;
 	Qt3DCore::QComponent* plane_material;
 	Qt3DCore::QComponent* plane_mesh;
+	
+	Qt3DRender::QCamera* camera;
+	Qt3DRender::QCamera* dummy_camera;
+	Qt3DExtras::QAbstractCameraController* camera_controller;
 
 	inline void re_gen_graph(graph<int>& gr, under_GP& options)
 	{
-		qDebug() << __FUNCSIG__ << " CALLED !!! ";
+		qDebug() << Q_FUNC_INFO << " CALLED !!! ";
 		for (int i = 0; i < gr.V.size(); i++)
 		{
 			qDebug() << i;
@@ -88,13 +105,13 @@ private:
 
 		}
 
-		qDebug() << __FUNCSIG__ << " END";
+		qDebug() << Q_FUNC_INFO << " END";
 	};
 
 
 	inline void scene_entities_clear()
 	{
-		qDebug() << __FUNCSIG__ << " CALLED !!! ";
+		qDebug() << Q_FUNC_INFO << " CALLED !!! ";
 		if (vertexes.size()) {
 			for (auto& vertex : vertexes) {
 
@@ -118,22 +135,32 @@ private:
 		if (vertexes_possitions.size())
 			vertexes_possitions.clear();
 
-		qDebug() << __FUNCSIG__ << " END";
+		qDebug() << Q_FUNC_INFO << " END";
 
 	}
 
 public slots:
 
+	void scene_entities_common_graph_camera_slot(Qt3DRender::QCamera* camera_)
+	{
+		qDebug() << Q_FUNC_INFO << " CALLED !!! "; 
+		camera = camera_;
+		//camera->viewAll();
+		//qDebug() << camera << "<<<<--- camera scene_entities pointer ";
+	
+	}
+
+
 	/// @brief get the graph with options and construct current scene states for entities their meshes and materials.
 	/// @return void
 	void scene_entities_common_graph_type_slot(int& type, graph<int>& gr, under_GP& options)
 	{
-		qDebug() << __FUNCSIG__ << " CALLED !!! ";
+		qDebug() << Q_FUNC_INFO << " CALLED !!! ";
 
 		scene_entities_clear();
 		re_gen_graph(gr, options);
 
-		qDebug() << __FUNCSIG__ << " END";
+		qDebug() << Q_FUNC_INFO << " END";
 		
 	}
 
@@ -141,7 +168,7 @@ public slots:
 	/// @return void
 	void scene_entities_common_graph_vertex_material_type_slot(Qt3DCore::QComponent* component)
 	{
-		qDebug() << __FUNCSIG__ << " CALLED !!! ";
+		qDebug() << Q_FUNC_INFO << " CALLED !!! ";
 		for (auto& vertex : vertexes) {
 		vertex->removeComponent(vertex_material);
 		vertex->addComponent(component);
@@ -154,7 +181,7 @@ public slots:
 	/// @return void
 	void scene_entities_common_graph_vertex_mesh_type_slot(Qt3DCore::QComponent* component)
 	{
-		qDebug() << __FUNCSIG__ << " CALLED !!! ";
+		qDebug() << Q_FUNC_INFO << " CALLED !!! ";
 		for (auto& vertex : vertexes) {
 			
 			vertex->removeComponent(vertex_mesh);
@@ -167,7 +194,7 @@ public slots:
 	/// @return void
 	void scene_entities_common_graph_edge_material_type_slot(Qt3DCore::QComponent* component)
 	{
-		qDebug() << __FUNCSIG__ << " CALLED !!! ";
+		qDebug() << Q_FUNC_INFO << " CALLED !!! ";
 		for (auto& edge : edges) {
 			
 			edge->removeComponent(edge_material);
@@ -182,7 +209,7 @@ public slots:
 	/// @return void
 	void scene_entities_common_graph_plane_material_type_slot(Qt3DCore::QComponent* component)
 	{
-		qDebug() << __FUNCSIG__ << " CALLED !!! ";
+		qDebug() << Q_FUNC_INFO << " CALLED !!! ";
 		plane->removeComponent(plane_material);
 		plane->addComponent(component);
 		plane_material = component;
@@ -192,11 +219,30 @@ public slots:
 	/// @return void
 	void scene_entities_common_graph_plane_mesh_type_slot(Qt3DCore::QComponent* component)
 	{
-		qDebug() << __FUNCSIG__ << " CALLED !!! ";
+		qDebug() << Q_FUNC_INFO << " CALLED !!! ";
 		plane->removeComponent(plane_mesh);
 		plane->addComponent(component);
 		plane_mesh = component;
+	}
 
+	/// @brief recive pointer to changed QComponent with specific entity
+	/// @return void
+	void scene_entities_common_graph_camera_camera_controller_type_slot(Qt3DExtras::QAbstractCameraController* controller)
+	{
+		if(camera_controller!=Q_NULLPTR)
+		camera_controller->setCamera(dummy_camera);
+		camera_controller = controller;
+		controller->setCamera(camera);
+
+		qDebug() << Q_FUNC_INFO << " CALLED !!! ";
 		
+	}
+
+	/// @brief dummy to prevent changing macrogeneration behaviour
+	/// @return void
+	void scene_entities_common_graph_camera_camera_type_slot()
+	{
+		qDebug() << Q_FUNC_INFO << " CALLED !!! ";
+
 	}
 };

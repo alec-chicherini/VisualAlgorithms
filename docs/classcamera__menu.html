@@ -102,7 +102,7 @@ $(document).ready(function(){initNavTree('classcamera__menu.html',''); initResiz
 </div><!--header-->
 <div class="contents">
 
-<p>class holds the global camera current possition settings  
+<p>class holds the camera current possition settings  
  <a href="classcamera__menu.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="camera__menu_8h_source.html">camera_menu.h</a>&gt;</code></p>
@@ -143,7 +143,7 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:af66d935421369e5a547c706e2a814590"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>class holds the global camera current possition settings </p>
+<div class="textblock"><p>class holds the camera current possition settings </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ae339e4e904191591a1a73dc97988b3e7"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae339e4e904191591a1a73dc97988b3e7">&#9670;&nbsp;</a></span>camera_menu()</h2>
@@ -165,7 +165,7 @@ Public Member Functions</h2></td></tr>
 <div class="fragment"><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;    : QWidget(parent)</div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;{</div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;    QGroupBox* groupbox_camera = <span class="keyword">new</span> QGroupBox;</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;    QGroupBox* groupbox_camera = <span class="keyword">new</span> QGroupBox(<span class="keyword">this</span>);</div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    spinbox_possition_x = <span class="keyword">new</span> QDoubleSpinBox(<span class="keyword">this</span>);</div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    spinbox_possition_y = <span class="keyword">new</span> QDoubleSpinBox(<span class="keyword">this</span>);</div>
@@ -394,16 +394,16 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
-<div class="fragment"><div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        {</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;            qDebug() &lt;&lt; QDateTime::currentDateTimeUtc()&lt;&lt; QString(<span class="stringliteral">&quot;&lt;----- call camera_possition_slot&quot;</span>) &lt;&lt; QString::number(viewport_possition_signal_was_recived);</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        </div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;            viewport_possition_signal_was_recived = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;            spinbox_possition_x-&gt;setValue(pos.x());</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;            viewport_possition_signal_was_recived = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;            spinbox_possition_y-&gt;setValue(pos.y());</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;            viewport_possition_signal_was_recived = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;            spinbox_possition_z-&gt;setValue(pos.z());</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        }</div>
+<div class="fragment"><div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        {</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;            qDebug() &lt;&lt; QDateTime::currentDateTimeUtc()&lt;&lt; QString(<span class="stringliteral">&quot;&lt;----- call camera_possition_slot&quot;</span>) &lt;&lt; QString::number(viewport_possition_signal_was_recived);</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;        </div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;            viewport_possition_signal_was_recived = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;            spinbox_possition_x-&gt;setValue(pos.x());</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;            viewport_possition_signal_was_recived = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;            spinbox_possition_y-&gt;setValue(pos.y());</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;            viewport_possition_signal_was_recived = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;            spinbox_possition_z-&gt;setValue(pos.z());</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;        }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -500,17 +500,17 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
-<div class="fragment"><div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        {</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;            qDebug() &lt;&lt; QDateTime::currentDateTimeUtc()&lt;&lt; QString(<span class="stringliteral">&quot;&lt;----- call camera_view_center_slot&quot;</span>) &lt;&lt; QString::number(viewport_view_center_signal_was_recived);</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    </div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;            viewport_view_center_signal_was_recived = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;            spinbox_view_center_x-&gt;setValue(pos.x());</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;            viewport_view_center_signal_was_recived = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;            spinbox_view_center_y-&gt;setValue(pos.y());</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;            viewport_view_center_signal_was_recived = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;            spinbox_view_center_z-&gt;setValue(pos.z());</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160; </div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;        }</div>
+<div class="fragment"><div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;        {</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;            qDebug() &lt;&lt; QDateTime::currentDateTimeUtc()&lt;&lt; QString(<span class="stringliteral">&quot;&lt;----- call camera_view_center_slot&quot;</span>) &lt;&lt; QString::number(viewport_view_center_signal_was_recived);</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    </div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;            viewport_view_center_signal_was_recived = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;            spinbox_view_center_x-&gt;setValue(pos.x());</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;            viewport_view_center_signal_was_recived = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;            spinbox_view_center_y-&gt;setValue(pos.y());</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;            viewport_view_center_signal_was_recived = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;            spinbox_view_center_z-&gt;setValue(pos.z());</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160; </div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;        }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -520,7 +520,7 @@ Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classcamera__menu.html">camera_menu</a></li>
-    <li class="footer">Generated on Tue Jun 8 2021 08:31:59 for Real World Algorithms by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Tue Jun 8 2021 09:08:27 for Real World Algorithms by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

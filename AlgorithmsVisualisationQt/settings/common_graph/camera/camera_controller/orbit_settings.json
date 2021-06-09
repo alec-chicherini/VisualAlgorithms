@@ -1,0 +1,8 @@
+{
+    "camera_controller_orbit_acceleration_value": 16,
+    "camera_controller_orbit_deceleration_value": 1,
+    "camera_controller_orbit_linear_speed_value": 9,
+    "camera_controller_orbit_look_speed_value": 7,
+    "camera_controller_orbit_zoom_in_limit_value": 11,
+    "current_camera_controller_type": 0
+}

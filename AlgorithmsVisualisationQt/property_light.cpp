@@ -1,6 +1,6 @@
-#include "light_menu.h"
+#include "property_light.h"
 
-light_menu::light_menu(QWidget *parent)
+property_light::property_light(QWidget *parent)
 	: QWidget(parent)
 {
 
@@ -25,10 +25,10 @@ light_menu::light_menu(QWidget *parent)
 
 	setLayout(layout);
 
-	connect(property_color, &color_picker::color_picker_signal, this, &light_menu::light_color_signal);
-	connect(spinbox_intensity, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this, &light_menu::light_intencity_signal);
+	connect(property_color, &color_picker::color_picker_signal, this, &property_light::light_color_signal);
+	connect(spinbox_intensity, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this, &property_light::light_intencity_signal);
 }
 
-light_menu::~light_menu()
+property_light::~property_light()
 {
 }

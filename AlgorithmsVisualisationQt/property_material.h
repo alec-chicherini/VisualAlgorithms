@@ -73,7 +73,7 @@ public:
 	/// @brief initialisation function to call in constructor and set all data from json to different properties in widget window
 	void send_initialization_data()
 	{
-		qDebug() << __FUNCSIG__ << " CALLED !!! ";
+		qDebug() << Q_FUNC_INFO << " CALLED !!! ";
 		//emit property_mesh_type_signal(combobox_mesh->currentIndex());
 
 		QMetaObject::invokeMethod(this,
@@ -112,10 +112,7 @@ public:
 
 			qDebug() << "END::QMetaObject::invokeMethod(" << e.signal_name.toStdString().data() << "," << e.signal_data << ")invoke result is: " << result;
 		}
-
-
 	};
-
 
 
 signals:

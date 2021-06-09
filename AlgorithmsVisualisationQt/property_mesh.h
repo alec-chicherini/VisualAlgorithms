@@ -71,7 +71,7 @@ public:
 	/// @return void
 	void send_initialization_data()
 	{
-		qDebug() << __FUNCSIG__ << " CALLED !!! ";
+		qDebug() << Q_FUNC_INFO << " CALLED !!! ";
 		//emit property_mesh_type_signal(combobox_mesh->currentIndex());
 
 		QMetaObject::invokeMethod(this,
