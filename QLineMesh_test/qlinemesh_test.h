@@ -1,12 +1,6 @@
 //test for custom mesh
 #pragma once
 
-#include <qjsondocument.h>
-#include <qjsonobject.h>
-#include <qfile.h>
-#include <qbytearray.h>
-#include <qmessagebox.h>
-
 #include <QWidget>
 
 #include <QEntity>
@@ -31,7 +25,6 @@
 
 #include "qlinemesh.h"
 
-#include "qpair.h"
 
 //
 #include <QGuiApplication>
