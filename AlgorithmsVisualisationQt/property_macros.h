@@ -1,12 +1,6 @@
 #pragma once
 //MACROSES FOR PROPERTY GENERATION
-// 
-//#define ADD_SIGNALS_FOR_ENTITY(ENTITY, HEAD)\
-//void property_mesh_##ENTITY##_##HEAD##_signal(auto);
-//
-//#define ADD_SIGNALS_FOR_ENTITY(ENTITY, HEAD, ...)\
-// void property_mesh_##ENTITY##_##HEAD##_signal(auto);\
-// ADD_SIGNALS_FOR_ENTITY(ENTITY,__VA_ARGS__)
+
 
 ///@brief macro used to add new properties entity
 #define ADD_ENTITY(ENTITY) \
@@ -101,15 +95,6 @@ read_write_##ENTITY##_json_(QIODevice::WriteOnly,QString(#PROPERTY)+QString("_")
 checkbox_##ENTITY##_##NAME->setChecked(read_write_##ENTITY##_json_(QIODevice::ReadOnly,\
 QString(#PROPERTY)+QString("_")+QString(#ENTITY)+QString("_")+QString(#NAME)+QString("_")+QString("value"),bool()).toBool());\
 e_vec_func_int.push_back({QString("property_")+QString(#PROPERTY)+QString("_")+QString(#ENTITY)+QString("_")+QString(#NAME)+QString("_signal"), checkbox_##ENTITY##_##NAME->isChecked()});
-
-
-//#define ADD_HIDDEN_PROPERTY(PROPERTY,ENTITY, NAME, TYPE)\
-//TYPE* TYPE##_##ENTITY##_##NAME = new TYPE();\
-//connect(checkbox_##ENTITY##_##NAME, &QCheckBox::stateChanged, this, [&,this](bool value){\
-//read_write_##ENTITY##_json_(QIODevice::WriteOnly,QString(#PROPERTY)+QString("_")+QString(#ENTITY)+QString("_")+QString(#NAME)+QString("_")+QString("value"), value);});\
-//checkbox_##ENTITY##_##NAME->setChecked(read_write_##ENTITY##_json_(QIODevice::ReadOnly,\
-//QString(#PROPERTY)+QString("_")+QString(#ENTITY)+QString("_")+QString(#NAME)+QString("_")+QString("value"),bool()).toBool());\
-//e_vec_func_int.push_back({QString("property_")+QString(#PROPERTY)+QString("_")+QString(#ENTITY)+QString("_")+QString(#NAME)+QString("_signal"), checkbox_##ENTITY##_##NAME->isChecked()});
 
 #define ADD_COLOR_PICKER_PROPERTY(PROPERTY,ENTITY, NAME, stringNAME, ROW)\
 color_picker* color_picker_##ENTITY##_##NAME## = new color_picker(#stringNAME);\

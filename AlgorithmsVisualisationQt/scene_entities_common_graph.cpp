@@ -4,8 +4,10 @@ scene_entities_common_graph::scene_entities_common_graph(Qt3DCore::QEntity* root
 	: QWidget(parent)
 {
 
-	//rootEntity = new Qt3DCore::QEntity(root);
-	rootEntity = root;
+	rootEntity = new Qt3DCore::QEntity(root);
+	
+	vertexes_root_entity = new Qt3DCore::QEntity(rootEntity);
+
 	plane = new Qt3DCore::QEntity(rootEntity);
 
 	Qt3DCore::QTransform* planeTransform = new Qt3DCore::QTransform(rootEntity);
@@ -65,6 +67,46 @@ scene_entities_common_graph::scene_entities_common_graph(Qt3DCore::QEntity* root
 	point_light_main->setIntensity(1.f);
 	light_main->addComponent(point_light_main);
 	light_main->addComponent(tansform_light_main);
+
+	//object picker
+	
+	picker_scene = new Qt3DRender::QObjectPicker(vertexes_root_entity);
+	picker_scene->setDragEnabled(true);
+	vertexes_root_entity->addComponent(picker_scene);
+
+	connect(picker_scene, &Qt3DRender::QObjectPicker::clicked,
+		this, [&](Qt3DRender::QPickEvent* pick)
+		{
+			qDebug() << "Clicked";
+		});
+
+	connect(picker_scene, &Qt3DRender::QObjectPicker::moved,
+		this, [&](Qt3DRender::QPickEvent* pick)
+		{
+
+			if (pick->buttons() == Qt3DRender::QPickEvent::LeftButton)
+			{
+				QVector3D possition_entity = pick->entity()->componentsOfType<Qt3DCore::QTransform>().front()->translation();
+
+				QMatrix4x4 modelView, projection;
+				modelView.lookAt(camera->position(), camera->viewCenter(), camera->upVector());
+				projection.perspective(camera->fieldOfView(), camera->aspectRatio(), camera->nearPlane(), camera->farPlane());
+				auto viewport = QRect(QPoint(0, 0), viewport_->size());
+
+				auto z = possition_entity.project(modelView, projection, viewport).z();
+
+				auto possition_pick = QVector3D(pick->position().x(), pick->position().y(), z);
+
+				possition_pick.setY(viewport.height() - possition_pick.y());
+
+				pick->entity()->componentsOfType<Qt3DCore::QTransform>().front()->
+					            setTranslation(possition_pick.unproject(modelView, projection, viewport));
+
+				update_edges_possitions(pick->entity());
+			}
+
+		}
+	);
 }
 
 scene_entities_common_graph::~scene_entities_common_graph()

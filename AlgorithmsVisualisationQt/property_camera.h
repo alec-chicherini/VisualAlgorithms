@@ -142,7 +142,7 @@ public slots:
 	/// @return void
 		void property_camera_possition_slot(const QVector3D& pos)
 		{
-			qDebug() << Q_FUNC_INFO;
+			//qDebug() << Q_FUNC_INFO;
 			bool_camera_camera_position = false;
 			xyz_picker_camera_position->setXYZ(pos);
 			bool_camera_camera_position = true;
@@ -153,7 +153,7 @@ public slots:
 	/// @return void
 		void property_camera_view_center_slot(const QVector3D& pos)
 		{
-			qDebug() << Q_FUNC_INFO;
+			//qDebug() << Q_FUNC_INFO;
 			bool_camera_camera_view_center = false;
 			xyz_picker_camera_view_center->setXYZ(pos);
 			bool_camera_camera_position = true;
@@ -164,7 +164,7 @@ public slots:
 	 /// @return void
 		void property_camera_up_vector_slot(const QVector3D& pos)
 		{
-			qDebug() << Q_FUNC_INFO;
+			//qDebug() << Q_FUNC_INFO;
 			bool_camera_camera_up_vector = false;
 			xyz_picker_camera_up_vector->setXYZ(pos);
 			bool_camera_camera_up_vector = true;

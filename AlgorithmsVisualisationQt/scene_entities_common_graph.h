@@ -30,6 +30,13 @@
 #include <qspheremesh.h>
 // 
 
+//object picker
+#include <Qt3DRender/qobjectpicker.h>
+#include <Qt3DRender/qpickevent.h>
+//
+
+#include <Qt3DExtras/qt3dwindow.h>
+
 /// @brief 3d scene for graphs visualisation entities. Hold all entities use in this scene and cnnection between them and tis scene materials and meshes. 
 class scene_entities_common_graph : public QWidget
 {
@@ -48,10 +55,11 @@ public:
 private:
 
 	Qt3DCore::QEntity* rootEntity;
-
+	Qt3DCore::QEntity* vertexes_root_entity;
 	std::vector<QVector3D> vertexes_possitions;
 	std::vector<Qt3DCore::QEntity*> vertexes;
 	std::vector<Qt3DCore::QEntity*> edges;
+	std::vector <std::vector<Qt3DCore::QEntity*>> vertex_vertex_edge;
 	Qt3DCore::QEntity* plane;
 
 	Qt3DCore::QComponent* vertex_material;
@@ -65,13 +73,32 @@ private:
 	Qt3DRender::QCamera* dummy_camera;
 	Qt3DExtras::QAbstractCameraController* camera_controller;
 
+	Qt3DRender::QObjectPicker* picker_scene;
+
+	Qt3DExtras::Qt3DWindow* viewport_;
+	
+
+	void update_edges_possitions(Qt3DCore::QEntity* vertex)
+	{
+		for (auto& vve : vertex_vertex_edge)
+		{
+			if (vve[0] == vertex || vve[1] == vertex)
+			{
+				vve[2]->componentsOfType<QLineMesh>()[0]
+					  ->setPossition(std::pair(vve[0]->componentsOfType<Qt3DCore::QTransform>().front()->translation(),
+					                           vve[1]->componentsOfType<Qt3DCore::QTransform>().front()->translation()));
+			}
+		}
+	
+	};
+
 	inline void re_gen_graph(graph<int>& gr, under_GP& options)
 	{
 		qDebug() << Q_FUNC_INFO << " CALLED !!! ";
 		for (int i = 0; i < gr.V.size(); i++)
 		{
 			qDebug() << i;
-			Qt3DCore::QEntity* vertex = new Qt3DCore::QEntity(rootEntity);
+			Qt3DCore::QEntity* vertex = new Qt3DCore::QEntity(vertexes_root_entity);
 			vertex->addComponent(vertex_material);
 			vertex->addComponent(vertex_mesh);
 
@@ -83,7 +110,6 @@ private:
 
 			vertexes.push_back(vertex);
 			vertexes_possitions.push_back(coord);
-
 		}
 
 		for (int i = 0; i < gr.E.size(); i++)
@@ -98,11 +124,12 @@ private:
 			auto pos = std::pair(vertexes_possitions[first_point], vertexes_possitions[second_point]);
 			qDebug() << "pos = " << pos.first.x() << pos.first.y() << pos.first.z() << " - " << pos.second.x() << pos.second.y() << pos.second.z();
 			QLineMesh* line = new QLineMesh(pos, rootEntity);
-			//line->setWidth(0.05f);
+			
 			edge->addComponent(line);
 
 			edges.push_back(edge);
 
+			vertex_vertex_edge.push_back(std::vector({ vertexes[gr.E[i].first],vertexes[gr.E[i].second],edge}));
 		}
 
 		qDebug() << Q_FUNC_INFO << " END";
@@ -141,15 +168,18 @@ private:
 
 public slots:
 
+	void scene_entities_common_graph_viewport_size_slot(Qt3DExtras::Qt3DWindow* view)
+	{
+		viewport_ = view;
+	};
+
 	void scene_entities_common_graph_camera_slot(Qt3DRender::QCamera* camera_)
 	{
 		qDebug() << Q_FUNC_INFO << " CALLED !!! "; 
 		camera = camera_;
 		//camera->viewAll();
 		//qDebug() << camera << "<<<<--- camera scene_entities pointer ";
-	
 	}
-
 
 	/// @brief get the graph with options and construct current scene states for entities their meshes and materials.
 	/// @return void

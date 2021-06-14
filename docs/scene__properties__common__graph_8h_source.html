@@ -152,37 +152,48 @@ $(document).ready(function(){initNavTree('scene__properties__common__graph_8h_so
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;signals:</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordtype">void</span> scene_properties_common_graph_type_signal(<span class="keywordtype">int</span>&amp; type, <a class="code" href="structreal__world__algorithm_1_1graph.html">graph&lt;int&gt;</a>&amp; gr, under_GP&amp; options);</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordtype">void</span> scene_properties_common_graph_camera_signal(Qt3DRender::QCamera*);</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="keyword">public</span> slots:</div>
-<div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="classscene__properties__common__graph.html#acc122d2244c96f8ba56ab7a553ec9932">   64</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classscene__properties__common__graph.html#acc122d2244c96f8ba56ab7a553ec9932">scene_properties_common_graph_type_slot</a>(<span class="keywordtype">int</span>&amp; type, <a class="code" href="structreal__world__algorithm_1_1graph.html">graph&lt;int&gt;</a>&amp; gr, under_GP&amp; options)</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keywordtype">void</span> scene_properties_common_graph_viewport_size_signal(Qt3DExtras::Qt3DWindow*);</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="keyword">public</span> slots:</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keywordtype">void</span> scene_properties_common_graph_viewport_size_slot(Qt3DExtras::Qt3DWindow* view)</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    {</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        <span class="keywordflow">if</span> (type == 0)</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        {</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;            emit scene_properties_common_graph_type_signal(type, gr, options);</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        }</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        QMetaObject::invokeMethod(<span class="keyword">this</span>,</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;            <span class="stringliteral">&quot;scene_properties_common_graph_viewport_size_signal&quot;</span>,</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;            Qt::QueuedConnection,</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;            Q_ARG(Qt3DExtras::Qt3DWindow*, view));</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    }</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordtype">void</span> scene_properties_common_graph_camera_slot(Qt3DRender::QCamera* camera)</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    {</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        QMetaObject::invokeMethod(<span class="keyword">this</span>,</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;            <span class="stringliteral">&quot;scene_properties_common_graph_camera_signal&quot;</span>,</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;            Qt::QueuedConnection,</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;            Q_ARG(Qt3DRender::QCamera*, camera));</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        QMetaObject::invokeMethod(<span class="keyword">this</span>,</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            <span class="stringliteral">&quot;scene_properties_common_graph_camera_signal&quot;</span>,</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            Qt::DirectConnection,</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;            Q_ARG(Qt3DRender::QCamera*, camera));</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    }</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;};</div>
+<div class="line"><a name="l00075"></a><span class="lineno"><a class="line" href="classscene__properties__common__graph.html#acc122d2244c96f8ba56ab7a553ec9932">   75</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classscene__properties__common__graph.html#acc122d2244c96f8ba56ab7a553ec9932">scene_properties_common_graph_type_slot</a>(<span class="keywordtype">int</span>&amp; type, <a class="code" href="structreal__world__algorithm_1_1graph.html">graph&lt;int&gt;</a>&amp; gr, under_GP&amp; options)</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    {</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        <span class="keywordflow">if</span> (type == 0)</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        {</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;            emit scene_properties_common_graph_type_signal(type, gr, options);</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        }</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    }</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keywordtype">void</span> scene_properties_common_graph_camera_slot(Qt3DRender::QCamera* camera)</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    {</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        QMetaObject::invokeMethod(<span class="keyword">this</span>,</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;            <span class="stringliteral">&quot;scene_properties_common_graph_camera_signal&quot;</span>,</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;            Qt::QueuedConnection,</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;            Q_ARG(Qt3DRender::QCamera*, camera));</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        QMetaObject::invokeMethod(<span class="keyword">this</span>,</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;            <span class="stringliteral">&quot;scene_properties_common_graph_camera_signal&quot;</span>,</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;            Qt::DirectConnection,</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;            Q_ARG(Qt3DRender::QCamera*, camera));</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    }</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;};</div>
 <div class="ttc" id="aclasscomponent__states_html"><div class="ttname"><a href="classcomponent__states.html">component_states</a></div><div class="ttdoc">class which store all instances of materials and meshes with current settings. So later if some entit...</div><div class="ttdef"><b>Definition:</b> component_states.h:48</div></div>
-<div class="ttc" id="aclassscene__entities__common__graph_html"><div class="ttname"><a href="classscene__entities__common__graph.html">scene_entities_common_graph</a></div><div class="ttdoc">3d scene for graphs visualisation entities. Hold all entities use in this scene and cnnection between...</div><div class="ttdef"><b>Definition:</b> scene_entities_common_graph.h:35</div></div>
+<div class="ttc" id="aclassscene__entities__common__graph_html"><div class="ttname"><a href="classscene__entities__common__graph.html">scene_entities_common_graph</a></div><div class="ttdoc">3d scene for graphs visualisation entities. Hold all entities use in this scene and cnnection between...</div><div class="ttdef"><b>Definition:</b> scene_entities_common_graph.h:42</div></div>
 <div class="ttc" id="aclassscene__properties__common__graph_html"><div class="ttname"><a href="classscene__properties__common__graph.html">scene_properties_common_graph</a></div><div class="ttdoc">3d scene for graphs visualisation properties.</div><div class="ttdef"><b>Definition:</b> scene_properties_common_graph.h:38</div></div>
 <div class="ttc" id="aclassscene__properties__common__graph_html_a74ca62349b25453d38d0c67a12ce37e7"><div class="ttname"><a href="classscene__properties__common__graph.html#a74ca62349b25453d38d0c67a12ce37e7">scene_properties_common_graph::scene_properties_common_graph</a></div><div class="ttdeci">scene_properties_common_graph(Qt3DCore::QEntity *root, QWidget *parent=Q_NULLPTR)</div><div class="ttdoc">default constructor</div><div class="ttdef"><b>Definition:</b> scene_properties_common_graph.cpp:3</div></div>
-<div class="ttc" id="aclassscene__properties__common__graph_html_aae74290e34111eb14ede97a93a65681e"><div class="ttname"><a href="classscene__properties__common__graph.html#aae74290e34111eb14ede97a93a65681e">scene_properties_common_graph::~scene_properties_common_graph</a></div><div class="ttdeci">~scene_properties_common_graph()</div><div class="ttdoc">default destructor</div><div class="ttdef"><b>Definition:</b> scene_properties_common_graph.cpp:272</div></div>
-<div class="ttc" id="aclassscene__properties__common__graph_html_acc122d2244c96f8ba56ab7a553ec9932"><div class="ttname"><a href="classscene__properties__common__graph.html#acc122d2244c96f8ba56ab7a553ec9932">scene_properties_common_graph::scene_properties_common_graph_type_slot</a></div><div class="ttdeci">void scene_properties_common_graph_type_slot(int &amp;type, graph&lt; int &gt; &amp;gr, under_GP &amp;options)</div><div class="ttdoc">if graph type is common graph this scene start to work</div><div class="ttdef"><b>Definition:</b> scene_properties_common_graph.h:64</div></div>
+<div class="ttc" id="aclassscene__properties__common__graph_html_aae74290e34111eb14ede97a93a65681e"><div class="ttname"><a href="classscene__properties__common__graph.html#aae74290e34111eb14ede97a93a65681e">scene_properties_common_graph::~scene_properties_common_graph</a></div><div class="ttdeci">~scene_properties_common_graph()</div><div class="ttdoc">default destructor</div><div class="ttdef"><b>Definition:</b> scene_properties_common_graph.cpp:278</div></div>
+<div class="ttc" id="aclassscene__properties__common__graph_html_acc122d2244c96f8ba56ab7a553ec9932"><div class="ttname"><a href="classscene__properties__common__graph.html#acc122d2244c96f8ba56ab7a553ec9932">scene_properties_common_graph::scene_properties_common_graph_type_slot</a></div><div class="ttdeci">void scene_properties_common_graph_type_slot(int &amp;type, graph&lt; int &gt; &amp;gr, under_GP &amp;options)</div><div class="ttdoc">if graph type is common graph this scene start to work</div><div class="ttdef"><b>Definition:</b> scene_properties_common_graph.h:75</div></div>
 <div class="ttc" id="astructreal__world__algorithm_1_1graph_html"><div class="ttname"><a href="structreal__world__algorithm_1_1graph.html">real_world_algorithm::graph&lt; int &gt;</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
@@ -190,7 +201,7 @@ $(document).ready(function(){initNavTree('scene__properties__common__graph_8h_so
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><b>scene_properties_common_graph.h</b></li>
-    <li class="footer">Generated on Thu Jun 10 2021 14:17:54 for Real World Algorithms by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Mon Jun 14 2021 12:47:44 for Real World Algorithms by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

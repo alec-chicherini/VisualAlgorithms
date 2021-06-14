@@ -50,6 +50,8 @@ main_window::main_window(QWidget *parent)
 	setLayout(grid_layout_main);
 	//
 
+	connect(viewport_window_, &viewport_window::viewport_window_screen_size_signal,
+		scene_properties_common_graph_, &scene_properties_common_graph::scene_properties_common_graph_viewport_size_slot);
 
 	//from graph menu
 	connect(graph_menu_, &graph_menu::regen_data_signal,this, &main_window::re_gen_graph);
@@ -74,6 +76,7 @@ main_window::main_window(QWidget *parent)
 	//connect(property_light_, &property_light::light_intencity_signal, viewport_window_, &viewport_window::viewport_light_intensity_slot);
 
 
+	
 }
 
 main_window::~main_window()

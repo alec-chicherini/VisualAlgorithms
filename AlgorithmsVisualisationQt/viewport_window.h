@@ -3,7 +3,7 @@
 #include <QWidget>
 
 #include <Qt3DCore/qentity.h>
-#include <qt3dwindow.h>
+#include <Qt3DExtras/qt3dwindow.h>
 #include <qforwardrenderer.h>
 
 #include <Qt3DRender/QGeometryRenderer>
@@ -55,10 +55,12 @@ public:
 	/// @brief default destructor
 	~viewport_window();
 
+	Qt3DExtras::Qt3DWindow* window3d_main;
+
 private:
 	Qt3DCore::QEntity* rootEntity;
 	Qt3DCore::QEntity* currentSceneEntity;
-	Qt3DExtras::Qt3DWindow* window3d_main;
+
 
 	//camera
 	Qt3DRender::QCamera* camera_main;
@@ -79,6 +81,8 @@ signals:
 	/// @param gr graph
 	/// @param op options
 	void update_common_graph(graph<int> gr, std::underlying_type_t<GP> op);
+
+	void viewport_window_screen_size_signal(Qt3DExtras::Qt3DWindow*);
 
 //public slots:
 //	/// @brief slot to set current type of camera controller

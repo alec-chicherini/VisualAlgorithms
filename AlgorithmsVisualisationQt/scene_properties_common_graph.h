@@ -57,8 +57,19 @@ private:
 signals:
 	void scene_properties_common_graph_type_signal(int& type, graph<int>& gr, under_GP& options);
 	void scene_properties_common_graph_camera_signal(Qt3DRender::QCamera*);
+	void scene_properties_common_graph_viewport_size_signal(Qt3DExtras::Qt3DWindow*);
 
 public slots:
+
+	void scene_properties_common_graph_viewport_size_slot(Qt3DExtras::Qt3DWindow* view)
+	{
+
+		QMetaObject::invokeMethod(this,
+			"scene_properties_common_graph_viewport_size_signal",
+			Qt::QueuedConnection,
+			Q_ARG(Qt3DExtras::Qt3DWindow*, view));
+	}
+
 	/// @brief if graph type is common graph this scene start to work
 	/// @return void
 	void scene_properties_common_graph_type_slot(int& type, graph<int>& gr, under_GP& options)

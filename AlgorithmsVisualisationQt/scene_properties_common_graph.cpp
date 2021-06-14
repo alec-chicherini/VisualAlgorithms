@@ -130,6 +130,7 @@ scene_properties_common_graph::scene_properties_common_graph(Qt3DCore::QEntity* 
 		ADD_LEAF_END(common_graph, edge, material)
 
 	ADD_ROOT(tree_widget, plane)
+
 		/*ADD_LEAF_BEGIN(common_graph,plane, mesh)
 			ADD_CONNECTION_PROPERTY_TO_STATE(plane, mesh, sphere, radius);
 			ADD_CONNECTION_PROPERTY_TO_STATE(plane, mesh, sphere, rings);
@@ -155,6 +156,7 @@ scene_properties_common_graph::scene_properties_common_graph(Qt3DCore::QEntity* 
 			ADD_CONNECTION_PROPERTY_TO_STATE(plane, mesh, torus, rings);
 			ADD_CONNECTION_PROPERTY_TO_STATE(plane, mesh, torus, slices);
 		ADD_LEAF_END(common_graph, plane, mesh)*/
+
 		ADD_LEAF_BEGIN(common_graph, plane, material)
 			ADD_CONNECTION_PROPERTY_TO_STATE(plane, material, phong, ambient);
 			ADD_CONNECTION_PROPERTY_TO_STATE(plane, material, phong, diffuse);
@@ -266,6 +268,10 @@ connect(this, &scene_properties_common_graph::scene_properties_common_graph_came
 connect(this, &scene_properties_common_graph::scene_properties_common_graph_camera_signal,
 	camera_camera, &property_camera::property_camera_camera_slot);
 
+
+/////////////////////////////////////////////////////////////////////////////////////////////////
+connect(this, &scene_properties_common_graph::scene_properties_common_graph_viewport_size_signal,
+	scene_entities_common_graph_, &scene_entities_common_graph::scene_entities_common_graph_viewport_size_slot);
 
 }
 

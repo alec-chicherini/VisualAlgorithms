@@ -41,6 +41,13 @@ viewport_window::viewport_window(Qt3DCore::QEntity* root,QWidget *parent)
 
 	//connect(camera_main, &Qt3DRender::QCamera::positionChanged, tansform_light_main, &Qt3DCore::QTransform::setTranslation);
 	//
+
+	QMetaObject::invokeMethod(this,
+		"viewport_window_screen_size_signal",
+		Qt::QueuedConnection,
+		Q_ARG(Qt3DExtras::Qt3DWindow*, window3d_main));
+	
+
 	QGridLayout* gl = new QGridLayout;
 	gl->setSpacing(0);
 	gl->setContentsMargins(0, 0, 0, 0);
