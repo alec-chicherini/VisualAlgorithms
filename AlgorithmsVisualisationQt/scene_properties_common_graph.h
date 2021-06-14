@@ -61,6 +61,7 @@ signals:
 
 public slots:
 
+	/// @brief recieve pointer viewport window to entities in common graph
 	void scene_properties_common_graph_viewport_size_slot(Qt3DExtras::Qt3DWindow* view)
 	{
 

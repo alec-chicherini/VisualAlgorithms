@@ -1,7 +1,5 @@
 var NAVTREEINDEX1 =
 {
-"functions_func_w.html":[1,1,1,15],
-"functions_func_x.html":[1,1,1,16],
 "functions_func_~.html":[1,1,1,17],
 "functions_g.html":[1,1,0,6],
 "functions_i.html":[1,1,0,7],
@@ -49,5 +47,7 @@ var NAVTREEINDEX1 =
 "structreal__world__algorithm_1_1graph.html#abea142034f4ff13d066f4dacf7a70029":[1,0,0,0,1],
 "structreal__world__algorithm_1_1graph.html#ac1aaabd9b04d0f3f83f1190a6a2b2071":[1,0,0,0,8],
 "structreal__world__algorithm_1_1graph.html#ac1fb6fbccbe412ab1f73c5e11f2706a3":[1,0,0,0,3],
-"structreal__world__algorithm_1_1graph.html#ac5b26f50838dbe2a0935b67303259803":[1,0,0,0,17]
+"structreal__world__algorithm_1_1graph.html#ac5b26f50838dbe2a0935b67303259803":[1,0,0,0,17],
+"":[0,0,1],
+"":[0,0,0,0]
 };
