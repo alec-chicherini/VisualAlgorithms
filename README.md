@@ -9,6 +9,9 @@ Builded for Windows 10.
 Qt 5.15.2 used.
 [Executable file here](https://github.com/ikvasir/Real_World_Algorithms/files/6647528/0.0.2.zip)
 
+###  Version 0.0.2 Added features
+- Vertexes drag and drop by mouse. 
+-  
 ## Version 0.0.1 Availible Features
 - First and only one availible now  scene just generate random graph with properties.
 - Changing properties in vertexes, edges, camera and camera controller. 
