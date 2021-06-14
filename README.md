@@ -11,7 +11,7 @@ Qt 5.15.2 used.
 
 ###  Version 0.0.2 Added features
 - Vertexes drag and drop by mouse. 
--  
+
 ## Version 0.0.1 Availible Features
 - First and only one availible now  scene just generate random graph with properties.
 - Changing properties in vertexes, edges, camera and camera controller. 
