@@ -51,6 +51,7 @@
       
         //ex 1.3.3
         std::cout << std::endl;
+        std::cout << "ex 1.3.3"<<std::endl;
         Calc calculator1,calculator2,c3;
         calculator1.getExpression("1 2 3 * +");
         calculator1.execute();
@@ -61,6 +62,7 @@
         c3.getExpression("2 2 + 3 3 + *");
         c3.execute();
 
+        std::cout << "ex 1.3.4" << std::endl;
         //ex 1.3.4
         std::cout << std::endl;
         bracers br,br2,br3,br4,br5;

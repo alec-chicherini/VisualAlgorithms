@@ -11,10 +11,11 @@ var searchData=
   ['scene_5fentities_5fcommon_5fgraph_5fvertex_5fmesh_5ftype_5fslot_188',['scene_entities_common_graph_vertex_mesh_type_slot',['../classscene__entities__common__graph.html#a83ede5cd4a8c4a6a720c538b10bacdbb',1,'scene_entities_common_graph']]],
   ['scene_5fproperties_5fcommon_5fgraph_189',['scene_properties_common_graph',['../classscene__properties__common__graph.html',1,'scene_properties_common_graph'],['../classscene__properties__common__graph.html#a74ca62349b25453d38d0c67a12ce37e7',1,'scene_properties_common_graph::scene_properties_common_graph(Qt3DCore::QEntity *root, QWidget *parent=Q_NULLPTR)']]],
   ['scene_5fproperties_5fcommon_5fgraph_5ftype_5fslot_190',['scene_properties_common_graph_type_slot',['../classscene__properties__common__graph.html#acc122d2244c96f8ba56ab7a553ec9932',1,'scene_properties_common_graph']]],
-  ['send_5finitialization_5fdata_191',['send_initialization_data',['../classproperty__camera.html#a0dd47f1a1f639ca1cea529c5f716fa14',1,'property_camera::send_initialization_data()'],['../classproperty__camera__controller.html#a91c67e8fe70216c7d89435628270b238',1,'property_camera_controller::send_initialization_data()'],['../classproperty__material.html#a6bde873a9e2544e79bd24dc7b98f9a60',1,'property_material::send_initialization_data()'],['../classproperty__mesh.html#a9f5a0aa3873d1ba23b4541605e1c5556',1,'property_mesh::send_initialization_data()']]],
-  ['setcolor_192',['setColor',['../classcolor__picker.html#abe813ead83406ad37d2716d95341fe41',1,'color_picker']]],
-  ['setpossition_193',['setPossition',['../class_q_line_mesh.html#a811d538b8746b78d9b4130ebac6e6e60',1,'QLineMesh']]],
-  ['setwidth_194',['setWidth',['../class_q_line_mesh.html#aa6068e9366f2bc4d6ba2dbdc4358a5af',1,'QLineMesh']]],
-  ['setxyz_195',['setXYZ',['../classxyz__picker.html#a1c6c57504a5d2d5cea4c95f861121e2a',1,'xyz_picker']]],
-  ['sorting_5fmenu_196',['sorting_menu',['../classsorting__menu.html',1,'sorting_menu'],['../classsorting__menu.html#a90cbdd0658c6f7f20236ce5d6ac05ad9',1,'sorting_menu::sorting_menu()']]]
+  ['scene_5fproperties_5fcommon_5fgraph_5fviewport_5fsize_5fslot_191',['scene_properties_common_graph_viewport_size_slot',['../classscene__properties__common__graph.html#a0f8ef3757aadd45dc6db02ad178be330',1,'scene_properties_common_graph']]],
+  ['send_5finitialization_5fdata_192',['send_initialization_data',['../classproperty__camera.html#a0dd47f1a1f639ca1cea529c5f716fa14',1,'property_camera::send_initialization_data()'],['../classproperty__camera__controller.html#a91c67e8fe70216c7d89435628270b238',1,'property_camera_controller::send_initialization_data()'],['../classproperty__material.html#a6bde873a9e2544e79bd24dc7b98f9a60',1,'property_material::send_initialization_data()'],['../classproperty__mesh.html#a9f5a0aa3873d1ba23b4541605e1c5556',1,'property_mesh::send_initialization_data()']]],
+  ['setcolor_193',['setColor',['../classcolor__picker.html#abe813ead83406ad37d2716d95341fe41',1,'color_picker']]],
+  ['setpossition_194',['setPossition',['../class_q_line_mesh.html#a811d538b8746b78d9b4130ebac6e6e60',1,'QLineMesh']]],
+  ['setwidth_195',['setWidth',['../class_q_line_mesh.html#aa6068e9366f2bc4d6ba2dbdc4358a5af',1,'QLineMesh']]],
+  ['setxyz_196',['setXYZ',['../classxyz__picker.html#a1c6c57504a5d2d5cea4c95f861121e2a',1,'xyz_picker']]],
+  ['sorting_5fmenu_197',['sorting_menu',['../classsorting__menu.html',1,'sorting_menu'],['../classsorting__menu.html#a90cbdd0658c6f7f20236ce5d6ac05ad9',1,'sorting_menu::sorting_menu()']]]
 ];

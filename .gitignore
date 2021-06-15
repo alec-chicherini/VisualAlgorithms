@@ -379,3 +379,4 @@ Doxyfile
 doxygenrunner.bat
 /QObjectPicker_test/QObjectPicker_test.vcxproj
 /QObjectPicker_test/QObjectPicker_test.vcxproj.filters
+/test/test.vcxproj

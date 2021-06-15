@@ -1,14 +1,10 @@
 #pragma once
 
-
 #include <functional>
 
 #define PART2
 #define PART1
-//#define PART3
-
-
-
+#define PART3
 
 #include "S:\Code\ikvasir\Real_World_Algorithms\AlgorithmsVisualisationQt\enums.h"
 #include <array>
@@ -25,10 +21,11 @@
 #include <utility>
 #include <algorithm>
 #include <set>
-
+#include <string>
 
 #include <bitset>
 
+#include <typeinfo>
 
 namespace real_world_algorithm {
 #ifdef PART1
@@ -122,7 +119,7 @@ class ouMyStack
 public:
     ouMyStack() { stack.resize(SIZE); };
     ouMyStack(size_t SIZE_) { SIZE = SIZE_; stack.resize(SIZE); };
-    bool is_full() { return current_pos == SIZE - 1 ? true : false; }
+    bool is_full() { return current_pos == SIZE  ? true : false; }
     bool is_empty() { return is_empty_bool; }
     void push(T x)
     {
@@ -156,13 +153,32 @@ public:
         return current_pos;
     }
 
-    void print()
+    std::string print()
     {
-        if (is_empty_bool)std::cout << "[empty]" << std::endl;
+
+     
+        std::string str;
+        if (is_empty_bool)str="[ empty ]";
         else {
-            std::cout << "[ ";
-            for (size_t i = 0; i < current_pos; i++)std::cout << stack.operator[](i) << " "; std::cout << "]";
+            str+= "[ ";
+            for (int i = 0; i < current_pos; i++)
+            {
+                T value = stack.at(i);
+
+                if constexpr(std::is_arithmetic_v<T>)
+                str += std::to_string(value);
+
+
+                str += " ";
+            }
+
+             str += "]";
+            
         }
+
+        std::cout << str<<std::endl;
+
+        return str;
     }
 
     void reverse()
@@ -180,6 +196,11 @@ class Calc
     ouMyStack<int> output;//100
 public:
     
+    int result()
+    {
+        return output.top();
+    };
+
     void getExpression(std::string&& str) {
         std::string current = "";
         for (size_t i = 0; i < str.size(); i++)
@@ -252,6 +273,7 @@ public:
     };
 };
 
+/// @brief count number of opened and closed bracers(not order, situation "[(])" - ok
 class bracers
 {
     ouMyStack<char> bracers_stack;//100

@@ -110,6 +110,9 @@ $(document).ready(function(){initNavTree('classscene__properties__common__graph.
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-slots"></a>
 Public Slots</h2></td></tr>
+<tr class="memitem:a0f8ef3757aadd45dc6db02ad178be330"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classscene__properties__common__graph.html#a0f8ef3757aadd45dc6db02ad178be330">scene_properties_common_graph_viewport_size_slot</a> (Qt3DExtras::Qt3DWindow *view)</td></tr>
+<tr class="memdesc:a0f8ef3757aadd45dc6db02ad178be330"><td class="mdescLeft">&#160;</td><td class="mdescRight">recieve pointer viewport window to entities in common graph  <a href="classscene__properties__common__graph.html#a0f8ef3757aadd45dc6db02ad178be330">More...</a><br /></td></tr>
+<tr class="separator:a0f8ef3757aadd45dc6db02ad178be330"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acc122d2244c96f8ba56ab7a553ec9932"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classscene__properties__common__graph.html#acc122d2244c96f8ba56ab7a553ec9932">scene_properties_common_graph_type_slot</a> (int &amp;type, <a class="el" href="structreal__world__algorithm_1_1graph.html">graph</a>&lt; int &gt; &amp;gr, under_GP &amp;options)</td></tr>
 <tr class="memdesc:acc122d2244c96f8ba56ab7a553ec9932"><td class="mdescLeft">&#160;</td><td class="mdescRight">if graph type is common graph this scene start to work  <a href="classscene__properties__common__graph.html#acc122d2244c96f8ba56ab7a553ec9932">More...</a><br /></td></tr>
 <tr class="separator:acc122d2244c96f8ba56ab7a553ec9932"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -493,13 +496,48 @@ Public Member Functions</h2></td></tr>
 
 <p>if graph type is common graph this scene start to work </p>
 <dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
-<div class="fragment"><div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    {</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        <span class="keywordflow">if</span> (type == 0)</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        {</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;            emit scene_properties_common_graph_type_signal(type, gr, options);</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        }</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    }</div>
+<div class="fragment"><div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    {</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        <span class="keywordflow">if</span> (type == 0)</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        {</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;            emit scene_properties_common_graph_type_signal(type, gr, options);</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        }</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a0f8ef3757aadd45dc6db02ad178be330"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f8ef3757aadd45dc6db02ad178be330">&#9670;&nbsp;</a></span>scene_properties_common_graph_viewport_size_slot</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void scene_properties_common_graph::scene_properties_common_graph_viewport_size_slot </td>
+          <td>(</td>
+          <td class="paramtype">Qt3DExtras::Qt3DWindow *&#160;</td>
+          <td class="paramname"><em>view</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">slot</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>recieve pointer viewport window to entities in common graph </p>
+<div class="fragment"><div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    {</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        QMetaObject::invokeMethod(<span class="keyword">this</span>,</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;            <span class="stringliteral">&quot;scene_properties_common_graph_viewport_size_signal&quot;</span>,</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;            Qt::QueuedConnection,</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;            Q_ARG(Qt3DExtras::Qt3DWindow*, view));</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -509,7 +547,7 @@ Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classscene__properties__common__graph.html">scene_properties_common_graph</a></li>
-    <li class="footer">Generated on Mon Jun 14 2021 13:01:33 for Real World Algorithms by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Tue Jun 15 2021 13:10:54 for Real World Algorithms by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>
