@@ -51,7 +51,7 @@
       
         //ex 1.3.3
         std::cout << std::endl;
-        std::cout << "ex 1.3.3"<<std::endl;
+        std::cout << "ex 1.3"<<std::endl;
         Calc calculator1,calculator2,c3;
         calculator1.getExpression("1 2 3 * +");
         calculator1.execute();
@@ -62,7 +62,7 @@
         c3.getExpression("2 2 + 3 3 + *");
         c3.execute();
 
-        std::cout << "ex 1.3.4" << std::endl;
+        std::cout << "ex 1.4" << std::endl;
         //ex 1.3.4
         std::cout << std::endl;
         bracers br,br2,br3,br4,br5;
@@ -80,7 +80,8 @@
 #endif
 
 #ifdef PART2
-        //2.1
+        std::cout << "ex 2.1" << std::endl;
+        
         ouMyList<int> lst;
         lst.print();
         lst.insert(1);
@@ -94,9 +95,9 @@
         lst.cleanup();
         lst.print();
 
-        //2.2
         std::cout << std::endl;
-        ouMyQueue<int> que;
+        std::cout << "ex 2.2" << std::endl;
+        ouMyQueue<int> que(10);
         //std::cout<<que.Head_.pos<<std::endl;
         //que.Head_++;        que.Head_++;        que.Head_++;        que.Head_++;        que.Head_++;        que.Head_++;        que.Head_++;        que.Head_++;    
         //std::cout << que.Head_.pos << std::endl;
@@ -111,36 +112,37 @@
         que.push(1); que.push(1);
         que.push(1); que.push(1);
         que.push(1); que.push(1);
-        que.print();
+        std::cout << que.print() << std::endl;
         que.pop(); que.pop();que.pop();
-        que.print();
+        std::cout << que.print()<<std::endl;
         que.push(1); que.push(1);
         que.push(1); que.push(1);
         que.push(1); que.push(1);
         que.push(1); que.push(1);
-        que.print();
+        std::cout << que.print() << std::endl;
         que.pop(); que.pop(); que.pop();
-        que.print();
+        std::cout << que.print() << std::endl;
         que.pop(); que.pop(); que.pop(); que.pop(); que.pop();
-        que.print();
+        std::cout << que.print() << std::endl;
         que.pop();
-        que.print();
+        std::cout << que.print() << std::endl;
         que.pop();
-        que.print();
+        std::cout << que.print() << std::endl;
         que.pop();
-        que.print();
+        std::cout << que.print() << std::endl;
         que.push(1); que.push(1);
         que.push(1); que.push(1);
         que.push(1); que.push(1);
         que.push(1); que.push(1);
-        que.print();
+        std::cout << que.print() << std::endl;
         que.push(1); que.push(1);
-        que.print();
+        std::cout << que.print() << std::endl;
         que.push(1);
-        que.print();
+        std::cout << que.print() << std::endl;
 
         //2.3
-        graph<int> gr1 = generateRandomGraph<int>(5,1,3,GP::LOOPS|GP::FULL);
+        std::cout << "ex 2.3" << std::endl;
+        graph<int> gr1 = generateRandomGraph<int>(5,1,2,GP::LOOPS|GP::FULL);
         gr1.print();
         std::cout << std::endl;
         gr1.DFS_recurcive(0);
@@ -166,11 +168,12 @@
 
         auto rand_graph = generateRandomGraph<int>(5, 1, 3, GP::LOOPS);
         rand_graph.print();
+
         
 #endif
 
 #ifdef PART3
-       
+        std::cout << "ex 3.1" << std::endl;
         std::string input("abcd");
         std::cout << "str input: ";
         std::cout << input << std::endl;
@@ -207,8 +210,6 @@
         //3.2
         using TF = ouMyPriorityQueue<char>::T_Freq;
         ouMyPriorityQueue<char> Q1(0, TF{'a',5});
-
-        
 
         Q1.insert(TF{'g',6 }, TF{ 'b',7 }, TF{ 'c',3 }, TF{ 'd',4 }, TF{ 'e',1 }, TF{ 'f',2 });
         Q1.print();

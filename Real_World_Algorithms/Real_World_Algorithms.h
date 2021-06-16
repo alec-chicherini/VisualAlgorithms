@@ -432,15 +432,20 @@ public:
         }
     }
 
-    void print() {
+    std::string print() {
 
+        std::string result;
         Node* current = first;
 
         while (current != nullptr) {
-            std::cout << current->data << "->";
+            result += std::to_string(current->data);
+            result += "->";
             current = current->next;
         }
-        std::cout << "nullptr" << std::endl;
+        result+= "nullptr";
+        std::cout << result << std::endl;
+
+        return result;
     };
 
     void cleanup() {
@@ -450,7 +455,7 @@ public:
             delete first;
             first = next;
         }
-        std::cout << "list deleted" << std::endl;
+       // std::cout << "list deleted" << std::endl;
     };
 
 };
@@ -460,17 +465,15 @@ template <class T>
 class ouMyQueue
 {
 public:
-    size_t SIZE = 10;
-    std::vector<T> queue_;
 
-    ouMyQueue() { queue_.resize(SIZE); };
-    ouMyQueue(size_t SIZE_) { SIZE = SIZE_; queue_.resize(SIZE); };
+    ouMyQueue() = delete;
+    ouMyQueue(size_t SIZE_): SIZE(SIZE_) { queue_.resize(SIZE_); };
 
 public:
     struct possition {
-        size_t SIZE=10;
+        size_t SIZE;
         size_t pos;
-        possition(size_t pos_, size_t SIZE_ = 10) { pos = pos_; SIZE = SIZE_; };
+        possition(size_t pos_, size_t SIZE_) { pos = pos_; SIZE = SIZE_; };
         possition() =delete;
 
         possition& operator++()
@@ -504,6 +507,9 @@ public:
 
     };
 private:
+    size_t SIZE;
+    std::vector<T> queue_;
+
     possition Head_{ 0,SIZE };
     possition Tail_{ 0,SIZE};
 
@@ -514,6 +520,7 @@ private:
 public:
     bool is_full() { return b_is_full; }
     bool is_empty() { return b_is_empty; }
+
     void push(T data)
     {
         if (is_full()) std::cout << "push failed. queue is full" << std::endl;
@@ -549,8 +556,9 @@ public:
         }
     };
 
-    void print()
+    std::string print()
     {
+       
         possition current(Head_.pos,SIZE);
         std::vector <std::string> print_array; print_array.resize(SIZE);
         for (auto& s : print_array)s = " ";
@@ -568,6 +576,7 @@ public:
                     break;
                 };
             };
+
         for (size_t i = 0; i < SIZE; i++) std::cout << i << " ";
         std::cout << std::endl;
 
@@ -579,7 +588,29 @@ public:
 
         for (size_t i = 0; i < SIZE; i++) if (Tail_.pos == i)std::cout << "T"; else std::cout << "  ";
         std::cout << std::endl;
+        for (size_t i = 0; i < SIZE; i++) std::cout << "--";
+        std::cout << std::endl;
 
+
+        std::string result;
+        possition cur(Head_.pos, SIZE);
+        while(true)
+        {
+            if (b_is_empty)break;
+
+           
+            result += std::to_string(queue_[cur.pos]);
+            if (b_is_one_element)break;
+
+            cur++;
+            if (cur.pos != Tail_.pos) result += " ";
+            else {
+                  result += " ";
+                  result += std::to_string(queue_[cur.pos]);
+                  break;
+            }
+        } 
+        return result;
     };
 };
 
@@ -755,8 +786,9 @@ struct graph
     /// @brief Depth-First Search stack algorithm for this graph
     /// @param node first node where search begin
     /// @param visualisation_func callback function for extern usage which allow to execute some code during each iteration of search. 
-    void DFS_stack(int node, std::function<void()> visualisation_func = [] {})
+    std::string DFS_stack(int node, std::function<void()> visualisation_func = [] {})
     {
+        std::string result;
         if (node<0 || node>N) { std::cout <<__FUNCDNAME__<< " error. first node not in range." << std::endl; }
         std::cout << std::endl;
      
@@ -764,7 +796,9 @@ struct graph
         for (size_t i = 0; i < visited.size(); i++)visited[i] = false;
        // std::cout << "DFS_Stack:visited: "; for (auto v : visited)std::cout << v; std::cout << std::endl;
         std::cout << "DFS_Stack: " << node;
-        
+
+        result += std::to_string(node);
+       
         ouMyStack<int> stack(N * N);
         stack.push(node);
         while (!stack.is_empty()) {
@@ -777,17 +811,25 @@ struct graph
             for (auto& a : AdjacencyList)
             {
                 if (!visited[a]) {
+
+                result += "->";
+                result += std::to_string(a);
+
                 std::cout << "->" << a;
                 stack.push(a);}
             }
         };
+
+        return result;
     }
 
     /// @brief Depth-First Search stack algorithm for this graph, work without visiting the nodes which was already have been visited.
     /// @param node first node where search begin
     /// @param visualisation_func callback function for extern usage which allow to execute some code during each iteration of search. 
-    void DFS_stack_2(int  node, std::function<void()> visualisation_func = [] {})
+    std::string DFS_stack_2(int  node, std::function<void()> visualisation_func = [] {})
     {
+        std::string result;
+
         if (node<0 || node>N) { std::cout << __FUNCDNAME__ << " error. first node not in range." << std::endl; }
         std::cout << std::endl;
         std::vector<int> instack;
@@ -803,7 +845,7 @@ struct graph
 
         //std::cout << "DFS_stack_2:visited: "; for (auto v : visited)std::cout << v; std::cout << std::endl;
         std::cout << "DFS_stack_2: " << node;
-        
+        result += std::to_string(node);
         ouMyStack<int> stack(N * N);
         stack.push(node);
 
@@ -820,6 +862,8 @@ struct graph
             for (auto& a : AdjacencyList)
             {
                 if (!visited[a]&&!instack[a]) {
+                    result += "->";
+                    result += std::to_string(a);
                     std::cout << "->" << a;
                     stack.push(a);
                     instack[a] = true;
@@ -827,6 +871,7 @@ struct graph
             }
         }//while
         std::cout << std::endl;
+        return result;
     }
 
     /// @brief it is like Depth-First Search stack algorithm. The next node chose only one and randomly from avaliable in adjacency list. After no avalible nodes in adjacency list presented for next step random vertex on graph chosed and etc. while all vertexes have not been visited.
@@ -920,8 +965,9 @@ struct graph
     /// @brief Breadth-First Search algorithm for this graph.
     /// @param node first node where search begin
     /// @param visualisation_func callback function for extern usage which allow to execute some code during each iteration of search. 
-    void BFS(int  node, std::function<void()> visualisation_func = [] {})
+    std::string BFS(int  node, std::function<void()> visualisation_func = [] {})
     {
+        std::string result;
 
         std::vector<bool> inqueue;
 
@@ -936,6 +982,7 @@ struct graph
 
        
         std::cout << "BFS: " << node;
+        result += std::to_string(node);
 
         ouMyQueue<int> queue(N);
         queue.push(node);
@@ -952,6 +999,8 @@ struct graph
             for (auto& a : AdjacencyList)
             {
                 if (!visited[a] && !inqueue[a]) {
+                    result += "->";
+                    result += std::to_string(a);
                     std::cout << "->" << a;
                     queue.push(a);
                     inqueue[a] = true;
@@ -959,6 +1008,7 @@ struct graph
             }
         }//while
         std::cout << std::endl;
+        return result;
     }
 
   
@@ -1046,42 +1096,42 @@ struct graph
 template<typename T>
 auto generateRandomGraph(int V, int E_left, int E_right, std::underlying_type_t<GP> options) {
     graph<T> G(V);
-    G.visited.resize(V + 1);
+    G.visited.resize(V);
 
-    for (int i = 0; i <= V; i++)
+    for (int i = 0; i < V; i++)
     {
         G.V.push_back(i);
     }
 
     if ((options & static_cast<std::underlying_type_t<GP>>(GP::DIRECTED)) == static_cast<std::underlying_type_t<GP>>(GP::DIRECTED))
     {
-        for (int i = 0; i <= V; i++)
+        for (int i = 0; i < V; i++)
         {
             int E_total = E_right - E_left + 1;
             int E_min = E_left;
 
             while (E_min--)
-                G.E.push_back({ i,G.RAND(0,V) });
+                G.E.push_back({ i,G.RAND(0,V-1) });
 
             while (E_total--)
                 if (G.RAND(0, 1000) % 2)
-                    G.E.push_back({ i,G.RAND(0,V) });
+                    G.E.push_back({ i,G.RAND(0,V-1) });
         }
     }
     else
     {
         //same as directed
-        for (int i = 0; i <= V; i++)
+        for (int i = 0; i < V; i++)
         {
             int E_total = E_right - E_left + 1;
             int E_min = E_left;
 
             while(E_min--)
-                G.E.push_back({i,G.RAND(0,V)});
+                G.E.push_back({i,G.RAND(0,V-1)});
 
             while (E_total--) 
                 if(G.RAND(0, 1000) % 2)
-                    G.E.push_back({ i,G.RAND(0,V) });
+                    G.E.push_back({ i,G.RAND(0,V-1) });
             
         }
 
