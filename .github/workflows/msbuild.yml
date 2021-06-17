@@ -12,6 +12,7 @@ jobs:
         var1: "hello"
         var2: "world"
         
-      run: echo $var1 $var2
+      run: $var1 $var2
+
 
 
