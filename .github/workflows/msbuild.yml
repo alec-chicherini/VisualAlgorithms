@@ -9,10 +9,10 @@ jobs:
     steps:
     - name: print a message
       env:
-        var1: "hello"
-        var2: "world"
+        var: "hello world"
+
         
-      run: $var1 $var2
+      run: $var
 
 
 
