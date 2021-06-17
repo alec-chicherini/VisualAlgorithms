@@ -1,6 +1,7 @@
 name: MSBuild
 
-on: [push]
+on:
+  workflow_dispatch:
 
 jobs:
   test:
