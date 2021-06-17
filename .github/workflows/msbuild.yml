@@ -1,16 +1,24 @@
-name: MSBuild
+name: MSVC build
 
 on:
   workflow_dispatch:
 
 jobs:
-  test:
-    name: Simple msg
+  algorithms:
+    name: Algorithms math build windows
     runs-on: windows-latest
     steps:
     - name: display path
       run: echo ${env::PATH}
       shell: powershell
-
+      
+  qt_visualisation:
+    needs: algorithms
+    name: Qt visualisation app windows build
+    runs-on: windows-latest  
+    steps:
+    - name: display path
+      run: echo ${env::PATH}
+      shell: powershell
 
 
