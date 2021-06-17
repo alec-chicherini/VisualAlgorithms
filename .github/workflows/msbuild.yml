@@ -8,12 +8,9 @@ jobs:
     name: Simple msg
     runs-on: windows-latest
     steps:
-    - name: print a message
-      env:
-        var: "hello world"
-
-        
-      run: $var
+    - name: display path
+      run: echo ${env::PATH}
+      shell: powershell
 
 
 
