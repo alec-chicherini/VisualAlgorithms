@@ -5,18 +5,22 @@ on:
 
 jobs:
   algorithms:
-    name: Algorithms math build windows
+    name: Algorithms math build 
     runs-on: windows-latest
     steps:
+    - name: Checkout doxygen
+      uses: actions/checkout@v1
     - name: display path
       run: echo ${env::PATH}
       shell: powershell
       
   qt_visualisation:
     needs: algorithms
-    name: Qt visualisation app windows build
+    name: Qt visualisation app build
     runs-on: windows-latest  
     steps:
+    - name: Checkout doxygen
+      uses: actions/checkout@v1
     - name: display path
       run: echo ${env::PATH}
       shell: powershell
