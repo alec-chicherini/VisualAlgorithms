@@ -188,33 +188,20 @@ Public Member Functions</h2></td></tr>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    container-&gt;setMinimumSize(QSize(128, 128));</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    container-&gt;setMaximumSize(screenSize);</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="comment">//light</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="comment">//light_main = new Qt3DCore::QEntity(currentSceneEntity);</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="comment">//point_light_main = new Qt3DRender::QPointLight(light_main);</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="comment">/*tansform_light_main = new Qt3DCore::QTransform(light_main);*/</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="comment">/*point_light_main-&gt;setColor(QColor(255, 255, 255));</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">    point_light_main-&gt;setIntensity(1.f);</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">    light_main-&gt;addComponent(point_light_main);</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">    light_main-&gt;addComponent(tansform_light_main);*/</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="comment">//connect(camera_main, &amp;Qt3DRender::QCamera::positionChanged, tansform_light_main, &amp;Qt3DCore::QTransform::setTranslation);</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="comment">//</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    QMetaObject::invokeMethod(<span class="keyword">this</span>,</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <span class="stringliteral">&quot;viewport_window_screen_size_signal&quot;</span>,</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        Qt::QueuedConnection,</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        Q_ARG(Qt3DExtras::Qt3DWindow*, window3d_main));</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    QGridLayout* gl = <span class="keyword">new</span> QGridLayout;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    gl-&gt;setSpacing(0);</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    gl-&gt;setContentsMargins(0, 0, 0, 0);</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    gl-&gt;addWidget(container);</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    setLayout(gl);</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    </div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;}</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    QMetaObject::invokeMethod(<span class="keyword">this</span>,</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <span class="stringliteral">&quot;viewport_window_screen_size_signal&quot;</span>,</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        Qt::QueuedConnection,</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        Q_ARG(Qt3DExtras::Qt3DWindow*, window3d_main));</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    QGridLayout* gl = <span class="keyword">new</span> QGridLayout;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    gl-&gt;setSpacing(0);</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    gl-&gt;setContentsMargins(0, 0, 0, 0);</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    gl-&gt;addWidget(container);</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    setLayout(gl);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -234,8 +221,8 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>default destructor </p>
-<div class="fragment"><div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;{</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;}</div>
+<div class="fragment"><div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;{</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -291,7 +278,7 @@ Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classviewport__window.html">viewport_window</a></li>
-    <li class="footer">Generated on Tue Jun 15 2021 13:10:54 for Real World Algorithms by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Sun Jun 27 2021 14:39:36 for Real World Algorithms by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

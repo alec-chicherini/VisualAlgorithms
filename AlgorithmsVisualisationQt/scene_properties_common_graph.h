@@ -54,10 +54,15 @@ private:
 
 	scene_entities_common_graph* scene_entities_common_graph_;
 
+	property_camera* camera_camera_ptr;
+
 signals:
 	void scene_properties_common_graph_type_signal(int& type, graph<int>& gr, under_GP& options);
 	void scene_properties_common_graph_camera_signal(Qt3DRender::QCamera*);
 	void scene_properties_common_graph_viewport_size_signal(Qt3DExtras::Qt3DWindow*);
+	void scene_properties_common_graph_light_possition(QVector3D);
+	void scene_properties_common_graph_light_direction(QVector3D);
+
 
 public slots:
 

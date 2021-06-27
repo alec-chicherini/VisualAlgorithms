@@ -1,0 +1,16 @@
+{
+    "light_spot_color_b_value": 128,
+    "light_spot_color_g_value": 0,
+    "light_spot_color_r_value": 128,
+    "light_spot_constant_attenuation_value": 31,
+    "light_spot_cut_off_angle_value": 12,
+    "light_spot_intensity_value": 75.99,
+    "light_spot_linear_attenuation_value": 3,
+    "light_spot_local_direction_x_value": 102.89,
+    "light_spot_local_direction_y_value": 86.93,
+    "light_spot_local_direction_z_value": -165.61,
+    "light_spot_possition_x_value": -53.92,
+    "light_spot_possition_y_value": -37.87,
+    "light_spot_possition_z_value": 215.61,
+    "light_spot_quadratic_attenuation_value": 0
+}

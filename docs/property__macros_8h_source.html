@@ -255,30 +255,31 @@ $(document).ready(function(){initNavTree('property__macros_8h_source.html',''); 
 <div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;<span class="preprocessor">#define ADD_ROOT(ROOT, NAME)\</span></div>
 <div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;<span class="preprocessor">QTreeWidgetItem* treeitem_##NAME## = new QTreeWidgetItem(##ROOT##);\</span></div>
 <div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;<span class="preprocessor">treeitem_##NAME##-&gt;setText(0, QString(#NAME).replace(0, 1, QString(#NAME)[0].toUpper()));\</span></div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;<span class="preprocessor">tree_widget-&gt;insertTopLevelItem(0, treeitem_##NAME##);\</span></div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;<span class="preprocessor">ROOT##-&gt;insertTopLevelItem(0, treeitem_##NAME##);\</span></div>
 <div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;<span class="preprocessor">component_states_##NAME = new component_states(root,this);\</span></div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;<span class="preprocessor">connect(this,&amp;scene_properties_common_graph::scene_properties_common_graph_camera_signal,\</span></div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;<span class="preprocessor">        component_states_##NAME, &amp;component_states::component_states_camera_slot);</span></div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160; </div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;<span class="preprocessor">#define ADD_LEAF_BEGIN(TYPE,PARENT,NAME)\</span></div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;<span class="preprocessor">property_##NAME##* ##PARENT##_##NAME## = new property_##NAME##(QString(&quot;settings/&quot;</span>)+QString(#TYPE)+QString(&quot;/&quot;)+QString(#PARENT)+QString(&quot;/&quot;)+QString(#NAME)+QString(&quot;/&quot;));\</div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;QTreeWidgetItem* treeitem_##PARENT##_##NAME## = new QTreeWidgetItem(treeitem_##PARENT##);\</div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;treeitem_##PARENT##_##NAME##-&gt;setText(0, QString(#NAME).replace(0, 1, QString(#NAME)[0].toUpper()));\</div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;QTreeWidgetItem* treeitem_##PARENT##_##NAME##_property = new QTreeWidgetItem(treeitem_##PARENT##_##NAME##);\</div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;tree_widget-&gt;setItemWidget(treeitem_##PARENT##_##NAME##_property, 0, ##PARENT##_##NAME##);\</div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;connect(##PARENT##_##NAME##, &amp;property_##NAME##::property_##NAME##_type_signal,\</div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;component_states_##PARENT##, &amp;component_states::component_states_##NAME##_type_slot);\</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;connect(component_states_##PARENT##, &amp;component_states::component_states_##NAME##_type_signal,\</div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;scene_entities_common_graph_, &amp;scene_entities_common_graph::scene_entities_common_graph_##PARENT##_##NAME##_type_slot);</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160; </div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;<span class="preprocessor">#define ADD_LEAF_END(TYPE,PARENT,NAME) PARENT##_##NAME##-&gt;send_initialization_data();</span></div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;<span class="preprocessor">if(QString(#NAME)==QString(&quot;camera&quot;</span>)){\</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;connect(this,&amp;scene_properties_common_graph::scene_properties_common_graph_camera_signal,\</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;        component_states_camera, &amp;component_states::component_states_camera_slot);}</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160; </div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;<span class="preprocessor">#define ADD_LEAF_BEGIN(TYPE,PARENT,NAME)\</span></div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;<span class="preprocessor">property_##NAME##* ##PARENT##_##NAME## = new property_##NAME##(QString(&quot;settings/&quot;</span>)+QString(#TYPE)+QString(&quot;/&quot;)+QString(#PARENT)+QString(&quot;/&quot;)+QString(#NAME)+QString(&quot;/&quot;));\</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;QTreeWidgetItem* treeitem_##PARENT##_##NAME## = new QTreeWidgetItem(treeitem_##PARENT##);\</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;treeitem_##PARENT##_##NAME##-&gt;setText(0, QString(#NAME).replace(0, 1, QString(#NAME)[0].toUpper()));\</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;QTreeWidgetItem* treeitem_##PARENT##_##NAME##_property = new QTreeWidgetItem(treeitem_##PARENT##_##NAME##);\</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;tree_widget-&gt;setItemWidget(treeitem_##PARENT##_##NAME##_property, 0, ##PARENT##_##NAME##);\</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;connect(##PARENT##_##NAME##, &amp;property_##NAME##::property_##NAME##_type_signal,\</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;component_states_##PARENT##, &amp;component_states::component_states_##NAME##_type_slot);\</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;connect(component_states_##PARENT##, &amp;component_states::component_states_##NAME##_type_signal,\</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;scene_entities_common_graph_, &amp;scene_entities_common_graph::scene_entities_common_graph_##PARENT##_##NAME##_type_slot);</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160; </div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;<span class="preprocessor">#define ADD_LEAF_END(TYPE,PARENT,NAME) PARENT##_##NAME##-&gt;send_initialization_data();</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><b>property_macros.h</b></li>
-    <li class="footer">Generated on Tue Jun 15 2021 13:10:54 for Real World Algorithms by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Sun Jun 27 2021 14:39:35 for Real World Algorithms by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

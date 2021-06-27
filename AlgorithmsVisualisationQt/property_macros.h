@@ -170,10 +170,11 @@ connect(##ENTITY##_##COMPONENT##, &property_##COMPONENT##::property_##COMPONENT#
 #define ADD_ROOT(ROOT, NAME)\
 QTreeWidgetItem* treeitem_##NAME## = new QTreeWidgetItem(##ROOT##);\
 treeitem_##NAME##->setText(0, QString(#NAME).replace(0, 1, QString(#NAME)[0].toUpper()));\
-tree_widget->insertTopLevelItem(0, treeitem_##NAME##);\
+ROOT##->insertTopLevelItem(0, treeitem_##NAME##);\
 component_states_##NAME = new component_states(root,this);\
+if(QString(#NAME)==QString("camera")){\
 connect(this,&scene_properties_common_graph::scene_properties_common_graph_camera_signal,\
-        component_states_##NAME, &component_states::component_states_camera_slot);
+        component_states_camera, &component_states::component_states_camera_slot);}
 
 #define ADD_LEAF_BEGIN(TYPE,PARENT,NAME)\
 property_##NAME##* ##PARENT##_##NAME## = new property_##NAME##(QString("settings/")+QString(#TYPE)+QString("/")+QString(#PARENT)+QString("/")+QString(#NAME)+QString("/"));\

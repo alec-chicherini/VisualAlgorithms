@@ -377,58 +377,113 @@ Public Member Functions</h2></td></tr>
 <div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;            ADD_CONNECTION_PROPERTY_TO_STATE(camera, camera, camera, projection_type);</div>
 <div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;            ADD_CONNECTION_PROPERTY_TO_STATE(camera, camera, camera, projection_matrix);</div>
 <div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;        ADD_LEAF_END(common_graph, camera, camera)</div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160; </div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;        ADD_LEAF_BEGIN(common_graph, camera, camera_controller)</div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;            ADD_CONNECTION_PROPERTY_TO_STATE(camera,camera_controller,first_person, acceleration);</div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;            ADD_CONNECTION_PROPERTY_TO_STATE(camera,camera_controller,first_person, deceleration);</div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;            ADD_CONNECTION_PROPERTY_TO_STATE(camera,camera_controller,first_person, linear_speed);</div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;            ADD_CONNECTION_PROPERTY_TO_STATE(camera,camera_controller,first_person, look_speed);</div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;            ADD_CONNECTION_PROPERTY_TO_STATE(camera,camera_controller,first_person, camera);                    </div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;            ADD_CONNECTION_PROPERTY_TO_STATE(camera,camera_controller,orbit, acceleration);</div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;            ADD_CONNECTION_PROPERTY_TO_STATE(camera,camera_controller,orbit, deceleration);</div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;            ADD_CONNECTION_PROPERTY_TO_STATE(camera,camera_controller,orbit, linear_speed);</div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;            ADD_CONNECTION_PROPERTY_TO_STATE(camera,camera_controller,orbit, look_speed);</div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;            ADD_CONNECTION_PROPERTY_TO_STATE(camera,camera_controller,orbit, camera);</div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;            ADD_CONNECTION_PROPERTY_TO_STATE(camera,camera_controller,orbit, zoom_in_limit);</div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;        ADD_LEAF_END(common_graph, camera, camera_controller)</div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160; </div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;    <span class="comment">//ADD_ROOT(tree_widget, light)</span></div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;    <span class="comment">//</span></div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;                camera_camera_ptr = camera_camera;</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160; </div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;        ADD_LEAF_BEGIN(common_graph, camera, camera_controller)</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;            ADD_CONNECTION_PROPERTY_TO_STATE(camera,camera_controller,first_person, acceleration);</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;            ADD_CONNECTION_PROPERTY_TO_STATE(camera,camera_controller,first_person, deceleration);</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;            ADD_CONNECTION_PROPERTY_TO_STATE(camera,camera_controller,first_person, linear_speed);</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;            ADD_CONNECTION_PROPERTY_TO_STATE(camera,camera_controller,first_person, look_speed);</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;            ADD_CONNECTION_PROPERTY_TO_STATE(camera,camera_controller,first_person, camera);                    </div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;            ADD_CONNECTION_PROPERTY_TO_STATE(camera,camera_controller,orbit, acceleration);</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;            ADD_CONNECTION_PROPERTY_TO_STATE(camera,camera_controller,orbit, deceleration);</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;            ADD_CONNECTION_PROPERTY_TO_STATE(camera,camera_controller,orbit, linear_speed);</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;            ADD_CONNECTION_PROPERTY_TO_STATE(camera,camera_controller,orbit, look_speed);</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;            ADD_CONNECTION_PROPERTY_TO_STATE(camera,camera_controller,orbit, camera);</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;            ADD_CONNECTION_PROPERTY_TO_STATE(camera,camera_controller,orbit, zoom_in_limit);</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;            ADD_LEAF_END(common_graph, camera, camera_controller)</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160; </div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;    ADD_ROOT(tree_widget, light)</div>
 <div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160; </div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;    tree_widget-&gt;headerItem()-&gt;setText(0,<span class="stringliteral">&quot;Common graph scene entities:&quot;</span>);</div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;    tree_widget-&gt;setSelectionMode(QAbstractItemView::SelectionMode::NoSelection);</div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;    tree_widget-&gt;setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);</div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160; </div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;    tree_widget-&gt;setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);</div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;    tree_widget-&gt;resizeColumnToContents(1);</div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;    QScrollBar* scroll = tree_widget-&gt;verticalScrollBar();</div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;    </div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;    QHBoxLayout* this_layout = <span class="keyword">new</span> QHBoxLayout;</div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;    this_layout-&gt;addWidget(scroll);</div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;    this_layout-&gt;addWidget(tree_widget);</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;        ADD_LEAF_BEGIN(common_graph, light, light)</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;            ADD_CONNECTION_PROPERTY_TO_STATE(light, light, point, color);</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;            ADD_CONNECTION_PROPERTY_TO_STATE(light, light, point, intensity);</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;            ADD_CONNECTION_PROPERTY_TO_STATE(light, light, point, constant_attenuation);</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;            ADD_CONNECTION_PROPERTY_TO_STATE(light, light, point, linear_attenuation);</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;            ADD_CONNECTION_PROPERTY_TO_STATE(light, light, point, quadratic_attenuation);</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;            ADD_CONNECTION_PROPERTY_TO_STATE(light, light, point, possition);</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160; </div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;            ADD_CONNECTION_PROPERTY_TO_STATE(light, light, directional, color);</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;            ADD_CONNECTION_PROPERTY_TO_STATE(light, light, directional, intensity);</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;            ADD_CONNECTION_PROPERTY_TO_STATE(light, light, directional, world_direction);</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;            ADD_CONNECTION_PROPERTY_TO_STATE(light, light, directional, possition);</div>
 <div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160; </div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;    setLayout(this_layout);</div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;    this-&gt;setMinimumHeight(550);</div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160; </div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160; </div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;    </div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;connect(<span class="keyword">this</span>, &amp;scene_properties_common_graph::scene_properties_common_graph_type_signal,</div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;    scene_entities_common_graph_, &amp;<a class="code" href="classscene__entities__common__graph.html#a912fc0bddff11620ef3f2470276c4d2b">scene_entities_common_graph::scene_entities_common_graph_type_slot</a>);</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;    </div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;connect(<span class="keyword">this</span>, &amp;scene_properties_common_graph::scene_properties_common_graph_camera_signal,</div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;    scene_entities_common_graph_, &amp;scene_entities_common_graph::scene_entities_common_graph_camera_slot);</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;            ADD_CONNECTION_PROPERTY_TO_STATE(light, light, spot, color);</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;            ADD_CONNECTION_PROPERTY_TO_STATE(light, light, spot, intensity);</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;            ADD_CONNECTION_PROPERTY_TO_STATE(light, light, spot, constant_attenuation);</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;            ADD_CONNECTION_PROPERTY_TO_STATE(light, light, spot, linear_attenuation);</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;            ADD_CONNECTION_PROPERTY_TO_STATE(light, light, spot, quadratic_attenuation);</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;            ADD_CONNECTION_PROPERTY_TO_STATE(light, light, spot, cut_off_angle);</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;            ADD_CONNECTION_PROPERTY_TO_STATE(light, light, spot, local_direction);</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;            ADD_CONNECTION_PROPERTY_TO_STATE(light, light, spot, possition);</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;        ADD_LEAF_END(common_graph, light, light)</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160; </div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160; </div>
 <div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160; </div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;connect(<span class="keyword">this</span>, &amp;scene_properties_common_graph::scene_properties_common_graph_camera_signal,</div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;    camera_camera, &amp;<a class="code" href="classproperty__camera.html#aad7c4b82149afc8d9e90a215a6e523d7">property_camera::property_camera_camera_slot</a>);</div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160; </div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160; </div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;connect(<span class="keyword">this</span>, &amp;scene_properties_common_graph::scene_properties_common_graph_viewport_size_signal,</div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;    scene_entities_common_graph_, &amp;scene_entities_common_graph::scene_entities_common_graph_viewport_size_slot);</div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160; </div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;}</div>
-<div class="ttc" id="aclassproperty__camera_html_aad7c4b82149afc8d9e90a215a6e523d7"><div class="ttname"><a href="classproperty__camera.html#aad7c4b82149afc8d9e90a215a6e523d7">property_camera::property_camera_camera_slot</a></div><div class="ttdeci">void property_camera_camera_slot(Qt3DRender::QCamera *camera)</div><div class="ttdoc">slot to set current camera to pointer from camera in viewport</div><div class="ttdef"><b>Definition:</b> property_camera.h:129</div></div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;    </div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160; </div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;    tree_widget-&gt;headerItem()-&gt;setText(0,<span class="stringliteral">&quot;Common graph scene entities:&quot;</span>);</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;    tree_widget-&gt;setSelectionMode(QAbstractItemView::SelectionMode::NoSelection);</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;    tree_widget-&gt;setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160; </div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;    tree_widget-&gt;setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;    tree_widget-&gt;resizeColumnToContents(1);</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;    QScrollBar* scroll = tree_widget-&gt;verticalScrollBar();</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;    </div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;    QHBoxLayout* this_layout = <span class="keyword">new</span> QHBoxLayout;</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;    this_layout-&gt;addWidget(scroll);</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;    this_layout-&gt;addWidget(tree_widget);</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160; </div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;    setLayout(this_layout);</div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;    this-&gt;setMinimumHeight(550);</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160; </div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160; </div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;    </div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;connect(<span class="keyword">this</span>, &amp;scene_properties_common_graph::scene_properties_common_graph_type_signal,</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;    scene_entities_common_graph_, &amp;<a class="code" href="classscene__entities__common__graph.html#a912fc0bddff11620ef3f2470276c4d2b">scene_entities_common_graph::scene_entities_common_graph_type_slot</a>);</div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;    </div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;connect(<span class="keyword">this</span>, &amp;scene_properties_common_graph::scene_properties_common_graph_camera_signal,</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;    scene_entities_common_graph_, &amp;scene_entities_common_graph::scene_entities_common_graph_camera_slot);</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160; </div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;connect(<span class="keyword">this</span>, &amp;scene_properties_common_graph::scene_properties_common_graph_camera_signal,</div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;    camera_camera, &amp;<a class="code" href="classproperty__camera.html#aad7c4b82149afc8d9e90a215a6e523d7">property_camera::property_camera_camera_slot</a>);</div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160; </div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160; </div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;connect(<span class="keyword">this</span>, &amp;scene_properties_common_graph::scene_properties_common_graph_viewport_size_signal,</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;    scene_entities_common_graph_, &amp;scene_entities_common_graph::scene_entities_common_graph_viewport_size_slot);</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160; </div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;connect(component_states_light, &amp;<a class="code" href="classcomponent__states.html#aba0a19b0b19f0d82be10ef8aa914b3d2">component_states::component_states_light_possition_signal</a>,</div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;        scene_entities_common_graph_, &amp;scene_entities_common_graph::scene_entities_common_graph_light_possition_slot);</div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160; </div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160; </div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;connect(light_light, &amp;property_light::property_light_possition_signal,</div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;    <span class="keyword">this</span>, [<span class="keyword">this</span>] {</div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;        <span class="keyword">auto</span> pos = camera_camera_ptr-&gt;property_camera_possition();</div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;        emit scene_properties_common_graph_light_possition(pos);</div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160; </div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;        <span class="keyword">auto</span> dir = camera_camera_ptr-&gt;property_camera_direction();</div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;        emit scene_properties_common_graph_light_direction(dir);</div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;        </div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;        </div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;    });</div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160; </div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;connect(<span class="keyword">this</span>, &amp;scene_properties_common_graph::scene_properties_common_graph_light_possition,</div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;    light_light, &amp;property_light::property_light_possition_slot);</div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160; </div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;connect(<span class="keyword">this</span>, &amp;scene_properties_common_graph::scene_properties_common_graph_light_possition,</div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;    component_states_light, &amp;component_states::component_states_light_possition_slot);</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160; </div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;connect(<span class="keyword">this</span>, &amp;scene_properties_common_graph::scene_properties_common_graph_light_direction,</div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;    light_light, &amp;property_light::property_light_direction_slot);</div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160; </div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;connect(<span class="keyword">this</span>, &amp;scene_properties_common_graph::scene_properties_common_graph_light_direction,</div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;    component_states_light, &amp;component_states::component_states_light_direction_slot);</div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160; </div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;}</div>
+<div class="ttc" id="aclasscomponent__states_html_aba0a19b0b19f0d82be10ef8aa914b3d2"><div class="ttname"><a href="classcomponent__states.html#aba0a19b0b19f0d82be10ef8aa914b3d2">component_states::component_states_light_possition_signal</a></div><div class="ttdeci">void component_states_light_possition_signal(QVector3D)</div><div class="ttdoc">on changing light possition send</div></div>
+<div class="ttc" id="aclassproperty__camera_html_aad7c4b82149afc8d9e90a215a6e523d7"><div class="ttname"><a href="classproperty__camera.html#aad7c4b82149afc8d9e90a215a6e523d7">property_camera::property_camera_camera_slot</a></div><div class="ttdeci">void property_camera_camera_slot(Qt3DRender::QCamera *camera)</div><div class="ttdoc">slot to set current camera to pointer from camera in viewport</div><div class="ttdef"><b>Definition:</b> property_camera.h:146</div></div>
 <div class="ttc" id="aclassscene__entities__common__graph_html"><div class="ttname"><a href="classscene__entities__common__graph.html">scene_entities_common_graph</a></div><div class="ttdoc">3d scene for graphs visualisation entities. Hold all entities use in this scene and cnnection between...</div><div class="ttdef"><b>Definition:</b> scene_entities_common_graph.h:42</div></div>
-<div class="ttc" id="aclassscene__entities__common__graph_html_a912fc0bddff11620ef3f2470276c4d2b"><div class="ttname"><a href="classscene__entities__common__graph.html#a912fc0bddff11620ef3f2470276c4d2b">scene_entities_common_graph::scene_entities_common_graph_type_slot</a></div><div class="ttdeci">void scene_entities_common_graph_type_slot(int &amp;type, graph&lt; int &gt; &amp;gr, under_GP &amp;options)</div><div class="ttdoc">get the graph with options and construct current scene states for entities their meshes and materials...</div><div class="ttdef"><b>Definition:</b> scene_entities_common_graph.h:186</div></div>
+<div class="ttc" id="aclassscene__entities__common__graph_html_a912fc0bddff11620ef3f2470276c4d2b"><div class="ttname"><a href="classscene__entities__common__graph.html#a912fc0bddff11620ef3f2470276c4d2b">scene_entities_common_graph::scene_entities_common_graph_type_slot</a></div><div class="ttdeci">void scene_entities_common_graph_type_slot(int &amp;type, graph&lt; int &gt; &amp;gr, under_GP &amp;options)</div><div class="ttdoc">get the graph with options and construct current scene states for entities their meshes and materials...</div><div class="ttdef"><b>Definition:</b> scene_entities_common_graph.h:197</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -448,8 +503,8 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>default destructor </p>
-<div class="fragment"><div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;{</div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;}</div>
+<div class="fragment"><div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;{</div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -496,13 +551,13 @@ Public Member Functions</h2></td></tr>
 
 <p>if graph type is common graph this scene start to work </p>
 <dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
-<div class="fragment"><div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    {</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        <span class="keywordflow">if</span> (type == 0)</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        {</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;            emit scene_properties_common_graph_type_signal(type, gr, options);</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        }</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    }</div>
+<div class="fragment"><div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    {</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        <span class="keywordflow">if</span> (type == 0)</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        {</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;            emit scene_properties_common_graph_type_signal(type, gr, options);</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        }</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -531,13 +586,13 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>recieve pointer viewport window to entities in common graph </p>
-<div class="fragment"><div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    {</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        QMetaObject::invokeMethod(<span class="keyword">this</span>,</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;            <span class="stringliteral">&quot;scene_properties_common_graph_viewport_size_signal&quot;</span>,</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;            Qt::QueuedConnection,</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;            Q_ARG(Qt3DExtras::Qt3DWindow*, view));</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    }</div>
+<div class="fragment"><div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    {</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        QMetaObject::invokeMethod(<span class="keyword">this</span>,</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;            <span class="stringliteral">&quot;scene_properties_common_graph_viewport_size_signal&quot;</span>,</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;            Qt::QueuedConnection,</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;            Q_ARG(Qt3DExtras::Qt3DWindow*, view));</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -547,7 +602,7 @@ Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classscene__properties__common__graph.html">scene_properties_common_graph</a></li>
-    <li class="footer">Generated on Tue Jun 15 2021 13:10:54 for Real World Algorithms by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Sun Jun 27 2021 14:39:36 for Real World Algorithms by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

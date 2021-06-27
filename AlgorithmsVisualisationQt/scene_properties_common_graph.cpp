@@ -222,6 +222,7 @@ scene_properties_common_graph::scene_properties_common_graph(Qt3DCore::QEntity* 
 		    ADD_CONNECTION_PROPERTY_TO_STATE(camera, camera, camera, projection_type);
 		    ADD_CONNECTION_PROPERTY_TO_STATE(camera, camera, camera, projection_matrix);
 		ADD_LEAF_END(common_graph, camera, camera)
+				camera_camera_ptr = camera_camera;
 
 		ADD_LEAF_BEGIN(common_graph, camera, camera_controller)
 			ADD_CONNECTION_PROPERTY_TO_STATE(camera,camera_controller,first_person, acceleration);
@@ -235,10 +236,36 @@ scene_properties_common_graph::scene_properties_common_graph(Qt3DCore::QEntity* 
             ADD_CONNECTION_PROPERTY_TO_STATE(camera,camera_controller,orbit, look_speed);
             ADD_CONNECTION_PROPERTY_TO_STATE(camera,camera_controller,orbit, camera);
             ADD_CONNECTION_PROPERTY_TO_STATE(camera,camera_controller,orbit, zoom_in_limit);
-		ADD_LEAF_END(common_graph, camera, camera_controller)
+			ADD_LEAF_END(common_graph, camera, camera_controller)
 
-	//ADD_ROOT(tree_widget, light)
-	//
+	ADD_ROOT(tree_widget, light)
+
+		ADD_LEAF_BEGIN(common_graph, light, light)
+			ADD_CONNECTION_PROPERTY_TO_STATE(light, light, point, color);
+			ADD_CONNECTION_PROPERTY_TO_STATE(light, light, point, intensity);
+			ADD_CONNECTION_PROPERTY_TO_STATE(light, light, point, constant_attenuation);
+			ADD_CONNECTION_PROPERTY_TO_STATE(light, light, point, linear_attenuation);
+			ADD_CONNECTION_PROPERTY_TO_STATE(light, light, point, quadratic_attenuation);
+			ADD_CONNECTION_PROPERTY_TO_STATE(light, light, point, possition);
+
+			ADD_CONNECTION_PROPERTY_TO_STATE(light, light, directional, color);
+			ADD_CONNECTION_PROPERTY_TO_STATE(light, light, directional, intensity);
+			ADD_CONNECTION_PROPERTY_TO_STATE(light, light, directional, world_direction);
+			ADD_CONNECTION_PROPERTY_TO_STATE(light, light, directional, possition);
+
+			ADD_CONNECTION_PROPERTY_TO_STATE(light, light, spot, color);
+			ADD_CONNECTION_PROPERTY_TO_STATE(light, light, spot, intensity);
+			ADD_CONNECTION_PROPERTY_TO_STATE(light, light, spot, constant_attenuation);
+			ADD_CONNECTION_PROPERTY_TO_STATE(light, light, spot, linear_attenuation);
+			ADD_CONNECTION_PROPERTY_TO_STATE(light, light, spot, quadratic_attenuation);
+			ADD_CONNECTION_PROPERTY_TO_STATE(light, light, spot, cut_off_angle);
+			ADD_CONNECTION_PROPERTY_TO_STATE(light, light, spot, local_direction);
+			ADD_CONNECTION_PROPERTY_TO_STATE(light, light, spot, possition);
+		ADD_LEAF_END(common_graph, light, light)
+
+
+
+	
 
 //////////////////////////////////////////////////////////////////////////////////
 	tree_widget->headerItem()->setText(0,"Common graph scene entities:");
@@ -272,6 +299,35 @@ connect(this, &scene_properties_common_graph::scene_properties_common_graph_came
 /////////////////////////////////////////////////////////////////////////////////////////////////
 connect(this, &scene_properties_common_graph::scene_properties_common_graph_viewport_size_signal,
 	scene_entities_common_graph_, &scene_entities_common_graph::scene_entities_common_graph_viewport_size_slot);
+
+/////////////////////////////////////////////////////////////////////////////////////////////////
+connect(component_states_light, &component_states::component_states_light_possition_signal,
+     	scene_entities_common_graph_, &scene_entities_common_graph::scene_entities_common_graph_light_possition_slot);
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////
+connect(light_light, &property_light::property_light_possition_signal,
+	this, [this] {
+		auto pos = camera_camera_ptr->property_camera_possition();
+		emit scene_properties_common_graph_light_possition(pos);
+
+		auto dir = camera_camera_ptr->property_camera_direction();
+		emit scene_properties_common_graph_light_direction(dir);
+		
+		
+	});
+
+connect(this, &scene_properties_common_graph::scene_properties_common_graph_light_possition,
+	light_light, &property_light::property_light_possition_slot);
+
+connect(this, &scene_properties_common_graph::scene_properties_common_graph_light_possition,
+	component_states_light, &component_states::component_states_light_possition_slot);
+
+connect(this, &scene_properties_common_graph::scene_properties_common_graph_light_direction,
+	light_light, &property_light::property_light_direction_slot);
+
+connect(this, &scene_properties_common_graph::scene_properties_common_graph_light_direction,
+	component_states_light, &component_states::component_states_light_direction_slot);
 
 }
 

@@ -76,6 +76,10 @@ private:
 	Qt3DRender::QObjectPicker* picker_scene;
 
 	Qt3DExtras::Qt3DWindow* viewport_;
+
+	Qt3DRender::QAbstractLight* light_;
+	Qt3DCore::QEntity* light;
+	Qt3DCore::QTransform* transform_light;
 	
 
 	void update_edges_possitions(Qt3DCore::QEntity* vertex)
@@ -84,9 +88,10 @@ private:
 		{
 			if (vve[0] == vertex || vve[1] == vertex)
 			{
+				auto newPossition = std::pair(vve[0]->componentsOfType<Qt3DCore::QTransform>().front()->translation(),
+					vve[1]->componentsOfType<Qt3DCore::QTransform>().front()->translation());
 				vve[2]->componentsOfType<QLineMesh>()[0]
-					  ->setPossition(std::pair(vve[0]->componentsOfType<Qt3DCore::QTransform>().front()->translation(),
-					                           vve[1]->componentsOfType<Qt3DCore::QTransform>().front()->translation()));
+					  ->setPossition(newPossition);
 			}
 		}
 	
@@ -167,6 +172,12 @@ private:
 	}
 
 public slots:
+
+	void scene_entities_common_graph_light_possition_slot(QVector3D pos)
+	{
+		qDebug() << Q_FUNC_INFO << " CALLED !!! ";
+		transform_light->setTranslation(pos);
+	};
 
 	void scene_entities_common_graph_viewport_size_slot(Qt3DExtras::Qt3DWindow* view)
 	{
@@ -273,6 +284,22 @@ public slots:
 	void scene_entities_common_graph_camera_camera_type_slot()
 	{
 		qDebug() << Q_FUNC_INFO << " CALLED !!! ";
+
+	}
+
+
+	/// @brief dummy to prevent changing macrogeneration behaviour
+	/// @return void
+	void scene_entities_common_graph_light_light_type_slot(Qt3DRender::QAbstractLight* current)
+	{
+		qDebug() << Q_FUNC_INFO << " CALLED !!! ";
+		light_ = current;
+		
+		
+		for(auto&l:light->componentsOfType<Qt3DRender::QAbstractLight>())
+				light->removeComponent(l);
+	if(light_!=Q_NULLPTR)
+		light->addComponent(light_);
 
 	}
 };

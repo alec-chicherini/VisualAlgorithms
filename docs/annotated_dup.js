@@ -1,6 +1,7 @@
 var annotated_dup =
 [
     [ "real_world_algorithm", null, [
+      [ "bracers", "classreal__world__algorithm_1_1bracers.html", null ],
       [ "graph", "structreal__world__algorithm_1_1graph.html", "structreal__world__algorithm_1_1graph" ]
     ] ],
     [ "color_picker", "classcolor__picker.html", "classcolor__picker" ],

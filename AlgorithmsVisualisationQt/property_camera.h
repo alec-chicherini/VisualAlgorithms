@@ -48,7 +48,7 @@ public:
 	QPushButton* btn_view_all;
 
 
-
+	
 private:
 	QString parentPath_;
 	ADD_JSON_LOADER(camera)
@@ -96,6 +96,23 @@ public:
 	std::vector<delayed_emit<double>> e_vec_func_double;
 	/// @brief list of all signals and their datas type of QVector3D
 	std::vector<delayed_emit<QVector3D>> e_vec_func_QVector3D;
+
+	QVector3D property_camera_possition() 
+	{
+		qDebug() << Q_FUNC_INFO << " CALLED !!! "
+			     << "xyz_picker_camera_position->getXYZ()"<< xyz_picker_camera_position->getXYZ();
+		auto res = xyz_picker_camera_position->getXYZ();
+		return res;
+	};
+
+	QVector3D property_camera_direction()
+	{
+		qDebug() << Q_FUNC_INFO << " CALLED !!! "
+			<< "xyz_picker_camera_view_center->getXYZ()" << xyz_picker_camera_view_center->getXYZ();
+		auto res = xyz_picker_camera_view_center->getXYZ();
+		
+		return res;
+	};
 
 signals:
 

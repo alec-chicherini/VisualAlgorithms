@@ -1,3 +1,4 @@
+//will be Deprecated. Now google tests instead.
 //Real-World Algorithms - > Beginners guide - Panos Louridas book examples and tasks.
 
 #include <iostream>

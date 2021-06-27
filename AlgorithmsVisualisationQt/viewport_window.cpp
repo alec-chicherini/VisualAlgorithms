@@ -29,19 +29,6 @@ viewport_window::viewport_window(Qt3DCore::QEntity* root,QWidget *parent)
 	container->setMinimumSize(QSize(128, 128));
 	container->setMaximumSize(screenSize);
 
-	//light
-	//light_main = new Qt3DCore::QEntity(currentSceneEntity);
-	//point_light_main = new Qt3DRender::QPointLight(light_main);
-	/*tansform_light_main = new Qt3DCore::QTransform(light_main);*/
-
-	/*point_light_main->setColor(QColor(255, 255, 255));
-	point_light_main->setIntensity(1.f);
-	light_main->addComponent(point_light_main);
-	light_main->addComponent(tansform_light_main);*/
-
-	//connect(camera_main, &Qt3DRender::QCamera::positionChanged, tansform_light_main, &Qt3DCore::QTransform::setTranslation);
-	//
-
 	QMetaObject::invokeMethod(this,
 		"viewport_window_screen_size_signal",
 		Qt::QueuedConnection,

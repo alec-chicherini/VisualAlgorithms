@@ -37,10 +37,10 @@
 
 //light
 #include <QAbstractLight>
-#include <Qt3DRender/qpointlight.h>
 #include <QDirectionalLight>
 #include <QPointLight>
 #include <QSpotLight>
+
 // 
 
 /// @brief class which store all instances of materials and meshes with current settings. So later if some entity switch component from one to another it just switch pointer to existing version in this.
@@ -88,13 +88,16 @@ private:
 	Qt3DRender::QPointLight* light_point;//id 0
 	Qt3DRender::QDirectionalLight* light_directional;//id 1
 	Qt3DRender::QSpotLight* light_spot;//id 2
+
+	QVector3D light_possition;
+	QVector3D light_direction;
 	//
-   
+	 
 	//current component
 	MeshType current_mesh_type;
 	MaterialType current_material_type;
 	bool current_camera_controller_type;
-	Qt3DRender::QAbstractLight::Type current_light_type;
+	int current_light_type;
 
 
 signals:
@@ -113,6 +116,11 @@ signals:
 /// @brief on changing current light type emit pointer to current light type
 	void component_states_light_type_signal(Qt3DRender::QAbstractLight*);
 
+	/// @brief on changing light possition send
+	void component_states_light_possition_signal(QVector3D);
+
+	/// @brief on changing light direction send
+	void component_states_light_direction_signal(QVector3D);
 
 public slots:
 	
@@ -239,9 +247,30 @@ public slots:
 	};
 
 	///@brief slot to change current light
-	void component_states_light_type_slot(Qt3DRender::QAbstractLight* light) 
+	void component_states_light_type_slot(int type) 
 	{
+		current_light_type = type;
 
+		if (current_light_type == 0)
+			emit component_states_light_type_signal(light_point);
+		else if (current_light_type == 1)
+			emit component_states_light_type_signal(light_directional);
+		else if (current_light_type == 2)
+			emit component_states_light_type_signal(light_spot);
+
+		qDebug() << Q_FUNC_INFO << "| type = " << type;
+	};
+
+	void component_states_light_possition_slot(QVector3D pos)
+	{
+		light_possition = pos;
+		emit component_states_light_possition_signal(pos);
+	};
+
+	void component_states_light_direction_slot(QVector3D pos)
+	{
+		light_direction = pos;
+		emit component_states_light_direction_signal(pos);
 	};
 
 	//material slots
@@ -358,6 +387,11 @@ public slots:
 	ADD_SLOT_FOR_ENTITY(light, point, constant_attenuation, setConstantAttenuation, float);
 	ADD_SLOT_FOR_ENTITY(light, point, linear_attenuation, setLinearAttenuation, float);
 	ADD_SLOT_FOR_ENTITY(light, point, quadratic_attenuation, setQuadraticAttenuation, float);
+	void property_light_point_possition_slot(QVector3D pos)
+	{
+		light_possition = pos;
+		emit component_states_light_possition_signal(pos);
+	};
 
 	ADD_SLOT_FOR_ENTITY(light, spot, color, setColor, QColor);
 	ADD_SLOT_FOR_ENTITY(light, spot, intensity, setIntensity, float);
@@ -366,11 +400,21 @@ public slots:
 	ADD_SLOT_FOR_ENTITY(light, spot, quadratic_attenuation, setQuadraticAttenuation, float);
 	ADD_SLOT_FOR_ENTITY(light, spot, cut_off_angle, setCutOffAngle, float);
 	ADD_SLOT_FOR_ENTITY(light, spot, local_direction, setLocalDirection, QVector3D);
+	void property_light_spot_possition_slot(QVector3D pos)
+	{
+		light_possition = pos;
+		emit component_states_light_possition_signal(pos);
+	};
 
 	ADD_SLOT_FOR_ENTITY(light, directional, color, setColor, QColor);
 	ADD_SLOT_FOR_ENTITY(light, directional, intensity, setIntensity, float);
 	ADD_SLOT_FOR_ENTITY(light, directional, world_direction, setWorldDirection, QVector3D);
 
+	void property_light_directional_possition_slot(QVector3D pos)
+	{
+		light_possition = pos;
+		emit component_states_light_possition_signal(pos);
+	};
 
 	//camera controllers
 	ADD_SLOT_FOR_ENTITY(camera_controller, first_person, acceleration, setAcceleration, float);

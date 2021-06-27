@@ -4,9 +4,9 @@
 
 #define PART2
 #define PART1
-#define PART3
+//#define PART3
 
-#include "S:\Code\ikvasir\Real_World_Algorithms\AlgorithmsVisualisationQt\enums.h"
+#include "../AlgorithmsVisualisationQt/enums.h"
 #include <array>
 #include <random>
 #include <type_traits>

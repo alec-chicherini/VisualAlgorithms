@@ -1,12 +1,12 @@
 {
-    "material_phong_ambient_b_value": 255,
-    "material_phong_ambient_g_value": 128,
-    "material_phong_ambient_r_value": 255,
-    "material_phong_diffuse_b_value": 128,
+    "material_phong_ambient_b_value": 0,
+    "material_phong_ambient_g_value": 0,
+    "material_phong_ambient_r_value": 0,
+    "material_phong_diffuse_b_value": 255,
     "material_phong_diffuse_g_value": 255,
     "material_phong_diffuse_r_value": 255,
-    "material_phong_shininess_value": 8,
+    "material_phong_shininess_value": 1,
     "material_phong_specular_b_value": 255,
-    "material_phong_specular_g_value": 58,
-    "material_phong_specular_r_value": 0
+    "material_phong_specular_g_value": 255,
+    "material_phong_specular_r_value": 255
 }

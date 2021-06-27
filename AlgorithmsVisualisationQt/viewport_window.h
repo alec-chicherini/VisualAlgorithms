@@ -66,11 +66,6 @@ private:
 	Qt3DRender::QCamera* camera_main;
 	Qt3DExtras::QAbstractCameraController* camera_controller_main = Q_NULLPTR;
 
-	//light
-	Qt3DCore::QEntity* light_main;
-	Qt3DRender::QPointLight* point_light_main;
-	Qt3DCore::QTransform* tansform_light_main;
-
 	QWidget* container;
 
 
@@ -83,59 +78,5 @@ signals:
 	void update_common_graph(graph<int> gr, std::underlying_type_t<GP> op);
 
 	void viewport_window_screen_size_signal(Qt3DExtras::Qt3DWindow*);
-
-//public slots:
-//	/// @brief slot to set current type of camera controller
-//	/// @param index 0 - normal; 1 - orbital;
-//	/// @return void
-//	void viewport_camera_controller_slot(int index)
-//	{
-//		if (index == 0)
-//		{
-//			if (camera_controller_main != Q_NULLPTR)delete camera_controller_main;
-//
-//			camera_controller_main = new Qt3DExtras::QFirstPersonCameraController(currentSceneEntity);
-//			camera_controller_main->setCamera(camera_main);
-//		}
-//		else if (index == 1)
-//		{
-//			if (camera_controller_main != Q_NULLPTR)delete camera_controller_main;
-//
-//			camera_controller_main = new Qt3DExtras::QOrbitCameraController(currentSceneEntity);
-//			camera_controller_main->setCamera(camera_main);
-//		}
-//	}
-//
-//	/// @brief slot to update light color
-//	/// @param clr
-//	/// @return void
-//	void viewport_light_color_slot(QColor clr)
-//	{
-//		point_light_main->setColor(clr);
-//		qDebug((std::to_string(clr.red()).c_str()));
-//		qDebug(" <----- COLOR RED WAS CHANGED()");
-//		qDebug((std::to_string(clr.green()).c_str()));
-//		qDebug(" <----- COLOR GREEN WAS CHANGED()");
-//		qDebug((std::to_string(clr.blue()).c_str()));
-//		qDebug(" <----- COLOR BLUE WAS CHANGED()");
-//	}
-//	/// @brief slot to update light intensity
-//	/// @param intens intensity
-//	/// @return void
-//	void viewport_light_intensity_slot(float intens)
-//	{
-//		point_light_main->setIntensity(intens);
-//			qDebug((std::to_string(intens).c_str()));
-//			qDebug(" <----- LIGHT INTENSYTY WAS CHANGED()");
-//	}
-//
-//
-//	/// @brief slot to set current scene by switching second entity after root
-//	/// @param scene scene entity
-//	/// @return void
-//	void viewport_scene_entity_slot(Qt3DCore::QEntity* scene)
-//	{
-//		currentSceneEntity = scene;
-//	}
 
 };

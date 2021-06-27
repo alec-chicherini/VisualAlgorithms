@@ -59,15 +59,19 @@ scene_entities_common_graph::scene_entities_common_graph(Qt3DCore::QEntity* root
 	//entity->addComponent(material);
 
 	//light
-	auto light_main = new Qt3DCore::QEntity(rootEntity);
-	auto point_light_main = new Qt3DRender::QPointLight(rootEntity);
-	auto tansform_light_main = new Qt3DCore::QTransform(rootEntity);
+	//auto light_main = new Qt3DCore::QEntity(rootEntity);
+	//auto point_light_main = new Qt3DRender::QPointLight(rootEntity);
 
-	point_light_main->setColor(QColor(255, 255, 255));
-	point_light_main->setIntensity(1.f);
-	light_main->addComponent(point_light_main);
-	light_main->addComponent(tansform_light_main);
 
+	//point_light_main->setColor(QColor(0, 255, 0));
+	//point_light_main->setIntensity(1.f);
+	//light_main->addComponent(point_light_main);
+
+	light = new Qt3DCore::QEntity(rootEntity);
+	transform_light = new Qt3DCore::QTransform(rootEntity);
+	transform_light->setTranslation(QVector3D(0, 0, 0));
+	light->addComponent(transform_light);
+	light_ = Q_NULLPTR;
 	//object picker
 	
 	picker_scene = new Qt3DRender::QObjectPicker(vertexes_root_entity);

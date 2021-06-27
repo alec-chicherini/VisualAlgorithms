@@ -29,8 +29,9 @@ component_states::component_states(Qt3DCore::QEntity* root, QWidget *parent)
 
 	//all lights
 	light_point = new Qt3DRender::QPointLight(rootEntity);//id 0
-	light_spot = new Qt3DRender::QSpotLight(rootEntity);//id 1
-	light_directional=new Qt3DRender::QDirectionalLight(rootEntity);//id 2
+	light_directional = new Qt3DRender::QDirectionalLight(rootEntity);//id 1
+	light_spot = new Qt3DRender::QSpotLight(rootEntity);//id 2
+	light_possition = QVector3D(0, 0, 0);
 
 
 	//camera

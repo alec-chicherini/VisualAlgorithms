@@ -17,6 +17,7 @@ var namespaces_dup =
       [ "operator|", "namespace_e_n_u_m_s___n_a_m_e_s_p_a_c_e.html#ac2eeada12c97b85319002a2e9ce7ae2b", null ]
     ] ],
     [ "real_world_algorithm", null, [
+      [ "bracers", "classreal__world__algorithm_1_1bracers.html", null ],
       [ "graph", "structreal__world__algorithm_1_1graph.html", "structreal__world__algorithm_1_1graph" ],
       [ "generateLabirinthGraph", "_real___world___algorithms_8h.html#a3a9757924b1f78bf55b27ed1451a1f4c", null ],
       [ "generateRandomGraph", "_real___world___algorithms_8h.html#ac34533eee540d57a141745982abd2e3c", null ],

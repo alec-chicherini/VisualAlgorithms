@@ -6,6 +6,7 @@ var classscene__entities__common__graph =
     [ "scene_entities_common_graph_camera_camera_controller_type_slot", "classscene__entities__common__graph.html#accd8c1029866ba09d70dd5fcdeeae391", null ],
     [ "scene_entities_common_graph_camera_camera_type_slot", "classscene__entities__common__graph.html#ace3a90ef62c6c01fa75a5490affbadae", null ],
     [ "scene_entities_common_graph_edge_material_type_slot", "classscene__entities__common__graph.html#aa5c886be5349d38d5913276738b0d740", null ],
+    [ "scene_entities_common_graph_light_light_type_slot", "classscene__entities__common__graph.html#a57a66358de433e1977d2fdd129577012", null ],
     [ "scene_entities_common_graph_plane_material_type_slot", "classscene__entities__common__graph.html#ae84101c33b292a7dde3552165af1c723", null ],
     [ "scene_entities_common_graph_plane_mesh_type_slot", "classscene__entities__common__graph.html#a2960ab0bc97b0379b81c7b334987670c", null ],
     [ "scene_entities_common_graph_type_slot", "classscene__entities__common__graph.html#a912fc0bddff11620ef3f2470276c4d2b", null ],
