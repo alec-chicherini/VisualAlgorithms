@@ -3,10 +3,10 @@
     "light_directional_color_g_value": 255,
     "light_directional_color_r_value": 255,
     "light_directional_intensity_value": 1,
-    "light_directional_possition_x_value": -53.92,
-    "light_directional_possition_y_value": -37.87,
-    "light_directional_possition_z_value": 215.61,
-    "light_directional_world_direction_x_value": 102.89,
-    "light_directional_world_direction_y_value": 86.93,
-    "light_directional_world_direction_z_value": -165.61
+    "light_directional_possition_x_value": 172.81,
+    "light_directional_possition_y_value": 317.35,
+    "light_directional_possition_z_value": 186.29,
+    "light_directional_world_direction_x_value": -134.46,
+    "light_directional_world_direction_y_value": -269.53,
+    "light_directional_world_direction_z_value": -142.23
 }

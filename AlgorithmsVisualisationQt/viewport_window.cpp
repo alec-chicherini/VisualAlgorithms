@@ -41,8 +41,34 @@ viewport_window::viewport_window(Qt3DCore::QEntity* root,QWidget *parent)
 	gl->addWidget(container);
 
 	setLayout(gl);
+
+//draw axys
+	QVector3D vec_axis_center = { 0,0,0 };
+	 line_axis_x = new QLineMesh(std::make_pair(vec_axis_center, QVector3D(vec_axis_center.x() + size_axis, vec_axis_center.y(),			    vec_axis_center.z())));
+	 line_axis_y = new QLineMesh(std::make_pair(vec_axis_center, QVector3D(vec_axis_center.x() ,			   vec_axis_center.y() + size_axis, vec_axis_center.z())));
+	 line_axis_z = new QLineMesh(std::make_pair(vec_axis_center, QVector3D(vec_axis_center.x() ,			   vec_axis_center.y(),             vec_axis_center.z() + size_axis)));
 	
+
+	axis_x = new Qt3DCore::QEntity(rootEntity);
+	axis_y = new Qt3DCore::QEntity(rootEntity);
+	axis_z = new Qt3DCore::QEntity(rootEntity);
+
+	auto material_axis = new Qt3DExtras::QPhongMaterial(rootEntity);
+	material_axis->setAmbient(QColor(255, 255, 0));
+
+	axis_x->addComponent(line_axis_x);
+	axis_x->addComponent(material_axis);
+
+	axis_y->addComponent(line_axis_y);
+	axis_y->addComponent(material_axis);
+
+	axis_z->addComponent(line_axis_z);
+	axis_z->addComponent(material_axis);
+
+	//connect(window3d_main->camera(), &Qt3DRender::QCamera::positionChanged, this, &viewport_window::draw_axis);
 }
+
+
 
 viewport_window::~viewport_window()
 {

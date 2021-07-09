@@ -41,6 +41,8 @@
 
 #include<qpushbutton.h>
 
+#include "qlinemesh.h"
+
 /// @brief viewport widget to show Qt3D objects
 class viewport_window : public QWidget
 {
@@ -57,6 +59,7 @@ public:
 
 	Qt3DExtras::Qt3DWindow* window3d_main;
 
+
 private:
 	Qt3DCore::QEntity* rootEntity;
 	Qt3DCore::QEntity* currentSceneEntity;
@@ -67,6 +70,18 @@ private:
 	Qt3DExtras::QAbstractCameraController* camera_controller_main = Q_NULLPTR;
 
 	QWidget* container;
+
+	//axis
+
+	Qt3DCore::QEntity* axis_x;
+	Qt3DCore::QEntity* axis_y;
+	Qt3DCore::QEntity* axis_z;
+
+	QLineMesh* line_axis_x;
+	QLineMesh* line_axis_y;
+	QLineMesh* line_axis_z;
+
+    float size_axis = 5.0f;
 
 
 signals:
@@ -79,4 +94,14 @@ signals:
 
 	void viewport_window_screen_size_signal(Qt3DExtras::Qt3DWindow*);
 
+private slots:
+
+	void viewport_window::draw_axis(const QVector3D& center)
+	{
+		
+
+		line_axis_x->setPossition(std::make_pair(center, QVector3D(center.x() + size_axis, center.y(), center.z())));
+		line_axis_y->setPossition(std::make_pair(center, QVector3D(center.x(), center.y() + size_axis, center.z())));
+		line_axis_z->setPossition(std::make_pair(center, QVector3D(center.x(), center.y(), center.z() + size_axis)));
+	};
 };

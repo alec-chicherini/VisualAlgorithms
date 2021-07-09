@@ -46,7 +46,7 @@ scene_entities_common_graph::scene_entities_common_graph(Qt3DCore::QEntity* root
 	//auto transform = new Qt3DCore::QTransform(rootEntity);
 	//auto entity = new Qt3DCore::QEntity(rootEntity);
 
-	//material->setAmbient(QColor(255, 255, 0));
+
 
 	//transform->setTranslation(QVector3D(0,0,10));
 
