@@ -1020,7 +1020,8 @@ struct graph
     {   
       
         enum class colors_enum:bool { RED, GREEN } current_color = colors_enum::RED;
-        using enum colors_enum;
+        //not compiled with CMAKE?
+        //using enum colors_enum;
 
         std::vector<bool> color;
         std::vector<bool> inqueue;
@@ -1045,7 +1046,7 @@ struct graph
         color[node] = static_cast<bool>(current_color);
 
         while (!queue.is_empty()) {
-            current_color=(current_color==RED?GREEN:RED);
+            current_color=(current_color== colors_enum::RED? colors_enum::GREEN: colors_enum::RED);
             auto c = queue.pop();
             inqueue[c] = false;
             visited[c] = true;
