@@ -35,13 +35,13 @@
 #include <Qt3DExtras/QPerVertexColorMaterial>
 #include <Qt3DRender/QGeometryRenderer>
 
-#if QT_VERSION == QT_VERSION_CHECK(6,1,0)
+#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
 #include <Qt3DCore/qattribute.h>
 #include <Qt3DCore/qgeometry.h>
 #include <Qt3DCore/qbuffer.h>
 using ATTRIBUTE_TYPE = ATTRIBUTE_TYPE;
 using GEOMETRY_TYPE = GEOMETRY_TYPE
-#elif QT_VERSION == QT_VERSION_CHECK(5,15,2)
+#elif QT_VERSION >= QT_VERSION_CHECK(5,0,0) && QT_VERSION < QT_VERSION_CHECK(6,0,0)
 #include <Qt3dRender/qattribute.h>
 #include <Qt3dRender/qgeometry.h>
 #include <Qt3dRender/qbuffer.h>

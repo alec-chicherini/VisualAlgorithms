@@ -1,0 +1,16 @@
+macro(QtModulePrepare MODULES)
+	if(QT_DEFAULT_MAJOR_VERSION EQUAL 5)
+		set(QT_PERFIX "Qt5::")
+		set(CMAKE_PREFIX_PATH  ${_QT_5_PATH})
+		find_package(Qt5 COMPONENTS ${${MODULES}} REQUIRED)
+	
+	elseif(QT_DEFAULT_MAJOR_VERSION EQUAL 6)
+		set(QT_PERFIX "Qt6::")
+		set(CMAKE_PREFIX_PATH  ${_QT_6_PATH})
+		set(CURRENT_PROJECT_COMPONENTS ${MODULES} Concurrent)
+		find_package(Qt6 COMPONENTS ${MODULES} REQUIRED)
+	endif()
+message("### QT_PERFIX  is ${QT_PERFIX}")
+message("### CMAKE_PREFIX_PATH  is ${CMAKE_PREFIX_PATH}")
+
+endmacro()

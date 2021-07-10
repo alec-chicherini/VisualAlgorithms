@@ -4,7 +4,7 @@
 #include <Qt3DRender/qgeometryrenderer.h>
 #include <tuple>
 #include <qvector3d.h>
-#if QT_VERSION == QT_VERSION_CHECK(6,1,0)
+#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
 #include <Qt3DCore/qattribute.h>
 #include <Qt3DCore/qgeometry.h>
 #include <Qt3DCore/qbuffer.h>
@@ -12,7 +12,7 @@ using ATTRIBUTE_TYPE = Qt3DCore::QAttribute;
 using GEOMETRY_TYPE = Qt3DCore::QGeometry;
 using BUFFER_TYPE = Qt3DCore::QBuffer;
 
-#elif QT_VERSION == QT_VERSION_CHECK(5,15,2)
+#elif QT_VERSION >= QT_VERSION_CHECK(5,0,0) && QT_VERSION < QT_VERSION_CHECK(6,0,0)
 #include <Qt3dRender/qattribute.h>
 #include <Qt3dRender/qgeometry.h>
 #include <Qt3dRender/qbuffer.h>
