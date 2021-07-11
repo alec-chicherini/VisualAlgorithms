@@ -1,3 +1,4 @@
+message("### RealWorldAlgorithms BEGIN")
 cmake_minimum_required(VERSION 3.20)
 
 #Real World Algorithms Book tasks. And test in console and google test.
@@ -18,3 +19,5 @@ message_property(RealWorldAlgorithmsTestConsole CXX_STANDART)
 message_property(CMAKE CXX_STANDART)
 message_property(CMAKE CXX_COMPILER_ID)
 message_property(CMAKE CXX_COMPILER_VERSION)
+
+message("### RealWorldAlgorithms END")

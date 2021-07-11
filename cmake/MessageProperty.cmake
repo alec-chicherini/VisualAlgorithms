@@ -11,12 +11,12 @@ if(${TARGET_} STREQUAL  "CMAKE")
 	set(RESULT "[EMPTY]")
 	endif()
 
-	message("### ${MAKE_PROPERTY} is " ${RESULT})
+	message(" ### ${MAKE_PROPERTY} is " ${RESULT})
 else()
 	get_property(PROPERTY_VALUE
 				 TARGET ${TARGET_} 
 				 PROPERTY ${PROPERTY_})
-	message("### ${PROPERTY_} in ${TARGET_} is ${PROPERTY_VALUE}")
+	message(" ### ${PROPERTY_} in ${TARGET_} is ${PROPERTY_VALUE}")
 endif()
 
 endfunction()

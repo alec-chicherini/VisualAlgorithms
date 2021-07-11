@@ -23,7 +23,7 @@
 #include "scene_properties_common_graph.h"
 
 //real world algorithms book
-#include "../Real_World_Algorithms/Real_World_Algorithms.h"
+#include "../../Real_World_Algorithms/Real_World_Algorithms.h"
 
 //debug
 #include "qdebug_helper.h"

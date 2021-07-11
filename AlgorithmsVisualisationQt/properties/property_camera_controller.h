@@ -25,7 +25,7 @@
 #include <Qt3DRender/qcameralens.h>
 #include <Qt3DExtras/qfirstpersoncameracontroller.h>
 #include <Qt3DExtras/qorbitcameracontroller.h>
-#include <qabstractcameracontroller.h>
+#include <Qt3DExtras/qabstractcameracontroller.h>
 
 /// @brief  class holds the camera current possition settings
 class property_camera_controller : public QWidget

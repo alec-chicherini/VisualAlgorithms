@@ -1,3 +1,5 @@
+#cmake -Bbuild -D_QT_5_PATH="S:\Code\Qt\5.15.2\msvc2019_64"^C
+
 cmake_minimum_required(VERSION 3.20)
 
 #top level sollution to all included projects
@@ -12,8 +14,8 @@ else()
 endif(WIN32)
 #System initialisation END
 
-#Qt initialisation BEGIN
 
+#Qt initialisation BEGIN
 option(_QT_5_PATH "Path to Qt5 current compiler folder like 'C:\\Qt\\5.15.2\\msvc2019_64\\'" OFF)
 
 string(COMPARE EQUAL "${_QT_5_PATH}" "OFF" zero_check)
@@ -35,17 +37,27 @@ message("### QT_DEFAULT_MAJOR_VERSION is ${QT_DEFAULT_MAJOR_VERSION}")
 set(REAL_WORLD_ALGORITHMS "Real_World_Algorithms")
 set(Q_OBJECT_PICKER_TEST "QObjectPicker_test")
 set(Q_LINE_MESH_TEST "QLineMesh_test")
+set(ALGORITHMS_VISUALISATION_QT "AlgorithmsVisualisationQt")
 
 set(PROJECTS 
     ${REAL_WORLD_ALGORITHMS}
+	${ALGORITHMS_VISUALISATION_QT}
 	${Q_OBJECT_PICKER_TEST}
 	${Q_LINE_MESH_TEST}
 	)
 
+if(${CMAKE_BINARY_DIR} STREQUAL ${CMAKE_SOURCE_DIR})
+	message("### CMAKE build dir is ${CMAKE_SOURCE_DIR}")
+	set(SUBPROJECTS_BUILD_DIR build/)
+else()
+	message("### CMAKE build dir is ${CMAKE_BINARY_DIR}")
+	set(SUBPROJECTS_BUILD_DIR ./)
+endif()
+
 foreach(P IN LISTS PROJECTS)
 	# Here and later all messages generated in this project build system starts with ###
 	message("### " ${P} " folder added to project")
-	add_subdirectory(${P} cmake/build/${P})
+	add_subdirectory(${P} ${SUBPROJECTS_BUILD_DIR}${P})
 endforeach()
 
 #CMAKE build system tree initialisation END

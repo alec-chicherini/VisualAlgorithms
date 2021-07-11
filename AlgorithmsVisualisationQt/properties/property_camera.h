@@ -26,7 +26,7 @@
 #include <Qt3DRender/qcameralens.h>
 #include <Qt3DExtras/qfirstpersoncameracontroller.h>
 #include <Qt3DExtras/qorbitcameracontroller.h>
-#include <qabstractcameracontroller.h>
+#include <Qt3DExtras/qabstractcameracontroller.h>
 
 
 

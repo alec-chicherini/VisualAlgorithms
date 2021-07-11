@@ -4,7 +4,7 @@
 
 #include <Qt3DCore/qentity.h>
 #include <Qt3DExtras/qt3dwindow.h>
-#include <qforwardrenderer.h>
+#include <Qt3DExtras/qforwardrenderer.h>
 
 #include <Qt3DRender/QGeometryRenderer>
 
@@ -24,7 +24,7 @@
 #include <Qt3DRender/qcameralens.h>
 #include <Qt3DExtras/qfirstpersoncameracontroller.h>
 #include <Qt3DExtras/qorbitcameracontroller.h>
-#include <qabstractcameracontroller.h>
+#include <Qt3DExtras/qabstractcameracontroller.h>
 
 //for QWidget container
 #include <qgridlayout.h>
@@ -34,9 +34,9 @@
 
 
 //real world algorithms book
-#include "../Real_World_Algorithms/Real_World_Algorithms.h"
-#include <qtorusmesh.h>
-#include <qcomponent.h>
+#include "../../Real_World_Algorithms/Real_World_Algorithms.h"
+#include <Qt3DExtras/qtorusmesh.h>
+#include <Qt3DCore/qcomponent.h>
 
 
 #include<qpushbutton.h>

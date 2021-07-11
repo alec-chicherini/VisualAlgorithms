@@ -31,7 +31,7 @@
 #include "component_states.h"
 
 //real world algorithms book
-#include "../Real_World_Algorithms/Real_World_Algorithms.h"
+#include "../../Real_World_Algorithms/Real_World_Algorithms.h"
 
 /// @brief 3d scene for graphs visualisation properties. 
 class scene_properties_common_graph : public QWidget

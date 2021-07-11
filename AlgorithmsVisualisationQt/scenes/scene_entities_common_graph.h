@@ -19,15 +19,15 @@
 #include <Qt3DRender/qcameralens.h>
 #include <Qt3DExtras/qfirstpersoncameracontroller.h>
 #include <Qt3DExtras/qorbitcameracontroller.h>
-#include <qabstractcameracontroller.h>
+#include <Qt3DExtras/qabstractcameracontroller.h>
 
 //real world algorithms
-#include "../Real_World_Algorithms/Real_World_Algorithms.h"
+#include "../../Real_World_Algorithms/Real_World_Algorithms.h"
 
 //light
 #include <Qt3DRender/qpointlight.h>
 #include <Qt3DCore/qtransform.h>
-#include <qspheremesh.h>
+#include <Qt3DExtras/qspheremesh.h>
 // 
 
 //object picker
@@ -88,7 +88,7 @@ private:
 		{
 			if (vve[0] == vertex || vve[1] == vertex)
 			{
-				auto newPossition = std::pair(vve[0]->componentsOfType<Qt3DCore::QTransform>().front()->translation(),
+				auto newPossition = std::pair<QVector3D,QVector3D>(vve[0]->componentsOfType<Qt3DCore::QTransform>().front()->translation(),
 					vve[1]->componentsOfType<Qt3DCore::QTransform>().front()->translation());
 				vve[2]->componentsOfType<QLineMesh>()[0]
 					  ->setPossition(newPossition);
@@ -126,7 +126,7 @@ private:
 			auto first_point = gr.E[i].first;
 			auto second_point = gr.E[i].second;
 
-			auto pos = std::pair(vertexes_possitions[first_point], vertexes_possitions[second_point]);
+			auto pos = std::pair<QVector3D, QVector3D>(vertexes_possitions[first_point], vertexes_possitions[second_point]);
 			qDebug() << "pos = " << pos.first.x() << pos.first.y() << pos.first.z() << " - " << pos.second.x() << pos.second.y() << pos.second.z();
 			QLineMesh* line = new QLineMesh(pos, rootEntity);
 			
@@ -134,7 +134,7 @@ private:
 
 			edges.push_back(edge);
 
-			vertex_vertex_edge.push_back(std::vector({ vertexes[gr.E[i].first],vertexes[gr.E[i].second],edge}));
+			vertex_vertex_edge.push_back(std::vector<Qt3DCore::QEntity*>({ vertexes[gr.E[i].first],vertexes[gr.E[i].second],edge}));
 		}
 
 		qDebug() << Q_FUNC_INFO << " END";

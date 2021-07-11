@@ -6,7 +6,7 @@
 #define PART1
 //#define PART3
 
-#include "../AlgorithmsVisualisationQt/enums.h"
+#include "../AlgorithmsVisualisationQt/utilities/enums.h"
 #include <array>
 #include <random>
 #include <type_traits>

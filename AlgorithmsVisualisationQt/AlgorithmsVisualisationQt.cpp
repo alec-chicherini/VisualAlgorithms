@@ -1,4 +1,4 @@
-#include <QApplication>
+#include <QtWidgets/QApplication>
 #include <QLibraryInfo>
 #include <qfile.h>
 #include <QTextStream>

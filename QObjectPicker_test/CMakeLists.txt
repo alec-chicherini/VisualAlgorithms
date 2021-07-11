@@ -1,3 +1,4 @@
+message("### object_picker_test BEGIN")
 cmake_minimum_required(VERSION 3.20)
 
 #building evironment for QObjectPicker_test
@@ -24,7 +25,7 @@ add_library(object_picker_window
 
 foreach(COMP IN LISTS CURRENT_PROJECT_COMPONENTS)
 	set(CURRENT_COMPONENT_NAME ${QT_PERFIX}${COMP} )
-	message("### object_picker_window linked with  ${CURRENT_COMPONENT_NAME} ")
+	message(" ### object_picker_window linked with  ${CURRENT_COMPONENT_NAME} ")
 	target_link_libraries(object_picker_window ${CURRENT_COMPONENT_NAME})
 endforeach()
 
@@ -34,7 +35,7 @@ target_link_libraries(${PROJECT_NAME}
 	)
 
 set(FULL_PATH_TO_EXEC $<TARGET_FILE:${PROJECT_NAME}>)
-message("### FULL_PATH_TO_EXEC is ${FULL_PATH_TO_EXEC} ")
+message(" ### FULL_PATH_TO_EXEC is ${FULL_PATH_TO_EXEC} ")
 
 add_custom_command(
 	TARGET ${PROJECT_NAME} POST_BUILD
@@ -43,3 +44,5 @@ add_custom_command(
 					--no-quick-import 
 					--no-translations 
 )
+
+message("### object_picker_test END")
