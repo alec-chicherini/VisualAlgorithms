@@ -19,10 +19,7 @@ QtModulePrepare(CURRENT_PROJECT_COMPONENTS)
 add_executable(${PROJECT_NAME} 
 	AlgorithmsVisualisationQt.cpp)
 
-
-set_target_properties(${PROJECT_NAME} PROPERTIES
-		CXX_STANDART 17
-		CXX_STANDARD_REQUIRED ON)
+target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_17)
 
 include(${VisualAlgorithms_SOURCE_DIR}/cmake/MessageProperty.cmake)
 

@@ -2,12 +2,11 @@ message("### RealWorldAlgorithms BEGIN")
 cmake_minimum_required(VERSION 3.20)
 
 #Real World Algorithms Book tasks. And test in console and google test.
-project(RealWorldAlgorithms CXX C)
+project(RealWorldAlgorithms)
 
 add_executable(RealWorldAlgorithmsTestConsole Real_World_Algorithms.cpp)
-set_target_properties(RealWorldAlgorithmsTestConsole PROPERTIES
-		CXX_STANDART 20
-		CXX_STANDARD_REQUIRED ON)
+
+target_compile_features(RealWorldAlgorithmsTestConsole PUBLIC cxx_std_20)
 
 #add timedelay lib from github
 include(${VisualAlgorithms_SOURCE_DIR}/cmake/TimedelayFetch.cmake)
