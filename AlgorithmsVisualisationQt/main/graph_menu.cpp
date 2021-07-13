@@ -10,7 +10,7 @@ graph_menu::graph_menu(QWidget *parent)
 	QRadioButton* radiobutton_3d_graph = new QRadioButton("3D graph");
 	QRadioButton* radiobutton_tree_graph = new QRadioButton("Tree");
 
-	QButtonGroup* btngroup_graph_type = new QButtonGroup;
+	btngroup_graph_type = new QButtonGroup;
 	btngroup_graph_type->addButton(radiobutton_graph,0);//Graph is classic in commonly meaning
 	btngroup_graph_type->addButton(radiobutton_tree_graph, 1);//Graph is tree
 	btngroup_graph_type->addButton(radiobutton_2d_graph, 2);//Graph is like 2D field
@@ -139,10 +139,56 @@ graph_menu::graph_menu(QWidget *parent)
 
 	setLayout(grid_layout_main);
 	//
+
+	read_settings();
 }
 
 
 
 graph_menu::~graph_menu()
 {
+}
+
+void graph_menu::write_settings()
+{
+	QSettings settings;
+	settings.beginGroup("graph_menu");
+	settings.setValue("graph_type", btngroup_graph_type->checkedId());
+
+	settings.setValue("directed", checkbox_directed->isChecked());
+	settings.setValue("weighted", checkbox_weighted->isChecked());
+	settings.setValue("loops", checkbox_loops->isChecked());
+	settings.setValue("connected", checkbox_connected->isChecked());
+
+	settings.setValue("vertex_num", spinbox_vertex_num->value());
+	settings.setValue("edges_num_left", spinbox_edges_num_left->value());
+	settings.setValue("edges_num_right", spinbox_edges_num_right->value());
+
+	settings.endGroup();
+
+}
+
+
+void graph_menu::read_settings()
+{
+	QSettings settings;
+	settings.beginGroup("graph_menu");
+	btngroup_graph_type->button(settings.value("graph_type").toInt())->setChecked(true);
+
+	checkbox_directed->setChecked(settings.value("directed", false).toBool());
+	checkbox_weighted->setChecked(settings.value("weighted", false).toBool());
+	checkbox_loops->setChecked(settings.value("loops", false).toBool());
+	checkbox_connected->setChecked(settings.value("connected,false").toBool());
+
+	spinbox_vertex_num->setValue(settings.value("vertex_num",10).toInt());
+	spinbox_edges_num_left->setValue(settings.value("edges_num_left",1).toInt());
+	spinbox_edges_num_right->setValue(settings.value("edges_num_right",3).toInt());
+
+
+	settings.endGroup();
+}
+
+void graph_menu::closeEvent(QCloseEvent* event)
+{
+	write_settings();
 }

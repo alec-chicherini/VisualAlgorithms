@@ -11,13 +11,12 @@
 #include <qcheckbox.h>
 #include <qspinbox.h>
 #include <qlabel.h>
+#include <QSettings>
 
 //enums
 #include"enums.h"
 using namespace ENUMS_NAMESPACE;
 
-//debug
-#include "qdebug_helper.h"
 /// @brief graph menu class holds controls to choose and set up generation of graphs visualisation
 class graph_menu : public QWidget
 {
@@ -39,6 +38,15 @@ private:
 	QSpinBox* spinbox_vertex_num;
 	QSpinBox* spinbox_edges_num_left;
 	QSpinBox* spinbox_edges_num_right;
+
+	QButtonGroup* btngroup_graph_type;
+
+	void write_settings();
+	void read_settings();
+
+protected:
+	void closeEvent(QCloseEvent* event);
+
 private slots:
 	void regen_graph_button_pushed()
 	{

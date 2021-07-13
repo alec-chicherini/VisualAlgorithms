@@ -28,6 +28,8 @@
 //debug
 #include "qdebug_helper.h"
 
+#include <QSettings>
+
 /// @brief The main window of app. Holds the three big parts.
 /// @brief 1) Left menu widget - parts of book picker. Graphs algorithms, sorting algorithms and their settings.
 /// @brief 2) Middle viewport widget - show Qt3D objects.
@@ -60,6 +62,12 @@ private:
 	int current_graph_type=0;
 	graph<int> main_graph;
 	under_GP current_graph_properties;
+
+	void write_settings();
+	void read_settings();
+
+protected:
+	void closeEvent(QCloseEvent* event);
 
 signals:
 	/// @brief graph signal retranslation to pass the generated graph to entities in this 

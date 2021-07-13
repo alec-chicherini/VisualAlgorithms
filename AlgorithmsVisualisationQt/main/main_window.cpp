@@ -29,7 +29,6 @@ main_window::main_window(QWidget *parent)
 	//
 	
 
-
 	//main layout
 	grid_layout_main = new QGridLayout;
 	
@@ -62,20 +61,8 @@ main_window::main_window(QWidget *parent)
 	
 	//connections between viewport and menu camera possitions
 	connect(viewport_window_, &viewport_window::viewport_camera_signal, scene_properties_common_graph_, &scene_properties_common_graph::scene_properties_common_graph_camera_slot);
-	//connect(property_camera_, &property_camera::camera_possition_signal, viewport_window_, &viewport_window::viewport_camera_possition_slot);
-	//connect(property_camera_, &property_camera::camera_view_center_signal, viewport_window_, &viewport_window::viewport_camera_view_center_slot);
-	//connect(viewport_window_, &viewport_window::viewport_camera_position_signal, property_camera_, &property_camera::camera_possition_slot);
-	//connect(viewport_window_, &viewport_window::viewport_camera_view_center_signal, property_camera_, &property_camera::camera_view_center_slot);
 
-	//connect(property_camera_, &property_camera::camera_controller_signal, viewport_window_, &viewport_window::viewport_camera_controller_slot);
-
-	//connect(property_camera_, &property_camera::camera_view_all_signal, viewport_window_, &viewport_window::viewport_camera_view_all_slot);
-
-	////light
-	//connect(property_light_, &property_light::light_color_signal, viewport_window_, &viewport_window::viewport_light_color_slot);
-	//connect(property_light_, &property_light::light_intencity_signal, viewport_window_, &viewport_window::viewport_light_intensity_slot);
-
-
+	read_settings();
 	
 }
 
@@ -83,5 +70,31 @@ main_window::~main_window()
 {
 }
 
+void main_window::write_settings()
+{
+	QSettings settings;	
+	settings.beginGroup("main_window");
+	settings.setValue("window_size", size());
+	settings.setValue("window_pos", pos());
+	settings.setValue("window_current_tab", tab_menu_left->currentIndex());
+	settings.endGroup();
+
+}
 
 
+void main_window::read_settings()
+{
+	QSettings settings;	
+	settings.beginGroup("main_window");
+	resize(settings.value("window_size").toSize());
+	move(settings.value("window_pos").toPoint());
+	tab_menu_left->setCurrentIndex(settings.value("window_current_tab").toInt());
+	settings.endGroup();
+}
+
+void main_window::closeEvent(QCloseEvent* event)
+{
+	graph_menu_->close();
+	;
+	write_settings();
+}

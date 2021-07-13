@@ -2,13 +2,18 @@
 #include <QLibraryInfo>
 #include <qfile.h>
 #include <QTextStream>
+#include <qsettings.h>
 #include "main_window.h"
 
 int main(int argc, char* argv[]) 
 {
-
 	QApplication app(argc, argv);
 
+	QCoreApplication::setOrganizationName("Chicherin inc");
+	QCoreApplication::setOrganizationDomain("chicherin.rf");
+	QCoreApplication::setApplicationName("AlgorithmVisualisation");
+
+	//logging dependencies
 	QFile log("QLibraryInfo_dependencies.txt");
 	QTextStream out(&log);
 	if(!log.open(QIODevice::WriteOnly | QIODevice::Text))return -1;
