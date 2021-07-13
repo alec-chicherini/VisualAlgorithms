@@ -41,47 +41,10 @@ public:
 
 private:
 	QString parentPath_;
-	ADD_JSON_LOADER(orbit)
-	ADD_JSON_LOADER(first_person)
-	ADD_JSON_LOADER(current_camera_controller_type)
-
+	
 	QComboBox* combobox_camera_controller;
 
-public:
-	/// @brief initialisation function to call in constructor and set all data from json to different properties in widget window
-	void send_initialization_data()
-	{
-		qDebug() << Q_FUNC_INFO << " CALLED !!! ";
-		QMetaObject::invokeMethod(this,
-			"camera_controller_type_signal",
-			Qt::QueuedConnection,
-			Q_ARG(int, combobox_camera_controller->currentIndex()));
-
-
-		for (auto& e : e_vec_func_double) {
-			qDebug() << "BEGIN::QMetaObject::invokeMethod(" << e.signal_name.toStdString().data() << "," << e.signal_data << ") - invoke data  ";
-			bool result = QMetaObject::invokeMethod(this,
-				e.signal_name.toStdString().data(),
-				Qt::QueuedConnection,
-				Q_ARG(double, e.signal_data));
-
-			qDebug() << "END::QMetaObject::invokeMethod(" << e.signal_name.toStdString().data() << "," << e.signal_data << ")invoke result is: " << result;
-		}
-
-	};
-
-public:
-	/// @brief plain structure to store signal name and signal data
-	template <typename T>
-	struct 	delayed_emit
-	{
-		QString signal_name;
-		T signal_data;
-	};
-
-	/// @brief list of all signals and their datas type of double
-	std::vector<delayed_emit<double>> e_vec_func_double;
-
+	
 
 signals:
 

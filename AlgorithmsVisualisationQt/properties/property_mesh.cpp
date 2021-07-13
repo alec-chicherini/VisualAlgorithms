@@ -4,6 +4,7 @@ property_mesh::property_mesh(QString parentPath,QWidget *parent)
 	: QWidget(parent)
 {
 	parentPath_ = parentPath;
+	SETTINGS_INIT()
 	combobox_mesh = new QComboBox;
 	
 	combobox_mesh->addItem("CONE");//id 0
@@ -13,55 +14,53 @@ property_mesh::property_mesh(QString parentPath,QWidget *parent)
 	combobox_mesh->addItem("SPHERE");//id 4
 	combobox_mesh->addItem("TORUS");//id 5
 
-
-
 	connect(combobox_mesh, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &property_mesh::property_mesh_type_signal);
 	
 		//Sphere
 		ADD_ENTITY(sphere)
-		ADD_DOUBLE_SPIN_BOX_PROPERTY(mesh, sphere, radius, Radius, 0)
-		ADD_SPIN_BOX_PROPERTY(mesh, sphere, rings, Rings, 1)
-		ADD_SPIN_BOX_PROPERTY(mesh, sphere, slices, Slices, 2)
+		ADD_DOUBLE_SPIN_BOX_PROPERTY(mesh, sphere, radius, Radius)
+		ADD_SPIN_BOX_PROPERTY(mesh, sphere, rings, Rings)
+		ADD_SPIN_BOX_PROPERTY(mesh, sphere, slices, Slices)
 		//
-		 
+		
 		//Cone
 		ADD_ENTITY(cone)
-		ADD_DOUBLE_SPIN_BOX_PROPERTY(mesh, cone, bottom_radius, BottomRadius, 0)
-		ADD_DOUBLE_SPIN_BOX_PROPERTY(mesh, cone, length, Length, 1)
-		ADD_DOUBLE_SPIN_BOX_PROPERTY(mesh, cone, top_radius, TopRadius, 2)
-		ADD_SPIN_BOX_PROPERTY(mesh, cone, rings, Rings, 3)
-		ADD_SPIN_BOX_PROPERTY(mesh, cone, slices, Slices, 4)
-		ADD_CHECK_BOX_PROPERTY(mesh, cone, has_bottom_endcap, hasBottomEndcap, 5)
-		ADD_CHECK_BOX_PROPERTY(mesh, cone, has_top_endcap, hasTopEndcap, 6)
+		ADD_DOUBLE_SPIN_BOX_PROPERTY(mesh, cone, bottom_radius, BottomRadius)
+		ADD_DOUBLE_SPIN_BOX_PROPERTY(mesh, cone, length, Length)
+		ADD_DOUBLE_SPIN_BOX_PROPERTY(mesh, cone, top_radius, TopRadius)
+		ADD_SPIN_BOX_PROPERTY(mesh, cone, rings, Rings)
+		ADD_SPIN_BOX_PROPERTY(mesh, cone, slices, Slices)
+		ADD_CHECK_BOX_PROPERTY(mesh, cone, has_bottom_endcap, hasBottomEndcap)
+		ADD_CHECK_BOX_PROPERTY(mesh, cone, has_top_endcap, hasTopEndcap)
 		//
 
 		//Cuboid
 		ADD_ENTITY(cuboid)
-		ADD_DOUBLE_SPIN_BOX_PROPERTY(mesh, cuboid, x_extent, xExtent, 0)
-		ADD_DOUBLE_SPIN_BOX_PROPERTY(mesh, cuboid, y_extent, yExtent, 1)
-		ADD_DOUBLE_SPIN_BOX_PROPERTY(mesh, cuboid, z_extent, zExtent, 2)
+		ADD_DOUBLE_SPIN_BOX_PROPERTY(mesh, cuboid, x_extent, xExtent)
+		ADD_DOUBLE_SPIN_BOX_PROPERTY(mesh, cuboid, y_extent, yExtent)
+		ADD_DOUBLE_SPIN_BOX_PROPERTY(mesh, cuboid, z_extent, zExtent)
 		//
 
 		//Cylinder
 		ADD_ENTITY(cylinder)
-		ADD_DOUBLE_SPIN_BOX_PROPERTY(mesh, cylinder, length, Length, 0)
-		ADD_DOUBLE_SPIN_BOX_PROPERTY(mesh, cylinder, radius, Radius, 1)
-		ADD_SPIN_BOX_PROPERTY(mesh, cylinder, rings, Rings, 2)
-		ADD_SPIN_BOX_PROPERTY(mesh, cylinder, slices, Slices, 3)
+		ADD_DOUBLE_SPIN_BOX_PROPERTY(mesh, cylinder, length, Length)
+		ADD_DOUBLE_SPIN_BOX_PROPERTY(mesh, cylinder, radius, Radius)
+		ADD_SPIN_BOX_PROPERTY(mesh, cylinder, rings, Rings)
+		ADD_SPIN_BOX_PROPERTY(mesh, cylinder, slices, Slices)
 		//
 
 		//Plane
 		ADD_ENTITY(plane)
-			ADD_DOUBLE_SPIN_BOX_PROPERTY(mesh, plane, height, Height, 0)
-			ADD_DOUBLE_SPIN_BOX_PROPERTY(mesh, plane, width, Width, 1)
+			ADD_DOUBLE_SPIN_BOX_PROPERTY(mesh, plane, height, Height)
+			ADD_DOUBLE_SPIN_BOX_PROPERTY(mesh, plane, width, Width)
 		//
 
 		//Torus
 		ADD_ENTITY(torus)
-		ADD_DOUBLE_SPIN_BOX_PROPERTY(mesh, torus, minor_radius, MinorRadius, 0)
-		ADD_DOUBLE_SPIN_BOX_PROPERTY(mesh, torus, radius, Radius, 1)
-		ADD_SPIN_BOX_PROPERTY(mesh, torus, rings, Rings, 2)
-		ADD_SPIN_BOX_PROPERTY(mesh, torus, slices, Slices, 3)
+		ADD_DOUBLE_SPIN_BOX_PROPERTY(mesh, torus, minor_radius, MinorRadius)
+		ADD_DOUBLE_SPIN_BOX_PROPERTY(mesh, torus, radius, Radius)
+		ADD_SPIN_BOX_PROPERTY(mesh, torus, rings, Rings)
+		ADD_SPIN_BOX_PROPERTY(mesh, torus, slices, Slices)
 		//
 		
 	QGridLayout* grid_layout_this = new QGridLayout;
@@ -78,11 +77,13 @@ property_mesh::property_mesh(QString parentPath,QWidget *parent)
 
 	connect(combobox_mesh, QOverload<int>::of(&QComboBox::currentIndexChanged), stackedlayout_mesh, &QStackedLayout::setCurrentIndex);
 	grid_layout_this->addLayout(stackedlayout_mesh,2,0,Qt::AlignTop);
-	
-	connect(combobox_mesh, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [&](int value) {
-		read_write_current_mesh_index_json_(QIODevice::WriteOnly, "current_mesh_index", value); });
 
-	combobox_mesh->setCurrentIndex(read_write_current_mesh_index_json_(QIODevice::ReadOnly, "current_mesh_index", int()).toInt());
+	connect(combobox_mesh, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [&](int value) {
+		QSettings settings;
+		settings.setValue(QString(QString(parentPath_) + QString("current_mesh_index")), value);
+		});
+
+	combobox_mesh->setCurrentIndex(settings.value(QString(QString(parentPath_) + QString("current_mesh_index"))).toInt());
 
 	setLayout(grid_layout_this);
 }

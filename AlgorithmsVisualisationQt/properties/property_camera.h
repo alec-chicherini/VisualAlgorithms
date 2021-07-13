@@ -28,7 +28,7 @@
 #include <Qt3DExtras/qorbitcameracontroller.h>
 #include <Qt3DExtras/qabstractcameracontroller.h>
 
-
+#include <QSettings>
 
 /// @brief  class holds the camera current possition settings
 class property_camera : public QWidget
@@ -51,52 +51,14 @@ public:
 	
 private:
 	QString parentPath_;
-	ADD_JSON_LOADER(camera)
 
 	ADD_XYZ_PICKER_PROPERTY_DEFINITION(camera, camera, position);
 	ADD_XYZ_PICKER_PROPERTY_DEFINITION(camera, camera, view_center);
 	ADD_XYZ_PICKER_PROPERTY_DEFINITION(camera, camera, up_vector);
 
-public:
-	/// @brief initialisation function to call in constructor and set all data from json to different properties in widget window
-	void send_initialization_data()
-	{
-		for (auto& e : e_vec_func_double) {
-			qDebug() << "BEGIN::QMetaObject::invokeMethod(" << e.signal_name.toStdString().data() << "," << e.signal_data << ") - invoke data  ";
-			bool result = QMetaObject::invokeMethod(this,
-				e.signal_name.toStdString().data(),
-				Qt::QueuedConnection,
-				Q_ARG(double, e.signal_data));
-
-			qDebug() << "END::QMetaObject::invokeMethod(" << e.signal_name.toStdString().data() << "," << e.signal_data << ")invoke result is: " << result;
-		}
-
-
-		for (auto& e : e_vec_func_QVector3D) {
-			qDebug() << "BEGIN::QMetaObject::invokeMethod(" << e.signal_name.toStdString().data() << "," << e.signal_data << ") - invoke data  ";
-			bool result = QMetaObject::invokeMethod(this,
-				e.signal_name.toStdString().data(),
-				Qt::QueuedConnection,
-				Q_ARG(QVector3D, e.signal_data));
-
-			qDebug() << "END::QMetaObject::invokeMethod(" << e.signal_name.toStdString().data() << "," << e.signal_data << ")invoke result is: " << result;
-		}
-	};
+	
 
 public:
-	/// @brief plain structure to store signal name and signal data
-	template <typename T>
-	struct 	delayed_emit
-	{
-		QString signal_name;
-		T signal_data;
-	};
-
-	/// @brief list of all signals and their datas type of double
-	std::vector<delayed_emit<double>> e_vec_func_double;
-	/// @brief list of all signals and their datas type of QVector3D
-	std::vector<delayed_emit<QVector3D>> e_vec_func_QVector3D;
-
 	QVector3D property_camera_possition() 
 	{
 		qDebug() << Q_FUNC_INFO << " CALLED !!! "

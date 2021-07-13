@@ -4,19 +4,20 @@ property_camera::property_camera(QString parentPath, QWidget *parent)
 	: QWidget(parent)
 {
 	parentPath_ = parentPath;
+	SETTINGS_INIT()
 	ADD_ENTITY(camera);
-	ADD_DOUBLE_SPIN_BOX_PROPERTY(camera, camera, aspect_ratio, AspectRatio, 0);
-	ADD_DOUBLE_SPIN_BOX_PROPERTY(camera, camera, bottom, Bottom, 1);
-	ADD_DOUBLE_SPIN_BOX_PROPERTY(camera, camera, exposure, Exposure, 2);
-	ADD_DOUBLE_SPIN_BOX_PROPERTY(camera, camera, far_plane, FarPlane, 3);
-	ADD_DOUBLE_SPIN_BOX_PROPERTY(camera, camera, near_plane, NearPlane, 4);
-	ADD_DOUBLE_SPIN_BOX_PROPERTY(camera, camera, field_of_view, FieldOfView, 5);
-	ADD_DOUBLE_SPIN_BOX_PROPERTY(camera, camera, left, Left, 6);
-	ADD_DOUBLE_SPIN_BOX_PROPERTY(camera, camera, right, Right, 7);
-	ADD_DOUBLE_SPIN_BOX_PROPERTY(camera, camera, top, Top, 8);
-	ADD_XYZ_PICKER_PROPERTY_DECLARATION(camera, camera, position, Position, 9);
-	ADD_XYZ_PICKER_PROPERTY_DECLARATION(camera, camera, view_center, ViewCenter, 10);
-	ADD_XYZ_PICKER_PROPERTY_DECLARATION(camera, camera, up_vector, UpVector, 11);
+	ADD_DOUBLE_SPIN_BOX_PROPERTY(camera, camera, aspect_ratio, AspectRatio);
+	ADD_DOUBLE_SPIN_BOX_PROPERTY(camera, camera, bottom, Bottom);
+	ADD_DOUBLE_SPIN_BOX_PROPERTY(camera, camera, exposure, Exposure);
+	ADD_DOUBLE_SPIN_BOX_PROPERTY(camera, camera, far_plane, FarPlane);
+	ADD_DOUBLE_SPIN_BOX_PROPERTY(camera, camera, near_plane, NearPlane);
+	ADD_DOUBLE_SPIN_BOX_PROPERTY(camera, camera, field_of_view, FieldOfView);
+	ADD_DOUBLE_SPIN_BOX_PROPERTY(camera, camera, left, Left);
+	ADD_DOUBLE_SPIN_BOX_PROPERTY(camera, camera, right, Right);
+	ADD_DOUBLE_SPIN_BOX_PROPERTY(camera, camera, top, Top);
+	ADD_XYZ_PICKER_PROPERTY_DECLARATION(camera, camera, position, Position);
+	ADD_XYZ_PICKER_PROPERTY_DECLARATION(camera, camera, view_center, ViewCenter);
+	ADD_XYZ_PICKER_PROPERTY_DECLARATION(camera, camera, up_vector, UpVector);
 
 	btn_view_all = new QPushButton("View All", this);
 	connect(btn_view_all, &QAbstractButton::clicked, this, [&, this] {camera_camera->viewAll(); });

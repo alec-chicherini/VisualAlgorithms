@@ -1,141 +1,94 @@
 #pragma once
 //MACROSES FOR PROPERTY GENERATION
 
+///@brief macro for QSettings
+#include <QSettings>
+
+#define SETTINGS_INIT()\
+QSettings settings;
+
 
 ///@brief macro used to add new properties entity
 #define ADD_ENTITY(ENTITY) \
 	QWidget* ENTITY##_properties = new QWidget(this);\
 	QGridLayout* ENTITY##_properties_layout = new QGridLayout;\
 	ENTITY##_properties_layout->setAlignment(Qt::AlignTop);\
-    ENTITY##_properties->setLayout(ENTITY##_properties_layout);
+    ENTITY##_properties->setLayout(ENTITY##_properties_layout);\
+    size_t ENTITY##_row=0;
 
 
-#define ADD_JSON_LOADER(ENTITY) \
-/*!
-@brief function to read  from or write to json file current values of ENTITY properties 
-*/\
-    template<typename T>\
-    QJsonValue read_write_##ENTITY##_json_(QIODevice::OpenModeFlag mode,QString key, T value={}){\
-    if(mode==QIODevice::ReadOnly){\
-        if (!QDir().exists(parentPath_ + QString(#ENTITY)))QDir().mkpath(parentPath_); \
-            QFile ENTITY##_settings_file(parentPath_ + QString(#ENTITY) + QString("_settings.json")); \
-    if(ENTITY##_settings_file.open(QIODevice::ReadWrite) && ENTITY##_settings_file.exists())\
-   /* qDebug()<<"File Oppened:"<<parentPath_+QString(#ENTITY)+QString("_settings.json")*/;\
-    else /*qDebug()<<"Can`t open:"<<parentPath_+QString(#ENTITY)+QString("_settings.json")*/;\
-    QByteArray ENTITY##_data = ENTITY##_settings_file.readAll();\
-    QJsonDocument doc(QJsonDocument::fromJson(ENTITY##_data));\
-    return doc.object().take(key);}\
-    else if(mode==QIODevice::WriteOnly){\
-    if(!QDir().exists(parentPath_+QString(#ENTITY)))QDir().mkpath(parentPath_);\
-    QFile ENTITY##_settings_file (parentPath_+QString(#ENTITY)+QString("_settings.json"));\
-    if(ENTITY##_settings_file.open(QIODevice::ReadOnly) && ENTITY##_settings_file.exists())\
-   /* qDebug()<<"File Oppened:"<<parentPath_+QString(#ENTITY)+QString("_settings.json")*/;\
-    else /*qDebug()<<"Can`t open:"<<parentPath_+QString(#ENTITY)+QString("_settings.json")*/;\
-    QByteArray ENTITY##_data = ENTITY##_settings_file.readAll();\
-    QJsonDocument doc(QJsonDocument::fromJson(ENTITY##_data));\
-    QJsonObject obj(doc.object());\
-    obj.insert(key, value);\
-    QFile ENTITY##_settings_file2(parentPath_ + QString(#ENTITY) + QString("_settings.json")); \
-    if(ENTITY##_settings_file2.open(QIODevice::WriteOnly) && ENTITY##_settings_file.exists())\
-   /* qDebug()<<"File Oppened:"<<parentPath_+QString(#ENTITY)+QString("_settings.json")*/;\
-    else /*qDebug()<<"Can`t open:"<<parentPath_+QString(#ENTITY)+QString("_settings.json")*/;\
-    ENTITY##_settings_file2.write(QJsonDocument(obj).toJson());\
-    return QJsonValue(1); }; return QJsonValue(1);};
-  
-   
-
-#define ADD_DOUBLE_SPIN_BOX_PROPERTY(PROPERTY,ENTITY, NAME, stringNAME, ROW)\
-ENTITY##_properties_layout->addWidget(new QLabel(#stringNAME), ROW, 0);\
+#define ADD_DOUBLE_SPIN_BOX_PROPERTY(PROPERTY,ENTITY, NAME, stringNAME)\
+ENTITY##_properties_layout->addWidget(new QLabel(#stringNAME), ENTITY##_row++, 0);\
 QDoubleSpinBox* spinbox_##ENTITY##_##NAME = new QDoubleSpinBox;\
-ENTITY##_properties_layout->addWidget(spinbox_##ENTITY##_##NAME, ROW, 1);\
+ENTITY##_properties_layout->addWidget(spinbox_##ENTITY##_##NAME, ENTITY##_row++, 1);\
 connect(spinbox_##ENTITY##_##NAME, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this, &property_##PROPERTY##::property_##PROPERTY##_##ENTITY##_##NAME##_signal);\
-connect(spinbox_##ENTITY##_##NAME, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this, [&](double value){\
-read_write_##ENTITY##_json_(QIODevice::WriteOnly,QString(QString(#PROPERTY)+QString("_")+QString(#ENTITY)+QString("_")+QString(#NAME)+QString("_")+QString("value")), value);\
-});\
-spinbox_##ENTITY##_##NAME->setValue(read_write_##ENTITY##_json_(QIODevice::ReadOnly,\
-QString(#PROPERTY)+QString("_")+QString(#ENTITY)+QString("_")+QString(#NAME)+QString("_")+QString("value"),double()).toDouble());\
-if((QString(#NAME)=="x_extent")||(QString(#NAME)=="y_extent")||(QString(#NAME)=="z_extent")||\
-   (QString(#NAME)=="height")||(QString(#NAME)=="width"))\
-{\
-    spinbox_##ENTITY##_##NAME->setMinimum(0.01f);\
-    if(spinbox_##ENTITY##_##NAME->value()<1.0)spinbox_##ENTITY##_##NAME->setValue((double)1.0);\
-}\
-if((QString(#ENTITY)=="cone"))\
-{\
-    spinbox_##ENTITY##_##NAME->setMinimum(0.00f);\
-}\
-e_vec_func_double.push_back({QString("property_")+QString(#PROPERTY)+QString("_")+QString(#ENTITY)+QString("_")+QString(#NAME)+QString("_signal"), spinbox_##ENTITY##_##NAME->value()});
+connect(spinbox_##ENTITY##_##NAME, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this, [&](double value) {\
+QSettings settings;\
+settings.setValue(QString(QString(parentPath_) + QString(#PROPERTY) + QString("_") + QString(#ENTITY) + QString("_") + QString(#NAME) + QString("_") + QString("value")), value);});\
+spinbox_##ENTITY##_##NAME->setValue(settings.value(parentPath+QString(QString(#PROPERTY)+QString("_")+QString(#ENTITY)+QString("_")+QString(#NAME)+QString("_")+QString("value"))).toDouble());
 
 
-#define ADD_SPIN_BOX_PROPERTY(PROPERTY,ENTITY, NAME, stringNAME, ROW)\
-ENTITY##_properties_layout->addWidget(new QLabel(#stringNAME), ROW, 0);\
+#define ADD_SPIN_BOX_PROPERTY(PROPERTY,ENTITY, NAME, stringNAME)\
+ENTITY##_properties_layout->addWidget(new QLabel(#stringNAME), ENTITY##_row++, 0);\
 QSpinBox* spinbox_##ENTITY##_##NAME = new QSpinBox;\
-ENTITY##_properties_layout->addWidget(spinbox_##ENTITY##_##NAME, ROW, 1);\
+ENTITY##_properties_layout->addWidget(spinbox_##ENTITY##_##NAME, ENTITY##_row++, 1);\
 connect(spinbox_##ENTITY##_##NAME, QOverload<int>::of(&QSpinBox::valueChanged), this, &property_##PROPERTY##::property_##PROPERTY##_##ENTITY##_##NAME##_signal);\
 connect(spinbox_##ENTITY##_##NAME, QOverload<int>::of(&QSpinBox::valueChanged), this, [&,this](int value){\
-read_write_##ENTITY##_json_(QIODevice::WriteOnly,QString(#PROPERTY)+QString("_")+QString(#ENTITY)+QString("_")+QString(#NAME)+QString("_")+QString("value"), value);\
-});\
-spinbox_##ENTITY##_##NAME->setValue(read_write_##ENTITY##_json_(QIODevice::ReadOnly,\
-QString(#PROPERTY)+QString("_")+QString(#ENTITY)+QString("_")+QString(#NAME)+QString("_")+QString("value"),double()).toInt());\
-if(QString(#NAME)=="rings"||QString(#NAME)=="slices")\
-{\
-    spinbox_##ENTITY##_##NAME->setRange(10,100);\
-   if(spinbox_##ENTITY##_##NAME->value()<10)spinbox_##ENTITY##_##NAME->setValue((int)10);\
-}\
-e_vec_func_int.push_back({QString("property_")+QString(#PROPERTY)+QString("_")+QString(#ENTITY)+QString("_")+QString(#NAME)+QString("_signal"), spinbox_##ENTITY##_##NAME->value()});
+QSettings settings;\
+settings.setValue(QString(QString(parentPath_) + QString(#PROPERTY) + QString("_") + QString(#ENTITY) + QString("_") + QString(#NAME) + QString("_") + QString("value")), value);});\
+spinbox_##ENTITY##_##NAME->setValue(settings.value(parentPath+QString(QString(#PROPERTY)+QString("_")+QString(#ENTITY)+QString("_")+QString(#NAME)+QString("_")+QString("value"))).toInt());
 
 
-#define ADD_CHECK_BOX_PROPERTY(PROPERTY,ENTITY, NAME, stringNAME, ROW)\
-ENTITY##_properties_layout->addWidget(new QLabel(#stringNAME), ROW, 0);\
+#define ADD_CHECK_BOX_PROPERTY(PROPERTY,ENTITY, NAME, stringNAME)\
+ENTITY##_properties_layout->addWidget(new QLabel(#stringNAME), ENTITY##_row++, 0);\
 QCheckBox* checkbox_##ENTITY##_##NAME = new QCheckBox;\
-ENTITY##_properties_layout->addWidget(checkbox_##ENTITY##_##NAME, ROW, 1,Qt::AlignRight);\
+ENTITY##_properties_layout->addWidget(checkbox_##ENTITY##_##NAME, ENTITY##_row++, 1,Qt::AlignRight);\
 connect(checkbox_##ENTITY##_##NAME, &QCheckBox::stateChanged, this, &property_##PROPERTY##::property_##PROPERTY##_##ENTITY##_##NAME##_signal);\
-connect(checkbox_##ENTITY##_##NAME, &QCheckBox::stateChanged, this, [&,this](bool value){\
-read_write_##ENTITY##_json_(QIODevice::WriteOnly,QString(#PROPERTY)+QString("_")+QString(#ENTITY)+QString("_")+QString(#NAME)+QString("_")+QString("value"), value);});\
-checkbox_##ENTITY##_##NAME->setChecked(read_write_##ENTITY##_json_(QIODevice::ReadOnly,\
-QString(#PROPERTY)+QString("_")+QString(#ENTITY)+QString("_")+QString(#NAME)+QString("_")+QString("value"),bool()).toBool());\
-e_vec_func_int.push_back({QString("property_")+QString(#PROPERTY)+QString("_")+QString(#ENTITY)+QString("_")+QString(#NAME)+QString("_signal"), checkbox_##ENTITY##_##NAME->isChecked()});
+connect(checkbox_##ENTITY##_##NAME, &QCheckBox::stateChanged, this, [&, this](bool value) {\
+QSettings settings; \
+settings.setValue(QString(QString(parentPath_) + QString(#PROPERTY) + QString("_") + QString(#ENTITY) + QString("_") + QString(#NAME) + QString("_") + QString("value")), value); });\
+checkbox_##ENTITY##_##NAME->setChecked(settings.value(parentPath + QString(QString(#PROPERTY) + QString("_") + QString(#ENTITY) + QString("_") + QString(#NAME) + QString("_") + QString("value"))).toBool());
 
-#define ADD_COLOR_PICKER_PROPERTY(PROPERTY,ENTITY, NAME, stringNAME, ROW)\
+#define ADD_COLOR_PICKER_PROPERTY(PROPERTY,ENTITY, NAME, stringNAME)\
 color_picker* color_picker_##ENTITY##_##NAME## = new color_picker(#stringNAME);\
-ENTITY##_properties_layout->addWidget(color_picker_##ENTITY##_##NAME##, ROW, 0,1,-1);\
+ENTITY##_properties_layout->addWidget(color_picker_##ENTITY##_##NAME##, ENTITY##_row++, 0,1,-1);\
 connect(color_picker_##ENTITY##_##NAME, &color_picker::color_picker_signal, this, &property_##PROPERTY::property_##PROPERTY##_##ENTITY##_##NAME##_signal);\
-color_picker_##ENTITY##_##NAME##->setColor(\
-read_write_##ENTITY##_json_(QIODevice::ReadOnly,QString(#PROPERTY) + QString("_") + QString(#ENTITY) + QString("_") + QString(#NAME) + QString("_") + QString("r_value"),int()).toInt(),\
-read_write_##ENTITY##_json_(QIODevice::ReadOnly,QString(#PROPERTY) + QString("_") + QString(#ENTITY) + QString("_") + QString(#NAME) + QString("_") + QString("g_value"),int()).toInt(),\
-read_write_##ENTITY##_json_(QIODevice::ReadOnly,QString(#PROPERTY) + QString("_") + QString(#ENTITY) + QString("_") + QString(#NAME) + QString("_") + QString("b_value"),int()).toInt()\
-);\
 connect(color_picker_##ENTITY##_##NAME, &color_picker::color_picker_signal_int, this, [&, this](int r, int g, int b) {\
-read_write_##ENTITY##_json_(QIODevice::WriteOnly,QString(#PROPERTY)+QString("_")+QString(#ENTITY)+QString("_")+QString(#NAME)+QString("_")+QString("r_value"), r);\
-read_write_##ENTITY##_json_(QIODevice::WriteOnly, QString(#PROPERTY) + QString("_") + QString(#ENTITY) + QString("_") + QString(#NAME) + QString("_") + QString("g_value"), g);\
-read_write_##ENTITY##_json_(QIODevice::WriteOnly, QString(#PROPERTY) + QString("_") + QString(#ENTITY) + QString("_") + QString(#NAME) + QString("_") + QString("b_value"), b);\
-});\
-e_vec_func_QColor.push_back({ QString("property_") + QString(#PROPERTY) + QString("_") + QString(#ENTITY) + QString("_") + QString(#NAME) + QString("_signal"), color_picker_##ENTITY##_##NAME->getColor() });
+QSettings settings; \
+settings.setValue(QString(QString(parentPath_) + QString(#PROPERTY) + QString("_") + QString(#ENTITY) + QString("_") + QString(#NAME) + QString("_") + QString("R")), r); ;\
+settings.setValue(QString(QString(parentPath_) + QString(#PROPERTY) + QString("_") + QString(#ENTITY) + QString("_") + QString(#NAME) + QString("_") + QString("G")), g); ;\
+settings.setValue(QString(QString(parentPath_) + QString(#PROPERTY) + QString("_") + QString(#ENTITY) + QString("_") + QString(#NAME) + QString("_") + QString("B")), b); ;\
+    }); \
+color_picker_##ENTITY##_##NAME##->setColor(\
+settings.value(QString(QString(parentPath_) + QString(#PROPERTY) + QString("_") + QString(#ENTITY) + QString("_") + QString(#NAME) + QString("_") + QString("R"))).toInt(),\
+settings.value(QString(QString(parentPath_) + QString(#PROPERTY) + QString("_") + QString(#ENTITY) + QString("_") + QString(#NAME) + QString("_") + QString("G"))).toInt(),\
+settings.value(QString(QString(parentPath_) + QString(#PROPERTY) + QString("_") + QString(#ENTITY) + QString("_") + QString(#NAME) + QString("_") + QString("B"))).toInt());
+
+
 
 #define ADD_XYZ_PICKER_PROPERTY_DEFINITION(PROPERTY,ENTITY, NAME)\
 xyz_picker* xyz_picker_##ENTITY##_##NAME;\
 bool bool_##PROPERTY##_##ENTITY##_##NAME;
 
-#define ADD_XYZ_PICKER_PROPERTY_DECLARATION(PROPERTY,ENTITY, NAME, stringNAME, ROW)\
+#define ADD_XYZ_PICKER_PROPERTY_DECLARATION(PROPERTY,ENTITY, NAME, stringNAME)\
 xyz_picker_##ENTITY##_##NAME## = new xyz_picker(#stringNAME);\
-ENTITY##_properties_layout->addWidget(xyz_picker_##ENTITY##_##NAME##, ROW, 0,1,-1);\
+ENTITY##_properties_layout->addWidget(xyz_picker_##ENTITY##_##NAME##, ENTITY##_row++, 0,1,-1);\
 bool_##PROPERTY##_##ENTITY##_##NAME = true;\
 connect(xyz_picker_##ENTITY##_##NAME, &xyz_picker::xyz_picker_signal, this,\
  [&,this]( QVector3D vec){\
    if(bool_##PROPERTY##_##ENTITY##_##NAME)\
     emit property_##PROPERTY##_##ENTITY##_##NAME##_signal(vec);\
     });\
-xyz_picker_##ENTITY##_##NAME##->setXYZ(\
-read_write_##ENTITY##_json_(QIODevice::ReadOnly,QString(#PROPERTY) + QString("_") + QString(#ENTITY) + QString("_") + QString(#NAME) + QString("_") + QString("x_value"),double()).toDouble(),\
-read_write_##ENTITY##_json_(QIODevice::ReadOnly,QString(#PROPERTY) + QString("_") + QString(#ENTITY) + QString("_") + QString(#NAME) + QString("_") + QString("y_value"),double()).toDouble(),\
-read_write_##ENTITY##_json_(QIODevice::ReadOnly,QString(#PROPERTY) + QString("_") + QString(#ENTITY) + QString("_") + QString(#NAME) + QString("_") + QString("z_value"),double()).toDouble()\
-);\
 connect(xyz_picker_##ENTITY##_##NAME, &xyz_picker::xyz_picker_signal_double, this, [&, this](double x, double y, double z) {\
-read_write_##ENTITY##_json_(QIODevice::WriteOnly,QString(#PROPERTY)+QString("_")+QString(#ENTITY)+QString("_")+QString(#NAME)+QString("_")+QString("x_value"), x);\
-read_write_##ENTITY##_json_(QIODevice::WriteOnly, QString(#PROPERTY) + QString("_") + QString(#ENTITY) + QString("_") + QString(#NAME) + QString("_") + QString("y_value"), y);\
-read_write_##ENTITY##_json_(QIODevice::WriteOnly, QString(#PROPERTY) + QString("_") + QString(#ENTITY) + QString("_") + QString(#NAME) + QString("_") + QString("z_value"), z);\
-});\
-e_vec_func_QVector3D.push_back({ QString("property_") + QString(#PROPERTY) + QString("_") + QString(#ENTITY) + QString("_") + QString(#NAME) + QString("_signal"), xyz_picker_##ENTITY##_##NAME->getXYZ() });
+QSettings settings; \
+settings.setValue(QString(QString(parentPath_) + QString(#PROPERTY) + QString("_") + QString(#ENTITY) + QString("_") + QString(#NAME) + QString("_") + QString("X")), x); ;\
+settings.setValue(QString(QString(parentPath_) + QString(#PROPERTY) + QString("_") + QString(#ENTITY) + QString("_") + QString(#NAME) + QString("_") + QString("Y")), y); ;\
+settings.setValue(QString(QString(parentPath_) + QString(#PROPERTY) + QString("_") + QString(#ENTITY) + QString("_") + QString(#NAME) + QString("_") + QString("Z")), z); ;\
+    }); \
+xyz_picker_##ENTITY##_##NAME##->setXYZ(\
+settings.value(QString(QString(parentPath_) + QString(#PROPERTY) + QString("_") + QString(#ENTITY) + QString("_") + QString(#NAME) + QString("_") + QString("X"))).toDouble(),\
+settings.value(QString(QString(parentPath_) + QString(#PROPERTY) + QString("_") + QString(#ENTITY) + QString("_") + QString(#NAME) + QString("_") + QString("Y"))).toDouble(),\
+settings.value(QString(QString(parentPath_) + QString(#PROPERTY) + QString("_") + QString(#ENTITY) + QString("_") + QString(#NAME) + QString("_") + QString("Z"))).toDouble());
 
 #define ADD_SIGNAL_FOR_ENTITY(PROPERTY,ENTITY,NAME,TYPE)\
 /*!
@@ -187,4 +140,4 @@ component_states_##PARENT##, &component_states::component_states_##NAME##_type_s
 connect(component_states_##PARENT##, &component_states::component_states_##NAME##_type_signal,\
 scene_entities_common_graph_, &scene_entities_common_graph::scene_entities_common_graph_##PARENT##_##NAME##_type_slot);
 
-#define ADD_LEAF_END(TYPE,PARENT,NAME) PARENT##_##NAME##->send_initialization_data();
+#define ADD_LEAF_END(TYPE,PARENT,NAME) //PARENT##_##NAME##->send_initialization_data();
