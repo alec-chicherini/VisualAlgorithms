@@ -43,10 +43,19 @@ viewport_window::viewport_window(Qt3DCore::QEntity* root,QWidget *parent)
 	setLayout(gl);
 
 //draw axys
-	QVector3D vec_axis_center = { 0,0,0 };
-	 line_axis_x = new QLineMesh(std::make_pair(vec_axis_center, QVector3D(vec_axis_center.x() + size_axis, vec_axis_center.y(),			    vec_axis_center.z())));
-	 line_axis_y = new QLineMesh(std::make_pair(vec_axis_center, QVector3D(vec_axis_center.x() ,			   vec_axis_center.y() + size_axis, vec_axis_center.z())));
-	 line_axis_z = new QLineMesh(std::make_pair(vec_axis_center, QVector3D(vec_axis_center.x() ,			   vec_axis_center.y(),             vec_axis_center.z() + size_axis)));
+	QVector3D center = { 0,0,0 };
+
+	QVector3D vec_x = QVector3D(center.x() + size_axis, center.y(), center.z());
+	auto x = std::make_pair(center, vec_x);
+	line_axis_x->setPossition(x);
+
+	QVector3D vec_y = QVector3D(center.x(), center.y() + size_axis, center.z());
+	auto y = std::make_pair(center, vec_y);
+	line_axis_y->setPossition(y);
+
+	QVector3D vec_z = QVector3D(center.x(), center.y(), center.z() + size_axis);
+	auto z = std::make_pair(center, vec_z);
+	line_axis_z->setPossition(z);
 	
 
 	axis_x = new Qt3DCore::QEntity(rootEntity);

@@ -34,8 +34,6 @@ set(DIRECTORIES_WITH_LIBS
     /properties/
     /scenes/)
 
-set(LIBRARIES_LIST)
-
 foreach(DIR_LIBS_ IN LISTS DIRECTORIES_WITH_LIBS)
   message(" ### Searching directory: " ${DIR_LIBS_})
     file(
@@ -55,21 +53,62 @@ foreach(DIR_LIBS_ IN LISTS DIRECTORIES_WITH_LIBS)
          ${CPP_FILE_PATH}
          )
 
+       target_compile_features(${CPP_FILE} PUBLIC cxx_std_17)
+
        message(" ### ${CPP_FILE} added as library from ${CPP_FILE_PATH}")
-       list(APPEND LIBRARIES_LIST ${CPP_FILE})
 
        target_include_directories(
           ${PROJECT_NAME} PUBLIC 
           .${DIR_LIBS_}
           )
 
-       target_link_libraries(
-          ${PROJECT_NAME}
-          ${CPP_FILE}
-          )
-      
-       target_include_directories(
-       ${CPP_FILE} PUBLIC 
+    endforeach()
+
+endforeach()
+
+#linkage dependencies order important
+SET(LIBRARIES_LIST 
+             main_window   
+             graph_menu 
+             sorting_menu
+             viewport_window
+             scene_entities_common_graph
+             scene_properties_common_graph
+             qlinemesh                        
+             property_camera                    
+             property_camera_controller         
+             property_light                     
+             property_material                  
+             property_mesh                      
+             property_transform      
+             color_picker                       
+             component_states           
+             xyz_picker                         
+             )
+#
+ 
+foreach(LIBS IN LISTS LIBRARIES_LIST)
+    message(" ### Library from list: " ${LIBS})
+
+    #All libs linkled with all libs. May be need to set dependencies individually.
+    #Not work because wrong order.
+    foreach(LIBS_ IN LISTS LIBRARIES_LIST)
+        if(NOT ${LIBS} STREQUAL ${LIBS_})
+            target_link_libraries(${LIBS} ${LIBS_})
+            message(" ### ${LIBS} linked with ${LIBS_} ")
+       endif()
+    endforeach()
+
+    foreach(COMP IN LISTS CURRENT_PROJECT_COMPONENTS)
+    	set(CURRENT_COMPONENT_NAME ${QT_PERFIX}${COMP} )
+        target_link_libraries(${LIBS} ${CURRENT_COMPONENT_NAME})
+        message(" ### ${LIBS} linked with  ${CURRENT_COMPONENT_NAME} ")
+    endforeach()
+
+    
+
+    target_include_directories(
+       ${LIBS} PUBLIC 
        utilities
        properties
        3d
@@ -77,35 +116,31 @@ foreach(DIR_LIBS_ IN LISTS DIRECTORIES_WITH_LIBS)
        main
        )
 
-    endforeach()
-
+    
 endforeach()
 
 
-foreach(LIBS IN LISTS LIBRARIES_LIST)
-    message(" ### Library from list: " ${LIBS})
-    foreach(COMP IN LISTS CURRENT_PROJECT_COMPONENTS)
-    	set(CURRENT_COMPONENT_NAME ${QT_PERFIX}${COMP} )
-        target_link_libraries(${LIBS} ${CURRENT_COMPONENT_NAME})
-        message(" ### ${LIBS} linked with  ${CURRENT_COMPONENT_NAME} ")
-    endforeach()
-endforeach()
+target_link_libraries(${PROJECT_NAME} main_window)
 
  foreach(COMP IN LISTS CURRENT_PROJECT_COMPONENTS)
     	set(CURRENT_COMPONENT_NAME ${QT_PERFIX}${COMP} )
         target_link_libraries(${PROJECT_NAME} ${CURRENT_COMPONENT_NAME})
         message(" ### ${PROJECT_NAME} linked with  ${CURRENT_COMPONENT_NAME} ")
-    endforeach()
+ endforeach()
 
 
  target_include_directories(
     ${PROJECT_NAME} PUBLIC 
        utilities
     )
-
+    #Project deployment BEGIN
+if(WIN32)
 set(FULL_PATH_TO_EXECUTABLE $<TARGET_FILE:${PROJECT_NAME}>)
 message(" ### FULL_PATH_TO_EXECUTABLE is ${FULL_PATH_TO_EXECUTABLE} ")
 
+
+
+message(" ### Deployment for Windows. Looking for windeployqt.exe")
 add_custom_command(
 	TARGET ${PROJECT_NAME} POST_BUILD
 	COMMAND ${CMAKE_PREFIX_PATH}/bin/windeployqt.exe 
@@ -123,4 +158,10 @@ add_custom_command(
     COMMAND ${CMAKE_COMMAND} -E copy_directory
    ${algorithms_visualisation_SOURCE_DIR}/settings  $<TARGET_FILE_DIR:${PROJECT_NAME}>/settings)
 
+   elseif(LINUX)
+
+      message(" ### Deployment for Linux. In develop.")
+
+   endif(WIN32)
+#Project deployment END
 message("### algorithms_visualisation END")

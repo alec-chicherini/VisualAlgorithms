@@ -5,6 +5,7 @@
 #include <qlabel.h>
 #include <qspinbox.h>
 #include <qvector3d.h>
+#include <float.h>
 
 #include <qdebug.h>
 

@@ -4,6 +4,9 @@ cmake_minimum_required(VERSION 3.20)
 #Real World Algorithms Book tasks. And test in console and google test.
 project(RealWorldAlgorithms)
 
+set(CMAKE_CXX_STANDART 20)
+set(CMAKE_CXX_STANDART_REQUIRED ON)
+
 add_executable(RealWorldAlgorithmsTestConsole Real_World_Algorithms.cpp)
 
 target_compile_features(RealWorldAlgorithmsTestConsole PUBLIC cxx_std_20)

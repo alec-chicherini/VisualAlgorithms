@@ -68,10 +68,10 @@ void qlinemesh_test::resizeEvent(QResizeEvent* event)
 	container->setMinimumSize(128, 128);
 
 	auto value = this->y();
-	OutputDebugStringW(LPCWSTR(std::to_wstring(value).c_str()));
-	OutputDebugStringW(L" <----- this->y()\n");
+	qDebug()<< this->y();
+	qDebug() << " <----- this->y()";
 
 	auto value2 = container->y();
-	OutputDebugStringW(LPCWSTR(std::to_wstring(value2).c_str()));
-	OutputDebugStringW(L" <----- container->y()\n");
+	qDebug() << container->y();
+	qDebug() << " <----- container->y()";
 }

@@ -34,9 +34,12 @@ target_link_libraries(${PROJECT_NAME}
 	Qt::Widgets
 	)
 
+
+	if(WIN32)
 set(FULL_PATH_TO_EXEC $<TARGET_FILE:${PROJECT_NAME}>)
 message(" ### FULL_PATH_TO_EXEC is ${FULL_PATH_TO_EXEC} ")
 
+message(" ### Deployment for Windows. Looking for windeployqt.exe")
 add_custom_command(
 	TARGET ${PROJECT_NAME} POST_BUILD
 	COMMAND ${CMAKE_PREFIX_PATH}/bin/windeployqt.exe 
@@ -45,4 +48,10 @@ add_custom_command(
 					--no-translations 
 )
 
+   elseif(LINUX)
+
+      message(" ### Deployment for Linux. In develop.")
+
+   endif(WIN32)
+#Project deployment END
 message("### object_picker_test END")

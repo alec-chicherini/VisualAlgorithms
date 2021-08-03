@@ -1,4 +1,5 @@
 #pragma once
+#include <climits>
 
 /// @brief all enums shared between all project
 namespace ENUMS_NAMESPACE {

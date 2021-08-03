@@ -150,7 +150,7 @@ QLineMesh::~QLineMesh()
 
  QByteArray QLineMesh::generateVertexData()
 {
-	float r = m_width * sqrt(3.f) / 6.f;
+	float r = m_width * qSqrt(3.f) / 6.f;
 	float R = r * 2.f;
 	float wd2 = m_width / 2.f;
 	/*

@@ -27,6 +27,14 @@
 
 #include <typeinfo>
 
+#if defined(__GNUC__)
+    #define CURRENT_FUNC_NAME __PRETTY_FUNCTION__
+#elif defined(_MSC_VER)
+    #define CURRENT_FUNC_NAME __FUNCDNAME__
+#else
+    #define CURRENT_FUNC_NAME __func__
+#endif
+
 namespace real_world_algorithm {
 #ifdef PART1
 
@@ -165,7 +173,7 @@ public:
             {
                 T value = stack.at(i);
 
-                if constexpr(std::is_arithmetic_v<T>)
+                if constexpr(std::is_arithmetic<T>::value)
                 str += std::to_string(value);
 
 
@@ -554,6 +562,7 @@ public:
             if (Tail_.pos == Head_.pos && !b_is_one_element) { b_is_one_element = true; }
             return queue_.operator[](current);
         }
+        return T();
     };
 
     std::string print()
@@ -754,7 +763,7 @@ struct graph
     /// @param visualisation_func callback function for extern usage which allow to execute some code during each iteration of search. 
     void DFS_recurcive(int node, std::function<void()> visualisation_func = []{}) {
        // std::cout << "getLastVisitedNode() = " << getLastVisitedNode() << std::endl;
-        if (node<0 || node>N) { std::cout << __FUNCDNAME__ << " error. first node not in range." << std::endl; }
+        if (node<0 || node>N) { std::cout << CURRENT_FUNC_NAME << " error. first node not in range." << std::endl; }
 
         if (first_DFS_iteration) {
             visited.resize(N + 1);
@@ -789,7 +798,7 @@ struct graph
     std::string DFS_stack(int node, std::function<void()> visualisation_func = [] {})
     {
         std::string result;
-        if (node<0 || node>N) { std::cout <<__FUNCDNAME__<< " error. first node not in range." << std::endl; }
+        if (node<0 || node>N) { std::cout <<CURRENT_FUNC_NAME<< " error. first node not in range." << std::endl; }
         std::cout << std::endl;
      
         visited.resize(N + 1);
@@ -830,7 +839,7 @@ struct graph
     {
         std::string result;
 
-        if (node<0 || node>N) { std::cout << __FUNCDNAME__ << " error. first node not in range." << std::endl; }
+        if (node<0 || node>N) { std::cout << CURRENT_FUNC_NAME << " error. first node not in range." << std::endl; }
         std::cout << std::endl;
         std::vector<int> instack;
 
@@ -879,7 +888,7 @@ struct graph
     /// @param visualisation_func callback function for extern usage which allow to execute some code during each iteration of search. 
     void DFS_stack_2_random(int  node, std::function<void()> visualisation_func = [] {})
     {
-        if (node<0 || node>N) { std::cout << __FUNCDNAME__ << " error. first node not in range." << std::endl; }
+        if (node<0 || node>N) { std::cout << CURRENT_FUNC_NAME << " error. first node not in range." << std::endl; }
         std::cout << std::endl;
         std::vector<bool> instack;
         std::vector<int> not_in_visited;

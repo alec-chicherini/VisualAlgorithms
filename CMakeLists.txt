@@ -5,23 +5,33 @@ cmake_minimum_required(VERSION 3.20)
 #top level sollution to all included projects
 project(VisualAlgorithms)
 
+
 #System initialisation BEGIN
+
+set(LINUX ${CMAKE_SYSTEM_NAME} STREQUAL "Linux" CACHE BOOL "If system linux - true, not - false")
+
+# Here and later all messages generated in this project build system starts with ###
 if(WIN32)
-	message("### System in WIN32")
+        message("### System is WIN32")
+		set(WRONG_PATH_MESSAGE "'C:\\Qt\\5.15.2\\msvc2019_64\\'")
+elseif(LINUX)
+        message("### System is Linux")
+		set(WRONG_PATH_MESSAGE "'\\Qt\\5.15.2\\gcc_64'")
 else()
-	message(FATAL_ERROR " ### System NOT WIN32. Not acceptable now. Linux will be addeded here.")
-	return()
+        message(FATAL_ERROR " ### System NOT supported now. System must be: Windows, Linux")
+        return()
 endif(WIN32)
 #System initialisation END
 
 
 #Qt initialisation BEGIN
-option(_QT_5_PATH "Path to Qt5 current compiler folder like 'C:\\Qt\\5.15.2\\msvc2019_64\\'" OFF)
+option(_QT_5_PATH "Set _QT_5_PATH like: ${WRONG_PATH_MESSAGE}" OFF)
 
 string(COMPARE EQUAL "${_QT_5_PATH}" "OFF" zero_check)
 	if(zero_check)
-		message(FATAL_ERROR "### -D_QT_5_PATH is empty! Set _QT_5_PATH on cmake.exe call like: \"cmake . -D_QT_5_PATH=C:\\\\Qt\\\\5.15.2\\\\msvc2019_64\\\\\"")
-		return()
+
+                message(FATAL_ERROR "### -D_QT_5_PATH is empty! Set _QT_5_PATH on cmake.exe call like: 'cmake . -D_QT_5_PATH=${WRONG_PATH_MESSAGE}'")
+                return()
 	else()
 		message("### -D_QT_5_PATH is ${_QT_5_PATH}")
 	endif()
@@ -57,7 +67,7 @@ else()
 endif()
 
 foreach(P IN LISTS PROJECTS)
-	# Here and later all messages generated in this project build system starts with ###
+	
 	message("### " ${P} " folder added to project")
 	add_subdirectory(${P} ${SUBPROJECTS_BUILD_DIR}${P})
 endforeach()

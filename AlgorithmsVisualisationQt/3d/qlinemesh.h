@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QtGlobal>
+#include <QtMath>
 #include <Qt3DRender/qgeometryrenderer.h>
 #include <tuple>
 #include <qvector3d.h>

@@ -96,12 +96,19 @@ signals:
 
 private slots:
 
-	void viewport_window::draw_axis(const QVector3D& center)
+	void draw_axis(const QVector3D& center)
 	{
 		
+	    QVector3D vec_x = QVector3D(center.x() + size_axis, center.y(), center.z());
+		auto x = std::make_pair(center, vec_x);
+		line_axis_x->setPossition(x);
 
-		line_axis_x->setPossition(std::make_pair(center, QVector3D(center.x() + size_axis, center.y(), center.z())));
-		line_axis_y->setPossition(std::make_pair(center, QVector3D(center.x(), center.y() + size_axis, center.z())));
-		line_axis_z->setPossition(std::make_pair(center, QVector3D(center.x(), center.y(), center.z() + size_axis)));
+	    QVector3D vec_y = QVector3D(center.x(), center.y() + size_axis, center.z());
+		auto y = std::make_pair(center, vec_y);
+		line_axis_y->setPossition(y);
+
+	    QVector3D vec_z = QVector3D(center.x(), center.y(), center.z() + size_axis);
+		auto z = std::make_pair(center, vec_z);
+		line_axis_z->setPossition(z);
 	};
 };
